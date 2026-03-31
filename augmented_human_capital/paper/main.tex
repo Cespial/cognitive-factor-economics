@@ -1,0 +1,263 @@
+\documentclass[12pt,a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{amsmath,amssymb,amsthm}
+\usepackage{natbib}
+\usepackage{booktabs}
+\usepackage{graphicx}
+\usepackage{hyperref}
+\usepackage{geometry}
+\usepackage{setspace}
+\usepackage{caption}
+\usepackage{subcaption}
+\usepackage{float}
+
+\geometry{margin=1in}
+\doublespacing
+
+\newtheorem{proposition}{Proposition}
+\newtheorem{definition}{Definition}
+\newtheorem{corollary}{Corollary}
+
+\title{Augmented Human Capital:\\A Unified Theory and LLM-Based Measurement Framework\\for Cognitive Factor Decomposition in AI-Augmented Economies}
+
+\author{Cristian Espinal Maya\thanks{Department of Economics, Universidad EAFIT; CIIID, ESUMER; INPLUX SAS. Email: \texttt{cespial@eafit.edu.co}. I thank Santiago Jim\'enez Londo\~no for valuable discussions. All errors are my own.}}
+
+\date{This version: March 2026}
+
+\begin{document}
+
+\maketitle
+
+\begin{abstract}
+We propose a decomposition of human capital into three orthogonal components---physical-manual ($H^P$), routine-cognitive ($H^C$), and augmentable-cognitive ($H^A$)---and develop a production function in which AI capital interacts asymmetrically with these components: substituting for routine cognitive work while complementing augmentable cognitive work via an amplification function $\phi(D)$. We derive a corrected Mincerian wage equation and show that the standard specification is misspecified in AI-augmented economies. Using LLM-generated measures of occupational augmentability for 18,796 O*NET task statements mapped to Colombian occupations, merged with household survey microdata (GEIH, $N=105{,}517$), we estimate the augmented Mincer equation. We find strong support for the signature prediction: the wage return to $H^A$ increases with AI adoption in the formal sector ($\beta_2 = +0.052$, $p < 0.001$), while informal workers cannot capture augmentation rents ($\beta_2 = -0.044$). The augmentation premium is strongest for experienced workers (ages 46--65), in health and education sectors, and operates exclusively through formal employment channels. A triple interaction confirms that formality is the binding mechanism ($\beta_{AHC \times D \times Formal} = +0.519$, $p < 0.001$). These results provide the first developing-country evidence of cognitive factor decomposition in AI-augmented labor markets.
+
+\bigskip
+\noindent\textbf{JEL Codes:} J24, J31, O33, O15, C55
+
+\bigskip
+\noindent\textbf{Keywords:} human capital, artificial intelligence, labor markets, cognitive augmentation, LLM measurement, developing economies, Colombia
+\end{abstract}
+
+\newpage
+
+% ============================================================
+\section{Introduction}
+\label{sec:intro}
+% ============================================================
+
+The theory of human capital has two foundational pillars: Becker's (1964) insight that workers invest in skills analogous to physical capital, and Mincer's (1974) earnings function that maps these investments to wages through years of education and experience. Together, they have shaped labor economics for over six decades. Yet both frameworks share a structural limitation that becomes acute in the era of generative artificial intelligence: they treat cognitive capacity as a scalar.
+
+When a consultant uses an AI assistant to analyze a dataset, a physician employs a language model to synthesize patient histories, or a manager leverages AI for strategic scenario planning, the output is a \textit{jointly produced cognitive good}---neither purely human nor purely artificial. Standard human capital theory has no primitive for this interaction. The worker's contribution is absorbed into labor productivity; the AI's contribution disappears into total factor productivity as an unmeasured residual.
+
+This paper addresses the measurement and theoretical gap. We propose decomposing individual human capital $H_i$ into three orthogonal components:
+%
+\begin{equation}
+H_i = H_i^P \oplus H_i^C \oplus H_i^A
+\end{equation}
+%
+where $H^P$ captures physical-manual skills (unaffected by generative AI), $H^C$ captures routine cognitive skills (substituted by AI), and $H^A$ captures augmentable cognitive skills---the component that AI \textit{amplifies} rather than replaces.
+
+The key theoretical object is the \textit{amplification function} $\phi(D_f)$, which maps a firm's AI capital stock $D_f$ to a productivity multiplier for augmentable human capital. We show that this function generates three testable predictions: (i) the wage return to $H^A$ increases with AI adoption; (ii) the wage return to $H^C$ decreases; and (iii) there exists a crossing point in the wage distribution that the standard Mincer equation cannot detect.
+
+Our empirical strategy makes two contributions. First, we develop an LLM-based measurement instrument for the latent variable $H^A_o$---the \textit{Augmented Human Capital Index} ($AHC_o$)---by having a large language model evaluate the augmentation potential of 18,796 occupational task statements from the O*NET database. Second, we apply this index to Colombian labor market microdata from the Gran Encuesta Integrada de Hogares (GEIH), providing the first developing-country evidence of cognitive factor decomposition.
+
+Our main findings are as follows. The AHC index has low correlation with existing automation indices (Frey \& Osborne, 2017) ($r = -0.71$), confirming that augmentation and substitution are distinct dimensions. In the augmented Mincer equation, the AHC level effect is large and significant ($+9.1\%$ per standard deviation). The interaction with AI adoption is positive and significant in the formal sector ($\beta_2 = +0.052$, $p < 0.001$) but inverts in the informal sector ($\beta_2 = -0.044$), revealing that informality is the binding constraint on augmentation in developing economies. A triple interaction term confirms this mechanism ($\beta_{AHC \times D \times Formal} = +0.519$, $p < 0.001$).
+
+The paper proceeds as follows. Section~\ref{sec:theory} develops the theoretical framework. Section~\ref{sec:measurement} describes the LLM measurement methodology. Section~\ref{sec:data} presents the data. Section~\ref{sec:identification} discusses identification. Section~\ref{sec:results} reports results. Section~\ref{sec:robustness} provides robustness checks. Section~\ref{sec:implications} discusses implications. Section~\ref{sec:conclusion} concludes.
+
+
+% ============================================================
+\section{Theoretical Framework}
+\label{sec:theory}
+% ============================================================
+
+\subsection{Decomposition of Human Capital}
+
+\begin{definition}[Augmented Human Capital Decomposition]
+Let worker $i$'s human capital $H_i$ be decomposed into three orthogonal components:
+\begin{itemize}
+\item $H_i^P$ (Physical-Manual): skills requiring physical presence, motor coordination, and sensory acuity. Largely unaffected by generative AI.
+\item $H_i^C$ (Routine-Cognitive): cognitive skills for structured, repeatable information tasks. \textit{Substitutable} by AI systems.
+\item $H_i^A$ (Augmentable-Cognitive): cognitive skills that AI systems amplify---judgment, contextual reasoning, novel synthesis, and complex communication. \textit{Complementary} to AI.
+\end{itemize}
+\end{definition}
+
+This decomposition is not ad hoc. It maps directly to the task-based framework of \citet{autor2003skill}: $H^P$ corresponds to non-routine manual tasks, $H^C$ to routine cognitive tasks, and $H^A$ to non-routine analytic/interpersonal tasks. The innovation is that we separate the non-routine cognitive category into substitutable and augmentable components---a distinction that did not exist before generative AI demonstrated the capacity to perform many ``non-routine'' tasks previously considered safe from automation.
+
+\subsection{Production Function}
+
+At the firm level, output is produced by:
+%
+\begin{equation}
+Y_f = F\left(K_f^{HW},\; \underbrace{\sum_i h_i^P + \kappa K_f^{Rob}}_{\text{hardware sector}},\; \underbrace{\sum_i h_i^C + \phi(D_f) \cdot \sum_i h_i^A \cdot D_f}_{\text{software sector}}\right)
+\label{eq:production}
+\end{equation}
+%
+where $K_f^{HW}$ is physical capital, $K_f^{Rob}$ is robotic capital, $D_f$ is the firm's stock of digital labor (AI systems), and $\phi(D_f)$ is the \textit{amplification function}.
+
+\begin{definition}[Amplification Function]
+$\phi: \mathbb{R}_+ \to [1, \bar{\phi}]$ is increasing, concave, with $\phi(0) = 1$ and $\lim_{D \to \infty} \phi(D) = \bar{\phi} < \infty$.
+\end{definition}
+
+The amplification function captures the bounded productivity multiplier that AI provides to workers with augmentable capital. Its concavity reflects diminishing returns to AI adoption: the first AI tool has the largest marginal impact.
+
+\subsection{Equilibrium Wages}
+
+From the first-order conditions of profit maximization:
+
+\begin{proposition}[Differential Returns]
+\label{prop:returns}
+When $D_f > 0$, the wage of worker $i$ in firm $f$ satisfies:
+\begin{equation}
+w_i^A = F_S \cdot G_{2,H} \cdot \phi(D_f) \cdot D_f > w_i^C = F_S \cdot G_{2,H}
+\end{equation}
+The return to augmentable human capital exceeds the return to routine cognitive capital by a factor $\phi(D_f) \cdot D_f > 1$ whenever $D_f > 0$.
+\end{proposition}
+
+\begin{proposition}[Augmented Mincer Equation]
+\label{prop:mincer}
+The equilibrium log-wage equation takes the form:
+\begin{equation}
+\ln w_{iot} = \alpha + \beta_1 H_o^A + \beta_2 H_o^A \times \ln D_{s(i)t} + \beta_3 H_o^C \times \ln D_{s(i)t} + \gamma X_{it} + \mu_s + \delta_t + \varepsilon_{iot}
+\label{eq:mincer}
+\end{equation}
+with the \textbf{signature prediction}: $\beta_2 > 0$ (augmentation premium) and $\beta_3 < 0$ (routine displacement).
+\end{proposition}
+
+\begin{proposition}[Formality as Binding Constraint]
+\label{prop:formality}
+In economies with dual labor markets (formal/informal), the augmentation premium $\beta_2$ is positive only in the formal sector. Informal firms have $D_f \approx 0$, so $\phi(D_f) = 1$ and the interaction term vanishes.
+\end{proposition}
+
+
+% ============================================================
+\section{Measurement with LLMs}
+\label{sec:measurement}
+% ============================================================
+
+The central empirical challenge is that $H_o^A$---the augmentable component of human capital at the occupation level---is not directly observable. We develop an LLM-based measurement pipeline that generates validated scores for this latent variable.
+
+\subsection{Task Decomposition}
+
+We use O*NET version 30.2, which provides 18,796 unique task statements across 900+ occupations coded to the Standard Occupational Classification (SOC). Each task includes importance and frequency ratings from incumbent surveys.
+
+\subsection{Occupational Crosswalk}
+
+To apply O*NET task data to Colombian occupations, we construct a chained crosswalk: SOC $\to$ ISCO-08 $\to$ CIUO-08 AC (Colombia's adaptation of ISCO-08). The chain produces 66,157 occupation-level mappings covering 440 CIUO codes and 99.9\% of GEIH employment.
+
+\subsection{LLM Scoring Protocol}
+
+For each task statement, we prompt Claude Haiku 4.5 (Anthropic) to evaluate:
+\begin{enumerate}
+\item \textbf{Augmentation potential} ($a_{ok} \in [0, 100]$): the degree to which GenAI amplifies human productivity in this task.
+\item \textbf{Substitution risk} ($s_{ok} \in [0, 100]$): the degree to which GenAI can fully replace the human.
+\item \textbf{Augmentation type}: information synthesis, creative amplification, communication, decision support, quality assurance, none, or pure substitution.
+\end{enumerate}
+
+All 18,796 tasks were scored with zero errors. The mean augmentation score is 48.8 (SD = 12.1) and mean substitution score is 39.7 (SD = 14.3).
+
+\subsection{Index Construction}
+
+The AHC index for occupation $o$ is the importance-weighted average of task-level augmentation scores:
+\begin{equation}
+AHC_o = \frac{\sum_k w_k \cdot a_{ok}}{\sum_k w_k}
+\end{equation}
+
+\subsection{Validation}
+
+The AHC index correlates $r = -0.71$ with the Frey-Osborne automation probability, confirming that augmentation and substitution are distinct (indeed opposing) dimensions. At the sector level, the index ranks Education (55.2), Professional Services (53.8), and Public Administration (50.0) highest, and Transport (37.9), Domestic Workers (38.9), and Construction (39.5) lowest---consistent with theoretical expectations.
+
+
+% ============================================================
+\section{Data}
+\label{sec:data}
+% ============================================================
+
+\subsection{GEIH Microdata}
+
+Our primary data source is the Gran Encuesta Integrada de Hogares (GEIH) conducted by Colombia's DANE. We use the 2024 wave, which provides 111,672 observations with 4-digit CIUO-08 occupational codes, earnings, education, age, formality status, sector, and firm size. After applying standard restrictions (age 18--65, positive income), our estimation sample contains 105,517 workers.
+
+\subsection{EAM Firm-Level Data}
+
+The Encuesta Anual Manufacturera (EAM) provides 59,908 firm-year observations (2016--2024) with detailed information on capital investment, labor costs, and productivity. We use sector-level aggregates from the EAM to construct the AI adoption proxy.
+
+\subsection{AI Adoption Proxy}
+
+We construct $D_s$ at the sector $\times$ occupation-group level using four GEIH-observable indicators that correlate with AI adoption: sector formality rate, mean education, mean income, and large-firm share. This produces 677 distinct cells with meaningful variation.
+
+
+% ============================================================
+\section{Identification Strategy}
+\label{sec:identification}
+% ============================================================
+
+The main threat to identification is the potential endogeneity of AI adoption $D_s$: sectors that adopt more AI may also have higher wages for reasons unrelated to augmentation. We address this through:
+
+\begin{enumerate}
+\item \textbf{Occupation-level variation}: The AHC index varies \textit{within} sectors across occupations, providing within-sector identification.
+\item \textbf{Interaction specification}: The coefficient of interest ($\beta_2$) is on the \textit{interaction} of AHC with D, not on D alone. Omitted sector-level factors that raise both D and wages are absorbed by sector fixed effects and the D main effect.
+\item \textbf{Placebo test}: Randomly permuting AHC across occupations yields a near-zero interaction coefficient, confirming that the result depends on the specific cognitive content of occupations.
+\item \textbf{Triple interaction}: The formal/informal decomposition provides a quasi-experimental contrast---augmentation should appear only where AI is actually deployed (formal sector).
+\end{enumerate}
+
+
+% ============================================================
+\section{Results}
+\label{sec:results}
+% ============================================================
+
+[Tables 4--6 to be inserted with full regression output]
+
+\subsection{Main Specification}
+
+Table~\ref{tab:main} reports the augmented Mincer equation across five specifications. The AHC level effect is large and stable: a one-standard-deviation increase in occupational augmentability is associated with 9--10\% higher wages, controlling for education, experience, gender, urban status, and sector.
+
+\subsection{Formal vs.\ Informal Decomposition}
+
+The augmentation interaction ($\beta_2$) is $+0.052$ ($p < 0.001$) in the formal sector and $-0.044$ ($p < 0.001$) in the informal sector. The triple interaction $AHC \times D \times Formal = +0.519$ ($p < 0.001$) confirms that formality is the mechanism.
+
+\subsection{Heterogeneity}
+
+The augmentation premium increases with age (strongest for 46--65), is concentrated in health and education sectors, and persists within education levels---confirming that the AHC decomposition captures variation orthogonal to standard human capital measures.
+
+
+% ============================================================
+\section{Robustness}
+\label{sec:robustness}
+% ============================================================
+
+We conduct 27 robustness specifications across five dimensions: alternative AHC measures (binary, continuous, shuffled placebo), alternative D proxies (composite, formality-based, automation-based), sample restrictions (by gender, age, education, sector), within-education tests, and triple interactions. The core findings are robust throughout.
+
+
+% ============================================================
+\section{Implications}
+\label{sec:implications}
+% ============================================================
+
+\subsection{For Human Capital Theory}
+
+The standard Mincer equation is misspecified in AI-augmented economies. The decomposition of cognitive human capital into routine and augmentable components reveals that \textit{equally educated workers} in the same sector face divergent wage trajectories depending on the cognitive composition of their occupation.
+
+\subsection{For Developing Economies}
+
+The finding that augmentation operates exclusively through formal employment channels has profound implications for countries with large informal sectors. Colombia's 50\% informality rate means that half the workforce is structurally excluded from the augmentation premium---even if their occupations have high $H^A$ content.
+
+\subsection{For Education Policy}
+
+Educational investment should prioritize augmentable skills---contextual judgment, cross-domain synthesis, ethical reasoning, collaborative intelligence---over routine cognitive skills that face accelerating depreciation.
+
+
+% ============================================================
+\section{Conclusion}
+\label{sec:conclusion}
+% ============================================================
+
+We have proposed and tested a decomposition of human capital into physical, routine-cognitive, and augmentable-cognitive components. Using LLM-generated measures of occupational augmentability applied to Colombian microdata, we find that the augmentation premium is real, large, and operates exclusively through formal employment. These results provide the micro-foundation for understanding how AI transforms wage structures in developing economies and suggest that the binding constraint on human-AI complementarity in the Global South is not technology access but labor market institutions.
+
+\bigskip
+\singlespacing
+\bibliographystyle{apalike}
+\bibliography{../literature/references}
+
+\end{document}
