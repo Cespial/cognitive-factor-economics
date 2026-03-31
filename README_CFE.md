@@ -21,6 +21,11 @@
    - [Paper 3 — Geography](#paper-3--geography-of-cognitive-augmentation)
    - [Paper 4 — Distributive Justice](#paper-4--distributive-justice-and-cognitive-capabilities)
    - [Paper 5 — Trade Theory](#paper-5--cognitive-comparative-advantage)
+   - [Applied Line: Society 5.0 Workplace Transitions (Papers 6–9)](#applied-line-society-50-workplace-transitions-papers-69)
+   - [Paper 6 — Workplace Augmentation Design](#paper-6--workplace-augmentation-design-for-society-50-first-investigation-in-this-line)
+   - [Paper 7 — Competencies & Education](#paper-7--competencies-and-education-for-society-50-planned)
+   - [Paper 8 — Sectoral S5.0 Models](#paper-8--sectoral-society-50-models-planned)
+   - [Paper 9 — Governance & Sustainability](#paper-9--governance-sustainability-and-circular-economy-in-society-50-planned)
 7. [Society 5.0 as Institutional Context](#7-society-50-as-institutional-context)
 8. [Empirical Strategy — Data Architecture](#8-empirical-strategy--data-architecture)
 9. [Positioning in the Literature](#9-positioning-in-the-literature)
@@ -221,7 +226,7 @@ A concern with LLM-generated indices is endogeneity: if the LLM's training data 
 
 ## 6. Research Agenda — The Paper Map
 
-The CFE program consists of six interconnected papers. Paper 0 is the methodological foundation; Papers 1–5 are substantive contributions that each stands alone but collectively form a unified program.
+The CFE program consists of ten papers organized in two tracks. **Core Track** (Papers 0–5): Paper 0 is the methodological foundation; Papers 1–5 are substantive theoretical and empirical contributions. **Applied Track** (Papers 6–9): the Society 5.0 Workplace Transitions line, which operationalizes CFE's primitives for institutional design, education, sectoral implementation, and governance. Each paper stands alone but collectively they form a unified program.
 
 ---
 
@@ -300,6 +305,100 @@ The CFE program consists of six interconnected papers. Paper 0 is the methodolog
 **Abstract (working):** The Heckscher-Ohlin theorem predicts that countries export goods intensive in their abundant factors. Applied to knowledge services, this implies that countries with abundant educated labor should export cognitive services. We show this prediction is misspecified in the AI era: what matters for comparative advantage in AI-augmented knowledge services is not the *quantity* of educated labor but the *composition* of human capital — specifically the ratio $H^A/H^C$ — and the country's AI access $D^{access}$. We develop a two-country, two-sector model with tradeable cognitive services and show that: (i) a country with abundant educated labor but low $H^A/H^C$ ratio can *lose* comparative advantage in premium cognitive services to a country with less overall education but better composition; (ii) AI access asymmetries between countries generate a new margin of trade that can either reinforce or reverse traditional comparative advantage; and (iii) the offshoring of cognitive services may partially reverse as AI augmentation in high-wage countries reduces the cost advantage of low-wage countries for routine cognitive work. We calibrate the model using trade in services data (WTO/IMF BOP) and our $AHC_o$ indices for 40 countries, and test its predictions against observed shifts in knowledge service trade flows post-2022.
 
 **Key contribution:** First general-equilibrium trade model incorporating AI augmentation as a determinant of comparative advantage. Explains the empirically observed patterns of knowledge service trade realignment post-ChatGPT. Has implications for development strategy in countries whose growth model depends on cognitive service exports (India, Philippines, Colombia).
+
+---
+
+### Applied Line: Society 5.0 Workplace Transitions (Papers 6–9)
+
+The theoretical core of CFE (Papers 0–5) establishes the primitives — $H^A$, $\phi(D)$, $D^*$, $\tau_{ij}$ — but leaves open the question of *how to operationalize* these concepts in the design of actual institutions, workplaces, and educational systems. The **Society 5.0 Applied Line** extends CFE into implementation science: how organizations and societies transition from automation-centered (Industry 4.0) to augmentation-centered (Society 5.0) paradigms.
+
+This line addresses four interconnected research questions:
+
+| Paper | Core Question | CFE Primitive Extended |
+|-------|--------------|----------------------|
+| **Paper 6** — Workplace Augmentation Design | How should work environments be designed to maximize $\phi(D)$? | Endogenizes $\phi(D) \to \phi(D, W)$ where $W$ = workplace design |
+| **Paper 7** — Education & Competencies for S5.0 | What competencies must educational systems develop for Society 5.0? | Operationalizes $H^A$ formation: curriculum → $\Delta H^A$ pipeline |
+| **Paper 8** — Sectoral S5.0 Models (Health, Smart Universities) | How do sector-specific constraints reshape augmentation? | Estimates sector-specific $\phi_s(D, W)$ and risk profiles |
+| **Paper 9** — Governance, Sustainability & Circular Economy in S5.0 | What governance structures sustain human-centric AI transitions? | Formalizes $\tau_{ij}$ as governance design variable |
+
+---
+
+### Paper 6 — Workplace Augmentation Design for Society 5.0 *(First investigation in this line)*
+
+**Full title:** *"From Automation to Augmentation: A Framework for Designing Human-Centric Work Environments in Society 5.0"*
+
+**Target journals:** *Technological Forecasting and Social Change* (Q1, IF ≈ 12) · *Computers in Industry* · *Technology in Society*
+
+**Abstract (working):** The transition from Industry 4.0 to Society 5.0 requires a fundamental shift in workplace design: from optimizing automation (minimizing human labor per unit of output) to optimizing augmentation (maximizing human-AI complementarity per unit of cognitive output). Yet no formal framework exists for what constitutes "human-centric" workplace design in operational, measurable terms. We address this gap by endogenizing the augmentation function from the Cognitive Factor Economics framework: instead of treating $\phi(D)$ as exogenous, we model it as $\phi(D, W)$, where $W$ is a vector of workplace design parameters encompassing five dimensions: (i) AI interface design and usability, (ii) human-AI decision authority allocation, (iii) task granularity and workflow orchestration, (iv) feedback and learning loop architecture, and (v) psychosocial work environment (autonomy, meaning, wellbeing). We define *human-centricity* formally as the set of design choices $W^*$ that satisfy $\partial \phi / \partial W > 0$ — a design is human-centric if and only if it increases the augmentation multiplier. We develop the **Workplace Augmentation Design Index (WADI)**, a composite instrument that measures the distance between a firm's current workplace design and the augmentation-optimal design $W^*$, conditional on its workforce's $H^A$ composition. Using mixed methods — a primary survey of 200+ Colombian firms across manufacturing, services, BPO, and financial sectors, merged with DANE EDIT technology investment data and our $AHC_o$ indices — we estimate the relationship between WADI scores and effective augmentation. We find that: (a) workplace design parameters explain 35–40% of the variance in effective $\phi$ after controlling for AI investment $D$ and worker composition; (b) the most binding constraint for Society 5.0 transitions is not technology adoption but decision authority allocation — firms that centralize AI-mediated decisions in management rather than distributing them to augmented workers achieve significantly lower $\phi$; (c) the optimal workplace design is contingent on the $H^A/H^C$ composition of the workforce, generating a *design-composition complementarity* that creates path dependence in organizational transitions. We derive a transition roadmap with three phases — diagnostic (measure WADI), redesign (optimize $W$ given $H^A$ composition), and institutional embedding (governance structures for sustained human-centricity) — and discuss implications for firms, labor policy, and the Society 5.0 agenda.
+
+**Key contributions:**
+
+1. **Theoretical:** Endogenizes the augmentation function $\phi(D) \to \phi(D, W)$. Provides the first formal definition of "human-centricity" grounded in economic theory rather than normative aspiration. Shows that human-centric design is not altruism — it is the profit-maximizing strategy when $H^A$ is the scarce factor.
+
+2. **Methodological:** Introduces the **WADI** (Workplace Augmentation Design Index) — a validated, multi-dimensional instrument that makes Society 5.0 transition progress measurable at the firm level. Analogous to what the $AHC_o$ index does for occupations, WADI does for workplaces.
+
+3. **Empirical:** First developing-country evidence on the relationship between workplace design and AI augmentation effectiveness. Identifies *decision authority allocation* as the primary bottleneck — not technology access, not skills, but organizational power structures.
+
+4. **Policy:** Produces a concrete transition roadmap (diagnostic → redesign → embedding) usable by firms and policymakers implementing Society 5.0 strategies.
+
+**Data:**
+
+| Source | Coverage | Variables |
+|--------|----------|-----------|
+| Primary survey (WADI instrument) | 200+ Colombian firms, 4 sectors | 5-dimension workplace design scores |
+| DANE EDIT X–XI | Manufacturing firms | Technology investment, innovation types |
+| DANE EMICRON | Micro-firm technology adoption | Digital tool usage, productivity |
+| $AHC_o$ index (from Paper 1) | All occupations mapped to CIUO-08 | Augmentation potential per occupation |
+| Computrabajo/LinkedIn | Job postings, 2022–2026 | AI skill requirements, job redesign signals |
+| DANE GEIH | Household surveys | Worker characteristics, wages, formality |
+
+**Identification strategy:** Cross-sectional OLS + IV. The WADI score is instrumented with pre-COVID organizational structure variables (management layers, worker autonomy indices from DANE Encuesta de Micronegocios 2019) to address the reverse causality that more productive firms may both adopt better designs and achieve higher $\phi$.
+
+**The five WADI dimensions:**
+
+| Dimension | Measures | Theoretical Basis |
+|-----------|----------|-------------------|
+| **W₁ — AI Interface Design** | Usability, transparency, explainability of AI tools deployed | HCI literature + augmented reality decision-making (Endsley 2017) |
+| **W₂ — Decision Authority Allocation** | Who decides: human, AI, or human-with-AI? At what level? | Organizational economics (Aghion & Tirole 1997) + S5.0 human-centricity |
+| **W₃ — Task Orchestration** | Granularity of human-AI task division; workflow integration | Task-based models (Autor 2003) + process mining |
+| **W₄ — Learning Loop Architecture** | Feedback cycles: does the AI learn from human corrections? Does the human learn from AI suggestions? | Dynamic capabilities (Teece 2018) + human-in-the-loop ML |
+| **W₅ — Psychosocial Environment** | Autonomy, meaning, cognitive load, wellbeing in AI-augmented work | Karasek demand-control model + Society 5.0 wellbeing goals |
+
+**Connection to subsequent papers:**
+
+- Paper 7 (Education) uses WADI to identify which competencies ($H^A$ sub-components) are most demanded by high-WADI workplaces
+- Paper 8 (Sectoral) estimates sector-specific $\phi_s(D, W)$ for health and smart universities
+- Paper 9 (Governance) uses WADI adoption patterns to identify governance structures that accelerate or block S5.0 transitions
+
+---
+
+### Paper 7 — Competencies and Education for Society 5.0 *(Planned)*
+
+**Full title:** *"Augmentable by Design: New Competency Frameworks for Education in Society 5.0"*
+
+**Target journals:** *Computers & Education* · *Higher Education* · *Studies in Higher Education*
+
+**Core question:** What specific competencies must educational systems develop to maximize $H^A$ — and how do these differ from traditional STEM or "21st century skills" frameworks? Includes sub-questions on smart university risks, AR/VR-mediated decision-making in educational settings, and curricular redesign for augmentation readiness.
+
+---
+
+### Paper 8 — Sectoral Society 5.0 Models *(Planned)*
+
+**Full title:** *"Society 5.0 in Practice: Sector-Specific Augmentation Models for Health, Education, and Knowledge Services"*
+
+**Target journals:** *Technological Forecasting and Social Change* · *Government Information Quarterly* · *Health Policy and Technology*
+
+**Core question:** How do sector-specific constraints (regulation, risk tolerance, human interaction intensity) reshape the augmentation function? Develops sector-specific $\phi_s(D, W)$ models for healthcare (patient safety constraints, clinical judgment augmentation) and higher education (smart university risks, pedagogical augmentation vs. substitution).
+
+---
+
+### Paper 9 — Governance, Sustainability and Circular Economy in Society 5.0 *(Planned)*
+
+**Full title:** *"Governing the Augmented Economy: Institutional Design for Sustainable Human-AI Complementarity"*
+
+**Target journals:** *Research Policy* · *Ecological Economics* · *Regulation & Governance*
+
+**Core question:** What governance structures sustain human-centric AI transitions — and how does the circular economy paradigm interact with cognitive augmentation? Formalizes the institutional complementarity distance $\tau_{ij}$ as a governance design variable and models the sustainability constraints on Society 5.0 transitions (energy costs of AI, circular economy principles for cognitive infrastructure).
 
 ---
 
