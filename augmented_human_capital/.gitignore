@@ -1,0 +1,25 @@
+# Environment
+.env
+.env.local
+__pycache__/
+*.pyc
+.ipynb_checkpoints/
+
+# Data (too large for git)
+data/raw/
+data/processed/*.parquet
+data/indices/*.jsonl
+data/upstream_auto_col
+
+# Output (regenerable)
+output/logs/
+output/figures/*.png
+*.log
+
+# OS
+.DS_Store
+Thumbs.db
+
+# IDE
+.vscode/
+.idea/

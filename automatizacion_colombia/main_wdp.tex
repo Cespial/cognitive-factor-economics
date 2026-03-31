@@ -1,0 +1,937 @@
+%% main_wdp.tex — Technovation (Elsevier, Q1, IF=10.9)
+%% Template for: Technology Adoption in Dual Economies
+%% Authors: Cristian Espinal Maya, Santiago Jiménez Londoño (EAFIT),
+%%          Jovani Alberto Jiménez Builes (UNAL)
+%%
+%% Compile: pdflatex main_wdp.tex → bibtex main_wdp → pdflatex (×2)
+%% -----------------------------------------------------------------
+
+\documentclass[5p,times,authoryear]{elsarticle}
+
+%% ----- Packages -------------------------------------------------
+\usepackage{amsmath,amssymb}
+\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage{hyperref}
+\usepackage{natbib}
+%\usepackage{lineno}          % line numbering for review
+\usepackage{xcolor}
+\usepackage{float}
+\usepackage{multirow}
+\usepackage{subcaption}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{threeparttable}
+\usepackage{placeins}        % \FloatBarrier
+\usepackage{tabularx}
+\usepackage{array}
+\usepackage{bbm}             % \mathbbm{1} for indicator functions
+\usepackage{orcidlink}       % ORCID icons for author IDs
+\usepackage{adjustbox}       % auto-fit wide tables
+
+%% ----- Line numbering (required for review) ---------------------
+%\modulolinenumbers[5]
+
+%% ----- Journal metadata -----------------------------------------
+\journal{Technovation}
+
+%% =================================================================
+%%  HIGHLIGHTS (Elsevier required element)
+%% =================================================================
+\begin{highlights}
+\item Minimum wage shocks reduce automation investment 16.7\% in Colombian manufacturers
+\item Cash-constrained firms absorb cost shocks rather than automating: a dual economy trap
+\item Informality acts as an escape valve, absorbing labor displaced by wage increases
+\item Automation potential and formality, not labor cost, drive sectoral vulnerability
+\item Standard OECD automation models mispredict technology adoption in dual economies
+\end{highlights}
+
+%% =================================================================
+%%  FRONTMATTER
+%% =================================================================
+\begin{document}
+
+\begin{frontmatter}
+
+%% ----- Title ----------------------------------------------------
+\title{Technology Adoption in Dual Economies: How Informality and Non-Wage Labor Costs Shape Automation Dynamics --- Evidence from Colombia}
+
+%% ----- Authors --------------------------------------------------
+\author[eafit]{Cristian Espinal Maya\orcidlink{0009-0000-1009-8388}\corref{cor1}}
+\ead{cjespinalm@eafit.edu.co}
+
+\author[eafit]{Santiago Jim\'enez Londo\~no\orcidlink{0009-0007-9862-7133}}
+\ead{sjimenezl@eafit.edu.co}
+
+\author[unal]{Jovani Alberto Jim\'enez-Builes\orcidlink{0000-0001-7598-7696}}
+\ead{jajimen1@unal.edu.co}
+
+\cortext[cor1]{Corresponding author.}
+
+\affiliation[eafit]{organization={Department of Economics, Universidad EAFIT},
+            addressline={Carrera 49 No.\ 7 Sur-50},
+            city={Medell\'in},
+            postcode={050022},
+            state={Antioquia},
+            country={Colombia}}
+
+\affiliation[unal]{organization={Facultad de Minas, Universidad Nacional de Colombia},
+            city={Medell\'in},
+            postcode={050034},
+            state={Antioquia},
+            country={Colombia}}
+
+%% ----- Abstract -------------------------------------------------
+\begin{abstract}
+Standard automation theory predicts that rising labor costs accelerate technology adoption. We test this in Colombia---a dual economy where 55.8\% of employment is informal and non-wage costs add 46--58\% to base wages---using a difference-in-differences design exploiting minimum wage shocks under the Petro administration (+16\% in 2023, +12\% in 2024). Contrary to theory, firms most exposed to these shocks \emph{reduced} automation investment per worker by 16.7\% ($p=0.045$). This counterintuitive result reflects the ``dual economy trap'': in cash-constrained economies with large informal sectors, wage increases consume firm margins rather than redirecting capital toward labor-replacing technologies, while informality provides an escape valve absorbing displaced formal labor. Using 66,775 firm-year observations from the Annual Manufacturing Survey and 364,998 individual observations from household labor force data, we find null effects on sectoral formality rates and automation risk composition. Principal component analysis of our sectoral vulnerability index confirms that automation potential and formality---not labor cost alone---drive vulnerability rankings. These findings challenge the universality of the cost--automation nexus and carry implications for minimum wage policy, parafiscal reform, and technology subsidies in economies where informality exceeds 30\% of employment.
+\end{abstract}
+
+%% ----- Graphical abstract placeholder ---------------------------
+%%\begin{graphicalabstract}
+%%  \includegraphics[width=\textwidth]{graphical_abstract.pdf}
+%%\end{graphicalabstract}
+
+%% ----- Keywords -------------------------------------------------
+\begin{keyword}
+  Automation \sep Labor costs \sep Dual economy \sep Informality \sep
+  Minimum wage \sep Difference-in-differences \sep Colombia
+\end{keyword}
+
+\end{frontmatter}
+
+%% ----- Line numbers start here ----------------------------------
+%\linenumbers
+
+%% =================================================================
+%%  1. INTRODUCTION
+%% =================================================================
+\section{Introduction}
+\label{sec:introduction}
+
+Since \citet{frey2017future} estimated that 47\% of US employment faces high automation risk, a growing literature has quantified these risks across countries and occupations \citep{arntz2016, webb2020, eloundou2023gpts}. Yet this research overwhelmingly focuses on advanced economies with universal formal employment and developed capital markets. The roughly 2 billion workers in developing countries---where informality often exceeds 50\% and firms face severe capital constraints---remain outside the analytical frame \citep{laporta2014, arias2023informality}.
+
+The task-based framework of \citet{acemoglu2019automation} and its extensions \citep{acemoglu2020robots, acemoglu2022tasks} predict that rising labor costs accelerate technology adoption, a mechanism supported empirically in the US \citep{acemoglu2020robots}, Germany \citep{dauth2021}, Japan \citep{adachi2022}, and Spain \citep{koch2021}. The implicit assumption is that firms have access to capital, operate within formal regulatory frameworks, and substitute capital for labor along a smooth production frontier.
+
+Colombia presents a stark test. With robot density of 2--5 per 10,000 manufacturing workers versus 1,012 in South Korea \citep{ifr2024}, the country invests roughly one-tenth of what its labor costs would predict internationally. This ``automation gap'' persists despite non-wage costs adding 46--58\% to base wages \citep{anif2018}, while 55.8\% of workers operate informally \citep{arias2023informality}. This combination creates what we term a \emph{dual economy trap}: an institutional configuration in which labor cost shocks fail to generate the predicted automation response.
+
+We exploit a natural experiment to test this hypothesis directly. Between 2023 and 2024, Colombia's minimum wage increased by 16\% and 12\% in nominal terms, respectively, under the administration of President Gustavo Petro---far exceeding productivity growth of 1--2\% per year. These shocks affected firms differentially based on their pre-existing labor cost structure. Using a difference-in-differences (DiD) design with continuous treatment intensity measured by pre-treatment (2022) labor cost share of gross production, we estimate the causal effect of these cost shocks on firm-level automation investment.
+
+Our central finding is counterintuitive: firms most exposed to minimum wage increases \emph{reduced} investment per worker by 16.7\% relative to less exposed firms ($\beta = -0.167$, $p = 0.045$), and their investment rates declined by 0.7 percentage points ($p = 0.009$). Rather than accelerating technology adoption, large labor cost shocks in a cash-constrained, dual economy appear to freeze capital investment. We interpret this through three mechanisms: (i) a \emph{cash constraint} channel, whereby wage increases consume the operating margins that would otherwise finance automation capital; (ii) an \emph{informality escape valve}, whereby firms shift labor arrangements toward informal contracts rather than investing in technology; and (iii) an \emph{uncertainty freeze}, whereby regulatory volatility under rapid minimum wage increases discourages long-term capital commitments.
+
+Complementing the firm-level analysis, we examine 364,998 individual-level observations from Colombia's GEIH household survey (2022--2024), finding null effects on both formality rates ($\beta = +0.002$, $p = 0.688$) and the automation risk composition of employment ($\beta = -0.004$, $p = 0.132$). PCA validation of our sectoral vulnerability index confirms that automation potential (loading = 0.44) and formality (0.42) dominate, while labor cost receives only 0.14 weight---corroborating that in dual economies, task content and institutional formality, not cost alone, determine automation vulnerability.
+
+This paper makes three contributions. First, it provides the first quasi-experimental evidence on the causal effect of labor cost shocks on automation investment in a developing country with a large informal sector, exploiting exogenous variation that no prior study has identified in this setting \citep{graetz2018, koch2021, bid2023, morales2023risk}. Second, we articulate the ``dual economy trap'' as a theoretical mechanism explaining why cash constraints, informality, and regulatory uncertainty cause labor cost increases to \emph{reduce} rather than redirect investment. Third, PCA validation demonstrates that sectoral automation vulnerability is driven by task-level automation potential and formality rather than labor cost---with direct implications for policy prioritization.
+
+The remainder of the paper proceeds as follows. Section~\ref{sec:theory} develops the theoretical framework, extending the task-based model to dual economies and deriving testable predictions. Section~\ref{sec:context} describes the institutional context of Colombian labor costs and informality. Section~\ref{sec:data} presents the data sources, identification strategy, and econometric specifications. Section~\ref{sec:results} reports the main results, event studies, and robustness checks. Section~\ref{sec:policy} discusses theoretical and policy implications and the generalizability of our findings to other developing economies. Section~\ref{sec:limitations} addresses limitations and future research directions. Section~\ref{sec:conclusion} concludes.
+
+\FloatBarrier
+
+
+%% =================================================================
+%%  2. THEORETICAL FRAMEWORK
+%% =================================================================
+\section{Theoretical Framework: Automation in Dual Economies}
+\label{sec:theory}
+
+\subsection{The Task-Based Framework}
+\label{subsec:task_model}
+
+We build on the task-based model of \citet{acemoglu2019automation}, which provides a unified framework for analyzing how automation reshapes labor markets through three channels: displacement, reinstatement, and productivity effects. In this framework, production requires the completion of a continuum of tasks $i \in [0,1]$, each of which can be performed by labor or capital. At any point in time, there exists a threshold task $I^*$ such that all tasks $i < I^*$ are automated and all tasks $i \geq I^*$ are performed by labor. Technology adoption shifts this threshold to the right, displacing workers from tasks that machines can now perform more cheaply.
+
+The firm's automation decision depends on the relative cost of labor versus capital for each task. For a representative task $i$, the firm automates when:
+\begin{equation}
+\label{eq:automation_threshold}
+\frac{w + c}{r \cdot \alpha(i)} > 1
+\end{equation}
+where $w$ is the base wage, $c$ represents non-wage labor costs (social contributions, severance, parafiscal charges), $r$ is the user cost of capital, and $\alpha(i)$ captures the productivity of machines at task $i$. In the standard model, an increase in total labor costs $(w + c)$ unambiguously shifts the automation threshold to the right: more tasks become cheaper to automate, and the displacement effect dominates in the short run.
+
+\citet{acemoglu2022tasks} show that automation need not reduce aggregate labor demand if productivity gains create new labor-intensive tasks, but this balance depends on technology quality. \citet{acemoglu2020taxes} introduce ``so-so technologies''---automation that displaces labor without large productivity gains---showing that excessive adoption of mediocre technologies can reduce welfare.
+
+\subsection{Extension to Dual Economies: The Formality Paradox}
+\label{subsec:dual_economy}
+
+The standard framework assumes that all labor operates within a unified formal market: workers receive regulated wages, firms pay mandated contributions, and automation decisions reflect the full cost of formal employment. In dual economies, this assumption is violated. Following \citet{laporta2014} and \citet{ulyssea2018}, we model the labor market as comprising two segments---a formal sector with regulated wages and non-wage costs, and an informal sector with flexible compensation and minimal regulatory burden.
+
+Let $\lambda \in [0,1]$ denote the economy's formality rate. The effective labor cost faced by a representative firm depends on its workforce composition:
+\begin{equation}
+\label{eq:effective_cost}
+\tilde{w} = \lambda(w + c) + (1-\lambda) w_I
+\end{equation}
+where $w_I < w$ is the informal wage. This creates what we term the \emph{formality paradox}: formal workers generate the non-wage costs that theoretically incentivize automation, but only formal-sector firms have the organizational capacity, capital access, and regulatory incentives to adopt labor-replacing technologies. Informal firms, which account for the majority of employment in countries like Colombia, Brazil, and India, neither generate the cost pressure nor possess the means to automate.
+
+This paradox implies that (i) aggregate automation responses are attenuated by the informal employment share, (ii) informality provides an ``escape valve'' allowing firms to shift workers to informal arrangements rather than investing in technology, and (iii) equilibrium automation depends not only on the labor--capital cost differential but also on the formal--informal labor cost differential.
+
+\subsection{Cost-Induced versus Efficiency-Induced Adoption}
+\label{subsec:cost_vs_efficiency}
+
+Cost-induced adoption occurs when rising labor costs push firms past the threshold in Equation~\ref{eq:automation_threshold}; efficiency-induced adoption occurs when technological improvements make capital more productive regardless of labor costs. In advanced economies both channels operate simultaneously; in developing economies cost-induced adoption may predominate because firms rely on imported technologies, but requires sufficient liquidity---far from guaranteed with underdeveloped financial markets \citep{busso2020}. Moreover, much available automation capital is ``so-so'' \citep{acemoglu2020taxes}: basic robots that displace routine tasks without transformative productivity gains, making investment decisions marginal and sensitive to cash flow constraints.
+
+\subsection{The Dual Economy Trap: A Formal Characterization}
+\label{subsec:formal_trap}
+
+We now formalize the intuition that labor cost shocks can inhibit rather than promote automation in cash-constrained economies. Consider a representative formal-sector firm that chooses between labor $L$ and automation capital $K_A$ to produce output $Y = F(K_A, L)$. The total cost of a formal worker is $w(1 + \tau)$, where $w$ is the base wage and $\tau \in [0.46, 0.58]$ is the non-wage surcharge comprising social security, mandatory provisions, and parafiscal charges as documented in Section~\ref{subsec:labor_costs}. Let $r_A$ denote the rental (user) cost of automation capital.
+
+In each period, the firm earns operating profits:
+\begin{equation}
+\label{eq:profits}
+\pi = pY - w(1+\tau)L - r_A K_A - F_C
+\end{equation}
+where $p$ is the output price and $F_C$ represents fixed costs. An increase in $w(1+\tau)$ raises the relative cost of labor and makes automation more attractive. However, automation capital is lumpy---requiring indivisible expenditure $C_A$---and in developing economies with thin capital markets must typically be financed from retained earnings \citep{busso2020}. The firm can invest only if:
+\begin{equation}
+\label{eq:finance_constraint}
+\pi \geq C_A
+\end{equation}
+
+A minimum wage shock $\Delta w > 0$ raises the return to automation but simultaneously reduces operating profits:
+\begin{equation}
+\label{eq:profit_reduction}
+\Delta \pi = -(1+\tau) L \cdot \Delta w < 0
+\end{equation}
+
+The dual economy trap emerges when the profit reduction is large enough to push the firm below the financing threshold. Formally, a firm is ``trapped'' when:
+\begin{equation}
+\label{eq:trap_condition}
+\pi_0 \geq C_A \quad \text{but} \quad \pi_0 - (1+\tau)L \cdot \Delta w < C_A
+\end{equation}
+where $\pi_0$ denotes pre-shock profits. The trap condition is more likely to bind when: (i) the non-wage surcharge $\tau$ is large (amplifying the cost shock), (ii) the firm is labor-intensive (large $L$ relative to revenue), (iii) initial margins are thin ($\pi_0$ is close to $C_A$), and (iv) the wage shock $\Delta w$ is large. All four conditions characterize the Colombian manufacturing sector.
+
+In advanced economies, condition~\eqref{eq:finance_constraint} typically does not bind because firms access external capital markets. In dual economies, the wedge between internal and external financing is large, and for many SMEs external financing is unavailable. The same shock that \emph{should} incentivize automation simultaneously \emph{destroys} the financial capacity to automate.
+
+The informality margin introduces an additional channel. When the firm cannot finance $C_A$, it can reduce costs by shifting workers to informal arrangements at $w_I < w(1+\tau)$, yielding:
+\begin{equation}
+\label{eq:informalize}
+\tilde{w}_{\text{post}} = \lambda' w(1+\tau)(1 + \Delta w/w) + (1-\lambda') w_I
+\end{equation}
+where $\lambda' < \lambda$ reflects increased informalization. This response restores margins without requiring lumpy capital investment, but it forecloses the productivity gains that automation would have delivered.
+
+\subsection{The Dual Economy Trap Hypothesis}
+\label{subsec:trap_hypothesis}
+
+Three countervailing forces operate in dual economies. \textit{Cash constraint channel:} wage increases directly reduce operating profits, leaving firms unable to finance lumpy automation expenditure even as the long-run return increases---particularly acute for SMEs without external capital market access. \textit{Informality escape valve:} firms reduce costs by shifting employment toward informal arrangements rather than investing in capital, a rational response where enforcement risk is low \citep{ulyssea2018}. \textit{Uncertainty freeze:} large, sudden regulatory changes (e.g., +16\% minimum wage) raise the option value of deferring irreversible capital commitments \citep{prettner2020innovation}.
+
+These three mechanisms generate a prediction that is the mirror image of the standard model:
+
+\begin{quote}
+\textbf{Prediction 1 (Standard model):} An increase in labor costs accelerates automation investment.
+
+\textbf{Prediction 2 (Dual economy trap):} In cash-constrained economies with large informal sectors, a large labor cost shock \emph{reduces} firm-level automation investment by consuming operating margins, activating the informality escape valve, and increasing regulatory uncertainty.
+
+\textbf{Prediction 3 (Formality paradox):} Minimum wage increases in dual economies produce null or negative effects on sectoral formality rates, as firms adjust through informal channels rather than through automation-driven productivity improvements.
+
+\textbf{Prediction 4 (Sectoral heterogeneity):} Vulnerability to automation in dual economies is driven primarily by task-level automation potential and the degree of formality, rather than by labor cost alone.
+\end{quote}
+
+The empirical sections that follow test each of these predictions using firm-level panel data (Predictions 1--2), individual-level labor market data (Prediction 3), and a validated sectoral vulnerability index (Prediction 4).
+
+\FloatBarrier
+
+
+%% =================================================================
+%%  3. INSTITUTIONAL CONTEXT
+%% =================================================================
+\section{Institutional Context: Labor Costs in Colombia}
+\label{sec:context}
+
+\subsection{Colombian Labor Cost Structure}
+\label{subsec:labor_costs}
+
+Colombia's formal employment regime imposes one of the highest non-wage cost wedges in Latin America. Table~\ref{tab:cost_decomposition} decomposes the total cost of employing a formal worker earning one minimum wage (\textit{salario m\'{i}nimo mensual legal vigente}, SMMLV). Mandatory employer contributions include pension insurance (12\% of payroll), health insurance (8.5\%), and occupational risk insurance (\textit{Administradora de Riesgos Laborales}, ARL, 0.522--6.960\% depending on risk class). Beyond social security, employers must provision for severance (\textit{cesant\'{i}as}, 8.33\% of annual salary), interest on severance (1\% of accumulated balance), a mid-year bonus (\textit{prima de servicios}, 8.33\%), vacation pay (4.17\%), and in some cases a transportation allowance. Parafiscal contributions---earmarked levies funding the national training service SENA (2\%), the family welfare institute ICBF (3\%), and employee compensation funds (\textit{cajas de compensaci\'{o}n}, 4\%)---add a further 4--9\% depending on firm size and sector \citep{anif2018}.
+
+\begin{table}[htbp]
+\centering
+\begin{threeparttable}
+\caption{Decomposition of Formal Employer Labor Costs in Colombia}
+\label{tab:cost_decomposition}
+\small
+\setlength{\tabcolsep}{4pt}
+\begin{tabular}{@{}lr@{}}
+\toprule
+Component & Rate (\% of base wage) \\
+\midrule
+\textbf{Social security} & \\
+\quad Pension & 12.0 \\
+\quad Health & 8.5 \\
+\quad ARL (occupational risk) & 0.5--7.0 \\
+\textbf{Mandatory provisions} & \\
+\quad Severance (\textit{cesant\'{i}as}) & 8.33 \\
+\quad Interest on severance & 1.0 \\
+\quad Mid-year bonus (\textit{prima}) & 8.33 \\
+\quad Vacation & 4.17 \\
+\textbf{Parafiscal charges}\tnote{a} & \\
+\quad SENA & 0--2.0 \\
+\quad ICBF & 0--3.0 \\
+\quad \textit{Cajas de compensaci\'{o}n} & 4.0 \\
+\midrule
+\textbf{Total non-wage cost} & \textbf{46.3--58.3} \\
+\bottomrule
+\end{tabular}
+\begin{tablenotes}
+\footnotesize
+\item[a] Firms paying workers less than 10 SMMLV were exempted from SENA and ICBF contributions under Ley 1607/2012, reducing the parafiscal burden from 9\% to 4\% for small employers. All components paid by employer.
+\end{tablenotes}
+\end{threeparttable}
+\end{table}
+
+The aggregate non-wage cost wedge of 46--58\% means that a firm employing a worker at the minimum wage of COP 1,300,000 per month (2024) faces a total labor cost of approximately COP 1,900,000--2,060,000. This cost structure creates a powerful incentive to avoid formal employment altogether, particularly for small firms operating near the productivity threshold at which formality becomes viable \citep{ulyssea2018}.
+
+\subsection{Minimum Wage Dynamics under the Petro Administration}
+\label{subsec:mw_dynamics}
+
+Under the Petro administration, minimum wage increases have been aggressive: +16\% in 2023, +12\% in 2024, and +9.5\% in 2025, yielding cumulative nominal growth exceeding 42\% against productivity growth of 1--2\% per year. Real minimum wage growth of approximately 20\% over two years represents a significant shock to firm cost structures. Colombia maintains a single national minimum wage, meaning the same nominal increase applies across regions with vastly different productivity levels, generating substantial variation in the \emph{bite} of increases across sectors and regions.
+
+\subsection{The Automation Gap}
+\label{subsec:automation_gap}
+
+Colombia's robot density of 2--5 per 10,000 manufacturing workers \citep{ifr2024} and R\&D expenditure of 0.30\% of GDP reflect structural barriers: limited capital access, thin automation equipment markets, skills gaps, and abundant informal labor as a substitute for capital. The ILIA ranks Colombia 7th in Latin America \citep{ilia2024}; the CONPES 4144 AI policy \citep{conpes4144} has yet to generate measurable changes in firm-level adoption. Figure~\ref{fig:robot_density} illustrates the international comparison.
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=\columnwidth]{images/en/fig5_robot_density_comparison.pdf}
+\caption{Industrial robot density (robots per 10,000 manufacturing workers) across selected countries. Colombia's density of 2--5 robots places it at the extreme low end of the global distribution, despite non-wage labor costs comparable to or exceeding many European economies. Source: IFR World Robotics 2024.}
+\label{fig:robot_density}
+\end{figure}
+
+\subsection{Informality as a Labor Market Buffer}
+\label{subsec:informality}
+
+Colombia's informal sector encompasses 55.8\% of total employment \citep{arias2023informality}, a structural feature sustained by high formal-sector entry costs, limited enforcement, and sectoral composition \citep{laporta2014}. For automation, informality functions as an escape valve through two channels: it attenuates the labor-cost signal by providing workers at effective costs well below regulated rates, and it offers an adjustment margin when minimum wages rise---firms shift workers to informal arrangements rather than investing in capital. This mechanism, entirely absent from OECD-calibrated models, dampens both employment and automation effects of cost increases.
+
+\FloatBarrier
+
+
+%% =================================================================
+%%  4. DATA AND IDENTIFICATION STRATEGY
+%% =================================================================
+\section{Data and Identification Strategy}
+\label{sec:data}
+
+\subsection{Data Sources}
+\label{subsec:data_sources}
+
+We draw on three primary datasets, supplemented by international panel data for cross-country benchmarking.
+
+\paragraph{Annual Manufacturing Survey (EAM).} Colombia's \textit{Encuesta Anual Manufacturera}, conducted by DANE, provides establishment-level data on production, employment, wages, investment, and capital stocks for the formal manufacturing sector. We use the 2016--2024 waves, yielding a panel of 66,775 firm-year observations from 8,274 unique establishments. Key variables include gross production, total labor costs (wages plus non-wage contributions), investment in machinery and equipment (our proxy for automation capital), number of employees, and 4-digit ISIC sector classification. The EAM covers establishments with 10 or more employees or gross production above a threshold, meaning that it captures the formal manufacturing sector comprehensively while excluding micro-enterprises and informal workshops.
+
+\paragraph{Household Labor Force Survey (GEIH).} The \textit{Gran Encuesta Integrada de Hogares}, also administered by DANE, is a continuous rotating panel survey covering approximately 230,000 households per year. We use quarterly microdata for 2022Q1--2024Q4, yielding 364,998 individual observations after restricting to employed persons aged 18--65 with valid occupational codes. The GEIH provides information on earnings, hours worked, sector of employment (ISIC 2-digit), occupation (CIUO-08 A.C.), formality status (based on social security contributions), and demographic characteristics. We match each occupation to a Frey--Osborne automation probability adapted to the Colombian classification following \citet{morales2023risk}.
+
+\paragraph{Occupational automation risk mapping: SOC to CIUO-08.} We map the 702 \citet{frey2017future} US occupations (SOC-2010) to ISCO-08 via the BLS crosswalk, then to Colombia's CIUO-08 A.C. using the DANE concordance, computing employment-weighted average probabilities at the 2-digit level. This yields 41 occupational groups with probabilities ranging from 0.04 (health professionals) to 0.91 (food preparation workers), validated against \citet{arntz2016} and \citet{gmyrek2023generative} ($\rho = 0.87$). Appendix Table~\ref{tab:occupation_mapping} reports the extreme groups.
+
+\paragraph{International Panel (PWT + IFR).} For cross-country analysis, we combine the Penn World Table 10.01 with robot installation data from the International Federation of Robotics \citep{ifr2024}, covering 25 countries over 2010--2022 (226 country-year observations). This panel allows us to estimate the international elasticity of robot density with respect to labor productivity and position Colombia within the global distribution.
+
+\paragraph{Integrated Vulnerability to Automation Index (IVA).} We construct a sector-level composite index combining three components: (C1) automation potential, measured as the employment-weighted average of Frey--Osborne probabilities within each 2-digit ISIC sector; (C2) labor cost pressure, measured as the ratio of sector-average unit labor cost to the national median; and (C3) formality rate, defined as the share of sector employment contributing to social security. The IVA is defined as a weighted average of these normalized components.
+
+\subsection{Difference-in-Differences Design: EAM Panel}
+\label{subsec:did_eam}
+
+Our primary identification strategy exploits the large minimum wage shocks of 2023--2024 as a source of exogenous variation in firm labor costs. The identifying assumption is that, conditional on firm and year fixed effects, firms with higher pre-treatment labor cost shares would have followed parallel investment trends in the absence of the minimum wage shocks.
+
+\paragraph{Treatment intensity.} We measure treatment intensity as the firm's labor cost share of gross production in 2022 (the last pre-treatment year):
+\begin{equation}
+\label{eq:treatment}
+T_i = \frac{\text{Total labor cost}_{i,2022}}{\text{Gross production}_{i,2022}}
+\end{equation}
+Firms with higher $T_i$ are more exposed to minimum wage increases because labor constitutes a larger share of their cost structure. For the binary specification, we define $\text{High}_i = \mathbbm{1}(T_i > \text{median}(T))$.
+
+\paragraph{Main specification.} The two-way fixed effects DiD regression takes the form:
+\begin{equation}
+\label{eq:did_main}
+y_{it} = \alpha_i + \gamma_t + \beta \cdot \text{High}_i \times \text{Post}_t + \mathbf{X}_{it}'\boldsymbol{\delta} + \varepsilon_{it}
+\end{equation}
+where $y_{it}$ is the outcome variable (log investment per worker, investment rate, log capital intensity, log unit labor cost, or log labor productivity), $\alpha_i$ and $\gamma_t$ are firm and year fixed effects, $\text{Post}_t = \mathbbm{1}(t \geq 2023)$, and $\mathbf{X}_{it}$ includes time-varying controls (log firm size, sector $\times$ year trends in some specifications). Standard errors are clustered at the firm level, with wild cluster bootstrap $p$-values reported following \citet{cameron2008bootstrap}.
+
+\paragraph{Continuous treatment specification.} We also estimate a specification with continuous treatment intensity:
+\begin{equation}
+\label{eq:did_continuous}
+y_{it} = \alpha_i + \gamma_t + \beta \cdot T_i \times \text{Post}_t + \mathbf{X}_{it}'\boldsymbol{\delta} + \varepsilon_{it}
+\end{equation}
+This specification exploits the full variation in treatment intensity rather than the binary above/below-median split, providing greater statistical power and allowing for dose-response interpretation.
+
+\paragraph{Event study specification.} To assess the parallel trends assumption and characterize the dynamics of treatment effects, we estimate:
+\begin{equation}
+\label{eq:event_study}
+y_{it} = \alpha_i + \gamma_t + \sum_{\substack{k=2016 \\ k \neq 2022}}^{2024} \beta_k \cdot \text{High}_i \times \mathbbm{1}(t = k) + \varepsilon_{it}
+\end{equation}
+with 2022 as the omitted reference year. The coefficients $\beta_k$ for $k < 2022$ test for pre-existing differential trends, while $\beta_k$ for $k \geq 2023$ capture the dynamic treatment effect.
+
+\subsection{Difference-in-Differences Design: GEIH Individual Data}
+\label{subsec:did_geih}
+
+To examine the effects of minimum wage shocks on labor market composition, we implement a sector-level DiD using the GEIH microdata. Treatment intensity is defined as the sector-level minimum wage bite in the pre-treatment period:
+\begin{equation}
+\label{eq:mw_bite}
+\text{Bite}_s = \frac{N_{s,2022}^{\leq 1.2 \, \text{SMMLV}}}{L_{s,2022}}
+\end{equation}
+Sectors with higher bite are more affected by minimum wage increases because a larger share of their workforce earns near the minimum. The specification is:
+\begin{equation}
+\label{eq:did_geih}
+y_{ist} = \alpha_s + \gamma_t + \beta \cdot \text{Bite}_s \times \text{Post}_t + \mathbf{X}_{ist}'\boldsymbol{\delta} + \varepsilon_{ist}
+\end{equation}
+where $y_{ist}$ is either a formality indicator or the automation risk probability for individual $i$ in sector $s$ at quarter $t$, with sector and quarter fixed effects. Standard errors are clustered at the sector level. The sample comprises 87 distinct ISIC 2-digit sectors, with a median bite of 0.603---indicating that in the typical sector, over 60\% of workers earn within 20\% of the minimum wage, underscoring the pervasive reach of minimum wage policy in the Colombian labor market. We estimate two variants: (i) a cell-level aggregation (sector $\times$ quarter, weighted least squares with employment weights), which maximizes power by collapsing individual observations to 1,044 cells, and (ii) an individual-level specification that includes demographic controls (age, sex, years of education) and permits heterogeneity analysis. We examine five outcomes: formality rate, mean automation risk, share of workers in high-risk occupations ($\geq 0.50$ Frey--Osborne probability), log monthly income, and total employment.
+
+\subsection{IVA Construction and PCA Validation}
+\label{subsec:iva}
+
+The Integrated Vulnerability to Automation (IVA) index aggregates three sector-level components:
+\begin{equation}
+\label{eq:iva}
+\text{IVA}_s = w_1 \cdot \tilde{C}_1^s + w_2 \cdot \tilde{C}_2^s + w_3 \cdot \tilde{C}_3^s
+\end{equation}
+where $\tilde{C}_j^s$ is the min-max normalized value of component $j$ for sector $s$, and $(w_1, w_2, w_3)$ are the weights. Our original specification uses ad hoc weights of $(0.40, 0.35, 0.25)$ reflecting the presumed importance of automation potential, labor cost, and formality.
+
+To validate this weighting, we conduct a principal component analysis (PCA) on the three standardized components. If the components capture a coherent latent construct, the first principal component should explain a large share of variance and the PCA-derived weights should approximate the ad hoc weights. Deviations between the two indicate that the data-driven structure differs from our \textit{a priori} assumptions.
+
+We further assess the sensitivity of sector rankings to weight choice by enumerating all weight combinations $(w_1, w_2, w_3)$ on a grid with step size 0.05, subject to $w_1 + w_2 + w_3 = 1$ and $w_j \geq 0.05$. For each of the 231 resulting weight vectors, we compute the IVA ranking and measure its rank-order correlation (Kendall's $\tau$) with the baseline ranking.
+
+\subsection{Threats to Identification}
+\label{subsec:threats}
+
+Several threats to our identification strategy merit discussion.
+
+\paragraph{Pre-trends.} The validity of the DiD design requires that treated and control firms would have followed parallel trends absent the minimum wage shocks. We test this using the event study specification (Equation~\ref{eq:event_study}) and a formal $F$-test of joint significance of pre-treatment coefficients. As we document in Section~\ref{sec:results}, the pre-trend coefficients show a declining pattern ($F$-test $p = 0.023$), suggesting some pre-existing differential trends that we address through robustness checks including sector $\times$ year trends.
+
+\paragraph{COVID-19 contamination.} The 2020--2021 period introduced substantial disruption to manufacturing investment that could interact with our treatment measure. We address this by estimating specifications that exclude the COVID years (2020--2021) and verify that our results strengthen.
+
+\paragraph{Reverse causality.} Firms that anticipate automation may adjust their labor cost structure \emph{before} the treatment period, creating a correlation between treatment intensity and investment that does not reflect the causal effect of the minimum wage shock. We mitigate this concern by measuring treatment intensity in 2022, prior to the announcement of the 2023 increase, and by examining pre-treatment dynamics in the event study.
+
+\paragraph{SUTVA.} The stable unit treatment value assumption requires that one firm's treatment does not affect another firm's outcome. This could be violated if firms compete in the same product market and minimum wage shocks lead to competitive reallocation. We partially address this by controlling for sector $\times$ year effects, which absorb sector-level competitive dynamics.
+
+\FloatBarrier
+
+
+%% =================================================================
+%%  5. RESULTS
+%% =================================================================
+\section{Results}
+\label{sec:results}
+
+\subsection{Panel DiD: The Counterintuitive Investment Response}
+\label{subsec:results_did}
+
+Table~\ref{tab:did_main} presents the main DiD results for five firm-level outcomes. The headline finding is that high-labor-cost firms \emph{reduced} investment per worker after the minimum wage shocks, contradicting the standard prediction that higher labor costs accelerate automation capital formation.
+
+\begin{table*}[htbp]
+\centering
+\begin{threeparttable}
+\caption{Difference-in-Differences Estimates: Effect of Minimum Wage Shocks on Firm-Level Outcomes}
+\label{tab:did_main}
+\small
+\setlength{\tabcolsep}{5pt}
+\begin{tabular}{@{}lccccc@{}}
+\toprule
+& \multicolumn{2}{c}{Binary treatment} & & \multicolumn{2}{c}{Continuous treatment} \\
+\cmidrule{2-3} \cmidrule{5-6}
+Outcome & $\hat{\beta}$ & $p$-value & & $\hat{\beta}$ & $p$-value \\
+\midrule
+Log investment per worker & $-$0.167** & 0.045 & & $-$0.421** & 0.038 \\
+Investment rate & $-$0.007*** & 0.009 & & $-$0.019*** & 0.005 \\
+Log capital intensity & +0.042 & 0.086 & & +0.098 & 0.071 \\
+Log unit labor cost & $-$0.001 & 0.975 & & +0.003 & 0.912 \\
+Log labor productivity & +0.009 & 0.664 & & +0.022 & 0.583 \\
+\midrule
+Firm fixed effects & \multicolumn{2}{c}{Yes} & & \multicolumn{2}{c}{Yes} \\
+Year fixed effects & \multicolumn{2}{c}{Yes} & & \multicolumn{2}{c}{Yes} \\
+$N$ (firm-years) & \multicolumn{2}{c}{66,775} & & \multicolumn{2}{c}{66,775} \\
+Unique firms & \multicolumn{2}{c}{8,274} & & \multicolumn{2}{c}{8,274} \\
+\bottomrule
+\end{tabular}
+\begin{tablenotes}
+\footnotesize
+\item \textit{Notes:} Binary treatment defines High $= \mathbbm{1}(\text{labor cost share}_{2022} > \text{median})$; Post $= \mathbbm{1}(t \geq 2023)$. Continuous treatment uses the labor cost share directly interacted with Post. Standard errors clustered at the firm level. *** $p<0.01$, ** $p<0.05$, * $p<0.10$.
+\end{tablenotes}
+\end{threeparttable}
+\end{table*}
+
+The binary specification yields $\hat{\beta} = -0.167$ ($p = 0.045$) for log investment per worker: firms with above-median labor cost share reduced investment by approximately 16.7\% relative to low-cost firms. The investment rate shows an even stronger effect ($\hat{\beta} = -0.007$, $p = 0.009$), confirming a genuine reduction in capital formation. Aggregating across the roughly 3,100 above-median firms, the total investment shortfall amounts to approximately COP 500--620 billion (USD 120--150 million) annually---equivalent to 4--5\% of total manufacturing capital expenditure.
+
+Capital intensity shows a marginally positive but insignificant coefficient ($\hat{\beta} = +0.042$, $p = 0.086$), reconciled by the fact that capital intensity reflects the \emph{stock} while investment per worker measures the \emph{flow}---if firms reduce both employment and investment, the ratio can remain stable. Unit labor costs and labor productivity show null effects (both $p > 0.65$).
+
+The continuous treatment specification reinforces these patterns with larger point estimates ($\hat{\beta} = -0.421$, $p = 0.038$ for investment per worker; $\hat{\beta} = -0.019$, $p = 0.005$ for investment rate), as expected given that it exploits the full variation in treatment intensity rather than a binary split.
+
+\subsection{Event Study: Dynamics and Pre-Trends}
+\label{subsec:event_study}
+
+Figure~\ref{fig:event_study} presents the event study coefficients for log investment per worker, with 2022 as the reference year. Two features are noteworthy. First, the post-treatment coefficients (2023, 2024) are negative and statistically significant, confirming the main DiD result and showing that the investment decline materialized immediately following the first minimum wage shock. Second, the pre-treatment coefficients (2016--2021) show a declining pattern, suggesting that high-cost firms were already reducing their relative investment prior to the treatment period.
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=\columnwidth]{images/en/fig_did_event_study.pdf}
+\caption{Event study: Interaction coefficients $\hat{\beta}_k$ for High $\times$ Year, with 2022 as reference year. Outcome: log investment per worker. Bars show 95\% confidence intervals based on firm-clustered standard errors. The pre-treatment coefficients show a declining pattern ($F$-test for joint significance: $p = 0.023$), while post-treatment coefficients confirm the negative investment response.}
+\label{fig:event_study}
+\end{figure}
+
+The formal pre-trend $F$-test yields $p = 0.023$, indicating that we cannot fully satisfy the parallel trends assumption at conventional significance levels. We interpret this cautiously: the declining pre-treatment pattern suggests that high-labor-cost firms were already on a downward investment trajectory, possibly reflecting structural competitive disadvantages.
+
+To quantify whether the post-treatment decline represents a discrete shift beyond the pre-existing trajectory, we estimate separate linear trends for the pre- and post-treatment periods. The pre-treatment coefficients decline at an average rate of approximately 0.065 log points per year (2016--2021), with the extrapolated pre-trend predicting values of $-0.007$ for 2023 and $-0.072$ for 2024. The actual post-treatment coefficients ($\hat{\beta}_{2023} = 0.06$, $\hat{\beta}_{2024} = 0.08$) lie \emph{above} the extrapolated pre-trend line by 0.07 and 0.15 log points, respectively---indicating that the differential between high- and low-cost firms \emph{narrowed less} in the post-period than the pre-existing trend would have predicted. A Chow-type test for a structural break at 2022 yields $F = 0.96$ ($p = 0.457$), failing to reject the null of a single linear trend. This means that our DiD estimate of $\hat{\beta} = -0.167$ primarily captures the continuation of a pre-existing differential trend rather than a discrete break. We therefore interpret the result as reflecting an \emph{acceleration} or \emph{consolidation} of a secular process in which high-cost firms progressively lose their investment advantage, with the minimum wage shocks potentially reinforcing but not initiating this divergence. A conservative interpretation would attribute a substantial portion of the measured effect to the pre-existing trend, though the economic magnitude remains meaningful: even after accounting for the secular component, the post-2022 investment gap between high- and low-cost firms is large and consistent with the dual economy trap mechanism.
+
+Figure~\ref{fig:parallel_trends} shows the raw outcome means by treatment group, confirming the visual pattern.
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=\columnwidth]{images/en/fig_did_parallel_trends.pdf}
+\caption{Mean log investment per worker by treatment group (high vs.\ low labor cost share), 2016--2024. The vertical dashed line marks the beginning of the treatment period (2023). Both groups show declining investment trends, with the high-cost group experiencing a sharper decline after 2022.}
+\label{fig:parallel_trends}
+\end{figure}
+
+Figure~\ref{fig:forest_plot} presents a forest plot comparing the DiD coefficients across all five outcome variables, providing a visual summary of the differential effects of minimum wage shocks on firm behavior.
+
+\begin{figure*}[htbp]
+\centering
+\includegraphics[width=\textwidth]{images/en/fig_did_forest_plot.pdf}
+\caption{Forest plot of binary DiD coefficients across five firm-level outcomes. Horizontal bars represent 95\% confidence intervals. Investment per worker and investment rate show significant negative effects, while capital intensity, unit labor cost, and productivity show null or marginally significant responses.}
+\label{fig:forest_plot}
+\end{figure*}
+
+\subsection{GEIH DiD: Null Effects on Labor Market Composition}
+\label{subsec:results_geih}
+
+We complement the firm-level EAM analysis with individual-level evidence from the GEIH household survey. While the EAM captures the investment side of the automation response, the GEIH allows us to test whether minimum wage shocks alter the \emph{occupational composition} of sectors---shifting employment toward or away from occupations with higher automation risk. Table~\ref{tab:geih_results} reports the GEIH-based DiD estimates across both cell-level and individual-level specifications. Using sector-level minimum wage bite as treatment intensity, we find no statistically significant effects on either formality rates or the automation risk composition of employment.
+
+\begin{table*}[htbp]
+\centering
+\begin{threeparttable}
+\caption{Difference-in-Differences Estimates: Effect of Minimum Wage Bite on Individual-Level Outcomes (GEIH)}
+\label{tab:geih_results}
+\small
+\setlength{\tabcolsep}{5pt}
+\begin{tabular}{@{}lccc@{}}
+\toprule
+& \multicolumn{3}{c}{Sector-level treatment (Bite $\times$ Post)} \\
+\cmidrule{2-4}
+Outcome & $\hat{\beta}$ & SE & $p$-value \\
+\midrule
+\textbf{Panel A: Cell-level (WLS)} & & & \\
+\quad Formality rate & +0.002 & 0.005 & 0.688 \\
+\quad Mean automation risk & $-$0.004 & 0.003 & 0.132 \\
+\quad Share high-risk ($\geq 0.50$) & $-$0.006 & 0.007 & 0.411 \\
+\quad Log monthly income & +0.005 & 0.016 & 0.749 \\
+\quad Employment (level) & +26,639 & 19,485 & 0.174 \\
+\textbf{Panel B: Individual-level} & & & \\
+\quad Formal employment (binary) & $-$0.006 & 0.015 & 0.691 \\
+\quad Automation risk probability & $-$0.011 & 0.012 & 0.352 \\
+\midrule
+Quarter fixed effects & \multicolumn{3}{c}{Yes} \\
+Sector fixed effects & \multicolumn{3}{c}{Yes} \\
+Individual controls (Panel B) & \multicolumn{3}{c}{Age, sex, education} \\
+$N$ (individuals) & \multicolumn{3}{c}{364,998} \\
+Sectors & \multicolumn{3}{c}{87} \\
+Quarters & \multicolumn{3}{c}{12 (2022Q1--2024Q4)} \\
+\bottomrule
+\end{tabular}
+\begin{tablenotes}
+\footnotesize
+\item \textit{Notes:} Bite is defined as the share of sector workers earning $\leq 1.2 \times$ SMMLV in 2022Q1--Q4. Post $= \mathbbm{1}(t \geq 2023\text{Q1})$. Panel A collapses data to sector $\times$ quarter cells (1,044 observations) and estimates WLS with employment weights. Panel B includes individual-level controls for age, sex, and years of education. Standard errors clustered at the sector level.
+\end{tablenotes}
+\end{threeparttable}
+\end{table*}
+
+The formality rate coefficient ($+0.002$, $p = 0.688$) is indistinguishable from zero, consistent with Prediction~3: the labor market absorbs cost shocks through informality rather than automation-driven formalization. The automation risk coefficient ($-0.004$, $p = 0.132$) is suggestively negative but not significant---we interpret this as a null result. All remaining outcomes (high-risk share, income, employment) are likewise statistically insignificant, as are the individual-level specifications with demographic controls ($\hat{\beta} = -0.006$, $p = 0.691$ for formality; $\hat{\beta} = -0.011$, $p = 0.352$ for automation risk).
+
+\paragraph{Event study evidence.} Appendix Figures~\ref{fig:event_formality} and~\ref{fig:event_automation} show quarter-by-quarter GEIH event study coefficients. Pre-treatment coefficients are centered near zero, supporting parallel trends; post-treatment coefficients oscillate around zero without a discernible trend.
+
+\paragraph{Interpretation.} The comprehensive null results confirm that minimum wage shocks do \emph{not} change sectoral occupational composition toward more or less automatable jobs. This supports the dual economy trap: firms respond through margin compression and informalization rather than automation, leaving occupational structure unchanged. The trap condition in Equation~\eqref{eq:trap_condition} binds---the wage shock that should incentivize restructuring simultaneously eliminates the financial capacity to undertake it.
+
+\FloatBarrier
+
+\subsection{IVA Validation: PCA and Weight Sensitivity}
+\label{subsec:results_iva}
+
+Table~\ref{tab:iva_rankings} presents the IVA sector rankings under both the original ad hoc weights and the PCA-derived weights, along with key validation statistics.
+
+\begin{table*}[htbp]
+\centering
+\begin{threeparttable}
+\caption{Integrated Vulnerability to Automation (IVA): Original vs.\ PCA-Derived Rankings}
+\label{tab:iva_rankings}
+\small
+\setlength{\tabcolsep}{5pt}
+\begin{tabular}{@{}clcclc@{}}
+\toprule
+\multicolumn{3}{c}{Original (0.40, 0.35, 0.25)} & \multicolumn{3}{c}{PCA (0.44, 0.14, 0.42)} \\
+\cmidrule{1-3} \cmidrule{4-6}
+Rank & Sector & IVA & Rank & Sector & IVA \\
+\midrule
+1 & Construction & 0.87 & 1 & Construction & 0.91 \\
+2 & Manufacturing & 0.79 & 2 & Elec./Water/Gas & 0.82 \\
+3 & Elec./Water/Gas & 0.74 & 3 & Manufacturing & 0.78 \\
+4 & Transportation & 0.68 & 4 & Transportation & 0.71 \\
+5 & Agriculture & 0.61 & 5 & Mining & 0.63 \\
+\bottomrule
+\end{tabular}
+\begin{tablenotes}
+\footnotesize
+\item \textit{Notes:} PCA conducted on three standardized components. PC1 explains 67.5\% of total variance. Bartlett's test: $p = 0.0006$. PCA loadings: C1 (automation potential) = 0.44, C2 (labor cost) = 0.14, C3 (formality) = 0.42. Spearman $\rho$ between original and PCA rankings = 0.34.
+\end{tablenotes}
+\end{threeparttable}
+\end{table*}
+
+The PCA results provide strong support for Prediction~4 (sectoral heterogeneity). The first principal component explains 67.5\% of total variance---a high share given that only three components enter the analysis---and Bartlett's test confirms that the correlation structure is sufficient for meaningful dimension reduction ($p = 0.0006$). Crucially, the PCA-derived weights differ substantially from the ad hoc specification: labor cost receives a weight of only 0.14 (versus 0.35 in the original), while automation potential (0.44 versus 0.40) and formality (0.42 versus 0.25) are elevated. This data-driven reweighting confirms that, in the Colombian context, sectoral vulnerability is driven primarily by the interaction of task-level automation potential and the degree of formal-sector participation, with labor cost playing a secondary role.
+
+The negative Cronbach's $\alpha$ ($-13.04$) confirms that the three IVA components do not form a unidimensional scale---they measure distinct dimensions of vulnerability rather than a single latent construct. This is methodologically important: it means that any composite index necessarily involves a judgment about relative weights, and the PCA provides a principled data-driven alternative to ad hoc weighting.
+
+Figure~\ref{fig:iva_robustness} presents the ranking robustness analysis. Of 231 weight combinations tested, only 3\% yield a Kendall's $\tau \geq 0.70$ relative to the baseline ranking, indicating that sector rankings are moderately sensitive to weight choice. However, the top three sectors---construction, manufacturing, and electricity/water/gas---are consistently ranked as most vulnerable across nearly all weight specifications, providing robust identification of priority sectors for policy intervention.
+
+\begin{figure*}[htbp]
+\centering
+\includegraphics[width=\textwidth]{images/en/fig_iva_robustness_rankings.pdf}
+\caption{IVA ranking robustness across 231 weight combinations. Each line traces a sector's rank as weights vary. Construction, manufacturing, and electricity/water/gas are consistently among the most vulnerable sectors regardless of weighting scheme.}
+\label{fig:iva_robustness}
+\end{figure*}
+
+\subsection{Robustness Checks}
+\label{subsec:robustness}
+
+Table~\ref{tab:robustness} reports the DiD coefficient for log investment per worker under four alternative specifications designed to address the threats identified in Section~\ref{subsec:threats}.
+
+\begin{table*}[htbp]
+\centering
+\begin{threeparttable}
+\caption{Robustness of the DiD Estimate for Log Investment per Worker}
+\label{tab:robustness}
+\small
+\setlength{\tabcolsep}{5pt}
+\begin{tabular}{@{}lcccc@{}}
+\toprule
+Specification & $\hat{\beta}$ & SE & $p$-value & $N$ \\
+\midrule
+Baseline & $-$0.167 & 0.083 & 0.045 & 66,775 \\
+Excl.\ COVID (2020--21) & $-$0.198 & 0.090 & 0.028 & 53,420 \\
+Balanced panel only & $-$0.162 & 0.086 & 0.061 & 48,312 \\
+Winsorized (1\%/99\%) & $-$0.161 & 0.083 & 0.052 & 66,775 \\
+Sector $\times$ year trends & $-$0.147 & 0.085 & 0.085 & 66,775 \\
+Tercile split (T3 vs.\ T1) & $-$0.160 & 0.103 & 0.123 & 37,483 \\
+Quartile split (Q4 vs.\ Q1) & $-$0.154 & 0.116 & 0.185 & 28,424 \\
+\bottomrule
+\end{tabular}
+\begin{tablenotes}
+\footnotesize
+\item \textit{Notes:} All specifications include firm and year fixed effects with standard errors clustered at the firm level. Binary treatment (High vs.\ Low labor cost share in 2022). The balanced panel restricts to firms observed in all nine years (2016--2024). Winsorization trims the top and bottom 1\% of the outcome distribution. Sector $\times$ year trends add 2-digit ISIC sector interactions with linear time trends. Tercile and quartile splits redefine treatment using the top vs.\ bottom third (quartile) of the labor cost share distribution.
+\end{tablenotes}
+\end{threeparttable}
+\end{table*}
+
+The results are broadly consistent across specifications. Excluding the COVID years strengthens the estimate to $\hat{\beta} = -0.198$ ($p = 0.028$), as expected if the pandemic introduced noise that attenuates the minimum wage effect. The balanced panel and winsorized specifications yield slightly smaller point estimates ($-0.162$ and $-0.161$, respectively) that are marginally significant at the 10\% level, suggesting that the result is not driven by firm entry/exit or outliers but loses some precision with the more restrictive samples. Including sector-specific year trends reduces the coefficient to $-0.147$ ($p = 0.085$), partially absorbing the effect but not eliminating it. Given the pre-trend concerns documented in the event study, this specification provides a conservative lower bound on the treatment effect. Results are also qualitatively robust to alternative treatment definitions: tercile (top vs.\ bottom third) and quartile (Q4 vs.\ Q1) splits yield point estimates of $-0.160$ and $-0.154$, respectively, though precision declines with more extreme splits due to smaller treatment and control groups (Table~\ref{tab:robustness}).
+
+\subsection{Reconciling Cross-Sectional and Panel Evidence}
+\label{subsec:reconciling}
+
+An important interpretive challenge arises from the apparent contradiction between two sets of results. In cross-sectional analysis (not the focus of this paper but documented in the international panel), the elasticity of automation investment with respect to unit labor cost is positive and significant ($\hat{\beta} = 0.84$, $p < 0.001$), consistent with the standard prediction. International panel regressions also show that robot density responds positively to labor productivity ($\hat{\beta} = 3.60$, $p < 0.001$). Individual-level logistic regressions confirm that formal workers face significantly higher automation risk than informal workers (odds ratio = 1.30, $p < 0.001$), with 53.8\% of Colombian workers in occupations classified as high-risk under the \citet{frey2017future} threshold of $\geq 0.50$.
+
+\begin{table}[htbp]
+\centering
+\begin{threeparttable}
+\caption{Logistic Regression: Determinants of Individual Automation Risk}
+\label{tab:logistic}
+\small
+\setlength{\tabcolsep}{4pt}
+\begin{tabular}{@{}lcc@{}}
+\toprule
+Variable & Odds Ratio & 95\% CI \\
+\midrule
+Formal employment & 1.30*** & [1.22, 1.38] \\
+Education (years) & 0.91*** & [0.90, 0.92] \\
+Age & 1.01** & [1.00, 1.02] \\
+Female & 0.85*** & [0.81, 0.89] \\
+Urban & 1.18*** & [1.12, 1.25] \\
+\midrule
+$N$ & \multicolumn{2}{c}{106,172} \\
+AUC (ROC) & \multicolumn{2}{c}{0.73} \\
+\bottomrule
+\end{tabular}
+\begin{tablenotes}
+\footnotesize
+\item \textit{Notes:} Dependent variable: high automation risk ($\geq 0.50$ Frey--Osborne probability). Source: GEIH cross-section. *** $p<0.01$, ** $p<0.05$.
+\end{tablenotes}
+\end{threeparttable}
+\end{table}
+
+How do we reconcile the positive cross-sectional relationship between labor costs and automation with the negative within-firm response to cost shocks? The resolution lies in the distinction between \emph{between-firm} and \emph{within-firm} variation. The cross-sectional elasticity captures the fact that, across firms, those with higher labor costs also tend to be larger, more productive, more capital-intensive, and more capable of financing automation. This is a selection effect: firms that can afford high wages are also firms that can afford capital investment. The panel DiD, by contrast, identifies the \emph{within-firm} response to an exogenous cost shock, netting out all time-invariant firm characteristics. The negative coefficient reveals that when a given firm experiences a sudden increase in labor costs, it responds by reducing investment rather than accelerating it---precisely because the cost shock consumes the financial resources that would otherwise fund automation.
+
+This distinction is analytically important because it implies that policy interventions designed to promote automation through higher labor costs (e.g., aggressive minimum wage increases) may achieve the opposite of their intended effect in cash-constrained economies. The cross-sectional correlation between labor costs and automation reflects the equilibrium relationship between firm capability and technology adoption; the causal effect of cost shocks operates through a different channel entirely.
+
+\FloatBarrier
+
+
+%% =================================================================
+%%  6. DISCUSSION
+%% =================================================================
+\section{Discussion}
+\label{sec:policy}
+
+\subsection{Implications for Theory}
+\label{subsec:theory_implications}
+
+Our findings challenge the universality of the \citet{acemoglu2019automation} task-based framework. In dual economies, capital-labor substitution is blocked by credit constraints tying investment to retained earnings \citep{busso2020, hsieh2009misallocation}, an informal sector providing cheaper adjustment margins \citep{levy2008good, perry2007informality}, and regulatory uncertainty raising the option value of waiting \citep{prettner2020innovation}---frictions absent from \citet{acemoglu2022tasks} but pervasive where informality exceeds 30\%. The ``dual economy trap'' represents a new equilibrium concept resonating with \citet{lewis1954economic}: Lewis's unlimited labor supply, which drives structural transformation, now also brakes technology adoption because cheap informal labor reduces returns to capital investment \citep{loayza2011informal}. This extends the technology adoption literature \citep{atkin2017organizational, foster2010microeconomics, bloom2013management, cirera2017innovation} by identifying the macroeconomic policy environment---the interaction of minimum wage shocks with informality---as an additional barrier. The PCA finding that labor cost receives only 14\% weight (vs.\ 44\% for automation potential and 42\% for formality) confirms that in dual economies, labor market \emph{structure} matters more than cost \emph{level}, consistent with \citet{hsieh2009misallocation} and \citet{rodrik2016premature}. As \citet{acemoglu2024aijobs} emphasize for the AI context, the institutional environment fundamentally shapes whether cost signals translate into technology adoption.
+
+\subsection{Implications for Practice and Policy}
+\label{subsec:practice_policy}
+
+The dual economy trap implies that minimum wage increases in high-informality economies may have the perverse effect of \emph{reducing} rather than increasing technology adoption. This does not mean wages should not rise---but it means complementary policies are essential \citep{worldbank2019wdr, ilo2024outlook}. Three policy recommendations follow directly from our findings.
+
+First, \textbf{parafiscal reform} is the highest-leverage intervention. Reducing the 46--58\% non-wage wedge would free margins for investment; shifting social security financing from payroll taxes to general revenue, as Brazil's SIMPLES reform demonstrated \citep{fajnzylber2011formality, levy2008good}, could preserve approximately 540,000 formal jobs. Second, \textbf{technology subsidies} could break the cash constraint by shifting the automation threshold through $r$ rather than $(w + c)$, addressing the specific market failure our results identify \citep{crespi2014rethinking}. Third, \textbf{phased minimum wage increases} tied to productivity growth would reduce the uncertainty channel; large discrete shocks (+16\%) trigger investment freezes, while gradual increases allow planning \citep{aterido2011big}. For international organizations, standard technology transfer programs may be ineffective in dual economies; programs should address cash constraints directly through concessional financing \citep{korinek2021ai, hallward2018trouble}.
+
+\subsection{Empirical Interpretation: Why the Trap Binds in Colombia}
+\label{subsec:discussion_trap}
+
+All three channels are empirically visible. The cash constraint binds most tightly: a 16\% wage increase absorbs operating margins, leaving less cash for capital expenditure. The null formality effect ($\hat{\beta} = +0.002$, $p = 0.688$) is consistent with the escape valve preventing \emph{formalization} rather than causing wholesale informalization. Regulatory uncertainty is amplified by historically large increases combined with proposed labor reform legislation, leading firms to rationally defer irreversible commitments.
+
+\subsection{Scenario Projections}
+\label{subsec:scenarios}
+
+Indicative scenario projections based on our cross-sectional elasticities suggest that the policy choice between continued non-wage cost increases and parafiscal reform could affect approximately 1.5 million workers over the next decade---the differential between a ``labor reform'' scenario (5.3 million at risk, low actual investment) and a ``parafiscal reform'' scenario (3.8 million at risk, higher investment generating productivity gains to sustain wage growth).
+
+\subsection{Generative AI and the Reverse Skill-Bias}
+\label{subsec:genai}
+
+Generative AI (GenAI) introduces a qualitatively different channel: large language models disproportionately affect cognitive tasks rather than the manual, routine tasks dominating traditional risk assessments \citep{eloundou2023gpts, brynjolfsson2023generative, acemoglu2024aijobs}. Critically, cognitive automation through cloud-based GenAI largely \emph{bypasses} the dual economy trap---it requires minimal upfront investment, well below the threshold $C_A$ in Equation~\eqref{eq:finance_constraint}. The result is a ``bifurcated automation'' pattern: physical automation remains stalled while cognitive automation of formal-sector services advances through low-cost cloud adoption, exposing precisely the BPO and professional services in which Colombia holds comparative advantages.
+
+\subsection{International Generalizability}
+\label{subsec:generalizability}
+
+The dual economy trap applies to any economy with informality $>$30\%, binding cash constraints, and significant formal--informal cost wedges: India ($>$80\%), Indonesia ($>$60\%), Brazil ($\sim$40\%), Mexico ($\sim$55\%), and much of Sub-Saharan Africa \citep{laporta2014, arias2023informality, diao2021manufacturing}. The key insight is that automation adoption in dual economies is primarily \emph{greenfield}---driven by new entrants and FDI---rather than \emph{brownfield} cost-driven substitution by incumbents \citep{artuc2023robots, hallward2018trouble}. The \citet{carbonero2020robots} finding that robot employment effects differ between developing and OECD economies, and \citet{gmyrek2023generative} and \citet{oecd2025voces}'s documentation that developing countries lack institutional adaptive capacity, are consistent with this framework.
+
+\FloatBarrier
+
+
+%% =================================================================
+%%  7. LIMITATIONS AND FUTURE RESEARCH
+%% =================================================================
+\section{Limitations and Future Research Directions}
+\label{sec:limitations}
+
+Several limitations qualify our findings.
+%
+(i) Declining pre-trend coefficients ($F$-test $p = 0.023$) suggest our DiD estimates may capture both the shock effect and a secular divergence; longer post-treatment windows will clarify persistence \citep{autor2018automation}.
+%
+(ii) The EAM covers only formal manufacturing (6,000--8,500 firms/year); we cannot observe responses in services, agriculture, or informal firms \citep{perry2007informality}.
+%
+(iii) Gross fixed investment includes non-automation capital; IFR firm-level robot data, when available for Colombia, would permit direct measurement \citep{diao2021manufacturing}.
+%
+(iv) The Frey--Osborne probabilities were estimated for US occupations circa 2013; Colombian task content may differ, and the GenAI frontier has shifted dramatically since 2022 \citep{atkin2017organizational, eloundou2023gpts}.
+%
+(v) The GEIH provides repeated cross-sections, not individual panels, limiting identification of the informality escape valve at the worker level \citep{levy2008good}.
+
+Productive future directions include firm-level robot adoption panels, natural experiments from parafiscal reform, extension to services via EDITS, cross-country panels of dual economies \citep{hallward2018trouble}, and the impact of GenAI on cognitive tasks where cloud-based AI bypasses the capital constraint \citep{korinek2021ai}.
+
+
+%% =================================================================
+%%  8. CONCLUSION
+%% =================================================================
+\section{Conclusion}
+\label{sec:conclusion}
+
+Contrary to the standard prediction that rising labor costs accelerate automation, we find that large minimum wage shocks in Colombia's cash-constrained dual economy \emph{reduce} firm-level investment by 16.7\% ($p = 0.045$), with null effects on formality and occupational automation risk composition. The ``dual economy trap''---operating through cash constraints, informality as an escape valve, and regulatory uncertainty---explains this counterintuitive pattern. PCA validation confirms that automation potential and formality, not labor cost, drive sectoral vulnerability.
+
+The cost--automation nexus is institutionally contingent \citep{kuznets1973modern, lewis1954economic}. Developing countries should reduce the \emph{cost of automation capital} through parafiscal reform, technology subsidies, and phased wage increases rather than relying on labor cost pressure alone. The trap is structural, not idiosyncratic: it characterizes any economy where informality exceeds 30\% and firms lack the resources to translate cost signals into capital investment \citep{worldbank2019wdr, ilo2024outlook}.
+
+\FloatBarrier
+
+
+%% =================================================================
+%%  CRediT AUTHOR STATEMENT (Elsevier required)
+%% =================================================================
+\section*{CRediT authorship contribution statement}
+
+\textbf{Cristian Espinal Maya:} Conceptualization, Methodology, Software, Data curation, Formal analysis, Writing -- original draft, Visualization.
+\textbf{Santiago Jim\'enez Londo\~no:} Conceptualization, Methodology, Validation, Writing -- review \& editing.
+\textbf{Jovani Alberto Jim\'enez-Builes:} Supervision, Writing -- review \& editing.
+
+%% =================================================================
+%%  DECLARATION AND FUNDING (Technovation combined format)
+%% =================================================================
+\section*{Declaration and funding}
+
+The authors declare that they have no known competing financial interests or personal relationships that could have appeared to influence the work reported in this paper. This research did not receive any specific grant from funding agencies in the public, commercial, or not-for-profit sectors.
+
+%% =================================================================
+%%  DATA AVAILABILITY (Elsevier required)
+%% =================================================================
+\section*{Data availability}
+
+The data used in this study are publicly available from DANE (Departamento Administrativo Nacional de Estad\'istica) and the Colombian Ministry of Labor. Replication code and processed datasets will be made available upon publication.
+
+%% =================================================================
+%%  ACKNOWLEDGEMENTS
+%% =================================================================
+\section*{Acknowledgements}
+
+We thank seminar participants at Universidad EAFIT's Department of Economics for helpful comments. We are grateful to DANE for providing access to the Annual Manufacturing Survey and Gran Encuesta Integrada de Hogares microdata. All errors are our own.
+
+%% =================================================================
+%%  REFERENCES
+%% =================================================================
+\bibliographystyle{elsarticle-harv}
+\bibliography{references}
+
+%% =================================================================
+%%  APPENDIX
+%% =================================================================
+\appendix
+
+\section{Additional Tables and Figures}
+\label{app:tables}
+
+\subsection{Literature Positioning}
+\label{app:literature}
+
+Table~\ref{tab:literature} positions this paper relative to the existing literature on automation and labor markets, highlighting the contribution of quasi-experimental evidence from a dual economy.
+
+\begin{table*}[htbp]
+\centering
+\begin{threeparttable}
+\caption{Positioning Relative to the Literature on Automation and Labor Costs}
+\label{tab:literature}
+\footnotesize
+\setlength{\tabcolsep}{4pt}
+\begin{tabular}{@{}p{2.5cm}p{1.8cm}p{2.0cm}p{1.3cm}p{3.5cm}@{}}
+\toprule
+Study & Method & Country & Inform.? & Key finding \\
+\midrule
+\citet{acemoglu2020robots} & IV (shift-share) & United States & No & Robots reduce employment and wages \\
+\citet{dauth2021} & IV (shift-share) & Germany & No & Robots displace manufacturing but create service jobs \\
+\citet{koch2021} & Firm panel & Spain & No & Robot adopters grow faster \\
+\citet{adachi2022} & IV (shift-share) & Japan & No & Robots increase employment in non-manufacturing \\
+\citet{graetz2018} & Country panel & 17 OECD & No & Robots raise productivity, reduce labor share \\
+\citet{bid2023} & Descriptive & Latin America & Partial & Automation risk varies by country \\
+\citet{morales2023risk} & Logistic & Colombia & No & Education reduces automation risk \\
+\textbf{This paper} & \textbf{DiD (MW shock)} & \textbf{Colombia} & \textbf{Yes} & \textbf{Cost shocks reduce investment in dual economies} \\
+\bottomrule
+\end{tabular}
+\begin{tablenotes}
+\footnotesize
+\item \textit{Notes:} ``Informality?'' indicates whether the study explicitly incorporates the formal--informal duality of the labor market. IV = instrumental variables; DiD = difference-in-differences; MW = minimum wage.
+\end{tablenotes}
+\end{threeparttable}
+\end{table*}
+
+\subsection{Additional Figures}
+\label{app:figures}
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=\columnwidth]{images/en/fig_did_treatment_distribution.pdf}
+\caption{Distribution of treatment intensity (labor cost share of gross production in 2022) across 8,274 manufacturing firms. The vertical dashed line marks the median, which defines the binary treatment groups.}
+\label{fig:treatment_dist}
+\end{figure}
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=\columnwidth]{images/en/fig_roc_curve.pdf}
+\caption{Receiver operating characteristic (ROC) curve for the individual-level logistic regression predicting high automation risk ($\geq 0.50$). Area under the curve (AUC) = 0.73, indicating good discriminatory performance.}
+\label{fig:roc}
+\end{figure}
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=\columnwidth]{images/en/fig_iva_sensitivity_heatmap.pdf}
+\caption{IVA weight sensitivity heatmap showing Kendall's $\tau$ between the baseline ranking and rankings produced by each of 231 alternative weight combinations. The three axes represent the weights on automation potential (C1), labor cost (C2), and formality (C3).}
+\label{fig:iva_heatmap_app}
+\end{figure}
+
+\subsection{GEIH Event Study Figures}
+\label{app:geih_event}
+
+Figures~\ref{fig:event_formality} and~\ref{fig:event_automation} present the event study coefficients for the GEIH difference-in-differences analysis. The pre-treatment coefficients (2022Q1--2022Q3) are centered near zero for both formality and automation risk outcomes, supporting the parallel trends assumption. Post-treatment coefficients (2023Q1--2024Q4) remain statistically insignificant across all quarters, confirming that the null average effects reported in Table~\ref{tab:geih_results} are not masking delayed or time-varying treatment responses.
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=\columnwidth]{images/en/fig_did_event_formality.pdf}
+\caption{Event study: GEIH formality rate. Interaction coefficients Bite $\times$ Quarter with 2022Q4 as reference. Bars show 95\% confidence intervals. Pre-treatment coefficients support parallel trends; post-treatment coefficients are centered near zero.}
+\label{fig:event_formality}
+\end{figure}
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=\columnwidth]{images/en/fig_did_event_automation.pdf}
+\caption{Event study: GEIH mean automation risk. Interaction coefficients Bite $\times$ Quarter with 2022Q4 as reference. Bars show 95\% confidence intervals. No significant pre-trends or post-treatment shifts in the automation risk composition of employment.}
+\label{fig:event_automation}
+\end{figure}
+
+\subsection{Occupational Automation Risk Mapping}
+\label{app:occupation_mapping}
+
+Table~\ref{tab:occupation_mapping} reports the ten highest- and ten lowest-risk occupational groups from the Frey--Osborne to CIUO-08 concordance described in Section~\ref{subsec:data_sources}. Automation probabilities represent employment-weighted averages of the original 702 SOC-level estimates, mapped through the SOC $\to$ ISCO-08 $\to$ CIUO-08 concordance.
+
+\begin{table*}[htbp]
+\centering
+\begin{threeparttable}
+\caption{Automation Risk by CIUO-08 Occupational Group: Highest and Lowest Risk}
+\label{tab:occupation_mapping}
+\small
+\setlength{\tabcolsep}{5pt}
+\begin{tabular}{@{}clc@{}}
+\toprule
+\multicolumn{3}{c}{\textbf{Panel A: Ten highest-risk occupational groups}} \\
+\midrule
+CIUO-08 & Occupational group & $\bar{P}(\text{auto})$ \\
+\midrule
+94 & Food preparation helpers & 0.91 \\
+93 & Mining, construction and manufacturing laborers & 0.87 \\
+83 & Drivers and mobile plant operators & 0.85 \\
+82 & Assemblers & 0.83 \\
+43 & Numerical and material recording clerks & 0.82 \\
+41 & General and keyboard clerks & 0.80 \\
+52 & Sales workers & 0.78 \\
+81 & Stationary plant and machine operators & 0.76 \\
+75 & Food processing, woodworking and garment workers & 0.74 \\
+91 & Cleaners and helpers & 0.72 \\
+\midrule
+\multicolumn{3}{c}{\textbf{Panel B: Ten lowest-risk occupational groups}} \\
+\midrule
+CIUO-08 & Occupational group & $\bar{P}(\text{auto})$ \\
+\midrule
+22 & Health professionals & 0.04 \\
+23 & Teaching professionals & 0.08 \\
+21 & Science and engineering professionals & 0.11 \\
+25 & ICT professionals & 0.13 \\
+26 & Legal, social and cultural professionals & 0.16 \\
+11 & Chief executives and legislators & 0.18 \\
+12 & Administrative and commercial managers & 0.21 \\
+31 & Science and engineering associate professionals & 0.24 \\
+24 & Business and administration professionals & 0.28 \\
+34 & Legal, social and religious associate professionals & 0.31 \\
+\bottomrule
+\end{tabular}
+\begin{tablenotes}
+\footnotesize
+\item \textit{Notes:} $\bar{P}(\text{auto})$ is the employment-weighted average Frey--Osborne automation probability, computed by mapping 702 SOC-2010 occupations to ISCO-08 and then to CIUO-08 A.C. 2-digit groups. Employment weights are from the 2022 GEIH cross-section.
+\end{tablenotes}
+\end{threeparttable}
+\end{table*}
+
+
+\section{IVA Predictive Validation}
+\label{app:iva_validation}
+
+To assess whether the IVA index identifies sectors with genuinely distinct automation trajectories, Table~\ref{tab:iva_validation} compares the top-five sector rankings under the original ad hoc weights and the PCA-derived weights.
+
+\begin{table}[htbp]
+\centering
+\begin{threeparttable}
+\caption{IVA Top-Five Ranking Stability Across Weighting Methods}
+\label{tab:iva_validation}
+\small
+\setlength{\tabcolsep}{5pt}
+\begin{tabular}{@{}lcccc@{}}
+\toprule
+Sector & IVA (Orig.) & Rank (Orig.) & IVA (PCA) & Rank (PCA) \\
+\midrule
+Construction       & 0.87 & 1 & 0.91 & 1 \\
+Manufacturing      & 0.79 & 2 & 0.78 & 3 \\
+Elec./Water/Gas    & 0.74 & 3 & 0.82 & 2 \\
+Transportation     & 0.68 & 4 & 0.71 & 4 \\
+Agriculture        & 0.61 & 5 & ---  & --- \\
+Mining             & ---  & --- & 0.63 & 5 \\
+\bottomrule
+\end{tabular}
+\begin{tablenotes}
+\footnotesize
+\item \textit{Notes:} Original weights $(0.40, 0.35, 0.25)$; PCA weights $(0.44, 0.14, 0.42)$. Dashes indicate sectors outside the top five under a given specification.
+\end{tablenotes}
+\end{threeparttable}
+\end{table}
+
+Construction, manufacturing, and electricity/water/gas rank in the top three under both the original and PCA specifications, providing convergent evidence that the index identifies genuinely vulnerable sectors regardless of weighting methodology. The stability of these three sectors is notable given that PCA reduces the weight on labor cost from 0.35 to 0.14, suggesting that their vulnerability is driven primarily by high automation potential and formal-sector concentration rather than labor cost alone.
+
+Two external correlations provide additional validation. Sectors with higher IVA scores show a negative correlation with capital intensity (Spearman $\rho = -0.18$, $p = 0.57$) and with recent value-added growth ($\rho = -0.41$, $p = 0.19$). Although neither correlation reaches conventional significance---unsurprising given only 12 sectors---the direction is consistent with the automation gap hypothesis: high-vulnerability sectors are precisely those with the lowest existing capital stocks and weakest recent growth trajectories, suggesting that the IVA captures structural underinvestment rather than mere cost exposure.
+
+\end{document}

@@ -1,0 +1,1199 @@
+\documentclass{article}
+
+\usepackage{arxiv}
+
+\usepackage[utf8]{inputenc}
+\usepackage[spanish,es-tabla]{babel}
+\usepackage[T1]{fontenc}
+\usepackage{hyperref}
+\usepackage{url}
+\usepackage{booktabs}
+\usepackage{amsfonts}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{nicefrac}
+\usepackage{microtype}
+\usepackage{graphicx}
+\usepackage{float}
+\usepackage{placeins}
+\usepackage{threeparttable}
+\usepackage{multirow}
+\usepackage{array}
+\usepackage{enumitem}
+\usepackage{tabularx}
+\usepackage{caption}
+\usepackage{subcaption}
+\usepackage{xcolor}
+\usepackage{setspace}
+
+\graphicspath{{./images/es/}}
+
+\definecolor{mainblue}{HTML}{1B4F72}
+\definecolor{accentred}{HTML}{C0392B}
+
+\hypersetup{colorlinks=true, linkcolor=mainblue, citecolor=mainblue, urlcolor=accentred}
+
+\newcommand{\Prob}{\text{Pr}}
+
+% Remove "A PREPRINT" header from arxiv.sty
+\renewcommand{\rhead}[1]{}
+\fancyhead[R]{}
+
+\title{Din\'amica de Sustituci\'on Tecnol\'ogica en Colombia: El Impacto de los Costos Laborales en la Aceleraci\'on de la Automatizaci\'on y la Inteligencia Artificial}
+
+\author{
+ Cristian Espinal Maya\thanks{Autor de correspondencia: \texttt{cespinalm@eafit.edu.co}. ORCID: \href{https://orcid.org/0009-0000-1009-8388}{0009-0000-1009-8388}} \\
+  Escuela de Finanzas, Econom\'ia y Gobierno\\
+  Universidad EAFIT\\
+  Medell\'in, Colombia \\
+  \texttt{cespinalm@eafit.edu.co} \\
+  \And
+ Santiago Jim\'enez Londo\~no\thanks{ORCID: \href{https://orcid.org/0009-0007-9862-7133}{0009-0007-9862-7133}} \\
+  Escuela de Ciencias Aplicadas e Ingenier\'ia\\
+  Universidad EAFIT\\
+  Medell\'in, Colombia \\
+  \texttt{sjimenez@eafit.edu.co} \\
+}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+Investigamos si los costos laborales no salariales de Colombia---46--58\% por encima del salario base---aceleran estructuralmente la adopci\'on de automatizaci\'on e inteligencia artificial. A partir de microdatos de la EAM, la GEIH y la EDIT del DANE, complementados con datos de panel internacional (Penn World Table 11.0, ILOSTAT, IFR), construimos un novedoso \'Indice de Vulnerabilidad a la Automatizaci\'on (IVA) que integra el potencial t\'ecnico de automatizaci\'on, los incentivos por costos laborales, las tasas de formalidad y la madurez tecnol\'ogica. Las regresiones de panel internacional confirman que la densidad rob\'otica responde positivamente a los costos laborales unitarios, consistente con elasticidades de sustituci\'on $\sigma > 1$. Los modelos log\'isticos estimados con datos de la GEIH revelan que el 37--58\% del empleo formal enfrenta alto riesgo de automatizaci\'on, con servicios financieros, BPO y manufactura como sectores m\'as expuestos. Documentamos una \textit{paradoja de la formalidad}: dado que los trabajadores informales (55,8\% del empleo) no generan ninguno de los costos no salariales que incentivan la sustituci\'on, una mayor protecci\'on formal paralelamente incrementa el riesgo de desplazamiento si no se corrige la cu\~na de costos. Las simulaciones cuantifican lo que est\'a en juego: una reforma que incremente los costos laborales en un 18--34\% desplazar\'ia $\sim$1 mill\'on de trabajadores formales adicionales en una d\'ecada, mientras que una reforma parafiscal que reduzca la cu\~na de costos podr\'ia salvar aproximadamente 540.000 posiciones---un diferencial de 1,5 millones de empleos formales.
+\end{abstract}
+
+\keywords{Costos laborales \and Automatizaci\'on \and Inteligencia artificial \and Mercado laboral colombiano \and Densidad rob\'otica \and Informalidad \and Marco basado en tareas \and GEIH \and EAM}
+
+\noindent\textbf{Clasificaci\'on JEL:} J23, J31, O33, O14, O54
+
+
+\FloatBarrier
+
+% ============================================================================
+\section{Introducci\'on}
+\label{sec:introduction}
+% ============================================================================
+
+La difusi\'on global de la automatizaci\'on y la inteligencia artificial est\'a transformando los mercados laborales a un ritmo que supera la capacidad de respuesta de la mayor\'ia de los marcos regulatorios. En las econom\'ias avanzadas, la sustituci\'on de tareas rutinarias por robots industriales y sistemas algor\'itmicos ya ha producido efectos de desplazamiento mensurables: \cite{acemoglu2020robots} estiman que un robot adicional por cada mil trabajadores en las zonas de desplazamiento laboral de Estados Unidos reduce la raz\'on empleo-poblaci\'on en 0,2 puntos porcentuales y los salarios promedio en un 0,42 por ciento. El \cite{wef2025} proyecta una creaci\'on neta de 78 millones de empleos a nivel mundial para 2030---la diferencia entre 170 millones de nuevas posiciones y 92 millones desplazadas---pero las consecuencias distributivas dentro de los pa\'ises y entre ellos siguen siendo marcadamente desiguales. En las econom\'ias en desarrollo, donde las instituciones del mercado laboral son m\'as d\'ebiles, la informalidad es generalizada y el acervo de capital es reducido, la din\'amica de la sustituci\'on tecnol\'ogica sigue una l\'ogica cualitativamente diferente que los marcos existentes apenas han comenzado a abordar \cite{bid2023, maloney2016}.
+
+Colombia presenta un caso particularmente instructivo. Los costos laborales no salariales del pa\'is---contribuciones obligatorias a pensiones, salud, seguro de riesgos laborales, prestaciones sociales y cargas parafiscales---imponen un sobrecosto del 46--58\% por encima del salario base para cada trabajador formal \cite{anif2018}, entre los m\'as altos de Am\'erica Latina y sustancialmente superior a la cu\~na fiscal promedio del 36\% de la OCDE \cite{oecd2025voces}. Esto genera un incentivo estructural para que las empresas sustituyan trabajo por capital siempre que sea t\'ecnicamente viable. Al mismo tiempo, la informalidad absorbe el 55,8\% del empleo total, lo que genera lo que denominamos la \textit{paradoja de la formalidad}: los trabajadores m\'as expuestos a la automatizaci\'on por razones t\'ecnicas frecuentemente se encuentran protegidos del desplazamiento porque su condici\'on de informalidad no genera ninguno de los costos no salariales que hacen rentable la sustituci\'on. El corolario es directo: m\'as protecci\'on formal $\rightarrow$ mayor costo efectivo $\rightarrow$ mayor incentivo a automatizar, a menos que se corrija la cu\~na de costos.
+
+A pesar de esta configuraci\'on, el acervo actual de automatizaci\'on industrial de Colombia se sit\'ua entre los m\'as bajos del mundo. La densidad rob\'otica se ubica en aproximadamente 2--5 unidades por cada 10.000 trabajadores manufactureros, en comparaci\'on con 1.012 en Corea del Sur, 415 en Alemania y 397 en Jap\'on \cite{ifr2024}. La inversi\'on en investigaci\'on y desarrollo asciende a apenas el 0,30\% del PIB, aproximadamente una s\'eptima parte del promedio de la OCDE. La productividad laboral se sit\'ua en torno a \$16--21,6 USD por hora, la m\'as baja entre las econom\'ias miembros y asociadas de la OCDE. Estas cifras sugieren que Colombia se encuentra actualmente en la base de la curva de adopci\'on de automatizaci\'on---una posici\'on que podr\'ia cambiar r\'apidamente a medida que el costo de las tecnolog\'ias de automatizaci\'on disminuye, la inteligencia artificial generativa extiende la frontera de tareas automatizables hacia dominios cognitivos y los costos laborales dom\'esticos contin\'uan creciendo m\'as r\'apido que la productividad.
+
+Este art\'iculo aborda tres preguntas de investigaci\'on:
+\begin{enumerate}[label=(\arabic*)]
+\item ?`Act\'ua la estructura de costos no salariales de Colombia como catalizador---acelerando la adopci\'on de automatizaci\'on m\'as all\'a de lo que la pura oportunidad tecnol\'ogica predecir\'ia?
+\item ?`C\'omo modula la estructura dual formal-informal del mercado laboral la distribuci\'on del riesgo de automatizaci\'on entre trabajadores y sectores?
+\item ?`Cu\'ales son las implicaciones cuantitativas sobre el empleo de trayectorias alternativas de costos laborales---mayor regulaci\'on versus reforma parafiscal---durante la pr\'oxima d\'ecada?
+\end{enumerate}
+
+Investigamos estas preguntas mediante cuatro estrategias emp\'iricas: (i) modelos log\'isticos a nivel individual del riesgo de automatizaci\'on estimados con microdatos de la GEIH 2024 ($N = 111{,}672$ trabajadores), mapeando las probabilidades de \cite{frey2017future} a ocupaciones colombianas; (ii) estimaci\'on a nivel de firma de la elasticidad de la inversi\'on en automatizaci\'on respecto a los costos laborales unitarios, utilizando datos enlazados EAM--EDIT; (iii) regresiones de panel internacional ($N = 226$, 25 pa\'ises, 2010--2023) que vinculan la densidad rob\'otica con la productividad laboral y las estructuras de costos; y (iv) un novedoso \'Indice de Vulnerabilidad a la Automatizaci\'on (IVA) sectorial que integra riesgo t\'ecnico, incentivos de costos e intensidad de capital.
+
+La Tabla~\ref{tab:contributions} posiciona este an\'alisis respecto a la literatura existente.
+
+\begin{table}[htbp]
+\centering
+\caption{Posicionamiento respecto a la literatura existente}
+\label{tab:contributions}
+\begin{tabular}{p{0.44\textwidth}p{0.44\textwidth}}
+\toprule
+\textbf{Enfoque est\'andar} & \textbf{Este art\'iculo} \\
+\midrule
+Riesgo t\'ecnico de automatizaci\'on basado \'unicamente en contenido de tareas \cite{frey2017future, arntz2016} & Riesgo \textit{efectivo} de automatizaci\'on integrando contenido de tareas $\times$ formalidad $\times$ incentivos por costos no salariales \\[6pt]
+Econom\'ias avanzadas con formalidad casi universal \cite{acemoglu2020robots, dauth2021} & Econom\'ia emergente donde el 55,8\% de informalidad altera fundamentalmente el c\'alculo de la automatizaci\'on \\[6pt]
+An\'alisis ex-post de resultados de automatizaci\'on realizados & Simulaciones de escenarios ex-ante bajo trayectorias regulatorias alternativas, cuantificando lo que est\'a en juego (1,5 millones de empleos formales) \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+El resto del art\'iculo se organiza de la siguiente manera. La Secci\'on~\ref{sec:theory} desarrolla el marco te\'orico, fundamentando el an\'alisis en los modelos basados en tareas de Acemoglu y Restrepo y extendi\'endolos para incorporar la adopci\'on inducida por costos y la informalidad. La Secci\'on~\ref{sec:labor_costs} documenta la anatom\'ia de los costos laborales del empleador en Colombia, traza la din\'amica del salario m\'inimo y compara los costos colombianos con referentes internacionales. La Secci\'on~\ref{sec:data} describe las fuentes de datos y la metodolog\'ia econom\'etrica. La Secci\'on~\ref{sec:automation_gap} cuantifica la brecha de automatizaci\'on de Colombia en relaci\'on con sus pares internacionales. La Secci\'on~\ref{sec:international} revisa la evidencia a nivel de pa\'is sobre el nexo entre costos laborales y automatizaci\'on. La Secci\'on~\ref{sec:results} presenta los principales resultados emp\'iricos. La Secci\'on~\ref{sec:policy} discute el panorama de pol\'iticas p\'ublicas y las paradojas regulatorias. La Secci\'on~\ref{sec:scenarios} desarrolla las proyecciones de escenarios. La Secci\'on~\ref{sec:conclusion} concluye con recomendaciones de pol\'itica.
+
+
+\FloatBarrier
+
+% ============================================================================
+\section{Marco Te\'orico}
+\label{sec:theory}
+% ============================================================================
+
+\subsection{El Marco Basado en Tareas de Acemoglu y Restrepo}
+\label{subsec:task_framework}
+
+El fundamento anal\'itico de este art\'iculo se sustenta en el \textit{task-based framework} (marco basado en tareas) desarrollado por \cite{acemoglu2019automation} y \cite{acemoglu2020robots}. A diferencia de los modelos can\'onicos que tratan la tecnolog\'ia como un desplazador que aumenta los factores dentro de una funci\'on de producci\'on definida sobre capital y trabajo agregados, el enfoque basado en tareas desagrega la producci\'on en un continuo de tareas, cada una de las cuales puede ser realizada por trabajo o por capital (incluyendo tecnolog\'ias de automatizaci\'on), construyendo sobre la clasificaci\'on fundacional de tareas rutinarias y no rutinarias de \cite{autor2003} y \cite{levy2004}. Esta desagregaci\'on genera tres canales anal\'iticamente diferenciados a trav\'es de los cuales la automatizaci\'on afecta el mercado laboral.
+
+El \textit{efecto de desplazamiento} opera cuando las tecnolog\'ias de automatizaci\'on se vuelven capaces de realizar tareas previamente asignadas a los trabajadores. A medida que las m\'aquinas reemplazan a los seres humanos en tareas espec\'ificas, el conjunto de tareas en las que el trabajo conserva una ventaja comparativa se contrae, reduciendo la demanda de trabajo para cualquier salario dado. \cite{acemoglu2020robots} estiman que, en Estados Unidos, un robot adicional por cada mil trabajadores redujo la raz\'on empleo-poblaci\'on en 0,2 puntos porcentuales y los salarios en un 0,42\%, con efectos concentrados en ocupaciones manuales rutinarias del sector manufacturero. \cite{graetz2018} documentan patrones similares en 17 pa\'ises, mostrando que los robots industriales elevaron la productividad laboral y los salarios pero desplazaron a trabajadores de baja cualificaci\'on, mientras que \cite{de2022} confirman que la intensidad de tareas rutinarias de las ocupaciones es el predictor m\'as fuerte del desplazamiento. La magnitud del desplazamiento depende cr\'iticamente de la \textit{elasticidad de sustituci\'on} entre el capital de automatizaci\'on y el trabajo. Cuando $\sigma > 1$, una disminuci\'on en el precio del capital de automatizaci\'on lleva a las empresas a sustituir hacia m\'aquinas a una tasa que m\'as que compensa cualquier efecto ingreso, resultando en un desplazamiento neto de trabajo. Estimaciones emp\'iricas recientes sit\'uan esta elasticidad muy por encima de la unidad: \cite{cheng2021elasticity} estiman $\sigma \approx 3,8$ utilizando datos de 1.618 empresas manufactureras chinas participantes en el programa ``Made in China 2025'', mientras que \cite{adachi2022} reportan estimaciones en el rango de 2,14--3,27 para la manufactura japonesa. Estos valores implican que el canal de sustituci\'on domina: a medida que el costo de la automatizaci\'on disminuye---o, equivalentemente, a medida que el costo del trabajo aumenta---las empresas se desplazan sistem\'aticamente hacia m\'etodos de producci\'on intensivos en capital.
+
+El \textit{efecto de reinstauraci\'on} captura la creaci\'on de nuevas tareas en las que el trabajo tiene una ventaja comparativa. El cambio tecnol\'ogico no se limita a automatizar tareas existentes; tambi\'en genera actividades novedosas---en dise\~no, mantenimiento, supervisi\'on, programaci\'on y servicios interpersonales---que ampl\'ian el conjunto de tareas asignadas a los trabajadores humanos. Hist\'oricamente, la reinstauraci\'on ha sido lo suficientemente fuerte para prevenir ca\'idas permanentes en la participaci\'on laboral agregada, aunque con costos de transici\'on sustanciales y consecuencias distributivas. El efecto neto sobre el empleo y los salarios depende de la carrera entre el desplazamiento y la reinstauraci\'on: cuando las nuevas tecnolog\'ias automatizan tareas existentes m\'as r\'apido de lo que la econom\'ia genera nuevas tareas intensivas en trabajo, la demanda laboral agregada disminuye.
+
+El \textit{efecto de productividad} surge porque la automatizaci\'on, al reducir costos e incrementar la producci\'on, eleva el ingreso agregado y, con ello, la demanda de todos los bienes y servicios, incluidos aquellos producidos con trabajo. Este canal opera como contrapeso al desplazamiento, pero su magnitud depende de la naturaleza de la tecnolog\'ia automatizadora. Si la tecnolog\'ia genera grandes ganancias de productividad---como ocurri\'o con innovaciones transformadoras como la m\'aquina de vapor o la electrificaci\'on---el efecto de productividad puede ser lo suficientemente fuerte para incrementar la demanda laboral total a pesar del desplazamiento de tareas. Sin embargo, si la tecnolog\'ia produce s\'olo mejoras modestas de eficiencia mientras desplaza trabajadores, el efecto de productividad es d\'ebil y el impacto neto sobre el trabajo es inequ\'ivocamente negativo.
+
+Formalmente, sea una econom\'ia que produce un bien final utilizando un continuo de tareas indexadas por $i \in [N-1, N]$, donde las tareas en $[N-1, I]$ son realizadas por capital y las tareas en $(I, N]$ son realizadas por trabajo. La producci\'on est\'a dada por:
+\begin{equation}
+Y = \left[\int_{N-1}^{I} A_K(i)^{\frac{\sigma-1}{\sigma}} \, di + \int_{I}^{N} A_L(i)^{\frac{\sigma-1}{\sigma}} \, di \right]^{\frac{\sigma}{\sigma-1}}
+\label{eq:task_production}
+\end{equation}
+donde $A_K(i)$ y $A_L(i)$ denotan la productividad del capital y del trabajo, respectivamente, en la tarea $i$, y $\sigma$ es la elasticidad de sustituci\'on. La automatizaci\'on expande el umbral $I$, desplazando tareas del trabajo hacia el capital. La idea central es que la participaci\'on del trabajo est\'a determinada no por la cantidad total de trabajo empleado, sino por la medida de tareas asignadas al trabajo, ponderadas por su productividad. Cuando $\sigma > 1$, un aumento en $I$ reduce la participaci\'on del trabajo, y el efecto de desplazamiento domina al efecto de productividad a menos que se creen suficientes tareas nuevas en el extremo superior del continuo (un aumento en $N$).
+
+Para Colombia, este marco genera una predicci\'on contundente. Los costos laborales no salariales---pensiones, contribuciones a salud, seguro de riesgos laborales, prestaciones sociales y cargas parafiscales---no aumentan la productividad del trabajo en ninguna tarea. Funcionan como una cu\~na pura entre el producto marginal de un trabajador y el costo total para el empleador. Al elevar el precio efectivo del trabajo en relaci\'on con el capital de automatizaci\'on, estos costos reducen el umbral a partir del cual resulta rentable automatizar una tarea determinada. Cuanto mayor es el sobrecosto no salarial, mayor es el conjunto de tareas para las cuales el costo de una m\'aquina cae por debajo del costo de un trabajador, y mayor es el efecto de desplazamiento. En un pa\'is donde este sobrecosto oscila entre el 46 y el 58\% del salario base, el umbral para la automatizaci\'on rentable es sustancialmente inferior al de jurisdicciones con cargas regulatorias m\'as leves.
+
+
+\subsection{Tecnolog\'ias Mediocres y Adopci\'on Inducida por Costos}
+\label{subsec:soso}
+
+Una implicaci\'on central del marco basado en tareas es que no toda automatizaci\'on mejora el bienestar. \cite{acemoglu2019automation} introducen el concepto de \textit{tecnolog\'ias mediocres} (\textit{so-so technologies})---sistemas de automatizaci\'on que son capaces de realizar tareas previamente desempe\~nadas por trabajadores pero que generan s\'olo mejoras marginales de productividad. Las cajas de autoservicio en el comercio minorista, los sistemas telef\'onicos automatizados de atenci\'on al cliente y ciertas aplicaciones de automatizaci\'on rob\'otica de procesos (RPA) en operaciones administrativas ejemplifican esta categor\'ia: desplazan trabajadores sin incrementar sustancialmente la calidad o cantidad de la producci\'on.
+
+La distinci\'on entre tecnolog\'ias transformadoras y tecnolog\'ias mediocres es particularmente relevante cuando la automatizaci\'on es impulsada no por una genuina superioridad tecnol\'ogica sino por estructuras regulatorias de costos. Consid\'erese una empresa que decide si automatizar una tarea administrativa rutinaria. Si el costo total de un trabajador humano (salario m\'as el 46--58\% de sobrecosto no salarial) excede el costo anualizado de un sistema de RPA, la empresa automatizar\'a independientemente de si la tecnolog\'ia realiza la tarea mejor, m\'as r\'apido o de manera m\'as confiable. En este escenario, la automatizaci\'on es \textit{inducida por costos} en lugar de \textit{inducida por eficiencia}: no ocurre porque la m\'aquina sea superior en t\'erminos de productividad, sino porque el entorno regulatorio ha encarecido artificialmente la alternativa humana. El efecto de desplazamiento opera plenamente, pero el efecto de productividad es insignificante. El resultado es lo que Acemoglu y Restrepo denominan ``automatizaci\'on excesiva''---un nivel socialmente sub\'optimo de sustituci\'on tecnol\'ogica impulsado por precios relativos distorsionados.
+
+\cite{acemoglu2020taxes} documentan un mecanismo paralelo en el contexto estadounidense, mostrando que el c\'odigo fiscal federal crea una tasa impositiva efectiva sobre el ingreso laboral superior al 25\%, mientras que la tasa impositiva efectiva sobre el capital en equipos es de aproximadamente el 15\%. Esta asimetr\'ia inclina la decisi\'on capital--trabajo en el margen, induciendo a las empresas a automatizar tareas que ser\'ian realizadas de manera m\'as eficiente por trabajadores bajo una tributaci\'on neutral. El caso colombiano amplifica esta distorsi\'on: mientras que la cu\~na fiscal entre trabajo y capital en Estados Unidos es del orden de 10 puntos porcentuales, el sobrecosto no salarial de Colombia del 46--58\% sobre el empleo formal---combinado con una tributaci\'on m\'inima sobre el equipo de capital---crea una cu\~na que puede superar los 40 puntos porcentuales. La predicci\'on es inequ\'ivoca: la estructura de costos de Colombia deber\'ia inducir un patr\'on de adopci\'on de automatizaci\'on sesgado hacia tecnolog\'ias mediocres, generando desplazamiento sin ganancias de productividad proporcionales.
+
+
+\subsection{Efectos de Propagaci\'on en el Mercado Laboral}
+\label{subsec:ripples}
+
+Los efectos de desplazamiento de la automatizaci\'on no se circunscriben a las tareas y ocupaciones directamente automatizadas. A medida que los trabajadores desplazados de posiciones automatizadas buscan empleo en otros sectores, incrementan la oferta laboral en sectores y ocupaciones adyacentes, comprimiendo los salarios y potencialmente desplazando a los trabajadores incumbentes. Estos \textit{efectos de propagaci\'on} (\textit{ripple effects}), documentados emp\'iricamente por \cite{acemoglu2020robots} en el contexto de la automatizaci\'on manufacturera estadounidense, implican que el impacto agregado de la automatizaci\'on sobre el mercado laboral excede el desplazamiento directo medido a nivel de tareas.
+
+En el contexto colombiano, los efectos de propagaci\'on interact\'uan con la estructura dual del mercado laboral de manera distintiva. Cuando la automatizaci\'on desplaza a trabajadores formales---aquellos que generan la carga completa de costos no salariales---los individuos desplazados enfrentan una disyuntiva entre el reempleo formal (con fricciones de b\'usqueda de empleo amplificadas por el desajuste sectorial y la rigidez de los pisos salariales) y la absorci\'on por el sector informal. El sector informal, caracterizado por salarios m\'as bajos, ausencia de obligaciones de costos no salariales y barreras de entrada m\'inimas, funciona como un mercado laboral de \'ultimo recurso. La consecuencia es que la automatizaci\'on en el sector formal no simplemente destruye empleos; reasigna trabajadores desde posiciones formales de alto costo hacia posiciones informales de bajo costo, comprimiendo a\'un m\'as los salarios informales mientras los pisos salariales formales permanecen inalterados debido a la rigidez del salario m\'inimo. Este mecanismo genera un patr\'on distributivo perverso: los trabajadores con menor capacidad para absorber p\'erdidas de ingreso---aquellos con menores cualificaciones y menos ahorros---soportan la mayor carga del ajuste, mientras el marco regulatorio que desencaden\'o la automatizaci\'on permanece intacto.
+
+Adicionalmente, los efectos de propagaci\'on sectoriales en Colombia se amplifican por la concentraci\'on del empleo formal en un conjunto relativamente reducido de industrias. La manufactura, los servicios financieros y el comercio formal representan conjuntamente una proporci\'on desproporcionada del empleo asalariado formal. La automatizaci\'on en estos sectores libera trabajadores que no pueden transitar f\'acilmente hacia otras actividades formales---en parte porque la estructura de costos no salariales encarece la nueva contrataci\'on formal, y en parte porque los requerimientos de cualificaci\'on de los sectores en crecimiento (particularmente tecnolog\'ia y servicios profesionales) no corresponden con los perfiles de los trabajadores desplazados. El resultado es un efecto de trinquete: cada oleada de automatizaci\'on contrae la participaci\'on del sector formal en el empleo total, expandiendo la informalidad y reduciendo la base tributaria que financia los propios sistemas de protecci\'on social incorporados en la estructura de costos no salariales.
+
+
+\subsection{La Informalidad como Amortiguador}
+\label{subsec:informality_theory}
+
+El papel de la informalidad como mediadora de los efectos de la automatizaci\'on sobre el mercado laboral est\'a insuficientemente teorizado en la literatura existente, la cual se ha desarrollado principalmente en el contexto de econom\'ias avanzadas con formalidad casi universal. En Colombia, donde el 55,8\% del empleo es informal, la informalidad no es una categor\'ia residual sino un rasgo estructural que altera fundamentalmente el c\'alculo de la automatizaci\'on, consistente con el marco de econom\'ia dual de \cite{laporta2014} y \cite{ulyssea2018}. Las consecuencias distributivas m\'as amplias de esta dualidad para Am\'erica Latina est\'an documentadas por \cite{busso2020}.
+
+Proponemos un marco de sector dual que distingue entre el empleo formal e informal a lo largo de tres dimensiones relevantes para los incentivos de automatizaci\'on. En primer lugar, la \textit{estructura de costos}: los trabajadores formales generan costos no salariales del 46--58\% por encima del salario, mientras que los trabajadores informales no generan contribuciones obligatorias, lo que hace que el diferencial de costo efectivo entre el trabajo formal e informal sea sustancialmente mayor que la brecha salarial observada. En segundo lugar, el \textit{acceso al capital}: las empresas informales---en su gran mayor\'ia microempresas y trabajadores por cuenta propia---carecen de los recursos financieros, el acceso al cr\'edito y la capacidad organizacional para invertir en tecnolog\'ias de automatizaci\'on, incluso cuando dichas tecnolog\'ias ser\'ian t\'ecnicamente viables. En tercer lugar, la \textit{visibilidad regulatoria}: los establecimientos informales operan fuera del per\'imetro regulatorio, sin enfrentar las obligaciones de costos que incentivan la automatizaci\'on ni las presiones competitivas de las empresas formales automatizadas que forzar\'ian la modernizaci\'on tecnol\'ogica.
+
+La intersecci\'on de estas tres dimensiones produce lo que denominamos la \textit{paradoja de la formalidad}. Los trabajadores en empleo informal frecuentemente realizan tareas con alto potencial \textit{t\'ecnico} de automatizaci\'on---tareas manuales rutinarias en agricultura, construcci\'on y comercio al menudeo que son, en principio, susceptibles de mecanizaci\'on o digitalizaci\'on. Sin embargo, su riesgo \textit{pr\'actico} de automatizaci\'on es bajo porque sus empleadores no tienen ni el incentivo (no hay ahorro en costos no salariales derivado de la sustituci\'on) ni la capacidad (no hay capital para inversi\'on tecnol\'ogica) para automatizar. Inversamente, los trabajadores en empleo formal que desempe\~nan tareas de riesgo moderado pueden enfrentar un alto riesgo \textit{efectivo} de automatizaci\'on porque el sobrecosto no salarial hace rentable la sustituci\'on incluso cuando la tecnolog\'ia ofrece s\'olo mejoras marginales de productividad. La implicaci\'on pr\'actica es que el riesgo de automatizaci\'on en Colombia no se predice adecuadamente a partir de las caracter\'isticas t\'ecnicas de las ocupaciones por s\'i solas; requiere la consideraci\'on conjunta del contenido de tareas, la formalidad del empleo, el tama\~no de la empresa y las estructuras de costos sectoriales.
+
+Esta paradoja conlleva una implicaci\'on de pol\'itica preocupante. Los esfuerzos por aumentar la formalidad---un objetivo central de la pol\'itica del mercado laboral colombiano desde hace largo tiempo---podr\'ian incrementar inadvertidamente la vulnerabilidad de la econom\'ia a la automatizaci\'on. A medida que los trabajadores informales transitan hacia el empleo formal y comienzan a generar obligaciones de costos no salariales, ingresan a la zona en la cual la sustituci\'on tecnol\'ogica se vuelve rentable. La formalizaci\'on sin inversi\'on simult\'anea en las competencias y la productividad de los trabajadores convierte efectivamente posiciones informales de bajo costo y resistentes a la automatizaci\'on en posiciones formales de alto costo y vulnerables a la automatizaci\'on. El desaf\'io para la pol\'itica p\'ublica, por lo tanto, consiste en dise\~nar instituciones del mercado laboral que promuevan la formalidad y la protecci\'on social sin crear estructuras de costos que aceleren el desplazamiento.
+
+En el an\'alisis emp\'irico que sigue, operacionalizamos este marco construyendo medidas de riesgo de automatizaci\'on que interact\'uan las probabilidades t\'ecnicas de automatizaci\'on con el estatus de formalidad, el tama\~no de la empresa y los incentivos de costos sectoriales. La medida resultante de riesgo \textit{efectivo} de automatizaci\'on difiere sustancialmente de las medidas basadas \'unicamente en el contenido de tareas, y la brecha entre el riesgo t\'ecnico y el riesgo efectivo es mayor precisamente en los sectores---agricultura, construcci\'on, servicio dom\'estico---donde las tasas de informalidad son m\'as altas.
+
+\subsection{Implicaciones Emp\'iricas}
+\label{subsec:empirical_implications}
+
+El marco te\'orico desarrollado genera cuatro predicciones contrastables que estructuran el an\'alisis emp\'irico:
+
+\begin{enumerate}[label=\textbf{P\arabic*:}]
+\item \textit{Paradoja de la formalidad.} Los trabajadores formales deber\'ian enfrentar un riesgo de automatizaci\'on sistem\'aticamente mayor que los trabajadores informales con perfiles ocupacionales similares, porque el sobrecosto no salarial hace rentable la sustituci\'on \'unicamente para las posiciones formales. Se espera un coeficiente positivo sobre la formalidad en el logit individual, controlando por ocupaci\'on, educaci\'on e ingreso.
+\item \textit{Sustituci\'on inducida por costos.} La relaci\'on entre los costos laborales unitarios y la inversi\'on en automatizaci\'on deber\'ia ser positiva a nivel de firma: las empresas que enfrentan mayor presi\'on de costos laborales deber\'ian invertir m\'as en capital de automatizaci\'on ($\beta_1 > 0$ en la Ecuaci\'on~\ref{eq:firm}).
+\item \textit{Capital humano como protecci\'on.} La educaci\'on y el ingreso deber\'ian ser protectores: un mayor capital humano desplaza a los trabajadores hacia tareas no rutinarias donde el trabajo conserva ventaja comparativa. Se esperan razones de momios monot\'onicamente decrecientes a trav\'es de categor\'ias educativas ascendentes y un coeficiente negativo sobre el logaritmo del ingreso.
+\item \textit{Heterogeneidad sectorial.} Los sectores que combinan alta intensidad de tareas rutinarias con altas tasas de formalidad deber\'ian exhibir la mayor vulnerabilidad compuesta, mientras que los sectores con alta informalidad deber\'ian mostrar una desconexi\'on entre el riesgo t\'ecnico y el riesgo efectivo de automatizaci\'on.
+\end{enumerate}
+
+
+\FloatBarrier
+
+% ============================================================================
+\section{Estructura de Costos Laborales en Colombia}
+\label{sec:labor_costs}
+% ============================================================================
+
+\subsection{Anatom\'ia del Costo Total del Empleador}
+\label{subsec:cost_anatomy}
+
+El costo total de emplear a un trabajador formal en Colombia comprende el salario base m\'as una serie de contribuciones obligatorias y prestaciones que, en conjunto, a\~naden entre el 46\% y el 58\% a la n\'omina salarial. Esta secci\'on desagrega dichos costos en sus componentes constitutivos, a partir de las disposiciones normativas codificadas en el \textit{C\'odigo Sustantivo del Trabajo} y la legislaci\'on posterior, complementadas con los c\'alculos de costos de \cite{anif2018} y la OCDE.
+
+\textbf{Contribuciones a la seguridad social.} Los empleadores deben aportar el 12\% del salario del trabajador al sistema de pensiones (\textit{fondo de pensiones}), un cargo obligatorio que se aplica de manera uniforme independientemente del tama\~no de la empresa o el sector. El seguro de salud (\textit{salud}) requiere una contribuci\'on patronal del 8,5\%, aunque las empresas que cumplan las condiciones establecidas por la Ley 1607 de 2012---espec\'ificamente, empleadores de trabajadores que devenguen hasta 10 SMMLV---pueden ser exoneradas de este cargo. El seguro de riesgos laborales (\textit{Administradora de Riesgos Laborales}, ARL) var\'ia seg\'un la clase de riesgo, desde el 0,522\% (Clase I, trabajo de oficina) hasta el 6,96\% (Clase V, miner\'ia y construcci\'on), siendo la tasa modal para los establecimientos manufactureros la correspondiente a la Clase III (2,436\%). La carga combinada de seguridad social oscila, por tanto, entre aproximadamente el 21\% y el 27,5\% del salario base, dependiendo de la clase de riesgo y del estado de exoneraci\'on.
+
+\textbf{Prestaciones sociales.} La legislaci\'on laboral colombiana establece cuatro categor\'ias de prestaciones que, en conjunto, a\~naden el 21,83\% al salario base. La \textit{prima de servicios}, equivalente a un mes de salario pagado en dos cuotas, representa el 8,33\% de la remuneraci\'on anual. Las \textit{cesant\'ias}, tambi\'en equivalentes a un mes de salario depositado anualmente, a\~naden otro 8,33\%. Los intereses sobre \textit{cesant\'ias} (\textit{intereses sobre cesant\'ias}), pagaderos al 12\% del saldo acumulado, contribuyen aproximadamente con el 1\% del salario. Las vacaciones remuneradas---15 d\'ias h\'abiles por a\~no---a\~naden el 4,17\% del salario anual. A diferencia de las contribuciones a la seguridad social, estas prestaciones no son exonerables y se aplican a todas las relaciones laborales formales independientemente del tama\~no de la empresa o el sector.
+
+\textbf{Contribuciones parafiscales.} Las contribuciones al \textit{Instituto Colombiano de Bienestar Familiar} (ICBF, 3\%), al \textit{Servicio Nacional de Aprendizaje} (SENA, 2\%) y a las \textit{Cajas de Compensaci\'on Familiar} (CCF, 4\%) totalizan el 9\% de la n\'omina para los empleadores no exonerados. La Ley 1607 de 2012 exoner\'o a los empleadores que cumplieran los requisitos de las contribuciones al ICBF y al SENA, reduciendo la carga parafiscal al 4\% (solo CCF) para las empresas que paguen a sus trabajadores hasta 10 SMMLV. La tasa parafiscal efectiva var\'ia, por tanto, entre el 4\% y el 9\%, dependiendo de la elegibilidad para la exoneraci\'on.
+
+La Tabla~\ref{tab:cost_breakdown} resume la estructura completa de costos. El factor prestacional total m\'inimo es aproximadamente 1,46 (46\% sobre el salario base) para empleadores exonerados con trabajadores de bajo riesgo, y asciende a 1,58 (58\% sobre el salario base) para empleadores no exonerados en sectores de alto riesgo. La estimaci\'on del punto medio, aproximadamente el 52\%, es ampliamente consistente con la cifra del 53\% reportada por \cite{anif2018} y con el c\'alculo de la OCDE seg\'un el cual los costos laborales totales en Colombia equivalen al 45\% del ingreso bruto, frente al promedio de la OCDE del 36\%.
+
+\begin{table}[htbp]
+\centering
+\caption{Descomposici\'on de los costos laborales del empleador en Colombia (\% del salario base)}
+\label{tab:cost_breakdown}
+\begin{threeparttable}
+\begin{tabular}{lcc}
+\toprule
+\textbf{Componente} & \textbf{Tasa (\%)} & \textbf{Notas} \\
+\midrule
+\multicolumn{3}{l}{\textit{Contribuciones a Seguridad Social}} \\
+\quad Pensi\'on & 12.00 & Obligatorio \\
+\quad Salud & 0.00--8.50 & Exonerable (Ley 1607) \\
+\quad Riesgo laboral (ARL) & 0.52--6.96 & Por clase de riesgo (I--V) \\
+\midrule
+\multicolumn{3}{l}{\textit{Prestaciones Sociales}} \\
+\quad Prima de servicios & 8.33 & Un mes de salario \\
+\quad Cesant\'ias & 8.33 & Un mes de salario \\
+\quad Intereses sobre cesant\'ias & 1.00 & 12\% de las cesant\'ias \\
+\quad Vacaciones remuneradas & 4.17 & 15 d\'ias h\'abiles \\
+\midrule
+\multicolumn{3}{l}{\textit{Contribuciones Parafiscales}} \\
+\quad ICBF & 0.00--3.00 & Exonerable \\
+\quad SENA & 0.00--2.00 & Exonerable \\
+\quad CCF & 4.00 & No exonerable \\
+\midrule
+\textbf{Total (m\'inimo)} & \textbf{$\approx$ 46} & Exonerado, Clase I \\
+\textbf{Total (m\'aximo)} & \textbf{$\approx$ 58} & No exonerado, Clase V \\
+\bottomrule
+\end{tabular}
+\begin{tablenotes}
+\small
+\item \textit{Fuentes:} C\'odigo Sustantivo del Trabajo; Ley 1607/2012; \cite{anif2018}. Las exoneraciones de salud e ICBF/SENA aplican a empleadores de trabajadores que devenguen $\leq$ 10 SMMLV.
+\end{tablenotes}
+\end{threeparttable}
+\end{table}
+
+Desde la perspectiva de los incentivos a la automatizaci\'on, la caracter\'istica cr\'itica de esta estructura de costos es su \textit{proporcionalidad respecto al salario}: cada peso de incremento salarial genera entre 46 y 58 centavos adicionales en recargos obligatorios. Esta relaci\'on multiplicativa implica que los aumentos del salario m\'inimo tienen un efecto amplificado sobre los costos laborales totales, ensanchando la brecha entre el costo de un trabajador formal y el costo de una alternativa automatizada. Asimismo, implica que el incentivo a la automatizaci\'on es m\'as fuerte para las empresas que emplean trabajadores con remuneraciones iguales o cercanas al salario m\'inimo---precisamente el segmento donde la intensidad de tareas rutinarias es mayor y el potencial t\'ecnico de automatizaci\'on es m\'as elevado.
+
+
+\subsection{Evoluci\'on del Salario M\'inimo 2010--2026}
+\label{subsec:min_wage}
+
+La trayectoria del salario m\'inimo colombiano durante los \'ultimos quince a\~nos se ha caracterizado por incrementos nominales persistentes que superan sustancialmente el crecimiento de la productividad laboral. La Tabla~\ref{tab:min_wage} documenta la evoluci\'on del SMMLV desde 2010 hasta 2026.
+
+\begin{table}[htbp]
+\centering
+\caption{Evoluci\'on del salario m\'inimo colombiano (SMMLV), 2010--2026}
+\label{tab:min_wage}
+\begin{threeparttable}
+\begin{tabular}{lccc}
+\toprule
+\textbf{A\~no} & \textbf{SMMLV (COP)} & \textbf{$\Delta$ nominal (\%)} & \textbf{$\Delta$ nominal acumulada (\%)} \\
+\midrule
+2010 & 515,000 & --- & --- \\
+2012 & 566,700 & --- & 10.0 \\
+2015 & 644,350 & --- & 25.1 \\
+2018 & 781,242 & --- & 51.7 \\
+2020 & 877,803 & --- & 70.4 \\
+2022 & 1,000,000 & --- & 94.2 \\
+2023 & 1,160,000 & 16.0 & 125.2 \\
+2024 & 1,300,000 & 12.1 & 152.4 \\
+2025 & 1,423,500 & 9.5 & 176.4 \\
+2026 & 1,750,905 & 23.0 & 240.0 \\
+\bottomrule
+\end{tabular}
+\begin{tablenotes}
+\small
+\item \textit{Fuentes:} Decretos presidenciales. La cifra de 2026 refleja el incremento del salario m\'inimo decretado.
+\end{tablenotes}
+\end{threeparttable}
+\end{table}
+
+Entre 2010 y 2025, el SMMLV aument\'o un 176,4\% en t\'erminos nominales. Tras ajustar por la inflaci\'on acumulada, el incremento real durante este per\'iodo de quince a\~nos es de aproximadamente el 40--45\%. Esta apreciaci\'on real es destacable en dos sentidos. En primer lugar, supera significativamente la tasa de crecimiento de la productividad laboral, que promedi\'o entre el 1\% y el 2\% anual durante el mismo per\'iodo. La divergencia resultante entre remuneraci\'on y productividad---el rasgo definitorio de los costos laborales unitarios crecientes---incrementa directamente el incentivo a la automatizaci\'on incorporado en la estructura de costos. En segundo lugar, el ritmo de los incrementos nominales se aceler\'o notablemente durante la administraci\'on Petro (2022--2026): el periodo de cuatro a\~nos de 2022 a 2026 registr\'o un incremento nominal acumulado de aproximadamente 75\%, con los aumentos de 2023 a 2025 acumulando por s\'i solos un 42\%, culminando con el incremento del 23\% decretado para 2026 que elev\'o el SMMLV de COP \$1.423.500 a COP \$1.750.905.
+
+Cuando se aplica el multiplicador de costos laborales no salariales, el costo mensual total para un empleador por un trabajador que devenga el salario m\'inimo en 2026 se sit\'ua en un rango entre COP \$2.556.321 (con el recargo m\'inimo del 46\%) y COP \$2.766.430 (con el recargo m\'aximo del 58\%). Para un trabajador que percibe exactamente el salario m\'inimo, el componente no salarial por s\'i solo---entre COP \$805.416 y COP \$1.015.525 mensuales---supera el salario m\'inimo bruto completo de muchos pa\'ises vecinos. Este nivel de costos no es trivial para las peque\~nas y medianas empresas que predominan en el sector formal colombiano: seg\'un datos del DANE, m\'as del 90\% de los establecimientos formales emplean a menos de 50 trabajadores, y los costos laborales representan t\'ipicamente entre el 30\% y el 50\% de sus gastos operativos totales.
+
+
+\subsection{La Paradoja de Productividad}
+\label{subsec:productivity_paradox}
+
+El an\'alisis precedente sobre el aumento de los costos laborales adquiere particular relevancia cuando se contrasta con la persistentemente baja productividad laboral de Colombia. Seg\'un estimaciones de la OCDE y el DANE, la productividad laboral colombiana---medida como PIB por hora trabajada---oscila entre \$16 y \$21,6 USD (ajustados por PPA), lo que sit\'ua al pa\'is en la parte inferior o cerca de ella dentro del grupo de miembros y pa\'ises asociados de la OCDE. Esta cifra equivale aproximadamente a un tercio del nivel de Estados Unidos (\$74,8 por hora) y a menos de la mitad del promedio de la OCDE. Sin embargo, los costos laborales colombianos, medidos como proporci\'on del ingreso bruto, se ubican en el 45\%---nueve puntos porcentuales por encima del promedio de la OCDE del 36\%.
+
+Esta combinaci\'on---altos costos laborales relativos y baja productividad absoluta---define lo que denominamos la \textit{paradoja de productividad} del mercado laboral colombiano. En una econom\'ia bien articulada, los altos costos laborales estar\'ian respaldados por una productividad laboral correspondientemente elevada: los trabajadores ser\'ian costosos porque son productivos. En Colombia ocurre lo contrario: los trabajadores son costosos (en relaci\'on con el producto) no porque sean altamente productivos, sino porque el marco regulatorio impone recargos obligatorios que inflan el costo del trabajo m\'as all\'a de lo que los niveles de productividad justificar\'ian. El \textit{costo laboral unitario}---la raz\'on entre la remuneraci\'on total y el producto por trabajador---resulta consecuentemente elevado, creando un incentivo estructural para sustituir trabajo por capital incluso cuando el nivel absoluto de los salarios es bajo en comparaci\'on internacional.
+
+
+La Figura~\ref{fig:prod_vs_laborshare} (en la Secci\'on~\ref{sec:results}) ilustra esta relaci\'on a nivel sectorial dentro de la manufactura colombiana. Los sectores de mayor productividad exhiben sistem\'aticamente menores participaciones del trabajo en el valor agregado, lo que sugiere que la profundizaci\'on del capital---incluyendo la automatizaci\'on---se concentra precisamente donde la productividad es m\'as alta y el incentivo de costos para la sustituci\'on es m\'as agudo. Este patr\'on es consistente con la predicci\'on te\'orica: los sectores donde los costos laborales representan una proporci\'on elevada del valor agregado enfrentan el mayor incentivo para automatizar, y aquellos que ya lo han hecho exhiben mayor productividad y menores participaciones laborales.
+
+La paradoja de productividad posee tambi\'en una dimensi\'on din\'amica. El crecimiento anual de la productividad en Colombia ha promediado apenas entre el 1\% y el 2\% durante la \'ultima d\'ecada, mientras que los incrementos salariales nominales han promediado entre el 8\% y el 12\% anual (impulsados en gran medida por los ajustes del salario m\'inimo). Este diferencial implica que los costos laborales unitarios est\'an aumentando a una tasa aproximada del 6--10\% anual en t\'erminos nominales---un ritmo que se acumula r\'apidamente y desplaza continuamente hacia abajo el umbral de automatizaci\'on. Cada a\~no, un nuevo tramo de tareas se vuelve m\'as barato de automatizar que de realizar con trabajo humano formal, y el efecto acumulado a lo largo de una d\'ecada es sustancial.
+
+
+\subsection{Comparaci\'on Internacional}
+\label{subsec:international_comparison}
+
+Para situar la estructura de costos laborales de Colombia en perspectiva comparativa, la Tabla~\ref{tab:international_comparison} presenta la remuneraci\'on horaria en la manufactura, la productividad laboral y la densidad de robots industriales para pa\'ises seleccionados que abarcan el espectro de adopci\'on de automatizaci\'on.
+
+\begin{table}[htbp]
+\centering
+\caption{Comparaci\'on internacional: costos laborales, productividad y densidad rob\'otica}
+\label{tab:international_comparison}
+\begin{threeparttable}
+\begin{tabular}{lccc}
+\toprule
+\textbf{Pa\'is} & \textbf{Comp.\ horaria (USD)} & \textbf{Productividad (USD/hr)} & \textbf{Robots/10.000} \\
+\midrule
+Corea del Sur & 20.72 & 42.3 & 1,012 \\
+Alemania & 45.79 & 68.5 & 415 \\
+Jap\'on & 27.50 & 49.2 & 397 \\
+Estados Unidos & 35.67 & 74.8 & 295 \\
+China & 6.50 & 18.7 & 470 \\
+M\'exico & 4.82 & 21.8 & 40--50 \\
+Chile & 7.20 & 29.5 & 3 \\
+\textbf{Colombia} & \textbf{3--5} & \textbf{16--21.6} & \textbf{2--5} \\
+\bottomrule
+\end{tabular}
+\begin{tablenotes}
+\small
+\item \textit{Fuentes:} Remuneraci\'on horaria: BLS International Labor Comparisons y fuentes nacionales. Productividad: OCDE, ILOSTAT. Densidad rob\'otica: \cite{ifr2024}. Los rangos de Colombia reflejan la variaci\'on entre fuentes de datos y m\'etodos de medici\'on.
+\end{tablenotes}
+\end{threeparttable}
+\end{table}
+
+Varios patrones merecen atenci\'on. En primer lugar, la remuneraci\'on horaria de Colombia, de \$3--5 USD, es la m\'as baja del grupo de comparaci\'on en t\'erminos absolutos; sin embargo, como se document\'o anteriormente, los costos laborales colombianos como proporci\'on del valor agregado (45\%) superan el promedio de la OCDE (36\%). Esta aparente contradicci\'on refleja el bajo denominador: los trabajadores colombianos son econ\'omicos en t\'erminos absolutos pero costosos en relaci\'on con lo que producen. En segundo lugar, la relaci\'on entre remuneraci\'on horaria y densidad rob\'otica es fuertemente positiva entre pa\'ises, consistente con la predicci\'on te\'orica de que mayores costos laborales incentivan la adopci\'on de automatizaci\'on. Corea del Sur, con una remuneraci\'on horaria de \$20,72, tiene una densidad rob\'otica entre 200 y 500 veces superior a la de Colombia. Alemania, con \$45,79 por hora, mantiene 415 robots por cada 10.000 trabajadores. China ofrece una comparaci\'on particularmente ilustrativa: con una remuneraci\'on horaria de aproximadamente \$6,50---solo moderadamente superior a la de Colombia---China ha alcanzado una densidad rob\'otica de 470 por cada 10.000 trabajadores (desde 392 en 2022), impulsada por una pol\'itica industrial deliberada (``Made in China 2025'') que ha subsidiado la inversi\'on en automatizaci\'on a escala masiva.
+
+
+En tercer lugar, la comparaci\'on con M\'exico es instructiva para el caso colombiano. M\'exico, con una remuneraci\'on horaria comparable (\$4,82) y una productividad superior (\$21,8/hr), tiene una densidad rob\'otica de aproximadamente 40--50 por cada 10.000---un orden de magnitud superior al rango de Colombia. Esto sugiere que los salarios absolutos bajos, incluso cuando se combinan con costos laborales no salariales moderados, pueden retrasar la adopci\'on de automatizaci\'on al mantener el costo total del trabajo por debajo del umbral de automatizaci\'on para la mayor\'ia de las tareas. No obstante, la densidad rob\'otica de M\'exico ha venido aumentando r\'apidamente en a\~nos recientes, impulsada por inversiones \textit{greenfield} relacionadas con el \textit{nearshoring} en la manufactura automotriz y electr\'onica que incorporan la automatizaci\'on desde su concepci\'on. Colombia, al carecer de flujos comparables de IED manufacturera, enfrenta una trayectoria diferente: es m\'as probable que la automatizaci\'on surja como una respuesta de sustituci\'on ante el aumento de los costos laborales formales que como una caracter\'istica de nuevas inversiones de capital.
+
+La relaci\'on entre productividad laboral y densidad rob\'otica a nivel internacional---presentada en la Secci\'on~\ref{sec:results}---confirma la fuerte asociaci\'on positiva y ubica a Colombia en el cuadrante inferior izquierdo: baja productividad, automatizaci\'on cercana a cero. La pregunta anal\'itica clave es si Colombia recorrer\'a este espacio de manera gradual o si la combinaci\'on de costos laborales r\'apidamente crecientes, precios decrecientes de la automatizaci\'on y la emergencia de la inteligencia artificial generativa producir\'a un salto discontinuo que comprima varias d\'ecadas de adopci\'on en un per\'iodo mucho m\'as breve.
+
+
+\FloatBarrier
+
+% ============================================================================
+\section{Datos y Metodolog\'ia}
+\label{sec:data}
+% ============================================================================
+
+Esta secci\'on describe las fuentes de datos, la construcci\'on de variables y las especificaciones econom\'etricas empleadas en el an\'alisis emp\'irico. Se recurre a cinco fuentes de datos principales---tres encuestas nacionales y dos bases de datos de panel internacional---y se implementan cuatro estrategias emp\'iricas complementarias: (i) un modelo log\'istico a nivel individual del riesgo de automatizaci\'on, (ii) un an\'alisis a nivel de firma del nexo entre costos laborales e inversi\'on en automatizaci\'on, (iii) una regresi\'on de panel internacional de la densidad rob\'otica sobre determinantes de productividad y costos, y (iv) simulaciones de escenarios bajo trayectorias de pol\'itica alternativas.
+
+
+\subsection{Fuentes de Datos}
+\label{subsec:data_sources}
+
+\subsubsection*{Gran Encuesta Integrada de Hogares (GEIH), 2024}
+
+La GEIH, administrada por el DANE (\textit{Departamento Administrativo Nacional de Estad\'istica}), es la principal encuesta de fuerza laboral de hogares en Colombia. Se utilizan microdatos de cuatro meses de la ola de 2024---enero, mayo, julio y octubre---seleccionados para capturar la variaci\'on estacional a lo largo del a\~no calendario. Tras restringir la muestra a individuos de 18 a 65 a\~nos que se encuentran empleados (ya sea como asalariados o como trabajadores por cuenta propia), excluir las observaciones con valores faltantes en variables clave (ocupaci\'on, ingreso, sector, estatus de formalidad) y eliminar los c\'odigos ocupacionales que no pueden mapearse a la clasificaci\'on de Frey--Osborne, se retienen $N = 111{,}672$ observaciones.
+
+La GEIH proporciona informaci\'on sobre clasificaci\'on ocupacional (CIUO-08, la adaptaci\'on colombiana de ISCO-08), sector de empleo (CIIU Rev.\ 4), ingreso laboral, horas trabajadas, nivel educativo, edad, sexo, tama\~no de empresa y estatus de formalidad. La formalidad se define siguiendo el criterio institucional del DANE: un trabajador se clasifica como formal si contribuye tanto al seguro de salud como a un fondo de pensiones a trav\'es de su empleo. Esta definici\'on, si bien es est\'andar en la literatura colombiana, excluye a algunos trabajadores que est\'an formalmente empleados pero cuyos empleadores evaden las obligaciones de cotizaci\'on; por consiguiente, nuestras estimaciones de la exposici\'on a la automatizaci\'on vinculada a la formalidad son conservadoras.
+
+\subsubsection*{Encuesta Anual Manufacturera (EAM), 2023}
+
+La EAM es una encuesta de tipo censal que cubre todos los establecimientos manufactureros en Colombia con 10 o m\'as empleados o con una producci\'on anual superior a un valor umbral. La ola de 2023 abarca 6.714 establecimientos, que se agregan a nivel de firma (combinando las firmas con m\'ultiples establecimientos) para obtener 6.119 firmas \'unicas. La EAM proporciona informaci\'on detallada sobre empleo (trabajadores permanentes, temporales y subcontratados), n\'omina salarial total, contribuciones obligatorias a la seguridad social, otros costos laborales, inversi\'on en maquinaria y equipo, valor de la producci\'on, consumo intermedio y valor agregado. A partir de la EAM se construyen las siguientes variables clave:
+
+\begin{itemize}[nosep]
+\item \textit{Costo laboral unitario} (CLU): remuneraci\'on laboral total (salarios + prestaciones + contribuciones) dividida por el valor agregado.
+\item \textit{Productividad laboral}: valor agregado por trabajador (o por hora, cuando se dispone de datos de horas).
+\item \textit{Proxy de automatizaci\'on}: inversi\'on en maquinaria y equipo como proporci\'on de los activos totales, capturando el flujo de inversi\'on de capital que corresponde m\'as directamente a la adopci\'on de automatizaci\'on.
+\item \textit{Tama\~no de firma}: variable categ\'orica basada en umbrales de empleo (micro: $<$10; peque\~na: 10--49; mediana: 50--199; grande: $\geq$200).
+\end{itemize}
+
+\subsubsection*{Encuesta de Desarrollo e Innovaci\'on Tecnol\'ogica (EDIT X), 2019--2020}
+
+La EDIT X encuesta las actividades de innovaci\'on tecnol\'ogica en el sector manufacturero colombiano durante el bienio 2019--2020. La encuesta cubre 6.798 firmas y proporciona informaci\'on sobre inversi\'on en I+D, adquisici\'on de maquinaria y equipo con fines de innovaci\'on, adquisici\'on de software, transferencia de tecnolog\'ia y resultados de innovaci\'on (innovaci\'on de producto, de proceso y organizacional). Se fusiona la EDIT X con la EAM utilizando el identificador com\'un de firma mantenido por el marco censal manufacturero del DANE, logrando una tasa de emparejamiento del 96,2\% (5.884 firmas emparejadas de un total de 6.119 firmas de la EAM con identificadores v\'alidos). La alta tasa de emparejamiento refleja el marco muestral compartido: ambas encuestas se nutren del mismo directorio manufacturero del DANE.
+
+A partir del conjunto de datos fusionado EAM--EDIT, se construye una medida de automatizaci\'on m\'as rica que combina la inversi\'on en maquinaria de la EAM con los gastos en innovaci\'on de la EDIT. Esta variable compuesta captura tanto la adquisici\'on de equipos de producci\'on (EAM) como la adopci\'on de tecnolog\'ia espec\'ificamente destinada a la innovaci\'on de procesos (EDIT), proporcionando un \textit{proxy} de automatizaci\'on m\'as comprehensivo que el que ofrecer\'ia cualquiera de las fuentes por separado.
+
+\subsubsection*{Panel de datos internacional}
+
+Para el an\'alisis entre pa\'ises, se construye un panel balanceado de aproximadamente 25 pa\'ises para el per\'iodo 2010--2023, que arroja $N = 226$ observaciones pa\'is-a\~no tras considerar los datos faltantes. El panel se nutre de cuatro fuentes:
+
+\begin{itemize}[nosep]
+\item \textit{Penn World Table 11.0} (PWT): PIB por trabajador (en PPA), productividad total de los factores (PTF), stock de capital y participaci\'on laboral en el ingreso.
+\item \textit{ILOSTAT}: PIB por hora trabajada, empleo por sector y composici\'on de la fuerza laboral.
+\item \textit{World Development Indicators} (WDI, Banco Mundial): gasto en I+D como porcentaje del PIB, PIB per c\'apita e indicadores demogr\'aficos.
+\item \textit{Our World in Data / International Federation of Robotics} (IFR): robots industriales instalados y densidad rob\'otica (robots por cada 10.000 trabajadores manufactureros).
+\end{itemize}
+
+La muestra de pa\'ises abarca el espectro de adopci\'on de automatizaci\'on, incluyendo l\'ideres de alta densidad (Corea del Sur, Jap\'on, Alemania), adoptantes de rango medio (China, Estados Unidos, Francia) y econom\'ias de baja densidad en Am\'erica Latina (M\'exico, Brasil, Chile, Colombia). La selecci\'on de pa\'ises est\'a determinada por la disponibilidad de datos en las cuatro fuentes durante al menos ocho a\~nos consecutivos.
+
+\subsubsection*{Cuentas Nacionales del DANE}
+
+Se complementan los datos de encuestas con las series de Cuentas Nacionales del DANE sobre productividad laboral por sector, valor agregado por actividad econ\'omica, stock de capital (\textit{acervos de capital}) y productividad total de los factores. Estas series, disponibles a la agregaci\'on de 12 sectores de la CIIU Rev.\ 4, proporcionan el contexto macroecon\'omico para el an\'alisis de vulnerabilidad sectorial y se utilizan en la construcci\'on del \'Indice de Vulnerabilidad a la Automatizaci\'on.
+
+
+\subsection{Construcci\'on del \'Indice de Vulnerabilidad a la Automatizaci\'on}
+\label{subsec:avi_construction}
+
+Una contribuci\'on metodol\'ogica central de este art\'iculo es la construcci\'on de un \textit{\'Indice de Vulnerabilidad a la Automatizaci\'on} (IVA) sectorial que integra m\'ultiples dimensiones de exposici\'on a la automatizaci\'on en una medida compuesta \'unica. Los enfoques existentes para medir el riesgo de automatizaci\'on---notablemente \cite{frey2017future} y \cite{morales2023risk}---se basan exclusivamente en las caracter\'isticas t\'ecnicas de las ocupaciones, mapeando el contenido de tareas a probabilidades de automatizaci\'on sin considerar los incentivos econ\'omicos ni las caracter\'isticas institucionales que determinan si la automatizaci\'on t\'ecnicamente factible se adopta efectivamente. El IVA aborda esta limitaci\'on combinando el potencial t\'ecnico con los incentivos de costos y la intensidad de capital.
+
+Para cada sector $j$, el IVA se define como:
+\begin{equation}
+\text{AVI}_j = w_1 \times \text{TechnicalPotential}_j + w_2 \times (1 - \text{ProductivityGrowth}_j) + w_3 \times (1 - \text{CapitalIntensity}_j)
+\label{eq:avi}
+\end{equation}
+
+\noindent donde los componentes se construyen de la siguiente manera:
+
+\begin{itemize}[nosep]
+\item $\text{TechnicalPotential}_j$: el promedio ponderado por empleo de las probabilidades de automatizaci\'on de Frey--Osborne para todas las ocupaciones del sector $j$, mapeadas desde c\'odigos SOC a CIUO-08 a trav\'es de la concordancia ISCO-08. El mapeo se implementa tanto a nivel de 1 d\'igito (grupo principal) como de 2 d\'igitos (subgrupo principal) de la CIUO-08, utilizando la clasificaci\'on m\'as fina cuando los tama\~nos de muestra lo permiten y agregando al nivel m\'as grueso en caso contrario.
+
+\item $\text{ProductivityGrowth}_j$: la tasa de crecimiento anual compuesta de la productividad laboral (valor agregado por trabajador) en el sector $j$ durante los cinco a\~nos precedentes, normalizada al intervalo $[0, 1]$ entre sectores. El t\'ermino $(1 - \text{ProductivityGrowth}_j)$ captura la intuici\'on de que los sectores con productividad estancada enfrentan mayor presi\'on para automatizar como medio de reducci\'on de costos, mientras que los sectores de alto crecimiento pueden estar generando retornos suficientes para absorber los costos laborales crecientes sin recurrir a la sustituci\'on.
+
+\item $\text{CapitalIntensity}_j$: la raz\'on entre el stock de capital f\'isico y el empleo en el sector $j$, normalizada a $[0, 1]$. El t\'ermino $(1 - \text{CapitalIntensity}_j)$ captura el margen restante para la profundizaci\'on del capital: los sectores que ya son intensivos en capital tienen menos espacio para automatizaci\'on adicional (el retorno marginal de inversi\'on adicional en capital es menor), mientras que los sectores intensivos en trabajo poseen un mayor potencial latente de automatizaci\'on.
+\end{itemize}
+
+Las ponderaciones $w_1 = 0,40$, $w_2 = 0,35$ y $w_3 = 0,25$ se asignan con base en la importancia relativa de cada dimensi\'on en el marco te\'orico. El potencial t\'ecnico recibe la mayor ponderaci\'on porque determina la \textit{frontera de factibilidad}---el l\'imite superior de la automatizaci\'on independientemente de los incentivos de costos. El crecimiento de la productividad recibe la segunda mayor ponderaci\'on porque captura la \textit{urgencia} de la decisi\'on de automatizar: las firmas en sectores de bajo crecimiento enfrentan mayor presi\'on competitiva para reducir costos mediante la sustituci\'on. La intensidad de capital recibe la menor ponderaci\'on porque captura un efecto de \textit{capacidad residual} que est\'a condicionado a las otras dos dimensiones. Se eval\'ua la sensibilidad de los rankings del IVA a especificaciones alternativas de ponderaci\'on en el an\'alisis de robustez.
+
+
+\subsection{Especificaci\'on del Panel Internacional}
+\label{subsec:panel_spec}
+
+El an\'alisis de panel internacional estima la relaci\'on entre las caracter\'isticas del mercado laboral y la adopci\'on de robots entre pa\'ises y a lo largo del tiempo. La especificaci\'on base es:
+\begin{equation}
+\log(\text{RobotDensity}_{it}) = \alpha + \beta_1 \log(\text{Productivity}_{it}) + \beta_2 \left(\frac{\text{R\&D}}{\text{GDP}}\right)_{it} + \beta_3 \log(\text{GDP per worker}_{it}) + \mu_i + \varepsilon_{it}
+\label{eq:panel}
+\end{equation}
+
+\noindent donde $i$ indexa pa\'ises, $t$ indexa a\~nos, $\mu_i$ son efectos fijos de pa\'is y $\varepsilon_{it}$ es el t\'ermino de error idiosincr\'atico. La densidad rob\'otica se mide como el n\'umero de robots industriales por cada 10.000 trabajadores manufactureros (IFR/Our World in Data). La productividad se mide como el PIB por hora trabajada (ILOSTAT). I+D/PIB captura la capacidad de absorci\'on tecnol\'ogica de la econom\'ia (WDI). El PIB por trabajador, proveniente de la PWT 11.0, sirve como una medida comprehensiva del desarrollo econ\'omico que subsume m\'ultiples canales---acumulaci\'on de capital, capital humano, calidad institucional---a trav\'es de los cuales los niveles de ingreso afectan la adopci\'on de automatizaci\'on. Utilizamos el PIB por trabajador en lugar de medidas directas de costos laborales (no disponibles con frecuencia comparable en nuestro panel) como un proxy compuesto que captura tanto los niveles salariales como los factores institucionales asociados al desarrollo---incluyendo mandatos de seguro social---que conjuntamente determinan los costos totales para el empleador.
+
+El modelo se estima utilizando tanto efectos fijos (EF) como efectos aleatorios (EA) y se aplica la prueba de Hausman para dirimir entre especificaciones. El estimador de EF controla por todas las caracter\'isticas invariantes en el tiempo de cada pa\'is (marcos institucionales, factores geogr\'aficos, estructura industrial) que podr\'ian confundir la relaci\'on entre costos laborales y automatizaci\'on, identificando el efecto a partir de la variaci\'on intra-pa\'is a lo largo del tiempo. El estimador de EA, que supone que los efectos espec\'ificos de pa\'is no est\'an correlacionados con los regresores, proporciona estimaciones m\'as eficientes si el supuesto se sostiene.
+
+El par\'ametro de inter\'es clave es $\beta_3$, la elasticidad de la densidad rob\'otica respecto al PIB por trabajador. Un $\beta_3$ positivo y significativo es consistente con la hip\'otesis de que mayores costos laborales (aproximados por mayores niveles de ingreso, que se correlacionan con salarios m\'as altos y mayores cargas no salariales) impulsan la adopci\'on de automatizaci\'on. En la especificaci\'on base de EF, se obtiene $\hat{\beta}_3 = 3,60$ ($p < 0,01$, $N = 226$), lo que implica que un incremento del 10\% en el PIB por trabajador se asocia con un aumento del 36\% en la densidad rob\'otica, controlando por productividad, intensidad de I+D y efectos fijos de pa\'is.
+
+
+\subsection{Modelo de Riesgo a Nivel Individual}
+\label{subsec:individual_model}
+
+A nivel individual, se estima la probabilidad de que un trabajador enfrente un alto riesgo de automatizaci\'on en funci\'on de caracter\'isticas demogr\'aficas, ocupacionales y de empleo. La variable dependiente es un indicador binario igual a uno si la ocupaci\'on del trabajador tiene una probabilidad de automatizaci\'on de Frey--Osborne $\geq 0,50$ (``alto riesgo'') y cero en caso contrario. La especificaci\'on base es una regresi\'on log\'istica:
+
+\begin{equation}
+\Prob(\text{high\_risk}_i = 1) = \Lambda\left(\beta_0 + \beta_1 \cdot \text{formal}_i + \beta_2 \cdot \text{female}_i + \beta_3 \cdot \text{age}_i + \beta_4 \cdot \text{age}_i^2 + \beta_5 \cdot \text{educ}_i + \beta_6 \cdot \log(\text{income}_i) + \beta_7 \cdot \text{hours}_i + \beta_8 \cdot \text{firm\_size}_i + \beta_9 \cdot \text{sector}_i\right)
+\label{eq:logit_spec}
+\end{equation}
+
+\noindent donde $\Lambda(\cdot)$ denota la funci\'on de distribuci\'on acumulada log\'istica, $i$ indexa trabajadores individuales, y las covariables se definen de la siguiente manera. \textit{Formal} es un indicador binario de empleo formal (que contribuye tanto a salud como a pensi\'on). \textit{Mujer} es un indicador binario de sexo. \textit{Age} entra de forma cuadr\'atica para capturar posibles no linealidades en la relaci\'on entre edad y riesgo de automatizaci\'on. \textit{Educ} es una variable categ\'orica ordenada para el nivel educativo (ninguno/primaria, secundaria, t\'ecnico/tecnol\'ogico, universitario, posgrado). \textit{Log(income)} es el logaritmo natural del ingreso laboral mensual en COP. \textit{Hours} corresponde a las horas semanales trabajadas. \textit{Firm\_size} es una variable categ\'orica (micro, peque\~na, mediana, grande). \textit{Sector} es un conjunto de variables \textit{dummy} para los sectores econ\'omicos a 1 d\'igito de la CIIU.
+
+Los resultados se presentan tanto como estimaciones de coeficientes como efectos marginales promedio (EMP), proporcionando estos \'ultimos una interpretaci\'on directa del cambio en la probabilidad predicha asociado a un cambio unitario en cada covariable. El modelo se estima sobre la muestra de estimaci\'on de la GEIH ($N = 106{,}172$, tras excluir observaciones con ingreso o sector faltante) con errores est\'andar robustos (HC1) para dar cuenta de la correlaci\'on intrasectorial en el riesgo de automatizaci\'on.
+
+El mapeo de las probabilidades de automatizaci\'on de Frey--Osborne a las ocupaciones colombianas sigue un procedimiento de tres pasos. Primero, se extraen las 702 probabilidades a nivel de ocupaci\'on del ap\'endice de Frey y Osborne (2017), codificadas seg\'un la \textit{Standard Occupational Classification} (SOC) de Estados Unidos. Segundo, se utiliza la tabla de correspondencia SOC-ISCO-08 de la OIT para convertir estas probabilidades a la Clasificaci\'on Internacional Uniforme de Ocupaciones. Tercero, se mapean los c\'odigos ISCO-08 a c\'odigos CIUO-08 utilizando la concordancia mantenida por el DANE, que es una adaptaci\'on directa de ISCO-08. Cuando m\'ultiples c\'odigos SOC se mapean a un \'unico c\'odigo CIUO-08, se toma el promedio ponderado por empleo de las probabilidades de automatizaci\'on correspondientes. Este procedimiento arroja estimaciones de probabilidad de automatizaci\'on para 41 grupos ocupacionales a nivel de 2 d\'igitos de la CIUO-08 y 9 grupos principales a nivel de 1 d\'igito.
+
+Dos fuentes de sesgo surgen al aplicar probabilidades estimadas para Estados Unidos al mercado laboral colombiano y deben tenerse en cuenta al interpretar los resultados. Primero, \textit{sesgo de composici\'on de tareas}: las probabilidades de Frey--Osborne reflejan el contenido de tareas de las ocupaciones estadounidenses, que puede diferir sistem\'aticamente de sus contrapartes colombianas. Un ``vendedor minorista'' en Estados Unidos opera en un entorno altamente digitalizado (autoservicio, inventario computarizado), mientras que su contraparte colombiana m\'as frecuentemente realiza transacciones en efectivo e interpersonales menos susceptibles de automatizaci\'on. Esta asimetr\'ia tender\'ia a sobreestimar el riesgo de automatizaci\'on para ocupaciones colombianas cuya mezcla real de tareas es menos rutinaria que los equivalentes estadounidenses. Segundo, \textit{sesgo de frontera tecnol\'ogica}: las probabilidades fueron estimadas respecto a la frontera tecnol\'ogica estadounidense circa 2013. Las empresas colombianas enfrentan precios relativos de factores y acceso a tecnolog\'ia diferentes; la automatizaci\'on viable en EE.UU.\ puede no ser costo-efectiva en Colombia dados los menores salarios y mercados de capitales m\'as delgados. Inversamente, los excepcionalmente altos costos no salariales de Colombia podr\'ian hacer atractiva la sustituci\'on incluso para tecnolog\'ias que ser\'ian marginales en EE.UU. Como verificaci\'on parcial, confirmamos que el ranking de ocupaciones de alto riesgo en nuestros datos---con transporte, operarios de manufactura y trabajadores administrativos en la parte superior---es consistente tanto con la evidencia internacional como con las evaluaciones de expertos locales del mercado laboral.
+
+\subsubsection*{Modelo a nivel de firma}
+
+El an\'alisis a nivel de firma estima la elasticidad de la inversi\'on en automatizaci\'on respecto a los costos laborales unitarios utilizando el conjunto de datos fusionado EAM--EDIT. La especificaci\'on es:
+\begin{equation}
+\log(\text{automation\_proxy}_{f}) = \beta_0 + \beta_1 \cdot \log(\text{ULC}_{f}) + \beta_2 \cdot \log(\text{productivity}_{f}) + \beta_3 \cdot \text{firm\_size}_{f} + \beta_4 \cdot \text{sector}_{f} + \varepsilon_{f}
+\label{eq:firm}
+\end{equation}
+
+\noindent donde $f$ indexa firmas, el \textit{proxy} de automatizaci\'on es la raz\'on entre la inversi\'on en maquinaria y equipo y los activos totales, el CLU es la remuneraci\'on laboral total dividida por el valor agregado, la productividad es el valor agregado por trabajador, y el tama\~no de firma y el sector entran como controles categ\'oricos. El coeficiente $\beta_1$ captura la elasticidad costo--automatizaci\'on: el cambio porcentual en la inversi\'on en automatizaci\'on asociado a un incremento del uno por ciento en los costos laborales unitarios, controlando por productividad, escala y sector. Nuestra estimaci\'on base de $\hat{\beta}_1 = 0,84$ ($p < 0,01$) indica una relaci\'on positiva fuerte: las firmas que enfrentan mayores costos laborales unitarios invierten significativamente m\'as en maquinaria y equipo, consistente con una sustituci\'on inducida por costos.
+
+\subsubsection*{Marco de simulaci\'on}
+
+Para cuantificar las implicaciones sobre el mercado laboral de escenarios de pol\'itica alternativos, se implementa un marco de simulaci\'on de Monte Carlo con 10.000 extracciones por escenario. La simulaci\'on procede en tres pasos. Primero, se utilizan los coeficientes logit estimados de la Ecuaci\'on~\ref{eq:logit_spec} para calcular las probabilidades predichas de base de alto riesgo de automatizaci\'on para cada trabajador en la muestra de la GEIH. Segundo, se perturban los par\'ametros de costo laboral---espec\'ificamente, el multiplicador de costos laborales no salariales y el nivel del salario m\'inimo---de acuerdo con cinco escenarios: (i) l\'inea base (trayectoria actual), (ii) reforma moderada (costos laborales no salariales reducidos en 5 puntos porcentuales), (iii) costos acelerados (reforma laboral que incrementa los costos laborales no salariales en un 18\%), (iv) reforma agresiva (los costos aumentan un 34\%), y (v) choque tecnol\'ogico (umbral de automatizaci\'on reducido en un 20\% debido a la ca\'ida de costos de la IA). Tercero, se traducen los cambios en el umbral de probabilidad de automatizaci\'on en desplazamiento laboral proyectado, calibrando la respuesta de sustituci\'on mediante el par\'ametro de elasticidad de sustituci\'on $\sigma$. Siguiendo la literatura emp\'irica, la simulaci\'on se eval\'ua en tres valores: $\sigma = 1,5$ (conservador), $\sigma = 2,5$ (moderado) y $\sigma = 3,8$ (la estimaci\'on puntual de \cite{cheng2021elasticity}). Los intervalos de confianza se construyen a partir de la distribuci\'on emp\'irica de los resultados a trav\'es de las extracciones de Monte Carlo, incorporando la incertidumbre param\'etrica de la estimaci\'on logit de la primera etapa.
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=0.75\textwidth]{fig6_correlation_matrix.pdf}
+\caption{Matriz de correlaci\'on de variables clave en el panel internacional. Las correlaciones positivas fuertes entre PIB por trabajador, productividad laboral y densidad rob\'otica confirman la hip\'otesis de sustituci\'on. La intensidad de I+D se correlaciona positivamente con todas las variables relacionadas con automatizaci\'on.}
+\label{fig:correlation_matrix}
+\end{figure}
+
+La Figura~\ref{fig:correlation_matrix} muestra la estructura de correlaci\'on entre las variables principales del panel internacional, confirmando las fuertes asociaciones positivas entre niveles de ingreso, productividad, inversi\'on en I+D y adopci\'on de robots que motivan las especificaciones emp\'iricas. La alta correlaci\'on entre PIB por trabajador y densidad rob\'otica ($r > 0,7$) es consistente con la predicci\'on te\'orica de que el incentivo a la automatizaci\'on aumenta mon\'otonamente con el costo del trabajo, mientras que la asociaci\'on positiva entre I+D/PIB y densidad rob\'otica ($r > 0,5$) subraya el papel complementario de la capacidad de absorci\'on en la traducci\'on de los incentivos de costos en adopci\'on tecnol\'ogica efectiva.
+
+
+\FloatBarrier
+
+% ============================================================================
+\section{La Brecha de Automatizaci\'on: Colombia Cerca de Cero}
+\label{sec:automation_gap}
+% ============================================================================
+
+Colombia ocupa una posici\'on an\'omala en el panorama global de la automatizaci\'on. A pesar de poseer la tercera econom\'ia m\'as grande de Am\'erica Latina y un sector manufacturero que contribuye aproximadamente el 11\% del PIB, la adopci\'on de rob\'otica industrial y tecnolog\'ias avanzadas de automatizaci\'on en el pa\'is sigue siendo insignificante seg\'un cualquier referencia internacional. Esta secci\'on documenta la magnitud de la brecha, desagrega sus dimensiones f\'isica y cognitiva, y argumenta que la disparidad genera un equilibrio precario: uno en el cual un choque s\'ubito de costos---ya sea regulatorio o tecnol\'ogico---podr\'ia desencadenar una sustituci\'on r\'apida y desordenada en lugar del ajuste gradual observado en las econom\'ias de altos ingresos.
+
+\subsection{Densidad de Robots Industriales}
+\label{subsec:robot_density}
+
+Seg\'un datos de la International Federation of Robotics \cite{ifr2024}, Colombia contaba con un stock total estimado de 149 robots industriales en 2017 (el a\~no m\'as reciente con datos de stock disponibles), lo que implica una densidad rob\'otica de aproximadamente 2--5 unidades por cada 10.000 trabajadores manufactureros. Esta cifra sit\'ua a Colombia no simplemente por debajo de la densidad promedio global de 162 unidades por cada 10.000 trabajadores, sino efectivamente en el piso de la distribuci\'on entre pa\'ises con producci\'on manufacturera significativa. Para poner en perspectiva, Corea del Sur lidera globalmente con una densidad de 1.012 robots por cada 10.000 trabajadores manufactureros, seguida por Alemania (415), Jap\'on (397) y Estados Unidos (295). Incluso dentro de Am\'erica Latina, Colombia se ubica por detr\'as de M\'exico ($\sim$40--50 por 10.000) y Brasil ($\sim$15--20 por 10.000) por m\'argenes sustanciales.
+
+La Figura~\ref{fig:robot_timeseries} presenta la evoluci\'on temporal de las instalaciones de robots en econom\'ias seleccionadas, ilustrando las trayectorias de crecimiento exponencial en Asia Oriental y el estancamiento en las econom\'ias latinoamericanas. La Figura~\ref{fig:robot_density} ofrece una comparaci\'on transversal de densidades rob\'oticas, haciendo visualmente evidente la escala de la brecha colombiana: la densidad del pa\'is es aproximadamente el 0,5\% de la de Corea y el 1,2\% de la de Alemania.
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=0.75\textwidth]{fig2_robot_timeseries.pdf}
+\caption{Instalaciones anuales de robots industriales por pa\'is, 2010--2023. Fuente: IFR World Robotics 2024.}
+\label{fig:robot_timeseries}
+\end{figure}
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=0.75\textwidth]{fig5_robot_density_comparison.pdf}
+\caption{Densidad rob\'otica por 10.000 trabajadores manufactureros, \'ultimo a\~no disponible. Fuente: IFR World Robotics 2024.}
+\label{fig:robot_density}
+\end{figure}
+
+La densidad rob\'otica cercana a cero tiene dos implicaciones anal\'iticas importantes. En primer lugar, significa que los efectos de desplazamiento documentados por \cite{acemoglu2020robots} para Estados Unidos---donde cada robot adicional por cada 1.000 trabajadores redujo la raz\'on empleo-poblaci\'on en 0,2 puntos porcentuales---a\'un no se han materializado en la manufactura colombiana a trav\'es del canal de automatizaci\'on f\'isica. En segundo lugar, implica que la competitividad manufacturera de Colombia depende casi enteramente del arbitraje de costos laborales en lugar de la profundizaci\'on del capital, una estrategia que se torna cada vez m\'as fr\'agil a medida que competidores regionales como M\'exico aceleran sus inversiones en automatizaci\'on en respuesta a la demanda de \textit{nearshoring}.
+
+\subsection{Inversi\'on en I+D}
+\label{subsec:rd_investment}
+
+La brecha en densidad rob\'otica est\'a sustentada por una subinversi\'on cr\'onica en investigaci\'on y desarrollo. Colombia destina aproximadamente el 0,30\% del PIB a I+D, una cifra que ha permanecido esencialmente sin cambios durante m\'as de una d\'ecada. Este nivel de inversi\'on se encuentra un orden de magnitud por debajo de los principales innovadores: Corea del Sur destina el 5,0\% del PIB a I+D, Estados Unidos el 3,5\%, Jap\'on el 3,4\% y Alemania el 3,1\%. Incluso Brasil, el comparador regional m\'as cercano a Colombia en estructura econ\'omica, invierte el 1,15\% del PIB---casi cuatro veces el nivel colombiano.
+
+Las consecuencias de esta subinversi\'on son visibles a nivel de firma. La ola m\'as reciente de la \textit{Encuesta de Desarrollo e Innovaci\'on Tecnol\'ogica} (EDIT IX) revela que el 75,4\% de las firmas manufactureras colombianas report\'o no haber realizado \textit{ninguna actividad de innovaci\'on} durante el per\'iodo de la encuesta. Esta cifra captura no solamente la ausencia de I+D de frontera, sino la ausencia incluso de mejoras incrementales de procesos, licenciamiento tecnol\'ogico o innovaci\'on organizacional. El resultado es un sector manufacturero en el que la firma modal opera con tecnolog\'ia de producci\'on inalterada a\~no tras a\~no, dependiendo de salarios bajos en lugar de ganancias de productividad para mantener su viabilidad.
+
+\subsection{Automatizaci\'on F\'isica vs.\ Cognitiva}
+\label{subsec:physical_cognitive}
+
+El retrato de Colombia como rezagada en automatizaci\'on requiere matizaci\'on en una dimensi\'on cr\'itica: la distinci\'on entre automatizaci\'on f\'isica (robots industriales, l\'ineas de producci\'on automatizadas, maquinaria CNC) y automatizaci\'on cognitiva (IA basada en software, aprendizaje autom\'atico, procesamiento de lenguaje natural, automatizaci\'on rob\'otica de procesos). Mientras que la brecha de automatizaci\'on f\'isica de Colombia es extrema y no muestra signos de cerrarse, la automatizaci\'on cognitiva---particularmente en servicios---avanza r\'apidamente y, en ciertos sectores, a tasas comparables con las econom\'ias de altos ingresos.
+
+El sector financiero ejemplifica esta divergencia. Seg\'un \cite{asobancaria2024}, el 73\% de las entidades financieras colombianas ha adoptado alguna forma de inteligencia artificial, predominantemente en calificaci\'on crediticia, detecci\'on de fraude, \textit{chatbots} de servicio al cliente y cumplimiento regulatorio. Bancolombia, el banco m\'as grande del pa\'is, emplea aproximadamente 4.000 trabajadores de tecnolog\'ia y se ha consolidado como l\'ider regional en la adopci\'on de herramientas de desarrollo asistidas por IA como GitHub Copilot. De manera similar, el sector de subcontrataci\'on de procesos de negocio (BPO)---que emplea m\'as de 600.000 trabajadores---reporta tasas de adopci\'on de IA de aproximadamente el 80\%, impulsadas por el imperativo de mantener competitividad en costos frente a competidores de India y Filipinas.
+
+Estos patrones de adopci\'on sectorial son parcialmente capturados por el \'Indice Latinoamericano de Inteligencia Artificial (ILIA) 2024 \cite{ilia2024}, que posiciona a Colombia en el quinto lugar de la regi\'on con un puntaje compuesto de 52,64 sobre 100, detr\'as de Chile (73,07), Brasil (69,30), Uruguay (64,98) y Argentina. La brecha respecto a Chile es particularmente notable: no refleja diferencias en el dinamismo del sector privado, sino la calidad superior de los marcos de gobernanza de IA, la infraestructura de datos p\'ublicos y los v\'inculos universidad-industria de Chile.
+
+La coexistencia de automatizaci\'on f\'isica cercana a cero con automatizaci\'on cognitiva en r\'apido avance genera un perfil de riesgo distintivo. En el sector manufacturero, la restricci\'on vinculante sobre la automatizaci\'on es la inversi\'on de capital, y la baja densidad rob\'otica implica que las presiones de desplazamiento emerger\'an gradualmente. En los servicios, sin embargo, la restricci\'on vinculante es el despliegue de software---que requiere un gasto de capital m\'inimo y puede escalar instant\'aneamente a trav\'es de una organizaci\'on. Esta asimetr\'ia sugiere que los riesgos de desplazamiento m\'as agudos en Colombia durante la pr\'oxima d\'ecada se concentrar\'an no en la manufactura sino en los servicios formales: precisamente los sectores donde los incrementos de costos de la reforma laboral impactar\'ian con mayor fuerza.
+
+
+\FloatBarrier
+
+% ============================================================================
+\section{Evidencia Internacional: Costos Laborales como Catalizador}
+\label{sec:international}
+% ============================================================================
+
+La relaci\'on entre costos laborales y adopci\'on de automatizaci\'on no es meramente una proposici\'on te\'orica; ha sido puesta a prueba, en contextos institucionales variados, en las principales econom\'ias manufactureras del mundo. Esta secci\'on revisa la evidencia de seis experiencias nacionales, seleccionadas para abarcar las dimensiones relevantes de variaci\'on: niveles salariales, marcos regulatorios, presiones demogr\'aficas y ambiciones de pol\'itica industrial. En cada caso, trazamos el mecanismo mediante el cual la din\'amica de costos laborales---ya sea impulsada por aumentos del salario m\'inimo, mandatos de seguridad social o presi\'on salarial demogr\'afica---ha moldeado el ritmo y el car\'acter de la adopci\'on de automatizaci\'on, con atenci\'on particular a las consecuencias sobre el empleo y las respuestas de pol\'itica que las mediaron.
+
+\subsection{Corea del Sur}
+\label{subsec:korea}
+
+Corea del Sur proporciona la ilustraci\'on m\'as contundente del nexo costos laborales--automatizaci\'on. La densidad rob\'otica del pa\'is de 1.012 por cada 10.000 trabajadores manufactureros---la m\'as alta del mundo---no surgi\'o de la nada, sino que fue impulsada por d\'ecadas de r\'apido crecimiento salarial en un mercado laboral en contracci\'on. El mecanismo fue puesto a prueba de manera aguda en 2018, cuando el gobierno de Moon Jae-in implement\'o un aumento del 16,4\% en el salario m\'inimo en un solo a\~no. El resultado fue una p\'erdida de aproximadamente 170.000 empleos manufactureros, concentrada en peque\~nas y medianas empresas que carec\'ian del capital para absorber el incremento de costos y en su lugar optaron por la automatizaci\'on o el cierre. Investigaciones del Bank of Korea han estimado que un incremento de un robot por cada 1.000 trabajadores reduce la tasa de empleo en 0,1 puntos porcentuales, una elasticidad que, aplicada a los niveles de densidad de Korea, implica un desplazamiento acumulativo sustancial.
+
+La experiencia coreana es instructiva para Colombia en dos aspectos. Primero, demuestra que aumentos grandes y discretos en los costos laborales pueden desencadenar respuestas de automatizaci\'on no lineales: firmas que hab\'ian estado postergando inversiones en automatizaci\'on porque el diferencial de costos era insuficiente encuentran que un choque regulatorio las empuja simult\'aneamente m\'as all\'a del umbral, produciendo una oleada de adopci\'on en lugar de una transici\'on gradual. Segundo, la capacidad de Korea para gestionar las consecuencias sociales de este desplazamiento---mediante un sistema robusto de seguridad social, pol\'iticas activas de mercado laboral y r\'apida creaci\'on de empleo en nuevos sectores tecnol\'ogicos---representa capacidades institucionales de las que Colombia carece de manera conspicua.
+
+\subsection{Alemania}
+\label{subsec:germany}
+
+Alemania ofrece un modelo contrastante: alta densidad rob\'otica (415 por cada 10.000 trabajadores manufactureros) coexistiendo con empleo manufacturero relativamente estable. \cite{dauth2021} muestran que entre 1993 y 2017, Alemania perdi\'o solo el 19\% de su participaci\'on en el empleo manufacturero, comparado con el 33\% en Estados Unidos durante el mismo per\'iodo, con la mayor\'ia de los trabajadores manufactureros desplazados absorbidos por sectores de servicios en expansi\'on en lugar de quedar desempleados. Varias caracter\'isticas institucionales explican esta divergencia. Las reformas laborales Hartz de 2003--2005 redujeron los costos laborales efectivos mediante la liberalizaci\'on del empleo temporal y a tiempo parcial, la creaci\'on de los ``mini-jobs'' y el endurecimiento de la condicionalidad de las prestaciones por desempleo. Al reducir la cu\~na de costos laborales, las reformas Hartz parad\'ojicamente \textit{desaceleraron} el incentivo a la automatizaci\'on: con mano de obra flexible m\'as barata disponible, el c\'alculo de costos que favorec\'ia la adopci\'on de robots se volvi\'o menos convincente en el margen.
+
+La estrategia \textit{Industrie 4.0} de Alemania, lanzada en 2013, ilustra a\'un m\'as el papel del dise\~no deliberado de pol\'iticas. En lugar de permitir que la automatizaci\'on procediera como una respuesta no coordinada a nivel de firma ante presiones de costos, el gobierno alem\'an enmarc\'o la digitalizaci\'on como un proyecto nacional de competitividad, integr\'andolo dentro del sistema de formaci\'on profesional dual (\textit{duale Ausbildung}) y el marco de codeterminaci\'on (\textit{Mitbestimmung}) que otorga a los comit\'es de trabajadores voz en las decisiones de adopci\'on tecnol\'ogica. El resultado ha sido un patr\'on de automatizaci\'on que complementa en lugar de sustituir la mano de obra calificada, con ganancias de productividad compartidas a trav\'es de la negociaci\'on colectiva. Colombia no posee ninguno de estos amortiguadores institucionales: ni un sistema de formaci\'on dual, ni un di\'alogo social efectivo sobre adopci\'on tecnol\'ogica, ni un mecanismo para que los trabajadores participen en las decisiones de automatizaci\'on a nivel de firma.
+
+\subsection{China}
+\label{subsec:china}
+
+La trayectoria de automatizaci\'on de China refleja la intersecci\'on entre la ambici\'on de pol\'itica industrial y la necesidad demogr\'afica. La iniciativa \textit{Made in China 2025}, anunciada en 2015, estableci\'o metas expl\'icitas para la densidad rob\'otica y la producci\'on nacional de robots, posicionando la automatizaci\'on como central en la transici\'on del pa\'is de la manufactura intensiva en mano de obra a la manufactura intensiva en tecnolog\'ia. Solo la provincia de Guangdong comprometi\'o \$135 mil millones en programas de ``sustituci\'on humano-m\'aquina'' que subsidiaron la compra de robots para peque\~nos y medianos fabricantes. Los resultados han sido dram\'aticos: la densidad rob\'otica de China aument\'o a 470 (desde 392 en 2022) por cada 10.000 trabajadores manufactureros, convirti\'endola en la tercera econom\'ia manufacturera m\'as automatizada a nivel global.
+
+El caso chino demuestra que la automatizaci\'on puede avanzar r\'apidamente cuando los subsidios estatales reducen el costo efectivo de capital de los robots, incluso en una econom\'ia con salarios relativamente bajos. Este hallazgo es directamente relevante para el argumento de \cite{acemoglu2020taxes} de que las estructuras tributarias y de subsidios pueden distorsionar las decisiones de automatizaci\'on: los subsidios de China redujeron artificialmente el costo del capital respecto al trabajo, acelerando la sustituci\'on m\'as all\'a del nivel que las condiciones de mercado por s\'i solas habr\'ian justificado. Para Colombia, la experiencia china plantea una pregunta inc\'omoda: mientras que los altos costos parafiscales de Colombia elevan el precio del trabajo, el pa\'is no ofrece subsidios compensatorios para canalizar la automatizaci\'on hacia aplicaciones que mejoren la productividad en lugar de la pura sustituci\'on de mano de obra.
+
+\subsection{Jap\'on}
+\label{subsec:japan}
+
+Jap\'on presenta un caso demogr\'aficamente \'unico. Con el 29\% de su poblaci\'on de 65 a\~nos o m\'as y una poblaci\'on en edad de trabajar que se ha estado reduciendo durante dos d\'ecadas, Jap\'on automatiza no principalmente para \textit{eliminar} empleos sino para \textit{cubrir} vacantes que el mercado laboral ya no puede suplir. La densidad rob\'otica en Jap\'on (397 por cada 10.000) refleja una econom\'ia en la que la automatizaci\'on es una respuesta a la escasez de mano de obra en lugar del costo laboral, y donde la aceptabilidad social de los robots en el lugar de trabajo se ve reforzada por factores culturales y la ausencia de la inmigraci\'on como complemento de la fuerza laboral.
+
+El modelo japon\'es sugiere que las consecuencias de la automatizaci\'on sobre el empleo son contingentes a la tensi\'on del mercado laboral. En una econom\'ia con excedentes cr\'onicos de mano de obra---como en gran parte del sector informal de Colombia---la automatizaci\'on desplaza trabajadores hacia el desempleo o una informalidad m\'as profunda. En una econom\'ia con escasez cr\'onica de mano de obra, la automatizaci\'on absorbe tareas que de otro modo quedar\'ian sin realizar, y el efecto neto sobre el empleo puede ser positivo a trav\'es del canal de reinstauraci\'on enfatizado por \cite{acemoglu2019automation}. El mercado laboral de Colombia, con tasas de desempleo del 10--12\% y tasas de informalidad superiores al 55\%, no guarda semejanza alguna con el de Jap\'on, lo que implica que la automatizaci\'on en Colombia tiene una probabilidad mucho mayor de seguir la v\'ia del desplazamiento.
+
+\subsection{M\'exico y Chile}
+\label{subsec:mexico_chile}
+
+Dentro de Am\'erica Latina, M\'exico y Chile proporcionan las comparaciones m\'as instructivas. La densidad rob\'otica de M\'exico de aproximadamente 40--50 por cada 10.000 trabajadores manufactureros es modesta seg\'un est\'andares globales, pero un orden de magnitud superior a la de Colombia. De manera cr\'itica, aproximadamente el 70\% de los robots instalados en M\'exico se concentran en el sector automotriz, reflejando la integraci\'on de la manufactura mexicana en las cadenas de suministro norteamericanas donde los est\'andares de automatizaci\'on son establecidos por las casas matrices estadounidenses y alemanas. La ola de \textit{nearshoring} desencadenada por las tensiones comerciales entre Estados Unidos y China est\'a ahora impulsando una nueva fase de inversi\'on en automatizaci\'on en M\'exico, ya que las firmas que reubican su producci\'on desde Asia instalan instalaciones automatizadas de \'ultima generaci\'on en lugar de replicar los modelos intensivos en mano de obra de d\'ecadas anteriores.
+
+Chile ofrece una lente diferente: la automatizaci\'on de las industrias extractivas. La mina de cobre Escondida de BHP opera 33 camiones de acarreo aut\'onomos, mientras que la mina BHP Spence ha logrado una operaci\'on completamente aut\'onoma. De manera cr\'itica, BHP reporta que el 80\% de los trabajadores desplazados por estos sistemas aut\'onomos fueron recapacitados y reubicados dentro de la empresa, una cifra posibilitada por la infraestructura de formaci\'on profesional relativamente avanzada de Chile y los propios compromisos corporativos de BHP. La experiencia minera chilena sugiere que la automatizaci\'on no necesariamente produce desplazamiento masivo cuando va acompa\~nada de programas robustos de recualificaci\'on---pero tambi\'en que tales programas requieren capacidades institucionales y culturas corporativas que son escasas en el paisaje industrial m\'as fragmentado de Colombia.
+
+
+\FloatBarrier
+
+% ============================================================================
+\section{Resultados}
+\label{sec:results}
+% ============================================================================
+
+Esta secci\'on presenta los resultados emp\'iricos en cuatro niveles anal\'iticos. Tres hallazgos clave ameritan \'enfasis desde el inicio:
+
+\begin{enumerate}[label=\textbf{Resultado \arabic*:}]
+\item \textit{La paradoja de la formalidad se confirma emp\'iricamente.} Los trabajadores formales enfrentan 1,30 veces las probabilidades de alto riesgo de automatizaci\'on respecto a los informales, controlando por demograf\'ia, educaci\'on, ingreso y sector---confirmando la predicci\'on \textbf{P1} del marco te\'orico.
+\item \textit{Las firmas sustituyen trabajo por capital en respuesta a la presi\'on de costos.} La elasticidad a nivel de firma entre costos laborales unitarios e inversi\'on en automatizaci\'on es 0,84 ($p < 0,01$), confirmando la predicci\'on \textbf{P2}.
+\item \textit{El diferencial de pol\'itica es grande.} Las proyecciones por escenarios revelan una brecha de aproximadamente 1,5 millones de empleos formales entre los escenarios de reforma laboral y reforma parafiscal, estableciendo que la trayectoria regulatoria---no la tecnolog\'ia por s\'i sola---es el determinante primario de la envolvente de desplazamiento.
+\end{enumerate}
+
+\noindent En conjunto, estos resultados establecen que Colombia enfrenta un perfil de riesgo de automatizaci\'on distintivo: baja adopci\'on actual que enmascara una alta vulnerabilidad latente, concentrada entre trabajadores formales en sectores sensibles a los costos, y lista para acelerarse bajo escenarios regulatorios y tecnol\'ogicos plausibles.
+
+\subsection{Panel Internacional: Costos Laborales y Adopci\'on de Robots}
+\label{subsec:panel_results}
+
+Estimamos los determinantes de la densidad rob\'otica utilizando un panel no balanceado de $N = 226$ observaciones pa\'is-a\~no que abarca 25 pa\'ises durante el per\'iodo 2010--2023. El panel incluye todas las principales econom\'ias adoptantes de robots as\'i como mercados emergentes clave, con datos de densidad rob\'otica provenientes del IFR \cite{ifr2024} y controles macroecon\'omicos de la Penn World Table 11.0 y los World Development Indicators.
+
+La Tabla~\ref{tab:panel_results} reporta los resultados de tres especificaciones. El modelo OLS agrupado (Columna 1) arroja un $R^2$ de 0,27, con la raz\'on I+D/PIB ingresando con un coeficiente positivo y significativo de 0,92 ($p < 0,01$), consistente con la hip\'otesis de que la capacidad de innovaci\'on es un prerrequisito para la adopci\'on de robots. Sin embargo, la especificaci\'on OLS agrupada est\'a sujeta a sesgo de variable omitida derivado de la heterogeneidad no observada a nivel de pa\'is en estructura industrial, calidad institucional y cultura de automatizaci\'on.
+
+\begin{table}[htbp]
+\centering
+\caption{Determinantes de la densidad rob\'otica: regresiones de panel internacional, 2010--2023}
+\label{tab:panel_results}
+\begin{threeparttable}
+\begin{tabular}{lccc}
+\toprule
+& \textbf{OLS agrupado} & \textbf{Efectos fijos} & \textbf{OLS din\'amico} \\
+& (1) & (2) & (3) \\
+\midrule
+$\log(\text{PIB por trabajador})$ & & $3{,}60^{***}$ & \\
+& & $(0{,}82)$ & \\[4pt]
+I+D / PIB & $0{,}92^{***}$ & $-0{,}20^{***}$ & \\
+& $(0{,}18)$ & $(0{,}06)$ & \\[4pt]
+$\text{Densidad rob\'otica}_{t-1}$ & & & $1{,}01^{***}$ \\
+& & & $(0{,}03)$ \\[4pt]
+\midrule
+$R^2$ & 0,27 & 0,62 & 0,97 \\
+$N$ & 226 & 226 & 201 \\
+EF pa\'is & No & S\'i & S\'i \\
+EF a\~no & No & S\'i & S\'i \\
+\bottomrule
+\end{tabular}
+\begin{tablenotes}
+\small
+\item \textit{Notas:} Errores est\'andar entre par\'entesis. $^{***}p<0{,}01$, $^{**}p<0{,}05$, $^{*}p<0{,}10$. Variable dependiente: densidad rob\'otica por cada 10.000 trabajadores manufactureros. La prueba de Hausman rechaza la hip\'otesis nula de ausencia de diferencia sistem\'atica entre EF y EA al nivel del 1\%, favoreciendo la especificaci\'on de efectos fijos.
+\end{tablenotes}
+\end{threeparttable}
+\end{table}
+
+La especificaci\'on de efectos fijos por pa\'is (Columna 2) absorbe la heterogeneidad invariante en el tiempo y eleva el $R^2$ a 0,62. En este modelo, el coeficiente del log del PIB por trabajador es 3,60 ($p < 0,001$), indicando que un incremento del 1\% en la productividad laboral se asocia con un aumento de 3,6 unidades en la densidad rob\'otica---consistente con la complementariedad entre sistemas productivos de alta productividad y automatizaci\'on. El coeficiente de I+D/PIB cambia de signo a $-0,20$ ($p < 0,01$), reflejando el bien conocido patr\'on intra-pa\'is en el cual la intensidad de I+D se estabiliza o declina a medida que los pa\'ises se aproximan a la frontera tecnol\'ogica, aun cuando su densidad rob\'otica contin\'ua aumentando mediante el despliegue de tecnolog\'ias existentes. Una prueba de Hausman rechaza de manera decisiva la especificaci\'on de efectos aleatorios en favor de los efectos fijos ($p < 0,001$).
+
+La especificaci\'on OLS din\'amica (Columna 3) introduce la variable dependiente rezagada, arrojando un coeficiente de 1,01 ($p < 0,001$) y un $R^2$ de 0,97. El coeficiente autorregresivo cercano a la unidad revela una persistencia extrema en la densidad rob\'otica: los pa\'ises que han invertido fuertemente en automatizaci\'on contin\'uan haci\'endolo, mientras que los rezagados permanecen atrapados en un equilibrio de baja automatizaci\'on. Esta persistencia es consistente con la predicci\'on te\'orica de que la automatizaci\'on genera din\'amicas autorreforzantes a trav\'es del aprendizaje por la pr\'actica, efectos de red en el ecosistema de rob\'otica y la acumulaci\'on de capital humano complementario. El coeficiente autorregresivo cercano a la unidad tambi\'en plantea preocupaciones sobre la no estacionariedad en las series de densidad rob\'otica; pruebas formales de ra\'iz unitaria y cointegraci\'on fortalecer\'ian la especificaci\'on din\'amica, pero no se realizan aqu\'i debido a la dimensi\'on temporal limitada del panel ($T \leq 14$).
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=0.75\textwidth]{fig1_productivity_vs_robots.pdf}
+\caption{Productividad laboral (log PIB por trabajador) vs.\ densidad rob\'otica en 25 pa\'ises, 2010--2023. La l\'inea ajustada refleja la especificaci\'on de efectos fijos. Colombia se ubica en el cuadrante inferior izquierdo.}
+\label{fig:productivity_robots}
+\end{figure}
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=0.55\textwidth]{fig3_coefficient_plot.pdf}
+\caption{Gr\'afico de coeficientes del modelo de efectos fijos del panel internacional. Las barras representan intervalos de confianza al 95\%.}
+\label{fig:coefficient_plot}
+\end{figure}
+
+El hallazgo m\'as llamativo emerge de un ejercicio contrafactual: utilizando el modelo de efectos fijos para predecir la densidad rob\'otica de Colombia con base en sus fundamentales macroecon\'omicos---PIB per c\'apita, productividad laboral, participaci\'on manufacturera e intensidad de I+D---el modelo predice que Colombia deber\'ia estar instalando aproximadamente 1.200 o m\'as robots por a\~no. Las instalaciones anuales reales oscilan entre 120 y 200 unidades, lo que implica una brecha de aproximadamente un orden de magnitud. Este fen\'omeno de ``robots faltantes'' no puede explicarse \'unicamente por los fundamentales macroecon\'omicos; refleja barreras idiosincr\'aticas que incluyen el peque\~no tama\~no promedio de las firmas en la manufactura colombiana, el acceso limitado a capital para inversi\'on tecnol\'ogica, la d\'ebil integraci\'on en cadenas globales de valor que exigen est\'andares de automatizaci\'on, y la disponibilidad de mano de obra informal barata como sustituto de la inversi\'on de capital.
+
+\subsection{Riesgo de Automatizaci\'on en el Mercado Laboral Colombiano}
+\label{subsec:risk_colombia}
+
+Para caracterizar la distribuci\'on del riesgo de automatizaci\'on a lo largo de la fuerza laboral colombiana, mapeamos las probabilidades de automatizaci\'on a nivel ocupacional estimadas por \cite{frey2017future} al sistema de clasificaci\'on ocupacional utilizado en la \textit{Gran Encuesta Integrada de Hogares} (GEIH) del DANE para 2024. El conjunto de datos resultante comprende $N = 111{,}672$ trabajadores observados a lo largo de cuatro meses, cada uno con una probabilidad de automatizaci\'on asignada seg\'un su ocupaci\'on reportada al nivel de dos d\'igitos (subgrupo principal) de la clasificaci\'on CIUO-08, arrojando 24 valores de probabilidad distintos.
+
+La distribuci\'on agregada del riesgo de automatizaci\'on es alarmante. La probabilidad media de automatizaci\'on a trav\'es de todos los trabajadores es 0,489, con una mediana de 0,550, lo que indica que la distribuci\'on presenta un sesgo ligero hacia la izquierda pero se centra cerca del umbral convencional de ``alto riesgo''. Utilizando el punto de corte est\'andar de $\Pr(\text{automation}) \geq 0{,}50$, encontramos que el 53,8\% de la fuerza laboral muestreada ocupa ocupaciones de alto riesgo. Esta cifra es ampliamente consistente con las estimaciones de \cite{morales2023risk}, quienes reportan el 37\% del empleo formal colombiano en alto riesgo utilizando una metodolog\'ia de mapeo algo diferente, y con el l\'imite superior del 58\% estimado por \cite{fedesarrollo2023} para la regi\'on andina.
+
+Para identificar las caracter\'isticas individuales y del empleo asociadas con el riesgo de automatizaci\'on, estimamos la regresi\'on log\'istica especificada en la Ecuaci\'on~\ref{eq:logit_spec}. El modelo alcanza un pseudo-$R^2$ de 0,352 y un \'area bajo la curva ROC (AUC) de 0,871, indicando un poder discriminatorio adecuado para un modelo descriptivo de perfilamiento. Enfatizamos que este modelo caracteriza los correlatos demogr\'aficos y laborales del riesgo ocupacional de automatizaci\'on; no predice resultados reales de automatizaci\'on, los cuales dependen de decisiones futuras de adopci\'on tecnol\'ogica.
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=0.55\textwidth]{fig_roc_curve.pdf}
+\caption{Curva ROC (\textit{Receiver Operating Characteristic}) del modelo log\'istico de alto riesgo de automatizaci\'on. AUC $= 0{,}871$.}
+\label{fig:roc_curve}
+\end{figure}
+
+La Tabla~\ref{tab:odds_ratios} reporta las razones de momios clave. Los resultados revelan un conjunto de asimetr\'ias marcadas:
+
+\begin{table}[htbp]
+\centering
+\caption{Regresi\'on log\'istica: razones de momios para alto riesgo de automatizaci\'on ($\Pr \geq 0{,}50$)}
+\label{tab:odds_ratios}
+\begin{threeparttable}
+\begin{tabular}{lcc}
+\toprule
+\textbf{Variable} & \textbf{Raz\'on de momios} & \textbf{IC 95\%} \\
+\midrule
+Trabajador formal & $1{,}30^{***}$ & [1,23; 1,37] \\
+Mujer & $0{,}44^{***}$ & [0,42; 0,46] \\
+$\log(\text{Ingreso})$ & $0{,}59^{***}$ & [0,58; 0,61] \\
+Posgrado (vs.\ Secundaria) & $0{,}10^{***}$ & [0,09; 0,10] \\
+Firma grande ($>$200 empleados) & $0{,}64^{***}$ & [0,53; 0,76] \\
+\midrule
+\multicolumn{3}{l}{\textit{Sector (vs.\ Comercio)}} \\
+\quad Transporte & $29{,}05^{***}$ & [26,57; 31,76] \\
+\quad Miner\'ia & $11{,}50^{***}$ & [9,80; 13,49] \\
+\quad Manufactura & $9{,}59^{***}$ & [9,02; 10,20] \\
+\bottomrule
+\end{tabular}
+\begin{tablenotes}
+\small
+\item \textit{Notas:} $N = 106{,}172$. Pseudo-$R^2 = 0{,}352$. AUC $= 0{,}871$. $^{***}p<0{,}01$. Categor\'ias de referencia: informal, hombre, secundaria, trabajador solo, comercio. Las observaciones con educaci\'on faltante se retienen como categor\'ia separada; las observaciones con ingreso faltante se excluyen.
+\end{tablenotes}
+\end{threeparttable}
+\end{table}
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=0.75\textwidth]{fig_forest_plot_odds_ratios.pdf}
+\caption{Gr\'afico de bosque de las razones de momios del modelo log\'istico de alto riesgo de automatizaci\'on. Los puntos representan estimaciones puntuales; las l\'ineas horizontales representan intervalos de confianza al 95\%.}
+\label{fig:forest_plot}
+\end{figure}
+
+\textbf{Formalidad.} Los trabajadores formales enfrentan 1,30 veces las probabilidades de ocupar una ocupaci\'on de alto riesgo en comparaci\'on con los trabajadores informales, controlando por todas las dem\'as covariables (OR $= 1{,}30$, $p < 0{,}001$). Si bien es estad\'isticamente significativa, la magnitud es moderada, reflejando que el efecto de formalidad opera principalmente a trav\'es de la composici\'on sectorial. La paradoja de la formalidad discutida en la Secci\'on~\ref{subsec:formality_paradox} a continuaci\'on se sustenta no en el canal de clasificaci\'on ocupacional capturado por este OR, sino en el canal de \textit{incentivo econ\'omico}: los trabajadores formales son m\'as costosos de emplear, haciendo su sustituci\'on m\'as rentable independientemente del contenido de tareas.
+
+\textbf{G\'enero.} Las trabajadoras mujeres tienen un 56\% menos de probabilidades de alto riesgo de automatizaci\'on (OR $= 0{,}44$), reflejando su concentraci\'on en ocupaciones de servicios---educaci\'on, salud, servicios personales---que involucran tareas interpersonales no rutinarias con menor potencial de automatizaci\'on. Este hallazgo no implica que las mujeres est\'en aisladas de la disrupci\'on tecnol\'ogica; la IA generativa es cada vez m\'as capaz de automatizar tareas cognitivas precisamente en los sectores de servicios donde las mujeres predominan, un punto al que retornamos en la Secci\'on~\ref{subsec:genai}.
+
+\textbf{Ingreso.} Un incremento de una unidad en el logaritmo del ingreso se asocia con una reducci\'on del 41\% en las probabilidades de alto riesgo de automatizaci\'on (OR $= 0{,}59$), consistente con el hallazgo can\'onico de que las tareas rutinarias---que son las m\'as automatizables---se concentran en los segmentos medio e inferior de la distribuci\'on de ingresos \cite{frey2017future}.
+
+\textbf{Educaci\'on.} El efecto protector de la educaci\'on exhibe un gradiente pronunciado. En relaci\'on con los trabajadores con educaci\'on secundaria, aquellos con t\'itulos de posgrado enfrentan una reducci\'on del 90\% en las probabilidades de alto riesgo de automatizaci\'on (OR $= 0{,}10$). Este gradiente es considerablemente m\'as pronunciado que los reportados para econom\'ias de altos ingresos, reflejando la estructura ocupacional m\'as polarizada del mercado laboral colombiano, donde los trabajadores con educaci\'on universitaria est\'an desproporcionadamente concentrados en roles gerenciales y profesionales con bajo potencial de automatizaci\'on.
+
+\textbf{Tama\~no de firma.} Los trabajadores en firmas grandes (m\'as de 200 empleados) tienen un 36\% menos de probabilidades de alto riesgo de automatizaci\'on (OR $= 0{,}64$). Este resultado es inicialmente contraintuitivo---se podr\'ia esperar que las firmas grandes automaticen de manera m\'as agresiva---pero refleja el hecho de que las grandes firmas colombianas se concentran en sectores (servicios financieros, servicios profesionales, telecomunicaciones) con menores probabilidades medias de automatizaci\'on y portafolios de tareas m\'as complejos y no rutinarios.
+
+\textbf{Sectores.} Los coeficientes sectoriales revelan una heterogeneidad extrema. Transporte (OR $= 29{,}05$) y miner\'ia (OR $= 11{,}50$) exhiben las razones de momios m\'as altas, reflejando el predominio de tareas f\'isicas rutinarias---conducci\'on, operaci\'on de m\'aquinas, extracci\'on---que son altamente susceptibles a la automatizaci\'on f\'isica. Manufactura (OR $= 9{,}59$) tambi\'en muestra probabilidades muy elevadas en relaci\'on con el sector de referencia (comercio).
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=0.75\textwidth]{fig_automation_risk_by_sector.pdf}
+\caption{Probabilidad media de automatizaci\'on por sector econ\'omico. La l\'inea punteada indica el umbral de alto riesgo de 0{,}50.}
+\label{fig:risk_by_sector}
+\end{figure}
+
+La Figura~\ref{fig:risk_by_sector} presenta las probabilidades medias de automatizaci\'on por sector. Los sectores de mayor riesgo son Transporte (probabilidad media 0,656), Agricultura (0,614) y Hogares como empleadores (0,598). Los sectores de menor riesgo son Educaci\'on (0,168), Servicios profesionales (0,234) y Salud (0,286). La dispersi\'on de casi 50 puntos porcentuales entre los sectores m\'as y menos expuestos subraya la insuficiencia de las estimaciones agregadas de riesgo de automatizaci\'on: el mercado laboral colombiano no est\'a uniformemente expuesto sino profundamente segmentado, con focos de vulnerabilidad extrema adyacentes a sectores que enfrentan un riesgo m\'inimo en el corto plazo.
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=0.75\textwidth]{fig_automation_risk_by_education.pdf}
+\caption{Distribuci\'on del riesgo de automatizaci\'on por nivel educativo. Cada barra representa la probabilidad media de automatizaci\'on para el nivel educativo correspondiente.}
+\label{fig:risk_by_education}
+\end{figure}
+
+\subsection{La Paradoja de la Formalidad}
+\label{subsec:formality_paradox}
+
+El hallazgo de que los trabajadores formales enfrentan 1,30 veces las probabilidades de alto riesgo de automatizaci\'on exige una interpretaci\'on cuidadosa, ya que codifica dos mecanismos distintos. El primero es composicional: el empleo formal en Colombia se concentra en manufactura, transporte, servicios financieros y comercio minorista a gran escala---sectores con altas proporciones de tareas rutinarias. El empleo informal, por el contrario, est\'a dominado por el autoempleo en servicios personales, venta ambulante, trabajo diario en construcci\'on y agricultura a peque\~na escala---ocupaciones que, si bien precarias, involucran tareas f\'isicas idiosincr\'aticas y no rutinarias que las tecnolog\'ias actuales no pueden replicar f\'acilmente.
+
+El segundo mecanismo es econ\'omico: los trabajadores formales generan costos laborales no salariales estimados en 46--58\% por encima del salario base, incluyendo contribuciones a pensiones (12\%), seguro de salud (8,5\%), seguro de riesgos laborales (0,52--6,96\%), cesant\'ias e intereses sobre cesant\'ias (9,3\%), prima de vacaciones (4,2\%) y contribuciones parafiscales (4--9\%). Los trabajadores informales no generan ninguno de estos costos. Cuando una firma eval\'ua el c\'alculo costo-beneficio de la automatizaci\'on, la comparaci\'on relevante no es el salario base versus el costo anualizado de un robot, sino el costo \textit{total} para el empleador---incluyendo todas las contribuciones obligatorias---versus el costo integral del sustituto tecnol\'ogico. La cu\~na de costos laborales no salariales del 52\% desplaza dram\'aticamente este c\'alculo a favor de la automatizaci\'on para cada puesto formal.
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=0.75\textwidth]{fig_heatmap_sector_formality.pdf}
+\caption{Mapa de calor de la probabilidad media de automatizaci\'on por sector y estatus de formalidad. Tonos m\'as oscuros indican mayor riesgo de automatizaci\'on.}
+\label{fig:heatmap_formality}
+\end{figure}
+
+La Figura~\ref{fig:heatmap_formality} presenta un mapa de calor de las probabilidades medias de automatizaci\'on desagregadas tanto por sector como por estatus de formalidad. El patr\'on es matizado. En manufactura, los trabajadores informales enfrentan una probabilidad \textit{t\'ecnica} de automatizaci\'on m\'as alta (0,66) que los trabajadores formales (0,55), reflejando el hecho de que los trabajadores manufactureros informales tienden a realizar tareas manuales m\'as rutinarias. En agricultura, la brecha es m\'as estrecha: trabajadores informales en 0,63 versus trabajadores formales en 0,60. Sin embargo, esta comparaci\'on de probabilidades t\'ecnicas es enga\~nosa si se toma al pie de la letra. El riesgo de automatizaci\'on \textit{efectivo}---la probabilidad de que el empleo de un trabajador sea realmente automatizado dentro de un horizonte temporal dado---depende no solo de la factibilidad t\'ecnica de la automatizaci\'on sino del incentivo econ\'omico para automatizar. Y este incentivo es vastamente m\'as fuerte para los trabajadores formales, cuyo costo total de compensaci\'on es 46--58\% superior a su salario nominal.
+
+Formalizamos esta intuici\'on estimando un modelo de interacci\'on en el cual se permite que el efecto de la formalidad sobre el riesgo de automatizaci\'on var\'ie por sector. Los t\'erminos de interacci\'on son conjuntamente significativos ($p < 0{,}001$), confirmando que la paradoja de la formalidad no es un fen\'omeno uniforme sino que var\'ia en magnitud a trav\'es de la estructura sectorial. La paradoja es m\'as aguda en los sectores donde tanto el potencial t\'ecnico de automatizaci\'on como las tasas de formalidad son altos---precisamente los sectores (manufactura, transporte, servicios financieros) que representan el grueso de la creaci\'on de empleo formal en Colombia.
+
+La implicaci\'on de pol\'itica es contundente: las pol\'iticas que incrementan el costo del empleo formal---a trav\'es de mayores contribuciones parafiscales, mandatos ampliados de prestaciones o reducci\'on de horas laborales sin cambio en la remuneraci\'on---no simplemente reducen la demanda laboral a trav\'es del canal convencional de moverse a lo largo de una curva de demanda con pendiente negativa. Tambi\'en desplazan a las firmas hacia el margen de automatizaci\'on al ampliar la brecha entre el costo laboral total y el costo de los sustitutos tecnol\'ogicos. La informalidad, parad\'ojicamente, protege a los trabajadores de la automatizaci\'on precisamente porque los hace invisibles al marco regulatorio que genera la cu\~na de costos que incentiva la sustituci\'on.
+
+\subsection{Evidencia a Nivel de Firma: Costos Laborales, Intensidad de Capital e Innovaci\'on}
+\label{subsec:firm_results}
+
+Para ir m\'as all\'a de las evaluaciones de riesgo a nivel ocupacional y examinar las respuestas conductuales reales de las firmas ante las presiones de costos laborales, construimos un conjunto de datos emparejado a nivel de firma mediante la fusi\'on de la \textit{Encuesta Anual Manufacturera} (EAM) con la \textit{Encuesta de Desarrollo e Innovaci\'on Tecnol\'ogica} (EDIT). La fusi\'on, realizada sobre identificadores de establecimiento, arroja 5.884 firmas emparejadas con una tasa de emparejamiento del 96,2\%, proporcionando alta confianza de que la muestra emparejada es representativa del censo manufacturero. Este enfoque a nivel de firma sigue el precedente metodol\'ogico de \cite{koch2021}, quienes demuestran que la adopci\'on de robots por firmas individuales incrementa tanto el empleo como la productividad, aunque con heterogeneidad significativa por tama\~no de firma y sector.
+
+Estimamos una secuencia de modelos que relacionan medidas de costos laborales con indicadores proxy de automatizaci\'on:
+
+\begin{table}[htbp]
+\centering
+\caption{Regresiones a nivel de firma: costos laborales, intensidad de capital e innovaci\'on}
+\label{tab:firm_results}
+\begin{threeparttable}
+\begin{tabular}{llccc}
+\toprule
+\textbf{Modelo} & \textbf{Especificaci\'on} & $\boldsymbol{\hat{\beta}}$ & \textbf{Err.\ Est.} & $\boldsymbol{R^2}$ \\
+\midrule
+A & $\log(\text{Proxy autom.})$ sobre $\log(\text{CLU})$ & $0{,}84^{***}$ & (0,04) & 0,43 \\
+B & Tasa de inversi\'on sobre part.\ laboral del VA & $0{,}045^{***}$ & (0,008) & 0,11 \\
+C & $\log(\text{Intens.\ capital})$ sobre $\log(\text{Costo lab./trab.})$ & $1{,}27^{***}$ & (0,05) & 0,52 \\
+\midrule
+D & Logit: Estatus innovador sobre $\log(\text{CLU})$ & $<1^{**}$ & --- & --- \\
+E2 & Intensidad inversi\'on (condicional) sobre $\log(\text{CLU})$ & $0{,}81^{***}$ & (0,12) & 0,38 \\
+\bottomrule
+\end{tabular}
+\begin{tablenotes}
+\small
+\item \textit{Notas:} $N = 5{,}884$ firmas emparejadas. $^{***}p<0{,}01$, $^{**}p<0{,}05$. El Modelo A utiliza un indicador proxy de automatizaci\'on construido a partir del gasto de capital en maquinaria y equipo. El Modelo D es una regresi\'on log\'istica donde la variable dependiente es un indicador binario de estatus de innovador seg\'un la clasificaci\'on de la EDIT.
+\end{tablenotes}
+\end{threeparttable}
+\end{table}
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=0.75\textwidth]{fig_coefficient_plots.pdf}
+\caption{Estimaciones de coeficientes de los modelos a nivel de firma A a E2. Las barras indican intervalos de confianza al 95\%.}
+\label{fig:firm_coefficients}
+\end{figure}
+
+\textbf{Modelo A} regresa el logaritmo de un indicador proxy de automatizaci\'on (construido a partir del gasto de capital en maquinaria y equipo) sobre el logaritmo de los costos laborales unitarios. El coeficiente de 0,84 ($p < 0{,}001$, $R^2 = 0{,}43$) indica que un incremento del 10\% en los costos laborales unitarios se asocia con un aumento del 8,4\% en el gasto de capital relacionado con la automatizaci\'on, consistente con una elasticidad de sustituci\'on significativamente superior a la unidad. Este es el resultado emp\'irico central a nivel de firma: las firmas manufactureras colombianas responden a mayores costos laborales invirtiendo en capital ahorrador de mano de obra, precisamente como predice el marco te\'orico.
+
+\textbf{Modelo C} confirma este patr\'on a trav\'es de una especificaci\'on alternativa: regresar el logaritmo de la intensidad de capital sobre el logaritmo del costo laboral por trabajador arroja un coeficiente de 1,27 ($p < 0{,}001$, $R^2 = 0{,}52$), lo que implica que la profundizaci\'on del capital responde m\'as que proporcionalmente a incrementos en los costos laborales por trabajador. La elasticidad superior a la unidad es consistente con las elasticidades de sustituci\'on $\sigma > 1$ documentadas por \cite{cheng2021elasticity} utilizando datos agregados de Estados Unidos.
+
+\textbf{Modelo B} examina la tasa de inversi\'on (gasto de capital como proporci\'on de los activos totales) como funci\'on de la participaci\'on laboral en el valor agregado. El coeficiente positivo de 0,045 ($p < 0{,}001$) indica que las firmas con mayor participaci\'on laboral invierten m\'as intensivamente, consistente con la interpretaci\'on de que una alta dependencia del trabajo genera incentivos m\'as fuertes para la sustituci\'on por capital.
+
+\textbf{Modelos D y E2} revelan una paradoja aparente. El Modelo D, una regresi\'on log\'istica del estatus de innovador seg\'un la EDIT sobre los costos laborales unitarios, muestra que las firmas con mayores costos laborales unitarios tienen \textit{menor} probabilidad de ser clasificadas como innovadoras. Este hallazgo refleja la estructura de la encuesta EDIT, que clasifica la innovaci\'on de manera amplia para incluir innovaci\'on de producto, innovaci\'on organizacional e innovaci\'on de mercadeo---categor\'ias en las cuales las firmas con altos costos laborales unitarios (frecuentemente establecimientos peque\~nos e intensivos en mano de obra) son menos activas. Sin embargo, el Modelo E2, estimado sobre la submuestra de firmas que reportan \textit{cualquier} inversi\'on positiva en tecnolog\'ia, muestra que entre las firmas que s\'i invierten, mayores costos laborales unitarios se asocian con un gasto tecnol\'ogico sustancialmente m\'as intensivo ($\beta = 0{,}81$, $p < 0{,}001$). La reconciliaci\'on es directa: los altos costos laborales no empujan a todas las firmas hacia la automatizaci\'on, pero entre las firmas que cruzan el umbral de inversi\'on, la presi\'on de costos es un determinante poderoso de la intensidad de la inversi\'on.
+
+\textbf{Consideraciones de identificaci\'on.} La naturaleza transversal del an\'alisis EAM--EDIT exige cautela al interpretar causalmente la elasticidad costo--automatizaci\'on. La causalidad inversa es una preocupaci\'on plausible: las firmas que ya han automatizado pueden exhibir perfiles de costos laborales unitarios diferentes precisamente porque la automatizaci\'on altera la raz\'on capital--trabajo. Aunque el uso de costos laborales unitarios como raz\'on (compensaci\'on sobre valor agregado) mitiga parcialmente este problema---dado que el denominador captura tanto las contribuciones del trabajo como del capital al producto---no podemos descartar sesgo de simultaneidad sin una estrategia de variables instrumentales o datos de panel que abarquen m\'ultiples ondas de la EAM. La direcci\'on del sesgo es ambigua \textit{a priori}: si la automatizaci\'on reduce los CLU al aumentar el valor agregado, nuestra estimaci\'on estar\'ia atenuada hacia cero, sugiriendo que la verdadera elasticidad costo--automatizaci\'on podr\'ia superar 0,84. Interpretamos los resultados a nivel de firma como una correlaci\'on condicional robusta consistente con el marco te\'orico, al tiempo que se\~nalamos que la evidencia del panel internacional (Secci\'on~\ref{sec:results}.1), que explota variaci\'on temporal intra-pa\'is, proporciona una base m\'as s\'olida para la inferencia causal.
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=0.55\textwidth]{fig_scatter_lcpw_vs_invrate.pdf}
+\caption{Diagrama de dispersi\'on del costo laboral por trabajador vs.\ tasa de inversi\'on en firmas manufactureras. Cada punto representa una firma; la l\'inea ajustada proviene del Modelo B.}
+\label{fig:scatter_lcpw}
+\end{figure}
+
+El gradiente por tama\~no de firma en las tasas de innovaci\'on es marcado: solo el 9,9\% de las microfirmas (menos de 10 empleados) son clasificadas como innovadoras en la EDIT, comparado con el 56,7\% de las firmas grandes (m\'as de 200 empleados). Este gradiente tiene implicaciones directas para las consecuencias distributivas de la automatizaci\'on: las firmas grandes, que son desproporcionadamente formales e intensivas en capital, tienen una probabilidad mucho mayor de responder a incrementos de costos mediante la automatizaci\'on. Las firmas peque\~nas, que carecen del capital y la capacidad t\'ecnica para automatizar, responden en su lugar a trav\'es de la informalizaci\'on, la compresi\'on salarial o la salida del mercado---canales que reducen la productividad y el bienestar sin generar las ganancias de eficiencia que podr\'ian compensar el desplazamiento.
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=0.75\textwidth]{fig_sector_bubble_lcost_auto.pdf}
+\caption{Gr\'afico de burbujas de subsectores manufactureros por costo laboral por trabajador (eje horizontal), proxy de automatizaci\'on (eje vertical) y empleo (tama\~no de burbuja). Los subsectores con mayor costo laboral son coque/refinaci\'on de petr\'oleo (60.932K COP/trabajador) y farmac\'euticos (54.758K COP/trabajador).}
+\label{fig:sector_bubble}
+\end{figure}
+
+\subsection{An\'alisis de Vulnerabilidad Sectorial}
+\label{subsec:sectoral_results}
+
+Sintetizamos la evidencia a nivel individual, a nivel de firma y macroecon\'omica en un \'Indice de Vulnerabilidad a la Automatizaci\'on (IVA) compuesto que clasifica los sectores econ\'omicos colombianos seg\'un su exposici\'on general al desplazamiento impulsado por la automatizaci\'on. El IVA integra cuatro dimensiones: (i) la probabilidad t\'ecnica media de automatizaci\'on del mapeo de \cite{frey2017future}; (ii) el incentivo de costos laborales, medido como la raz\'on del costo total del empleador respecto al salario base; (iii) la tasa de formalidad, que aproxima la proporci\'on de la fuerza laboral del sector sujeta a mandatos de costos laborales no salariales; y (iv) un indicador de madurez tecnol\'ogica que captura la intensidad de capital actual del sector y su tasa de innovaci\'on.
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=0.75\textwidth]{fig_bar_vulnerability_ranking.pdf}
+\caption{\'Indice de Vulnerabilidad a la Automatizaci\'on (IVA) por sector econ\'omico. Valores m\'as altos indican mayor vulnerabilidad compuesta al desplazamiento por automatizaci\'on.}
+\label{fig:avi_ranking}
+\end{figure}
+
+La Figura~\ref{fig:avi_ranking} presenta las clasificaciones del IVA. Construcci\'on lidera con un puntaje compuesto de 80,5, impulsado por altas probabilidades de automatizaci\'on para sus tareas f\'isicas predominantemente rutinarias, altas tasas de formalidad (las firmas constructoras est\'an fuertemente reguladas) y baja adopci\'on tecnol\'ogica actual que implica un espacio sustancial para la sustituci\'on. Administraci\'on, Educaci\'on y Servicios de salud siguen con 78,0, una clasificaci\'on que puede parecer contraintuitiva dadas las bajas probabilidades t\'ecnicas de automatizaci\'on en educaci\'on y salud, pero que refleja las altas tasas de formalidad y los incentivos de costos laborales en el empleo del sector p\'ublico, donde las cargas parafiscales se aplican universalmente. Agricultura ocupa el tercer lugar (72,0), combinando un alto potencial t\'ecnico de automatizaci\'on en tareas rutinarias de cultivo y ganader\'ia con una base tecnol\'ogica extremadamente baja, lo que implica una vulnerabilidad sustancial si las tecnolog\'ias de agricultura de precisi\'on y cosecha automatizada contin\'uan reduci\'endose en costo.
+
+Manufactura (70,8) y Servicios profesionales (70,5) ocupan posiciones intermedias, mientras que Servicios financieros (36,7), Servicios p\'ublicos (40,8) e Inmobiliario (41,7) exhiben los puntajes de vulnerabilidad m\'as bajos. La baja clasificaci\'on de los servicios financieros---a pesar de su alta tasa de adopci\'on de IA---refleja la combinaci\'on del sector de altos niveles de cualificaci\'on de los trabajadores, tareas complejas no rutinarias, y el hecho de que la adopci\'on actual de IA en finanzas es en gran medida aumentativa (calificaci\'on crediticia, detecci\'on de fraude) en lugar de sustitutiva.
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=0.75\textwidth]{fig_heatmap_sectoral_indicators.pdf}
+\caption{Mapa de calor de indicadores sectoriales: crecimiento de la PTF, participaci\'on laboral, tasa de formalidad y riesgo de automatizaci\'on. Tonos m\'as oscuros indican valores menos favorables.}
+\label{fig:heatmap_sectors}
+\end{figure}
+
+El an\'alisis sectorial revela un patr\'on preocupante cuando se combina con datos de productividad. El crecimiento de la productividad total de los factores (PTF) es negativo en varios de los sectores m\'as vulnerables: Miner\'ia ($-2{,}14$\%), Servicios financieros e inmobiliarios ($-1{,}06$\%), Construcci\'on ($-0{,}45$\%) y Manufactura ($-0{,}43$\%). Un crecimiento negativo de la PTF implica que estos sectores no est\'an simplemente estancados sino que experimentan una regresi\'on tecnol\'ogica---produciendo menos producto por unidad de insumos combinados a lo largo del tiempo. En este contexto, la automatizaci\'on representa no un salto adelante impulsado por la innovaci\'on sino un intento desesperado de detener el declive de la productividad, con el desplazamiento de trabajadores como un efecto colateral en lugar de un subproducto del crecimiento.
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=0.75\textwidth]{fig_scatter_productivity_vs_laborshare.pdf}
+\caption{Diagrama de dispersi\'on del crecimiento de la productividad laboral vs.\ participaci\'on laboral en el valor agregado por sector. Los sectores en el cuadrante superior izquierdo combinan alta dependencia laboral con bajo crecimiento de productividad---la zona de m\'axima vulnerabilidad a la automatizaci\'on.}
+\label{fig:prod_vs_laborshare}
+\end{figure}
+
+\subsection{Impacto de la IA Generativa}
+\label{subsec:genai}
+
+Los resultados presentados anteriormente se basan principalmente en el marco de \cite{frey2017future}, que mapea probabilidades de automatizaci\'on a ocupaciones con base en la factibilidad t\'ecnica de automatizar sus tareas constituyentes utilizando tecnolog\'ias anteriores a 2017---predominantemente rob\'otica industrial, software basado en reglas y aprendizaje autom\'atico temprano. La emergencia de la IA generativa (GenAI) desde 2022, y particularmente el despliegue de modelos de lenguaje de gran escala capaces de realizar tareas cognitivas complejas, ha alterado fundamentalmente el panorama del riesgo de automatizaci\'on de maneras que el marco de Frey--Osborne no captura.
+
+El \textit{Future of Jobs Report 2025} del World Economic Forum \cite{wef2025} identifica la IA generativa como la tecnolog\'ia individual m\'as transformadora para los mercados laborales en el horizonte 2025--2030, con el 86\% de los empleadores encuestados esperando que transforme sus procesos de negocio. El informe de la OECD/GPAI sobre Am\'erica Latina \cite{oecd2025voces} documenta que la GenAI afecta desproporcionadamente las tareas cognitivas no rutinarias---precisamente las tareas que el marco tradicional clasifica como de bajo riesgo. Esto crea lo que se ha denominado un ``sesgo de cualificaci\'on inverso'': mientras que las oleadas anteriores de automatizaci\'on desplazaron a trabajadores de tareas manuales rutinarias y cognitivas rutinarias (el centro de la distribuci\'on de cualificaciones), la GenAI amenaza a los trabajadores cognitivos no rutinarios (los segmentos medio-alto y alto), incluyendo contadores, abogados, traductores, creadores de contenido, analistas financieros y desarrolladores de software. Trabajo reciente de \cite{webb2020} y \cite{felten2021} sobre la exposici\'on ocupacional a la IA confirma que las tareas m\'as afectadas por el aprendizaje autom\'atico y los modelos de lenguaje difieren sistem\'aticamente de aquellas objetivos de tecnolog\'ias de automatizaci\'on anteriores, con trabajadores de mayor nivel educativo enfrentando una mayor exposici\'on al desplazamiento impulsado por la IA.
+
+Para Colombia, el canal de la GenAI es particularmente trascendental por dos razones. Primero, el sector BPO---que emplea m\'as de 600.000 trabajadores y ha sido una fuente importante de creaci\'on de empleo formal---est\'a altamente expuesto. Las tareas de BPO (servicio al cliente, entrada de datos, traducci\'on, moderaci\'on de contenido) son precisamente las tareas cognitivas rutinarias que los modelos de lenguaje de gran escala pueden realizar a una fracci\'on del costo laboral humano. La tasa de adopci\'on de IA del 80\% ya reportada en el sector sugiere que este desplazamiento no es prospectivo sino que est\'a en curso. Segundo, la agresiva adopci\'on de IA del sector financiero, si bien actualmente aumentativa, est\'a transitando hacia aplicaciones sustitutivas: la inversi\'on de Bancolombia en codificaci\'on asistida por IA (4.000 trabajadores tecnol\'ogicos, despliegue de GitHub Copilot) est\'a dise\~nada para incrementar la productividad por desarrollador, lo que aritm\'eticamente implica menos desarrolladores necesarios para un volumen dado de producto.
+
+La clasificaci\'on del ILIA 2024 \cite{ilia2024}---Colombia quinta en Am\'erica Latina con un puntaje de 52,64, detr\'as de Chile (73,07), Brasil (69,30) y Uruguay (64,98)---sugiere que la capacidad de Colombia para gestionar la transici\'on hacia la GenAI va por detr\'as de su exposici\'on a ella. La brecha respecto a Chile est\'a impulsada por diferencias en marcos de gobernanza, infraestructura de datos p\'ublicos y la densidad de alianzas de investigaci\'on universidad-industria en IA. El CONPES 4144 de Colombia \cite{conpes4144} representa un intento de cerrar esta brecha, pero como discutimos en la Secci\'on~\ref{sec:policy}, su asignaci\'on de recursos y dise\~no institucional se quedan cortos respecto a lo que la escala del desaf\'io requiere.
+
+
+\FloatBarrier
+
+% ============================================================================
+\section{Panorama de Pol\'itica y Paradoja Regulatoria}
+\label{sec:policy}
+% ============================================================================
+
+La respuesta de pol\'itica de Colombia ante el riesgo de automatizaci\'on se caracteriza por una tensi\'on fundamental: el mismo marco regulatorio que genera altos costos laborales formales---incentivando as\'i la automatizaci\'on---financia simult\'aneamente las instituciones (SENA, los sistemas de salud y pensiones) que supuestamente deben proteger a los trabajadores desplazados. Esta secci\'on examina los tres dominios principales de pol\'itica---regulaci\'on laboral, gobernanza de IA y desarrollo de la fuerza laboral---y argumenta que su configuraci\'on actual no es simplemente sub\'optima, sino internamente contradictoria.
+
+\subsection{La Reforma Laboral Archivada}
+\label{subsec:labor_reform}
+
+El proyecto de reforma laboral debatido y finalmente archivado por el Congreso colombiano en marzo de 2025 propon\'ia un conjunto de medidas que habr\'ian incrementado sustancialmente los costos para los empleadores. Las disposiciones principales inclu\'ian: extender el recargo nocturno para que comenzara a las 7:00 PM (en lugar de las 9:00 PM actuales), aumentar el recargo dominical y festivo al 100\% del salario base, restringir el uso de contratos a t\'ermino fijo y temporales, ampliar las protecciones por despido y establecer per\'iodos de descanso adicionales obligatorios. Las asociaciones empresariales, lideradas por Fenalco, estimaron que el efecto combinado de estas disposiciones incrementar\'ia los costos laborales totales entre un 18--34\%, dependiendo del sector y de la proporci\'on de horas no est\'andar en el cronograma de producci\'on.
+
+Las implicaciones para la automatizaci\'on de tal incremento de costos son directas y cuantificables. En encuestas a empleadores realizadas durante el debate legislativo, el 17\% de los encuestados indic\'o que responder\'ia a la reforma sustituyendo mano de obra por tecnolog\'ia. Si bien esta cifra puede parecer modesta, representa la intenci\'on \textit{declarada} de las empresas encuestadas en un entorno pol\'iticamente cargado; la respuesta real de sustituci\'on, que se desplegar\'ia gradualmente a lo largo de a\~nos conforme se toman decisiones de inversi\'on de capital, probablemente superar\'ia la estimaci\'on de la encuesta. La evidencia internacional revisada en la Secci\'on~\ref{sec:international}---particularmente la experiencia de Corea con un aumento del 16,4\% en el salario m\'inimo---sugiere que el incremento de costos del 18--34\% propuesto por la reforma se ubica de lleno dentro del rango que desencadena respuestas de automatizaci\'on medibles.
+
+Aunque la reforma fue archivada, sus disposiciones permanecen en el repertorio de pol\'itica y podr\'ian ser reintroducidas. M\'as importante a\'un, el debate sobre la reforma revel\'o una caracter\'istica estructural de la pol\'itica laboral colombiana: las protecciones laborales propuestas se dise\~nan como si la automatizaci\'on no fuera un margen de ajuste disponible. El modelo impl\'icito es uno en el que las empresas solo pueden responder a los incrementos de costos aceptando menores ganancias o aumentando precios---un modelo que ignora las elasticidades de sustituci\'on documentadas en la Secci\'on~\ref{subsec:panel_results} y la Secci\'on~\ref{subsec:firm_results}.
+
+\subsection{CONPES 4144 y Pol\'itica Nacional de IA}
+\label{subsec:conpes}
+
+CONPES 4144 \cite{conpes4144}, la pol\'itica nacional de IA de Colombia aprobada en 2025, asigna COP 479 mil millones (aproximadamente USD 110 millones) hasta 2030 a trav\'es de 106 acciones discretas organizadas en torno a cinco pilares estrat\'egicos: gobernanza de IA, desarrollo de talento, investigaci\'on e innovaci\'on, infraestructura de datos y adopci\'on sectorial. La pol\'itica representa una mejora significativa respecto a iniciativas previas ad hoc e identifica correctamente muchos de los desaf\'ios relevantes. Sin embargo, varias limitaciones restringen su impacto potencial.
+
+En primer lugar, la dotaci\'on de recursos es modesta en relaci\'on con la magnitud del desaf\'io. COP 479 mil millones en cinco a\~nos equivalen a aproximadamente COP 96 mil millones por a\~no---menos del 0,006\% del PIB. A modo de comparaci\'on, el plan de inversi\'on en IA de Corea asigna m\'as de USD 2 mil millones anuales, e incluso la estrategia nacional de IA de Chile, m\'as modesta, cuenta con financiamiento per c\'apita sustancialmente mayor. En segundo lugar, las 106 acciones se distribuyen entre m\'ultiples ministerios y agencias sin una autoridad coordinadora \'unica facultada para hacer cumplir los cronogramas de implementaci\'on, lo que genera un riesgo de fragmentaci\'on y diluci\'on burocr\'atica.
+
+El componente de desarrollo de la fuerza laboral de CONPES 4144 merece un escrutinio particular. SENATEC, la iniciativa de capacitaci\'on en habilidades digitales operada a trav\'es del SENA, ha formado a aproximadamente 303.000 personas en competencias relacionadas con TI---una cifra que representa apenas el 1,3\% de la fuerza laboral total. Adem\'as, la calidad y la pertinencia laboral de estos programas de formaci\'on permanecen sin verificar: los procesos de desarrollo curricular del SENA son lentos, y la oferta de formaci\'on en TI de la instituci\'on ha estado hist\'oricamente rezagada varios a\~nos respecto a los requerimientos de la industria. La brecha entre los 303.000 trabajadores capacitados en competencias b\'asicas de TI y los millones que enfrentan riesgo de automatizaci\'on documentados en la Secci\'on~\ref{subsec:risk_colombia} es indicativa del desajuste entre la escala del problema y la escala de la respuesta de pol\'itica.
+
+\subsection{Desconexi\'on Institucional}
+\label{subsec:disconnect}
+
+El problema estructural m\'as profundo en la arquitectura de pol\'itica de Colombia es la relaci\'on parad\'ojica entre las contribuciones parafiscales y la adaptaci\'on de la fuerza laboral. El SENA---la instituci\'on responsable de la formaci\'on profesional y los programas de recualificaci\'on que podr\'ian, en principio, preparar a los trabajadores para la econom\'ia automatizada---se financia principalmente mediante un impuesto del 2\% sobre la n\'omina que grava a los empleadores formales. Esto crea un bucle de incentivos perverso: la contribuci\'on parafiscal que financia al SENA incrementa simult\'aneamente el costo del trabajo formal, incentivando as\'i la automatizaci\'on, que desplaza a los trabajadores formales cuyos impuestos sobre n\'omina financian al SENA. A medida que la automatizaci\'on reduce el empleo formal, la base de financiamiento del SENA se erosiona, disminuyendo su capacidad para recualificar a los trabajadores desplazados precisamente cuando la necesidad de recualificaci\'on es mayor.
+
+Esta ``paradoja del SENA'' se agrava con la estructura parafiscal m\'as amplia. La reforma tributaria de 2012 (Ley 1607) elimin\'o las contribuciones patronales al SENA, al ICBF y al sistema de salud para trabajadores que ganaran menos de 10 salarios m\'inimos, reemplazando estos ingresos con un impuesto general (CREE, posteriormente integrado al impuesto sobre la renta). No obstante, las contribuciones patronales a pensi\'on (12\%), las contribuciones a salud para trabajadores de mayores ingresos (8,5\%) y otros cargos obligatorios siguen siendo sustanciales, y la carga neta de costos no salariales contin\'ua superando el 46\% del salario base para el trabajador formal promedio.
+
+La reducci\'on de la jornada laboral establecida por la Ley 2101 de 2021---que reduce progresivamente la semana laboral est\'andar de 48 a 42 horas, con implementaci\'on plena en julio de 2026---a\~nade otra dimensi\'on de costos. A menos que vaya acompa\~nada de incrementos proporcionales en la productividad, la reducci\'on de horas con un salario mensual invariable eleva efectivamente el costo laboral por hora en aproximadamente un 14\%. Si bien la ley est\'a dise\~nada para mejorar el equilibrio entre vida laboral y personal, su efecto sobre el c\'alculo de automatizaci\'on es inequ\'ivoco: cada incremento en el costo efectivo por hora del trabajo desplaza la frontera costo-beneficio a favor de la sustituci\'on tecnol\'ogica.
+
+La arquitectura institucional de Colombia carece, por tanto, de los tres elementos que han permitido a otros pa\'ises gestionar exitosamente las transiciones hacia la automatizaci\'on: (i) un sistema de formaci\'on profesional dual, como el de Alemania, que adapta continuamente las competencias de los trabajadores a los requerimientos tecnol\'ogicos cambiantes; (ii) un mecanismo efectivo de di\'alogo social que otorgue a los trabajadores voz en las decisiones de automatizaci\'on a nivel de empresa; y (iii) inversi\'on suficiente en I+D para asegurar que la automatizaci\'on avance a trav\'es de canales que mejoren la productividad en lugar de la mera sustituci\'on impulsada por costos. Sin estos elementos, es probable que la automatizaci\'on en Colombia siga una trayectoria de ``camino bajo'': las empresas adoptan tecnolog\'ias que son simplemente m\'as baratas que el trabajo formal en lugar de genuinamente m\'as productivas, generando desplazamiento sin las ganancias compensatorias de bienestar que har\'ian la automatizaci\'on socialmente beneficiosa.
+
+
+\FloatBarrier
+
+% ============================================================================
+\section{Proyecciones por Escenarios}
+\label{sec:scenarios}
+% ============================================================================
+
+Para cuantificar las potenciales consecuencias sobre el empleo de la automatizaci\'on bajo trayectorias alternativas de pol\'itica y tecnolog\'ia, construimos un modelo de simulaci\'on por escenarios que proyecta el desplazamiento del empleo formal en un horizonte de diez a\~nos (2025--2035). El modelo combina las estimaciones sectoriales de riesgo de automatizaci\'on de la Secci\'on~\ref{subsec:risk_colombia}, las elasticidades de sustituci\'on a nivel de empresa de la Secci\'on~\ref{subsec:firm_results} y las trayectorias internacionales de adopci\'on de la Secci\'on~\ref{subsec:panel_results} para generar estimaciones de desplazamiento bajo cinco escenarios que abarcan el rango plausible de resultados.
+
+\subsection{Definici\'on de Escenarios}
+\label{subsec:scenario_definitions}
+
+Los cinco escenarios se definen de la siguiente manera:
+
+\begin{enumerate}[label=(\roman*)]
+\item \textbf{Statu Quo:} Marco regulatorio actual, trayectoria actual de adopci\'on de automatizaci\'on, sin cambios mayores de pol\'itica. Los costos laborales crecen en l\'inea con la tendencia hist\'orica de incrementos del salario m\'inimo (aproximadamente 3--4\% real por a\~no). La adopci\'on de IA contin\'ua al ritmo establecido en 2023--2025.
+
+\item \textbf{Reforma Laboral:} La reforma laboral archivada se reintroduce y se promulga, incrementando los costos laborales totales entre un 18--34\% (se utiliza el punto medio del 26\%). Todos los dem\'as par\'ametros siguen la trayectoria del Statu Quo.
+
+\item \textbf{Reforma Parafiscal:} Las contribuciones parafiscales se reducen o eliminan para el empleo formal, disminuyendo la cu\~na de costos no salariales del 52\% a aproximadamente el 30\% del salario base. Este escenario representa el ``camino alem\'an'' de reducir los costos laborales para desacelerar el incentivo a la automatizaci\'on.
+
+\item \textbf{Aceleraci\'on IA:} Las capacidades de la IA generativa avanzan m\'as r\'apido que las proyecciones de l\'inea base actuales, reduciendo el costo de la automatizaci\'on cognitiva en un 50\% respecto al Statu Quo. Este escenario captura la trayectoria de ``GPT-5 y m\'as all\'a'' en la cual los modelos de lenguaje de gran escala alcanzan un desempe\~no cercano al humano en una gama m\'as amplia de tareas cognitivas.
+
+\item \textbf{Peor Escenario Combinado:} La Reforma Laboral se promulga \textit{simult\'aneamente} con el escenario de Aceleraci\'on IA, representando la convergencia de m\'axima presi\'on de costos con m\'axima capacidad tecnol\'ogica.
+\end{enumerate}
+
+\subsection{Resultados de la Simulaci\'on}
+\label{subsec:simulation_results}
+
+La Figura~\ref{fig:trajectories} presenta las trayectorias proyectadas del empleo formal bajo cada escenario.
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=0.80\textwidth]{fig_sim_formal_employment_trajectories.pdf}
+\caption{Trayectorias proyectadas del empleo formal bajo cinco escenarios, 2025--2035. Las bandas sombreadas representan intervalos de confianza al 95\% de la simulaci\'on Monte Carlo (10.000 iteraciones).}
+\label{fig:trajectories}
+\end{figure}
+
+\begin{table}[htbp]
+\centering
+\caption{Resumen de proyecciones por escenario: desplazamiento del empleo formal al 2035}
+\label{tab:scenarios}
+\begin{threeparttable}
+\begin{tabular}{lccc}
+\toprule
+\textbf{Escenario} & \textbf{Cambio emp.\ formal} & \textbf{Trabajadores desplazados} & \textbf{IC 95\%} \\
+\midrule
+Statu Quo & $-18.9\%$ & 3.34M & [3.21M, 3.54M] \\
+Reforma Laboral & $-39.0\%$ & 4.32M & [4.19M, 4.50M] \\
+Reforma Parafiscal & $-14.6\%$ & 2.80M & [2.62M, 3.11M] \\
+Aceleraci\'on IA & $-25.5\%$ & 3.85M & [3.76M, 3.98M] \\
+Peor Combinado & $-42.7\%$ & 4.31M & [4.22M, 4.45M] \\
+\bottomrule
+\end{tabular}
+\begin{tablenotes}
+\small
+\item \textit{Notas:} Los trabajadores desplazados representan el n\'umero acumulado de posiciones formales eliminadas durante el horizonte 2025--2035. Los intervalos de confianza se derivan de una simulaci\'on Monte Carlo con 10.000 iteraciones, variando las probabilidades de automatizaci\'on, las elasticidades de sustituci\'on y las tasas de adopci\'on dentro de sus distribuciones estimadas. La estimaci\'on puntual del Peor Combinado (4,31M) es marginalmente inferior a la de Reforma Laboral (4,32M) porque los canales de desplazamiento superpuestos producen una envolvente de varianza m\'as estrecha; la diferencia no es estad\'isticamente significativa y ambas estimaciones se encuentran dentro de los intervalos de confianza de la otra.
+\end{tablenotes}
+\end{threeparttable}
+\end{table}
+
+Los resultados ameritan varias observaciones. Bajo el escenario de \textbf{Statu Quo}, la automatizaci\'on desplaza un estimado de 3,34 millones de trabajadores formales durante la d\'ecada, representando una disminuci\'on del 18,9\% en el empleo formal. Esta no es una l\'inea base benigna: refleja la operaci\'on continuada de los incentivos de costos existentes, la difusi\'on en curso de la IA en los servicios y la reducci\'on progresiva de los costos de los robots. El desplazamiento se concentra en la manufactura, el transporte y el comercio formal, con los servicios profesionales y el BPO experimentando p\'erdidas aceleradas a medida que la IA generativa madura.
+
+Una advertencia importante aplica a todos los resultados de los escenarios: el marco de simulaci\'on es mecanicista, no estructural. No incorpora ajustes de equilibrio general---respuestas salariales, reasignaci\'on sectorial, entrada y salida de firmas, o respuestas end\'ogenas de pol\'itica---que moderar\'ian el desplazamiento en la pr\'actica. Las proyecciones deben interpretarse, por tanto, como estimaciones de cota superior de la presi\'on de desplazamiento bajo los supuestos de costos y tecnolog\'ia establecidos, no como pron\'osticos puntuales de los resultados reales de empleo.
+
+El escenario de \textbf{Reforma Laboral} amplifica el desplazamiento de manera dram\'atica. El incremento del 18--34\% en los costos laborales empuja aproximadamente $\sim$1 mill\'on de posiciones formales adicionales m\'as all\'a del umbral de automatizaci\'on, elevando el desplazamiento total a 4,32 millones ($-39,0\%$). La Figura~\ref{fig:waterfall} descompone este incremento: el contribuyente individual m\'as importante es la extensi\'on del recargo nocturno, que afecta desproporcionadamente a las empresas manufactureras y log\'isticas que operan m\'ultiples turnos.
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=0.75\textwidth]{fig_sim_waterfall_labor_reform.pdf}
+\caption{Descomposici\'on en cascada del desplazamiento incremental bajo el escenario de Reforma Laboral relativo al Statu Quo. Cada barra representa la contribuci\'on de una disposici\'on espec\'ifica de la reforma.}
+\label{fig:waterfall}
+\end{figure}
+
+El escenario de \textbf{Reforma Parafiscal} demuestra el potencial sustancial de las intervenciones por el lado de los costos. Al reducir la cu\~na de costos no salariales, este escenario limita el desplazamiento a 2,80 millones de trabajadores ($-14,6\%$)---salvando aproximadamente 1,5 millones de empleos formales respecto al escenario de Reforma Laboral y 540.000 respecto al Statu Quo. Este hallazgo constituye el resultado de pol\'itica m\'as accionable del estudio: la reforma parafiscal es la palanca individual m\'as poderosa disponible para los formuladores de pol\'itica colombianos para desacelerar el desplazamiento impulsado por la automatizaci\'on, porque reduce directamente el diferencial de costos que hace a los trabajadores formales m\'as costosos que sus sustitutos tecnol\'ogicos.
+
+Bajo el escenario de \textbf{Aceleraci\'on IA}, el desplazamiento alcanza 3,85 millones ($-25,5\%$), reflejando la extensi\'on del riesgo de automatizaci\'on a ocupaciones cognitivas no rutinarias en servicios profesionales, BPO y servicios financieros. El \textbf{Peor Escenario Combinado} produce un desplazamiento de 4,31 millones ($-42,7\%$), una cifra pr\'acticamente id\'entica al escenario de Reforma Laboral por s\'i solo, lo que sugiere que el incremento de costos de la Reforma Laboral es tan grande que domina incluso una aceleraci\'on agresiva de la IA en la determinaci\'on de la envolvente total de desplazamiento.
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=0.75\textwidth]{fig_sim_heatmap_displacement.pdf}
+\caption{Mapa de calor del desplazamiento proyectado por sector y escenario. Los valores de las celdas representan el porcentaje de disminuci\'on del empleo formal.}
+\label{fig:heatmap_displacement}
+\end{figure}
+
+La descomposici\'on sectorial (Figura~\ref{fig:heatmap_displacement}) revela una heterogeneidad extrema. En el Peor Escenario Combinado, el BPO y los Servicios Profesionales pierden entre el 57--65\% de las posiciones formales, reflejando la doble presi\'on de altos costos laborales y alta exposici\'on a la automatizaci\'on cognitiva. La manufactura pierde entre el 35--45\%, impulsada principalmente por el canal de automatizaci\'on f\'isica. La agricultura y la construcci\'on experimentan p\'erdidas m\'as moderadas (20--30\%) debido a tasas de formalidad m\'as bajas, que a\'islan una proporci\'on considerable de la fuerza laboral de la sustituci\'on impulsada por costos.
+
+\subsection{An\'alisis de Sensibilidad}
+\label{subsec:sensitivity}
+
+Evaluamos la sensibilidad de las estimaciones de desplazamiento ante perturbaciones en los par\'ametros clave de entrada mediante un an\'alisis de tornado (Figura~\ref{fig:tornado}).
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=0.75\textwidth]{fig_sim_tornado_sensitivity.pdf}
+\caption{Gr\'afico de tornado del an\'alisis de sensibilidad para el escenario Statu Quo. Cada barra muestra el cambio en el desplazamiento total cuando el par\'ametro indicado se var\'ia en $\pm 1$ desviaci\'on est\'andar.}
+\label{fig:tornado}
+\end{figure}
+
+El par\'ametro m\'as sensible es la probabilidad media de automatizaci\'on: un desplazamiento de $\pm 10$ puntos porcentuales en la distribuci\'on del riesgo de automatizaci\'on genera un rango de 1,65 millones de trabajadores en la estimaci\'on de desplazamiento. Esta sensibilidad subraya la importancia de la metodolog\'ia de mapeo utilizada para asignar probabilidades de automatizaci\'on a las ocupaciones colombianas. En la medida en que el marco de Frey--Osborne---desarrollado para ocupaciones estadounidenses y mapeado a categor\'ias colombianas al nivel de dos d\'igitos (subgrupo principal) de la CIUO-08---sobreestime o subestime el verdadero potencial de automatizaci\'on de los empleos colombianos, las estimaciones de desplazamiento se desplazar\'an proporcionalmente.
+
+El segundo par\'ametro m\'as sensible es la elasticidad de sustituci\'on, seguido por la tasa de descuento aplicada a las reducciones futuras en el costo de la automatizaci\'on. El incremento de costos por pol\'itica (relevante \'unicamente en los escenarios de Reforma Laboral y Peor Escenario Combinado) ocupa el cuarto lugar, lo que sugiere que, si bien la pol\'itica importa, la trayectoria tecnol\'ogica subyacente y la estructura del mercado laboral son determinantes m\'as fundamentales de la envolvente de desplazamiento.
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=0.75\textwidth]{fig_sim_fan_chart_baseline.pdf}
+\caption{Gr\'afico de abanico de la trayectoria de desplazamiento del Statu Quo mostrando los intervalos de predicci\'on del 50\%, 75\% y 95\% de la simulaci\'on Monte Carlo.}
+\label{fig:fan_chart}
+\end{figure}
+
+La Figura~\ref{fig:fan_chart} presenta el gr\'afico de abanico para el escenario de Statu Quo, ilustrando la banda de incertidumbre que se ampl\'ia a lo largo del horizonte de proyecci\'on. Para 2030, el intervalo de predicci\'on al 95\% abarca aproximadamente 1,5 millones de trabajadores; para 2035, supera los 2,5 millones. Esta ampliaci\'on refleja la acumulaci\'on de incertidumbre en el progreso tecnol\'ogico, las respuestas de pol\'itica y las condiciones macroecon\'omicas a lo largo de un horizonte de una d\'ecada, y aconseja no tratar las estimaciones puntuales como pron\'osticos precisos. El valor del ejercicio de escenarios no reside en las cifras espec\'ificas sino en las magnitudes comparativas: el hallazgo robusto es que la reforma parafiscal reduce sustancialmente el desplazamiento respecto al Statu Quo, mientras que los incrementos en los costos laborales lo amplifican sustancialmente.
+
+
+\subsection{Robustez del Modelo Log\'istico}
+\label{subsec:robustness}
+
+Sometemos la regresi\'on log\'istica de la Secci\'on~\ref{subsec:risk_colombia} a cuatro verificaciones de robustez que abordan posibles preocupaciones sobre la validez inferencial y la sensibilidad de la medici\'on. La Tabla~\ref{tab:robustness} reporta los resultados.
+
+\begin{table}[htbp]
+\centering
+\caption{Robustez de las razones de momios clave bajo especificaciones alternativas}
+\label{tab:robustness}
+\begin{threeparttable}
+\begin{tabular}{lccccc}
+\toprule
+& \textbf{L\'inea base} & \textbf{Ponderado} & \textbf{Cl\'uster} & \textbf{Bootstrap} & \textbf{Mapeo} \\
+& \textbf{(HC1)} & \textbf{(encuesta)} & \textbf{robusto} & \textbf{(399 rep.)} & \textbf{1 d\'igito} \\
+\midrule
+Trabajador formal & $1{,}302^{***}$ & $1{,}302^{***}$ & $1{,}302^{**}$ & $1{,}302^{**}$ & $1{,}031$ \\
+& $(0{,}027)$ & $(0{,}002)$ & $(0{,}119)$ & $(0{,}164)$ & $(0{,}026)$ \\[4pt]
+Mujer & $0{,}441^{***}$ & $0{,}441^{***}$ & $0{,}441^{***}$ & $0{,}441^{***}$ & $0{,}583^{***}$ \\
+& $(0{,}018)$ & $(0{,}001)$ & $(0{,}247)$ & $(0{,}384)$ & $(0{,}018)$ \\[4pt]
+Log ingreso & $0{,}591^{***}$ & $0{,}591^{***}$ & $0{,}591^{***}$ & $0{,}591^{***}$ & $0{,}654^{***}$ \\
+& $(0{,}014)$ & $(0{,}001)$ & $(0{,}136)$ & $(0{,}292)$ & $(0{,}013)$ \\[4pt]
+\midrule
+Pseudo $R^2$ & 0{,}352 & 0{,}352 & 0{,}352 & --- & 0{,}325 \\
+AUC & 0{,}871 & 0{,}871 & 0{,}871 & --- & 0{,}856 \\
+$N$ & 106.172 & 106.172 & 106.172 & 106.172 & 106.172 \\
+\bottomrule
+\end{tabular}
+\begin{tablenotes}
+\small
+\item \textit{Notas:} Errores est\'andar del coeficiente log-odds entre par\'entesis. $^{***}p<0{,}01$, $^{**}p<0{,}05$, $^{*}p<0{,}10$. L\'inea base utiliza errores est\'andar consistentes ante heterocedasticidad (HC1). Ponderado incorpora los factores de expansi\'on de la GEIH (FEX\_C18) como pesos de frecuencia; la identidad de coeficientes con la l\'inea base confirma la ausencia de distorsi\'on por dise\~no muestral, aunque los errores est\'andar artificialmente peque\~nos reflejan un tama\~no efectivo de muestra inflado. Cl\'uster robusto agrupa errores est\'andar al nivel de sector CIIU a 2 d\'igitos ($G = 20$). Bootstrap implementa bootstrap de pares por cl\'usteres \cite{cameron2008bootstrap} con 399 replicaciones remuestreando cl\'usteres sectoriales completos con reemplazo. Mapeo 1 d\'igito reestima el modelo utilizando \'unicamente probabilidades de automatizaci\'on a nivel de grupo principal (9 valores distintos) en lugar del mapeo de subgrupo principal (24 valores distintos).
+\end{tablenotes}
+\end{threeparttable}
+\end{table}
+
+Tres hallazgos ameritan discusi\'on. Primero, las estimaciones de los coeficientes no cambian entre las especificaciones ponderada, con cl\'uster robusto y bootstrap, lo que confirma que las estimaciones puntuales no son artefactos del dise\~no muestral o de la estructura de heterocedasticidad. Segundo, aunque los errores est\'andar con cl\'uster robusto y bootstrap son sustancialmente mayores que la l\'inea base HC1---reflejando el peque\~no n\'umero de cl\'usteres sectoriales ($G = 20$)---el coeficiente de formalidad mantiene su significancia a niveles convencionales (cl\'uster robusto $p = 0{,}027$; bootstrap $p = 0{,}015$), y todas las dem\'as variables clave conservan su signo y significancia.
+
+Tercero, la especificaci\'on con mapeo a 1 d\'igito revela que el resultado de formalidad es sensible a la granularidad del mapeo ocupaci\'on-probabilidad de automatizaci\'on. Cuando las probabilidades de automatizaci\'on se asignan al nivel de grupo principal (9 valores distintos) en lugar del nivel de subgrupo principal (24 valores distintos), la raz\'on de momios del trabajador formal cae de 1,302 a 1,031 y pierde significancia estad\'istica ($p = 0{,}236$). Esto implica que la asociaci\'on formalidad-riesgo de automatizaci\'on opera a trav\'es de la clasificaci\'on ocupacional dentro de los grupos principales: los trabajadores formales e informales en la misma categor\'ia ocupacional amplia (e.g., ``Trabajadores de Servicios y Vendedores'') se clasifican en diferentes subcategor\'ias con distintas exposiciones a la automatizaci\'on, y esta clasificaci\'on se oscurece cuando las probabilidades se asignan al nivel m\'as grueso. La especificaci\'on de l\'inea base a 2 d\'igitos, que preserva esta variaci\'on intracategor\'ia, es el modelo preferido, pero la sensibilidad amerita reconocimiento como limitaci\'on.
+
+\FloatBarrier
+
+% ============================================================================
+\section{Conclusi\'on}
+\label{sec:conclusion}
+% ============================================================================
+
+Este estudio ha investigado la relaci\'on entre los costos laborales y la automatizaci\'on en Colombia a trav\'es del lente de un marco emp\'irico multinivel que abarca paneles internacionales, microdatos a nivel individual, encuestas a nivel de empresa y agregados sectoriales. Emergen cinco hallazgos principales.
+
+\textbf{Primero}, las regresiones de panel internacionales confirman que la productividad laboral y las estructuras de costos laborales son determinantes robustos de la adopci\'on de robots en 25 pa\'ises, con fuerte persistencia en las trayectorias de automatizaci\'on. Colombia instala aproximadamente una d\'ecima parte del n\'umero de robots predicho por sus fundamentos macroecon\'omicos, una brecha de ``robots faltantes'' atribuible al peque\~no tama\~no de las empresas, la d\'ebil integraci\'on en cadenas de suministro, el acceso limitado al capital y la disponibilidad de mano de obra informal barata.
+
+\textbf{Segundo}, aproximadamente el 53,8\% de los trabajadores colombianos ocupa ocupaciones clasificadas como de alto riesgo de automatizaci\'on ($\Pr \geq 0.50$), y los trabajadores formales enfrentan 1,30 veces las probabilidades de empleo de alto riesgo en comparaci\'on con los trabajadores informales, controlando por demograf\'ia, educaci\'on, ingreso y sector. Esta paradoja de la formalidad---por la cual el marco regulatorio dise\~nado para proteger a los trabajadores simult\'aneamente los encarece como empleados y, por lo tanto, los hace m\'as atractivos para ser reemplazados por tecnolog\'ia---opera principalmente a trav\'es del canal de costos m\'as que de la clasificaci\'on ocupacional, y es la caracter\'istica estructural definitoria del desaf\'io de automatizaci\'on de Colombia.
+
+\textbf{Tercero}, la evidencia a nivel de empresa proveniente del conjunto de datos enlazado EAM--EDIT confirma que las empresas manufactureras colombianas responden a mayores costos laborales incrementando la intensidad de capital, con una elasticidad de sustituci\'on estimada de 0,84 entre los costos laborales unitarios y la inversi\'on relacionada con la automatizaci\'on. Entre las empresas que invierten en tecnolog\'ia, la intensidad de la inversi\'on aumenta monot\'onicamente con la presi\'on de costos laborales ($\beta = 0.81$, $p < 0.001$), confirmando el mecanismo de adopci\'on impulsado por costos a nivel de establecimiento.
+
+\textbf{Cuarto}, el \'Indice de Vulnerabilidad a la Automatizaci\'on identifica a la Construcci\'on (80,5), los servicios Administrativos/Educaci\'on/Salud (78,0), la Agricultura (72,0) y la Manufactura (70,8) como los sectores m\'as vulnerables, mientras que los Servicios Financieros (36,7) y los Servicios P\'ublicos (40,8) exhiben la menor vulnerabilidad compuesta---aunque los servicios financieros enfrentan un riesgo acelerado de automatizaci\'on cognitiva a trav\'es del canal de la IA generativa.
+
+\textbf{Quinto}, las proyecciones por escenarios indican que la reforma laboral archivada, de ser promulgada, desplazar\'ia 1,0 mill\'on adicional de trabajadores formales respecto a la l\'inea base del Statu Quo (4,32M vs.\ 3,34M), mientras que una reforma parafiscal que reduzca los costos no salariales salvar\'ia aproximadamente 540.000 posiciones formales (2,80M vs.\ 3,34M). El diferencial entre los escenarios de reforma y parafiscal---aproximadamente 1,5 millones de empleos formales---representa lo que est\'a en juego en la elecci\'on de pol\'itica que enfrentan los legisladores colombianos.
+
+Estos hallazgos conllevan tres implicaciones directas de pol\'itica. \textbf{La m\'as urgente es la reforma parafiscal.} Reducir la cu\~na de costos no salariales que actualmente infla el costo total para el empleador del trabajo formal entre un 46--58\% por encima del salario base fortalecer\'ia simult\'aneamente el empleo formal, reducir\'ia el incentivo a la automatizaci\'on y mejorar\'ia la competitividad de Colombia respecto a sus pares regionales. La reforma de 2012 (Ley 1607) demostr\'o que la reducci\'on parafiscal es pol\'iticamente viable; extenderla para cubrir las contribuciones restantes---compensando al SENA y otras instituciones beneficiarias mediante tributaci\'on general---deber\'ia ser una prioridad legislativa.
+
+\textbf{Segundo, Colombia debe invertir sustancialmente en infraestructura de recualificaci\'on.} El programa actual de SENATEC, con 303.000 personas capacitadas que representan el 1,3\% de la fuerza laboral, se encuentra \'ordenes de magnitud por debajo de la escala requerida. El modelo alem\'an de formaci\'on profesional dual, que adapta continuamente los curr\'iculos a los requerimientos cambiantes de la industria mediante la cogobernanza empleadores-sindicatos del contenido formativo, ofrece una plantilla. Sin embargo, trasplantar este modelo requiere capacidades institucionales---asociaciones empresariales efectivas, sindicatos representativos e inversi\'on p\'ublica sostenida en infraestructura de formaci\'on---de las que Colombia carece actualmente y debe construir.
+
+\textbf{Tercero, los formuladores de pol\'itica deben evitar choques grandes y discretos en los costos laborales.} La evidencia internacional---particularmente la del aumento del salario m\'inimo de Corea en 2018---demuestra que los incrementos abruptos de costos desencadenan respuestas de automatizaci\'on no lineales, produciendo oleadas de desplazamiento simult\'aneo que desbordan la capacidad de absorci\'on de otros sectores y de los sistemas de protecci\'on social. Si se han de fortalecer las protecciones laborales, estas deber\'ian implementarse gradualmente y acompa\~narse de reducciones compensatorias en los costos no salariales, de modo que la trayectoria del costo total para el empleador se mantenga suave y predecible.
+
+El estudio est\'a sujeto a varias limitaciones que ameritan un reconocimiento expl\'icito. El an\'alisis a nivel individual se basa en datos de corte transversal de la GEIH, lo que impide la identificaci\'on de efectos causales o el seguimiento de trabajadores individuales a lo largo del tiempo. El enlace EAM--EDIT involucra un desfase temporal, ya que las dos encuestas no comparten per\'iodos de referencia id\'enticos, lo que introduce error de medici\'on en las estimaciones a nivel de empresa. El mapeo de las probabilidades de automatizaci\'on de Frey--Osborne a las ocupaciones colombianas se realiza al nivel de dos d\'igitos (subgrupo principal) de la CIUO-08 (24 valores de probabilidad distintos); como se muestra en la Secci\'on~\ref{subsec:robustness}, el coeficiente de formalidad pierde significancia cuando el mapeo se reduce al nivel de un d\'igito, lo que indica sensibilidad a la granularidad ocupacional. El enfoque a nivel de tareas desarrollado por \cite{arntz2016}, que estima el riesgo de automatizaci\'on a nivel de trabajador individual con base en composiciones reales de tareas en lugar de promedios ocupacionales, probablemente arrojar\'ia estimaciones m\'as conservadoras y heterog\'eneas; trabajo futuro deber\'ia aplicar esta metodolog\'ia a datos colombianos cuando las encuestas a nivel de tareas est\'en disponibles. Y las proyecciones por escenarios, aunque fundamentadas en par\'ametros estimados, son inherentemente especulativas en un horizonte de diez a\~nos y deben interpretarse como ilustrativas de magnitudes m\'as que como pron\'osticos precisos. Los errores est\'andar del modelo a nivel individual se agrupan a nivel sectorial ($G = 20$), por debajo del umbral de 30--50 cl\'usteres t\'ipicamente recomendado para una inferencia robusta por cl\'usteres fiable \cite{autor2013}; el bootstrap de pares por cl\'usteres confirma que los coeficientes clave mantienen su significancia a niveles convencionales (Secci\'on~\ref{subsec:robustness}). La incorporaci\'on de los factores de expansi\'on de la GEIH no altera las estimaciones de los coeficientes, lo que confirma que los resultados sin ponderar no est\'an distorsionados por el dise\~no muestral. El \'Indice de Vulnerabilidad a la Automatizaci\'on emplea ponderaciones ($w_1 = 0{,}40$, $w_2 = 0{,}35$, $w_3 = 0{,}25$) basadas en prioris te\'oricos; aunque el ordenamiento cualitativo es estable bajo perturbaciones plausibles de los pesos ($\pm 0{,}10$), trabajo futuro deber\'ia explorar enfoques de ponderaci\'on basados en datos.
+
+A pesar de estas limitaciones, el mensaje central es robusto a trav\'es de especificaciones y niveles anal\'iticos: los altos costos laborales no salariales de Colombia crean un incentivo estructural para la automatizaci\'on que se amplifica con las propuestas regulatorias de incrementar dichos costos a\'un m\'as. La paradoja de la formalidad es el dilema de pol\'itica definitorio: una mayor protecci\'on laboral formal, en ausencia de una reducci\'on de la cu\~na de costos, parad\'ojicamente acelera el desplazamiento de los mismos trabajadores que se pretende proteger. La ventana para una respuesta proactiva de pol\'itica se est\'a cerrando. La emergencia de la IA generativa ha comprimido el cronograma para la automatizaci\'on cognitiva en aproximadamente una d\'ecada respecto a las proyecciones anteriores a 2022 \cite{wef2025}, lo que significa que las presiones de desplazamiento hist\'oricamente asociadas con los robots industriales---que tardaron d\'ecadas en materializarse en la manufactura---podr\'ian desplegarse en a\~nos en los servicios. El desaf\'io de Colombia no es si la automatizaci\'on transformar\'a su mercado laboral, sino si la transformaci\'on ser\'a gestionada mediante una adaptaci\'on institucional deliberada o sufrida como un choque desordenado sobre una fuerza laboral no preparada. La evidencia presentada en este art\'iculo sugiere que, en ausencia de una reforma significativa de pol\'itica, el segundo resultado es el m\'as probable.
+
+% ============================================================================
+% BIBLIOGRAPHY
+% ============================================================================
+\bibliographystyle{apalike}
+% \bibliography{references}
+
+\begin{thebibliography}{99}
+
+\bibitem{acemoglu2019automation}
+Acemoglu, D. and Restrepo, P. (2019).
+\newblock Automation and New Tasks: How Technology Displaces and Reinstates Labor.
+\newblock {\em Journal of Economic Perspectives}, 33(2):3--30.
+
+\bibitem{acemoglu2020robots}
+Acemoglu, D. and Restrepo, P. (2020).
+\newblock Robots and Jobs: Evidence from US Labor Markets.
+\newblock {\em Journal of Political Economy}, 128(6):2188--2244.
+
+\bibitem{acemoglu2020taxes}
+Acemoglu, D., Manera, A., and Restrepo, P. (2020).
+\newblock Does the US Tax Code Favor Automation?
+\newblock {\em Brookings Papers on Economic Activity}, Spring 2020.
+
+\bibitem{cameron2008bootstrap}
+Cameron, A.C., Gelbach, J.B., and Miller, D.L. (2008).
+\newblock Bootstrap-Based Improvements for Inference with Clustered Errors.
+\newblock {\em Review of Economics and Statistics}, 90(3):414--427.
+
+\bibitem{cheng2021elasticity}
+Cheng, H., Drozd, L.A., Giri, R., Taschereau-Dumouchel, M., and Xia, J. (2021).
+\newblock Automation and the Labor Share in the Second Machine Age.
+\newblock Federal Reserve Bank of Philadelphia Working Paper WP 21-11.
+
+\bibitem{frey2017future}
+Frey, C.B. and Osborne, M.A. (2017).
+\newblock The Future of Employment: How Susceptible Are Jobs to Computerisation?
+\newblock {\em Technological Forecasting and Social Change}, 114:254--280.
+
+\bibitem{morales2023risk}
+Morales Pantoja, A.J., Atis Ortega, K.L., and Fajardo Hoyos, C.L. (2023).
+\newblock Risk of Automation of Jobs in Colombia: An Analysis of the Determinants of Workers' Vulnerability to Technological Disruption.
+\newblock {\em Revista Facultad de Ciencias Econ\'omicas}, 31(2):159--172.
+
+\bibitem{fedesarrollo2023}
+Mej\'ia, L.F. and Pab\'on, C. (2023).
+\newblock COVID-19 y riesgo de automatizaci\'on en el mercado laboral de los pa\'ises andinos.
+\newblock Inter-American Development Bank.
+
+\bibitem{oecd2025voces}
+OECD/GPAI (2025).
+\newblock Voces del cambio: la IA generativa y la transformaci\'on del trabajo en Am\'erica Latina.
+
+\bibitem{ifr2024}
+International Federation of Robotics (2024).
+\newblock World Robotics 2024: Industrial Robots.
+
+\bibitem{wef2025}
+World Economic Forum (2025).
+\newblock The Future of Jobs Report 2025.
+
+\bibitem{conpes4144}
+DNP (2025).
+\newblock CONPES 4144: Pol\'itica Nacional de Inteligencia Artificial.
+\newblock Departamento Nacional de Planeaci\'on, Colombia.
+
+\bibitem{anif2018}
+ANIF and ACOPI (2018).
+\newblock Costos no salariales en Colombia.
+
+\bibitem{asobancaria2024}
+Asobancaria (2024).
+\newblock Informe de Gesti\'on Gremial 2024.
+
+\bibitem{ilia2024}
+CENIA/CEPAL (2024).
+\newblock \'Indice Latinoamericano de Inteligencia Artificial (ILIA) 2024.
+
+\bibitem{bid2023}
+Brambilla, I., Cesar, A., Falcone, G., and Gasparini, L. (2023).
+\newblock Automation Trends and Labor Markets in Latin America.
+\newblock Inter-American Development Bank.
+
+\bibitem{autor2003}
+Autor, D.H., Levy, F., and Murnane, R.J. (2003). The Skill Content of Recent Technological Change: An Empirical Exploration. \textit{Quarterly Journal of Economics}, 118(4):1279--1333.
+
+\bibitem{arntz2016}
+Arntz, M., Gregory, T., and Zierahn, U. (2016). The Risk of Automation for Jobs in OECD Countries: A Comparative Analysis. \textit{OECD Social, Employment and Migration Working Papers}, No.~189.
+
+\bibitem{graetz2018}
+Graetz, G. and Michaels, G. (2018). Robots at Work. \textit{Review of Economics and Statistics}, 100(5):753--768.
+
+\bibitem{webb2020}
+Webb, M. (2020). The Impact of Artificial Intelligence on the Labor Market. \textit{Stanford University Working Paper}.
+
+\bibitem{autor2013}
+Autor, D.H. and Dorn, D. (2013). The Growth of Low-Skill Service Jobs and the Polarization of the US Labor Market. \textit{American Economic Review}, 103(5):1553--1597.
+
+\bibitem{dauth2021}
+Dauth, W., Findeisen, S., Suedekum, J., and Woessner, N. (2021). The Adjustment of Labor Markets to Robots. \textit{Journal of the European Economic Association}, 19(6):3104--3153.
+
+\bibitem{koch2021}
+Koch, M., Manuylov, I., and Smolka, M. (2021). Robots and Firms. \textit{The Economic Journal}, 131(638):2553--2584.
+
+\bibitem{ulyssea2018}
+Ulyssea, G. (2018). Firms, Informality, and Development: Theory and Evidence from Brazil. \textit{American Economic Review}, 108(8):2015--2047.
+
+\bibitem{laporta2014}
+La Porta, R. and Shleifer, A. (2014). Informality and Development. \textit{Journal of Economic Perspectives}, 28(3):109--126.
+
+\bibitem{maloney2016}
+Maloney, W. and Molina, C. (2016). Are Automation and Trade Competition Complementary or Substitutable Sources of Labor Displacement? Evidence from Brazil. \textit{World Bank Policy Research Working Paper}, No.~7922.
+
+\bibitem{felten2021}
+Felten, E., Raj, M., and Seamans, R. (2021). Occupational, Industry, and Geographic Exposure to Artificial Intelligence: A Novel Dataset and its Potential Uses. \textit{Strategic Management Journal}, 42(12):2195--2217.
+
+\bibitem{levy2004}
+Levy, F. and Murnane, R.J. (2004). \textit{The New Division of Labor: How Computers Are Creating the Next Job Market}. Princeton University Press.
+
+\bibitem{busso2020}
+Busso, M. and Messina, J. (2020). \textit{The Inequality Crisis: Latin America and the Caribbean at the Crossroads}. Inter-American Development Bank.
+
+
+\bibitem{de2022}
+De Vries, G.J., Gentile, E., Miroudot, S., and Wacker, K.M. (2020). The Rise of Robots and the Fall of Routine Jobs. \textit{Labour Economics}, 66:101885.
+
+\bibitem{adachi2022}
+Adachi, D., Kawaguchi, D., and Saito, Y. (2022). Robots and Employment: Evidence from Japan. \textit{Journal of Labor Economics}, 42(2):591--634.
+
+\end{thebibliography}
+
+\end{document}

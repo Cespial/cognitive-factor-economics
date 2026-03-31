@@ -1,0 +1,51 @@
+# Environment & secrets
+.env
+.env.local
+.env.template
+__pycache__/
+*.pyc
+.ipynb_checkpoints/
+
+# Large data files (not tracked — use data download scripts to reproduce)
+*.csv
+*.parquet
+*.jsonl
+*.zip
+*.gz
+*.xls
+*.xlsx
+*.pdf
+
+# Upstream symlinks
+data/upstream_auto_col
+
+# Raw data directories (reproducible via scripts)
+augmented_human_capital/data/raw/
+augmented_human_capital/data/processed/
+augmented_human_capital/data/indices/
+augmented_human_capital/data/crosswalks/*.parquet
+
+# Generated outputs (reproducible)
+augmented_human_capital/output/logs/
+augmented_human_capital/output/figures/*.png
+
+# Automatizacion Colombia (has its own repo, heavy data)
+automatizacion_colombia/data/
+automatizacion_colombia/images/
+automatizacion_colombia/*.pdf
+automatizacion_colombia/*.aux
+automatizacion_colombia/*.log
+automatizacion_colombia/*.out
+automatizacion_colombia/*.bbl
+automatizacion_colombia/*.blg
+automatizacion_colombia/*.fdb_latexmk
+automatizacion_colombia/*.fls
+automatizacion_colombia/*.synctex.gz
+
+# OS
+.DS_Store
+Thumbs.db
+
+# IDE
+.vscode/
+.idea/

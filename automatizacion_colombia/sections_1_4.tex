@@ -1,0 +1,369 @@
+% ============================================================================
+\section{Introduction}
+\label{sec:introduction}
+% ============================================================================
+
+The global diffusion of automation and artificial intelligence is reshaping labor markets at a pace that outstrips the capacity of most regulatory frameworks to respond. In advanced economies, the substitution of routine tasks by industrial robots and algorithmic systems has already produced measurable displacement effects: \cite{acemoglu2020robots} estimate that one additional robot per thousand workers in U.S.\ commuting zones reduces the employment-to-population ratio by 0.2 percentage points and average wages by 0.42 percent. The \cite{wef2025} projects a net creation of 78 million jobs globally by 2030---the difference between 170 million new positions and 92 million displaced ones---but distributional consequences within and across countries remain sharply uneven. In developing economies, where labor market institutions are weaker, informality is pervasive, and capital stocks are thin, the dynamics of technological substitution follow a qualitatively different logic that existing frameworks have only begun to address.
+
+Colombia presents a particularly instructive case. The country's non-wage labor costs---comprising mandatory contributions to pension (12\%), health (8.5\%), occupational risk insurance (0.5--6.96\%), social benefits (21.83\%), and parafiscal charges (4--9\%)---impose a surcharge of 46--58\% above the base salary for every formal worker \cite{anif2018}. This regulatory burden, among the highest in Latin America and substantially above the OECD average tax wedge on labor of 36\% \cite{oecd2025voces}, creates a structural incentive for firms to substitute labor with capital whenever technically feasible. At the same time, informality absorbs 55.8\% of total employment, generating a paradox: the workers most exposed to automation on technical grounds---those performing routine cognitive and manual tasks---are frequently shielded from displacement precisely because their informal status generates none of the non-wage costs that make substitution profitable.
+
+Despite this configuration, Colombia's current stock of industrial automation remains among the lowest in the world. Robot density stands at approximately 2--5 units per 10,000 manufacturing workers, compared with 1,012 in South Korea, 415 in Germany, and 397 in Japan \cite{ifr2024}. Investment in research and development amounts to just 0.30\% of GDP, roughly one-seventh of the OECD average. Labor productivity hovers around \$16--21.6 USD per hour, the lowest among OECD member and partner economies. These figures suggest that Colombia currently sits at the base of the automation adoption curve---a position that could change rapidly as the cost of automation technologies falls, generative AI extends the frontier of automatable tasks into cognitive domains, and domestic labor costs continue to rise faster than productivity.
+
+The empirical question that motivates this paper is whether Colombia's non-wage cost structure acts as a catalyst---accelerating the pace at which firms adopt automation relative to what pure technological opportunity would predict. We investigate this question through four complementary empirical strategies. First, using microdata from the \textit{Gran Encuesta Integrada de Hogares} (GEIH) for 2024, we map Frey and Osborne automation probabilities \cite{frey2017future} onto Colombian occupational classifications and estimate individual-level logistic models of automation risk on a sample of $N = 111{,}672$ workers. We find that 53.8\% of observations fall in the high-risk category (automation probability $\geq 0.50$), a figure broadly consistent with the 57--58\% reported by \cite{fedesarrollo2023} and higher than the 37\% estimated by \cite{morales2023risk} using 2019 data. Second, we merge firm-level data from the \textit{Encuesta Anual Manufacturera} (EAM, 2023) with the \textit{Encuesta de Desarrollo e Innovaci\'on Tecnol\'ogica} (EDIT X, 2019--2020) and estimate the elasticity of automation investment with respect to unit labor costs, obtaining a coefficient of $0.84$ ($p < 0.01$). Third, we construct an international panel of approximately 25 countries over 2010--2023 using the Penn World Table 11.0, ILOSTAT, World Development Indicators, and IFR robot data, finding that the elasticity of robot density with respect to GDP per worker is $\hat{\beta} = 3.60$ ($p < 0.01$) in fixed-effects specifications ($N = 226$). Fourth, we develop a novel sectoral Automation Vulnerability Index (AVI) that integrates technical automation potential, productivity dynamics, and capital intensity to rank Colombian economic sectors by composite exposure.
+
+The minimum wage trajectory reinforces the urgency of this analysis. The \textit{salario m\'inimo mensual legal vigente} (SMMLV) rose from COP \$515,000 in 2010 to COP \$1,423,500 in 2025 and COP \$1,750,905 in 2026---a nominal increase of 176.4\% and a real increase of approximately 40--45\% over fifteen years. Over the same period, labor productivity grew at an annual rate of just 1--2\%. The resulting divergence between compensation growth and productivity growth widens the gap between the effective cost of a formal worker and the declining cost of an automation alternative, particularly in sectors where routine task intensity is high.
+
+This paper makes three contributions to the literature. First, it provides the first integrated empirical analysis linking Colombia's non-wage cost structure to automation adoption incentives at the firm level, using matched administrative data from the EAM and EDIT that cover the near-universe of formal manufacturing establishments. Second, it documents what we term the \textit{formality paradox}---the finding that informality, usually conceived as a pathology of developing labor markets, simultaneously represents the strongest practical barrier against technological displacement, since informal workers generate none of the mandatory contributions that make substitution attractive. Third, it offers scenario simulations under alternative regulatory trajectories, quantifying how proposed labor reforms that would increase non-wage costs by 18--34\% could accelerate the displacement of an additional 140,000--500,000 formal positions over a decade.
+
+The remainder of the paper is organized as follows. Section~\ref{sec:theory} develops the theoretical framework, grounding the analysis in the task-based models of Acemoglu and Restrepo and extending them to account for cost-induced adoption and informality. Section~\ref{sec:labor_costs} documents the anatomy of employer labor costs in Colombia, traces minimum wage dynamics, and benchmarks Colombian costs against international comparators. Section~\ref{sec:data} describes the data sources and econometric methodology. Section~\ref{sec:automation_gap} quantifies Colombia's automation gap relative to international peers. Section~\ref{sec:international} reviews country-level evidence on the labor cost--automation nexus. Section~\ref{sec:results} presents the main empirical results. Section~\ref{sec:policy} discusses the policy landscape and regulatory paradoxes. Section~\ref{sec:scenarios} develops scenario projections. Section~\ref{sec:conclusion} concludes with policy recommendations.
+
+
+% ============================================================================
+\section{Theoretical Framework}
+\label{sec:theory}
+% ============================================================================
+
+\subsection{The Task-Based Framework of Acemoglu and Restrepo}
+\label{subsec:task_framework}
+
+The analytical foundation of this paper rests on the task-based framework developed by \cite{acemoglu2019automation} and \cite{acemoglu2020robots}. In contrast to canonical models that treat technology as a factor-augmenting shifter within a production function defined over aggregate capital and labor, the task-based approach disaggregates production into a continuum of tasks, each of which can be performed by either labor or capital (including automation technologies). This disaggregation yields three analytically distinct channels through which automation affects the labor market.
+
+The \textit{displacement effect} operates when automation technologies become capable of performing tasks previously allocated to workers. As machines replace humans in specific tasks, the set of tasks in which labor retains a comparative advantage shrinks, reducing the demand for labor at any given wage. \cite{acemoglu2020robots} estimate that in the United States, one additional robot per thousand workers reduced the employment-to-population ratio by 0.2 percentage points and wages by 0.42\%, with effects concentrated in routine manual occupations in manufacturing. The magnitude of displacement depends critically on the \textit{elasticity of substitution} between automation capital and labor. When $\sigma > 1$, a decline in the price of automation capital leads firms to substitute toward machines at a rate that more than offsets any income effect, resulting in net labor displacement. Recent empirical estimates place this elasticity well above unity: \cite{cheng2021elasticity} estimate $\sigma \approx 3.8$ using data from 1,618 Chinese manufacturing firms participating in the ``Made in China 2025'' program, while Adachi et al.\ report estimates in the range of 2.14--3.27 for Japanese manufacturing. These values imply that the substitution channel dominates: as the cost of automation falls---or, equivalently, as the cost of labor rises---firms systematically shift toward capital-intensive production methods.
+
+The \textit{reinstatement effect} captures the creation of new tasks in which labor has a comparative advantage. Technological change does not merely automate existing tasks; it also generates novel activities---in design, maintenance, supervision, programming, and interpersonal services---that expand the set of tasks allocated to human workers. Historically, reinstatement has been sufficiently strong to prevent permanent declines in the aggregate labor share, albeit with substantial transitional costs and distributional consequences. The net effect on employment and wages depends on the race between displacement and reinstatement: when new technologies automate existing tasks faster than the economy generates new labor-intensive tasks, aggregate labor demand falls.
+
+The \textit{productivity effect} arises because automation, by reducing costs and increasing output, raises aggregate income and thereby the demand for all goods and services, including those produced with labor. This channel works to counteract displacement, but its magnitude depends on the nature of the automating technology. If the technology generates large productivity gains---as with transformative innovations such as the steam engine or electrification---the productivity effect can be sufficiently strong to increase overall labor demand despite task displacement. If, however, the technology produces only modest efficiency improvements while displacing workers, the productivity effect is weak, and the net impact on labor is unambiguously negative.
+
+Formally, let the economy produce a final good using a continuum of tasks indexed by $i \in [N-1, N]$, where tasks in $[N-1, I]$ are performed by capital and tasks in $(I, N]$ are performed by labor. Output is given by:
+\begin{equation}
+Y = \left[\int_{N-1}^{I} A_K(i)^{\frac{\sigma-1}{\sigma}} \, di + \int_{I}^{N} A_L(i)^{\frac{\sigma-1}{\sigma}} \, di \right]^{\frac{\sigma}{\sigma-1}}
+\label{eq:task_production}
+\end{equation}
+where $A_K(i)$ and $A_L(i)$ denote the productivity of capital and labor, respectively, in task $i$, and $\sigma$ is the elasticity of substitution. Automation expands the threshold $I$, shifting tasks from labor to capital. The critical insight is that the labor share is determined not by the total quantity of labor employed but by the measure of tasks allocated to labor, weighted by their productivity. When $\sigma > 1$, an increase in $I$ reduces the labor share, and the displacement effect dominates the productivity effect unless sufficiently many new tasks are created at the upper end of the continuum (an increase in $N$).
+
+For Colombia, this framework generates a sharp prediction. Non-wage labor costs---pensions, health contributions, occupational risk insurance, social benefits, and parafiscal charges---do not augment the productivity of labor in any task. They function as a pure wedge between the marginal product of a worker and the total cost to the employer. By raising the effective price of labor relative to automation capital, these costs lower the threshold at which it becomes profitable to automate a given task. The higher the non-wage surcharge, the larger the set of tasks for which the cost of a machine falls below the cost of a worker, and the greater the displacement effect. In a country where this surcharge ranges from 46 to 58\% of the base salary, the threshold for profitable automation is substantially lower than in jurisdictions with lighter regulatory burdens.
+
+
+\subsection{So-So Technologies and Cost-Induced Adoption}
+\label{subsec:soso}
+
+A central implication of the task-based framework is that not all automation is welfare-improving. \cite{acemoglu2019automation} introduce the concept of \textit{so-so technologies}---automation systems that are capable of performing tasks previously done by workers but that generate only marginal productivity improvements. Self-checkout kiosks in retail, automated customer service phone trees, and certain robotic process automation (RPA) applications in back-office operations exemplify this category: they displace workers without substantially increasing the quality or quantity of output.
+
+The distinction between transformative and so-so technologies is particularly consequential when automation is driven not by genuine technological superiority but by regulatory cost structures. Consider a firm deciding whether to automate a routine clerical task. If the all-in cost of a human worker (salary plus 46--58\% non-wage surcharge) exceeds the annualized cost of an RPA system, the firm will automate regardless of whether the technology performs the task better, faster, or more reliably. In this scenario, the automation is \textit{cost-induced} rather than \textit{efficiency-induced}: it occurs not because the machine is superior on productivity grounds but because the regulatory environment has made the human alternative artificially expensive. The displacement effect is fully operative, but the productivity effect is negligible. The result is what Acemoglu and Restrepo term ``excessive automation''---a socially suboptimal level of technological substitution driven by distorted relative prices.
+
+\cite{acemoglu2020taxes} document a parallel mechanism in the U.S.\ context, showing that the federal tax code creates an effective tax rate on labor income exceeding 25\%, while the effective tax rate on equipment capital is approximately 15\%. This asymmetry tilts the capital--labor decision at the margin, inducing firms to automate tasks that would be more efficiently performed by workers under neutral taxation. The Colombian case amplifies this distortion: while the U.S.\ tax wedge between labor and capital is on the order of 10 percentage points, Colombia's non-wage cost surcharge of 46--58\% on formal employment---combined with minimal taxation of capital equipment---creates a wedge that may exceed 40 percentage points. The prediction is unambiguous: Colombia's cost structure should induce a pattern of automation adoption that is biased toward so-so technologies, generating displacement without commensurate productivity gains.
+
+
+\subsection{Ripple Effects Across the Labor Market}
+\label{subsec:ripples}
+
+The displacement effects of automation are not confined to the tasks and occupations directly automated. As workers displaced from automated positions seek employment elsewhere, they increase labor supply in adjacent sectors and occupations, compressing wages and potentially crowding out incumbent workers. These \textit{ripple effects}, documented empirically by \cite{acemoglu2020robots} in the context of U.S.\ manufacturing automation, imply that the aggregate labor market impact of automation exceeds the direct displacement measured at the task level.
+
+In the Colombian context, ripple effects interact with the dual structure of the labor market in a distinctive way. When automation displaces formal workers---those generating the full burden of non-wage costs---the displaced individuals face a choice between formal re-employment (with job search frictions amplified by sectoral mismatch and rigidity of wage floors) and absorption into the informal sector. The informal sector, characterized by lower wages, no non-wage cost obligations, and minimal barriers to entry, serves as a labor market of last resort. The consequence is that automation in the formal sector does not simply destroy jobs; it reallocates workers from high-cost formal positions to low-cost informal ones, compressing informal wages further while leaving formal wage floors unchanged due to minimum wage rigidity. This mechanism generates a perverse distributional pattern: the workers least able to absorb income losses---those with lower skills and fewer savings---bear the brunt of adjustment, while the regulatory framework that triggered the automation remains intact.
+
+Furthermore, sectoral ripple effects in Colombia are amplified by the concentration of formal employment in a relatively narrow set of industries. Manufacturing, financial services, and formal commerce together account for a disproportionate share of formal wage employment. Automation in these sectors releases workers who cannot easily transition to other formal activities---partly because the non-wage cost structure makes new formal hiring expensive, and partly because the skill requirements of growing sectors (particularly technology and professional services) do not match the profiles of displaced workers. The result is a ratchet effect: each wave of automation shrinks the formal sector's share of total employment, expanding informality and reducing the tax base that finances the very social protection systems embedded in the non-wage cost structure.
+
+
+\subsection{Informality as a Buffer}
+\label{subsec:informality_theory}
+
+The role of informality in mediating the labor market effects of automation is undertheorized in the existing literature, which has been developed primarily in the context of advanced economies with near-universal formality. In Colombia, where 55.8\% of employment is informal, informality is not a residual category but a structural feature that fundamentally alters the automation calculus.
+
+We propose a dual-sector framework that distinguishes between formal and informal employment along three dimensions relevant to automation incentives. First, \textit{cost structure}: formal workers generate non-wage costs of 46--58\% above salary, while informal workers generate no mandatory contributions, making the effective cost differential between formal and informal labor substantially larger than the observed wage gap. Second, \textit{capital access}: informal firms---overwhelmingly microenterprises and self-employed individuals---lack the financial resources, credit access, and organizational capacity to invest in automation technologies, even when such technologies would be technically feasible. Third, \textit{regulatory visibility}: informal establishments operate outside the regulatory perimeter, facing neither the cost obligations that incentivize automation nor the competitive pressures from automated formal firms that would force technological upgrading.
+
+The intersection of these three dimensions produces what we term the \textit{formality paradox}. Workers in informal employment frequently perform tasks with high \textit{technical} automation potential---routine manual tasks in agriculture, construction, and petty commerce that are, in principle, amenable to mechanization or digitization. Yet their \textit{practical} automation risk is low because their employers have neither the incentive (no non-wage cost savings from substitution) nor the capacity (no capital for technology investment) to automate. Conversely, workers in formal employment performing moderate-risk tasks may face high \textit{effective} automation risk because the non-wage cost surcharge makes substitution profitable even when the technology offers only marginal productivity improvements. The practical implication is that automation risk in Colombia is not well predicted by the technical characteristics of occupations alone; it requires joint consideration of task content, employment formality, firm size, and sectoral cost structures.
+
+This paradox carries a troubling policy implication. Efforts to increase formality---long a central objective of Colombian labor market policy---may inadvertently increase the economy's vulnerability to automation. As informal workers transition to formal employment and begin generating non-wage cost obligations, they enter the zone in which technological substitution becomes profitable. Formalization without simultaneous investment in worker skills and productivity effectively converts low-cost, automation-resistant informal positions into high-cost, automation-vulnerable formal ones. The challenge for policy, therefore, is to design labor market institutions that promote formality and social protection without creating cost structures that accelerate displacement.
+
+In the empirical analysis that follows, we operationalize this framework by constructing measures of automation risk that interact technical automation probabilities with formality status, firm size, and sectoral cost incentives. The resulting \textit{effective} automation risk measure differs substantially from measures based on task content alone, and the gap between technical and effective risk is largest in precisely the sectors---agriculture, construction, domestic services---where informality rates are highest.
+
+
+% ============================================================================
+\section{Labor Cost Structure in Colombia}
+\label{sec:labor_costs}
+% ============================================================================
+
+\subsection{Anatomy of Total Employer Cost}
+\label{subsec:cost_anatomy}
+
+The total cost of employing a formal worker in Colombia comprises the base salary plus a series of mandatory contributions and benefits that, in aggregate, add between 46\% and 58\% to the wage bill. This section disaggregates these costs into their constituent components, drawing on regulatory provisions codified in the \textit{C\'odigo Sustantivo del Trabajo} and subsequent legislation, supplemented by cost calculations from \cite{anif2018} and the OECD.
+
+\textbf{Social security contributions.} Employers must contribute 12\% of the worker's salary to the pension system (\textit{fondo de pensiones}), a mandatory charge that applies uniformly across firm sizes and sectors. Health insurance (\textit{salud}) requires an employer contribution of 8.5\%, although firms meeting the conditions established by Law 1607 of 2012---specifically, employers of workers earning up to 10 SMMLV---may be exonerated from this charge. Occupational risk insurance (\textit{Administradora de Riesgos Laborales}, ARL) varies by risk class from 0.522\% (Class I, office work) to 6.96\% (Class V, mining and construction), with the modal rate for manufacturing establishments falling in Class III (2.436\%). The combined social security burden thus ranges from approximately 21\% to 27.5\% of the base salary, depending on risk class and exoneration status.
+
+\textbf{Social benefits (\textit{prestaciones sociales}).} Colombian labor law mandates four categories of benefits that together add 21.83\% to the base salary. The \textit{prima de servicios} (service bonus), equivalent to one month's salary paid in two installments, represents 8.33\% of annual compensation. \textit{Cesant\'ias} (severance savings), also equivalent to one month's salary deposited annually, add another 8.33\%. Interest on \textit{cesant\'ias} (\textit{intereses sobre cesant\'ias}), payable at 12\% of the accumulated balance, contributes approximately 1\% of salary. Paid vacation---15 working days per year---adds 4.17\% of the annual wage. Unlike social security contributions, these benefits are non-exonerable and apply to all formal employment relationships regardless of firm size or sector.
+
+\textbf{Parafiscal contributions.} Contributions to the \textit{Instituto Colombiano de Bienestar Familiar} (ICBF, 3\%), the \textit{Servicio Nacional de Aprendizaje} (SENA, 2\%), and the \textit{Cajas de Compensaci\'on Familiar} (CCF, 4\%) total 9\% of payroll for non-exonerated employers. Law 1607 of 2012 exonerated qualifying employers from the ICBF and SENA contributions, reducing the parafiscal burden to 4\% (CCF only) for firms paying workers up to 10 SMMLV. The effective parafiscal rate thus varies between 4\% and 9\% depending on exoneration eligibility.
+
+Table~\ref{tab:cost_breakdown} summarizes the full cost structure. The minimum total factor prestacional is approximately 1.46 (46\% over base salary) for exonerated employers with low-risk workers, rising to 1.58 (58\% over base salary) for non-exonerated employers in high-risk sectors. The midpoint estimate of approximately 52\% is broadly consistent with the 53\% figure reported by \cite{anif2018} and the OECD's calculation that total labor costs in Colombia equal 45\% of gross income, compared with the OECD average of 36\%.
+
+\begin{table}[H]
+\centering
+\caption{Decomposition of Employer Labor Costs in Colombia (\% of Base Salary)}
+\label{tab:cost_breakdown}
+\begin{threeparttable}
+\begin{tabular}{lcc}
+\toprule
+\textbf{Component} & \textbf{Rate (\%)} & \textbf{Notes} \\
+\midrule
+\multicolumn{3}{l}{\textit{Social Security Contributions}} \\
+\quad Pension & 12.00 & Mandatory \\
+\quad Health & 0.00--8.50 & Exonerable (Law 1607) \\
+\quad Occupational Risk (ARL) & 0.52--6.96 & By risk class (I--V) \\
+\midrule
+\multicolumn{3}{l}{\textit{Social Benefits (Prestaciones)}} \\
+\quad Prima de servicios & 8.33 & One month's salary \\
+\quad Cesant\'ias & 8.33 & One month's salary \\
+\quad Interest on cesant\'ias & 1.00 & 12\% of cesant\'ias \\
+\quad Paid vacation & 4.17 & 15 working days \\
+\midrule
+\multicolumn{3}{l}{\textit{Parafiscal Contributions}} \\
+\quad ICBF & 0.00--3.00 & Exonerable \\
+\quad SENA & 0.00--2.00 & Exonerable \\
+\quad CCF & 4.00 & Non-exonerable \\
+\midrule
+\textbf{Total (minimum)} & \textbf{$\approx$ 46} & Exonerated, Class I \\
+\textbf{Total (maximum)} & \textbf{$\approx$ 58} & Non-exonerated, Class V \\
+\bottomrule
+\end{tabular}
+\begin{tablenotes}
+\small
+\item \textit{Sources:} C\'odigo Sustantivo del Trabajo; Law 1607/2012; \cite{anif2018}. Health and ICBF/SENA exonerations apply to employers of workers earning $\leq$ 10 SMMLV.
+\end{tablenotes}
+\end{threeparttable}
+\end{table}
+
+From the perspective of automation incentives, the critical feature of this cost structure is its \textit{proportionality to the wage}: every peso of salary increase generates an additional 46--58 centavos in mandatory surcharges. This multiplicative relationship means that minimum wage increases have an amplified effect on total labor costs, widening the gap between the cost of a formal worker and the cost of an automation alternative. It also means that the automation incentive is strongest for firms employing workers at or near the minimum wage---precisely the segment where routine task intensity is highest and technical automation potential is greatest.
+
+
+\subsection{Minimum Wage Evolution 2010--2026}
+\label{subsec:min_wage}
+
+The trajectory of the Colombian minimum wage over the past fifteen years has been characterized by persistent nominal increases that substantially outpace labor productivity growth. Table~\ref{tab:min_wage} documents the evolution of the SMMLV from 2010 to 2026.
+
+\begin{table}[H]
+\centering
+\caption{Evolution of the Colombian Minimum Wage (SMMLV), 2010--2026}
+\label{tab:min_wage}
+\begin{threeparttable}
+\begin{tabular}{lccc}
+\toprule
+\textbf{Year} & \textbf{SMMLV (COP)} & \textbf{Nominal $\Delta$ (\%)} & \textbf{Cumulative nominal $\Delta$ (\%)} \\
+\midrule
+2010 & 515,000 & --- & --- \\
+2012 & 566,700 & --- & 10.0 \\
+2015 & 644,350 & --- & 25.1 \\
+2018 & 781,242 & --- & 51.7 \\
+2020 & 877,803 & --- & 70.4 \\
+2022 & 1,000,000 & --- & 94.2 \\
+2023 & 1,160,000 & 16.0 & 125.2 \\
+2024 & 1,300,000 & 12.1 & 152.4 \\
+2025 & 1,423,500 & 9.5 & 176.4 \\
+2026 & 1,750,905 & 23.0 & 240.0 \\
+\bottomrule
+\end{tabular}
+\begin{tablenotes}
+\small
+\item \textit{Sources:} Presidential decrees. The 2026 figure reflects the enacted minimum wage increase.
+\end{tablenotes}
+\end{threeparttable}
+\end{table}
+
+Between 2010 and 2025, the SMMLV increased by 176.4\% in nominal terms. After adjusting for cumulative inflation, the real increase over this fifteen-year period is approximately 40--45\%. This real appreciation is noteworthy in two respects. First, it significantly exceeds the growth rate of labor productivity, which averaged 1--2\% per year over the same period. The resulting divergence between compensation and productivity---the defining feature of rising unit labor costs---directly increases the automation incentive embedded in the cost structure. Second, the pace of nominal increases accelerated markedly under the Petro administration (2022--2026): the three-year period from 2023 to 2026 saw a cumulative nominal increase of approximately 42\%, culminating in the 23\% increase decreed for 2026 that raised the SMMLV from COP \$1,423,500 to COP \$1,750,905.
+
+When the non-wage cost multiplier is applied, the total monthly cost to an employer of a minimum-wage worker in 2026 falls in the range of COP \$2,556,321 (at the 46\% minimum surcharge) to COP \$2,766,430 (at the 58\% maximum surcharge). For a worker earning precisely the minimum wage, the non-wage component alone---between COP \$805,416 and COP \$1,015,525 per month---exceeds the entire pre-tax minimum wage of many neighboring countries. This cost level is not trivial for the predominantly small and medium-sized enterprises that constitute the bulk of Colombia's formal sector: according to DANE data, over 90\% of formal establishments employ fewer than 50 workers, and labor costs typically represent 30--50\% of their total operating expenses.
+
+
+\subsection{The Productivity Paradox}
+\label{subsec:productivity_paradox}
+
+The preceding analysis of rising labor costs acquires particular force when set against Colombia's persistently low labor productivity. According to OECD and DANE estimates, Colombian labor productivity---measured as GDP per hour worked---ranges between \$16 and \$21.6 USD (PPP-adjusted), placing the country at or near the bottom of the OECD membership and partnership group. This figure is roughly one-third of the U.S.\ level (\$74.8 per hour) and less than half the OECD average. Yet Colombian labor costs, measured as a share of gross income, stand at 45\%---nine percentage points above the OECD average of 36\%.
+
+This combination---high relative labor costs and low absolute productivity---defines what we term the \textit{productivity paradox} of the Colombian labor market. In a well-functioning economy, high labor costs would be supported by correspondingly high labor productivity: workers would be expensive because they are productive. In Colombia, the reverse obtains: workers are expensive (relative to output) not because they are highly productive but because the regulatory framework imposes mandatory surcharges that inflate the cost of labor beyond what productivity levels would justify. The \textit{unit labor cost}---the ratio of total compensation to output per worker---is consequently elevated, creating a structural incentive to substitute toward capital even when the absolute level of wages is low by international standards.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.85\textwidth]{fig_scatter_productivity_vs_laborshare.pdf}
+\caption{Labor share of value added versus productivity across Colombian manufacturing sectors. Each point represents a 2-digit CIIU sector. The negative relationship indicates that higher-productivity sectors tend to have lower labor shares, consistent with capital deepening in more productive industries.}
+\label{fig:productivity_vs_laborshare}
+\end{figure}
+
+Figure~\ref{fig:productivity_vs_laborshare} illustrates this relationship at the sectoral level within Colombian manufacturing. Higher-productivity sectors systematically exhibit lower labor shares of value added, suggesting that capital deepening---including automation---is concentrated precisely where productivity is highest and the cost incentive for substitution is most acute. This pattern is consistent with the theoretical prediction: sectors where labor costs represent a large share of value added face the strongest incentive to automate, and those that have already done so exhibit higher productivity and lower labor shares.
+
+The productivity paradox also has a dynamic dimension. Annual productivity growth in Colombia has averaged just 1--2\% over the past decade, while nominal wage increases have averaged 8--12\% per year (driven largely by minimum wage adjustments). This differential implies that unit labor costs are rising at approximately 6--10\% annually in nominal terms---a rate that compounds rapidly and continuously shifts the automation threshold downward. Each year, a new tranche of tasks becomes cheaper to automate than to perform with formal human labor, and the cumulative effect over a decade is substantial.
+
+
+\subsection{International Comparison}
+\label{subsec:international_comparison}
+
+To place Colombia's labor cost structure in comparative perspective, Table~\ref{tab:international_comparison} presents hourly compensation in manufacturing, labor productivity, and industrial robot density for selected countries spanning the automation adoption spectrum.
+
+\begin{table}[H]
+\centering
+\caption{International Comparison: Labor Costs, Productivity, and Robot Density}
+\label{tab:international_comparison}
+\begin{threeparttable}
+\begin{tabular}{lccc}
+\toprule
+\textbf{Country} & \textbf{Hourly comp.\ (USD)} & \textbf{Productivity (USD/hr)} & \textbf{Robots/10,000} \\
+\midrule
+South Korea & 20.72 & 42.3 & 1,012 \\
+Germany & 45.79 & 68.5 & 415 \\
+Japan & 27.50 & 49.2 & 397 \\
+United States & 35.67 & 74.8 & 295 \\
+China & 6.50 & 18.7 & 392 \\
+Mexico & 4.82 & 21.8 & 6 \\
+Chile & 7.20 & 29.5 & 3 \\
+\textbf{Colombia} & \textbf{3--5} & \textbf{16--21.6} & \textbf{2--5} \\
+\bottomrule
+\end{tabular}
+\begin{tablenotes}
+\small
+\item \textit{Sources:} Hourly compensation: BLS International Labor Comparisons and national sources. Productivity: OECD, ILOSTAT. Robot density: \cite{ifr2024}. Colombia ranges reflect variation across data sources and measurement methods.
+\end{tablenotes}
+\end{threeparttable}
+\end{table}
+
+Several patterns merit attention. First, Colombia's hourly compensation of \$3--5 USD is the lowest in the comparison group in absolute terms---yet, as documented above, Colombian labor costs as a share of value added (45\%) exceed the OECD average (36\%). This apparent contradiction reflects the low denominator: Colombian workers are inexpensive in absolute terms but expensive relative to what they produce. Second, the relationship between hourly compensation and robot density is strongly positive across countries, consistent with the theoretical prediction that higher labor costs incentivize automation adoption. South Korea, with hourly compensation of \$20.72, has a robot density 200--500 times higher than Colombia's. Germany, at \$45.79 per hour, maintains 415 robots per 10,000 workers. China provides a particularly informative comparison: with hourly compensation of approximately \$6.50---only modestly above Colombia's---China has achieved a robot density of 392 per 10,000 workers, driven by a deliberate industrial policy (``Made in China 2025'') that has subsidized automation investment on a massive scale.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.85\textwidth]{fig1_productivity_vs_robots.pdf}
+\caption{Cross-country relationship between labor productivity (GDP per worker, log scale) and robot density (robots per 10,000 manufacturing workers, log scale). The positive slope confirms that higher productivity economies adopt more robots. Colombia occupies the lower-left quadrant, with both low productivity and near-zero robot density.}
+\label{fig:prod_vs_robots}
+\end{figure}
+
+Third, the comparison with Mexico is instructive for the Colombian case. Mexico, with comparable hourly compensation (\$4.82) and higher productivity (\$21.8/hr), has a robot density of only 6 per 10,000---marginally above Colombia's range. This suggests that low absolute wages, even when paired with moderate non-wage costs, can delay automation adoption by keeping the total cost of labor below the automation threshold for most tasks. However, Mexico's robot density has been rising rapidly in recent years, driven by nearshoring-related greenfield investments in automotive and electronics manufacturing that incorporate automation from inception. Colombia, lacking comparable manufacturing FDI inflows, faces a different trajectory: automation is more likely to emerge as a substitution response to rising formal labor costs than as a feature of new capital investment.
+
+Figure~\ref{fig:prod_vs_robots} plots the cross-country relationship between labor productivity and robot density, confirming the strong positive association and locating Colombia in the lower-left quadrant---low productivity, near-zero automation. The key analytical question is whether Colombia will traverse this space gradually, following a trajectory consistent with its current productivity level, or whether the combination of rapidly rising labor costs, falling automation prices, and the emergence of generative AI will produce a discontinuous jump that compresses several decades of adoption into a much shorter period.
+
+
+% ============================================================================
+\section{Data and Methodology}
+\label{sec:data}
+% ============================================================================
+
+This section describes the data sources, variable construction, and econometric specifications employed in the empirical analysis. We draw on five principal data sources---three domestic surveys and two international panel datasets---and implement four complementary empirical strategies: (i) an individual-level logistic model of automation risk, (ii) a firm-level analysis of the labor cost--automation investment nexus, (iii) an international panel regression of robot density on productivity and cost determinants, and (iv) scenario simulations under alternative policy trajectories.
+
+
+\subsection{Data Sources}
+\label{subsec:data_sources}
+
+\subsubsection*{Gran Encuesta Integrada de Hogares (GEIH), 2024}
+
+The GEIH, administered by DANE (\textit{Departamento Administrativo Nacional de Estad\'istica}), is Colombia's principal household labor force survey. We use microdata from four months of the 2024 wave---January, May, July, and October---selected to capture seasonal variation across the calendar year. After restricting the sample to individuals aged 18--65 who are employed (either as wage earners or self-employed), excluding observations with missing values on key variables (occupation, income, sector, formality status), and dropping occupational codes that cannot be mapped to the Frey--Osborne classification, we retain $N = 111{,}672$ observations.
+
+The GEIH provides information on occupational classification (CIUO-08, the Colombian adaptation of ISCO-08), sector of employment (CIIU Rev.\ 4), labor income, hours worked, educational attainment, age, sex, firm size, and formality status. Formality is defined following DANE's institutional criterion: a worker is classified as formal if they contribute to both health insurance and a pension fund through their employment. This definition, while standard in the Colombian literature, excludes some workers who are formally employed but whose employers evade contribution obligations; our estimates of formality-related automation exposure are therefore conservative.
+
+\subsubsection*{Encuesta Anual Manufacturera (EAM), 2023}
+
+The EAM is a census-type survey of all manufacturing establishments in Colombia with 10 or more employees or annual production above a threshold value. The 2023 wave covers 6,714 establishments, which we aggregate to the firm level (combining multi-establishment firms) to obtain 6,119 unique firms. The EAM provides detailed information on employment (permanent, temporary, and outsourced workers), total wage bill, mandatory social security contributions, other labor costs, investment in machinery and equipment, value of production, intermediate consumption, and value added. We construct the following key variables from the EAM:
+
+\begin{itemize}[nosep]
+\item \textit{Unit labor cost} (ULC): total labor compensation (wages + benefits + contributions) divided by value added.
+\item \textit{Labor productivity}: value added per worker (or per hour, when hours data are available).
+\item \textit{Automation proxy}: investment in machinery and equipment as a share of total assets, capturing the flow of capital investment that most directly corresponds to automation adoption.
+\item \textit{Firm size}: categorical variable based on employment thresholds (micro: $<$10; small: 10--49; medium: 50--199; large: $\geq$200).
+\end{itemize}
+
+\subsubsection*{Encuesta de Desarrollo e Innovaci\'on Tecnol\'ogica (EDIT X), 2019--2020}
+
+The EDIT X surveys technological innovation activities in the Colombian manufacturing sector during the 2019--2020 biennium. The survey covers 6,798 firms and provides information on investment in R\&D, acquisition of machinery and equipment for innovation purposes, software acquisition, technology transfer, and innovation outcomes (product, process, and organizational innovation). We merge the EDIT X with the EAM using the common firm identifier maintained by DANE's manufacturing census frame, achieving a merge rate of 96.2\% (5,884 matched firms out of 6,119 EAM firms with valid identifiers). The high merge rate reflects the shared sampling frame: both surveys draw from the same DANE manufacturing directory.
+
+From the merged EAM--EDIT dataset, we construct a richer automation measure that combines EAM machinery investment with EDIT innovation expenditures. This composite variable captures both the acquisition of production equipment (EAM) and the adoption of technology specifically intended for process innovation (EDIT), providing a more comprehensive proxy for automation than either source alone.
+
+\subsubsection*{International Panel Dataset}
+
+For the cross-country analysis, we construct a balanced panel of approximately 25 countries over the period 2010--2023, yielding $N = 226$ country-year observations after accounting for missing data. The panel draws on four sources:
+
+\begin{itemize}[nosep]
+\item \textit{Penn World Table 11.0} (PWT): GDP per worker (at PPP), total factor productivity (TFP), capital stock, and labor share of income.
+\item \textit{ILOSTAT}: GDP per hour worked, employment by sector, and labor force composition.
+\item \textit{World Development Indicators} (WDI, World Bank): R\&D expenditure as a percentage of GDP, GDP per capita, and demographic indicators.
+\item \textit{Our World in Data / International Federation of Robotics} (IFR): industrial robots installed and robot density (robots per 10,000 manufacturing workers).
+\end{itemize}
+
+The country sample spans the automation adoption spectrum, including high-density leaders (South Korea, Japan, Germany), mid-range adopters (China, the United States, France), and low-density economies in Latin America (Mexico, Brazil, Chile, Colombia). Country selection is determined by data availability across all four sources for at least eight consecutive years.
+
+\subsubsection*{DANE National Accounts}
+
+We supplement the survey data with DANE's National Accounts series on labor productivity by sector, value added by economic activity, capital stock (\textit{acervos de capital}), and total factor productivity. These series, available at the 12-sector aggregation of CIIU Rev.\ 4, provide the macroeconomic context for the sectoral vulnerability analysis and are used in the construction of the Automation Vulnerability Index.
+
+
+\subsection{Construction of the Automation Vulnerability Index}
+\label{subsec:avi_construction}
+
+A central methodological contribution of this paper is the construction of a sectoral \textit{Automation Vulnerability Index} (AVI) that integrates multiple dimensions of automation exposure into a single composite measure. Existing approaches to measuring automation risk---notably \cite{frey2017future} and \cite{morales2023risk}---rely exclusively on the technical characteristics of occupations, mapping task content to automation probabilities without accounting for the economic incentives or institutional features that determine whether technically feasible automation is actually adopted. The AVI addresses this limitation by combining technical potential with cost incentives and capital intensity.
+
+For each sector $j$, the AVI is defined as:
+\begin{equation}
+\text{AVI}_j = w_1 \times \text{TechnicalPotential}_j + w_2 \times (1 - \text{ProductivityGrowth}_j) + w_3 \times (1 - \text{CapitalIntensity}_j)
+\label{eq:avi}
+\end{equation}
+
+\noindent where the components are constructed as follows:
+
+\begin{itemize}[nosep]
+\item $\text{TechnicalPotential}_j$: the employment-weighted average of Frey--Osborne automation probabilities for all occupations in sector $j$, mapped from SOC codes to CIUO-08 via the ISCO-08 concordance. We implement the mapping at both the 1-digit (major group) and 2-digit (sub-major group) levels of CIUO-08, using the finer classification where sample sizes permit and aggregating to the coarser level otherwise.
+
+\item $\text{ProductivityGrowth}_j$: the compound annual growth rate of labor productivity (value added per worker) in sector $j$ over the preceding five years, normalized to the $[0, 1]$ interval across sectors. The term $(1 - \text{ProductivityGrowth}_j)$ captures the intuition that sectors with stagnant productivity face greater pressure to automate as a means of cost reduction, while high-growth sectors may be generating sufficient returns to absorb rising labor costs without resorting to substitution.
+
+\item $\text{CapitalIntensity}_j$: the ratio of physical capital stock to employment in sector $j$, normalized to $[0, 1]$. The term $(1 - \text{CapitalIntensity}_j)$ captures the remaining scope for capital deepening: sectors that are already capital-intensive have less room for additional automation (the marginal return to further capital investment is lower), while labor-intensive sectors have greater latent automation potential.
+\end{itemize}
+
+The weights $w_1 = 0.40$, $w_2 = 0.35$, and $w_3 = 0.25$ are assigned based on the relative importance of each dimension in the theoretical framework. Technical potential receives the largest weight because it determines the \textit{feasibility frontier}---the upper bound on automation regardless of cost incentives. Productivity growth receives the second-largest weight because it captures the \textit{urgency} of the automation decision: firms in low-growth sectors face stronger competitive pressure to reduce costs through substitution. Capital intensity receives the smallest weight because it captures a \textit{residual capacity} effect that is conditional on the other two dimensions. We assess the sensitivity of the AVI rankings to alternative weight specifications in the robustness analysis.
+
+
+\subsection{International Panel Specification}
+\label{subsec:panel_spec}
+
+The international panel analysis estimates the relationship between labor market characteristics and robot adoption across countries and over time. The baseline specification is:
+\begin{equation}
+\log(\text{RobotDensity}_{it}) = \alpha + \beta_1 \log(\text{Productivity}_{it}) + \beta_2 \left(\frac{\text{R\&D}}{\text{GDP}}\right)_{it} + \beta_3 \log(\text{GDP per worker}_{it}) + \mu_i + \varepsilon_{it}
+\label{eq:panel}
+\end{equation}
+
+\noindent where $i$ indexes countries, $t$ indexes years, $\mu_i$ are country fixed effects, and $\varepsilon_{it}$ is the idiosyncratic error term. Robot density is measured as the number of industrial robots per 10,000 manufacturing workers (IFR/Our World in Data). Productivity is measured as GDP per hour worked (ILOSTAT). R\&D/GDP captures the technological absorptive capacity of the economy (WDI). GDP per worker, from the PWT 11.0, serves as a comprehensive measure of economic development that subsumes multiple channels---capital accumulation, human capital, institutional quality---through which income levels affect automation adoption.
+
+We estimate the model using both fixed effects (FE) and random effects (RE) and apply the Hausman test to adjudicate between specifications. The FE estimator controls for all time-invariant country characteristics (institutional frameworks, geographic factors, industrial structure) that might confound the relationship between labor costs and automation, identifying the effect from within-country variation over time. The RE estimator, which assumes that country-specific effects are uncorrelated with the regressors, provides more efficient estimates if the assumption holds.
+
+The key parameter of interest is $\beta_3$, the elasticity of robot density with respect to GDP per worker. A positive and significant $\beta_3$ is consistent with the hypothesis that higher labor costs (proxied by higher income levels, which correlate with higher wages and non-wage burdens) drive automation adoption. In the baseline FE specification, we obtain $\hat{\beta}_3 = 3.60$ ($p < 0.01$, $N = 226$), implying that a 10\% increase in GDP per worker is associated with a 36\% increase in robot density, controlling for productivity, R\&D intensity, and country fixed effects.
+
+
+\subsection{Individual-Level Risk Model}
+\label{subsec:individual_model}
+
+At the individual level, we estimate the probability that a worker faces high automation risk as a function of demographic, occupational, and employment characteristics. The dependent variable is a binary indicator equal to one if the worker's occupation has a Frey--Osborne automation probability $\geq 0.50$ (``high risk'') and zero otherwise. The baseline specification is a logistic regression:
+
+\begin{equation}
+\Prob(\text{high\_risk}_i = 1) = \Lambda\left(\beta_0 + \beta_1 \cdot \text{formal}_i + \beta_2 \cdot \text{female}_i + \beta_3 \cdot \text{age}_i + \beta_4 \cdot \text{age}_i^2 + \beta_5 \cdot \text{educ}_i + \beta_6 \cdot \log(\text{income}_i) + \beta_7 \cdot \text{hours}_i + \beta_8 \cdot \text{firm\_size}_i + \beta_9 \cdot \text{sector}_i\right)
+\label{eq:logit}
+\end{equation}
+
+\noindent where $\Lambda(\cdot)$ denotes the logistic CDF, $i$ indexes individual workers, and the covariates are defined as follows. \textit{Formal} is a binary indicator for formal employment (contributing to both health and pension). \textit{Female} is a binary sex indicator. \textit{Age} enters quadratically to capture potential non-linearities in the age--automation risk relationship. \textit{Educ} is an ordered categorical variable for educational attainment (none/primary, secondary, technical/technological, university, postgraduate). \textit{Log(income)} is the natural logarithm of monthly labor income in COP. \textit{Hours} is weekly hours worked. \textit{Firm\_size} is a categorical variable (micro, small, medium, large). \textit{Sector} is a set of dummy variables for 1-digit CIIU economic sectors.
+
+We report results as both coefficient estimates and average marginal effects (AMEs), the latter providing a direct interpretation of the change in predicted probability associated with a unit change in each covariate. The model is estimated on the full GEIH sample ($N = 111{,}672$) with robust standard errors clustered at the sector level to account for within-sector correlation in automation risk.
+
+The mapping of Frey--Osborne automation probabilities to Colombian occupations follows a three-step procedure. First, we extract the 702 occupation-level probabilities from the Frey and Osborne (2017) appendix, coded to the U.S.\ Standard Occupational Classification (SOC). Second, we use the ILO's SOC-to-ISCO-08 crosswalk to convert these probabilities to the International Standard Classification of Occupations. Third, we map ISCO-08 codes to CIUO-08 codes using the concordance maintained by DANE, which is a direct adaptation of ISCO-08. Where multiple SOC codes map to a single CIUO-08 code, we take the employment-weighted average of the corresponding automation probabilities. This procedure yields automation probability estimates for 41 occupational groups at the 2-digit CIUO-08 level and 9 major groups at the 1-digit level.
+
+\subsubsection*{Firm-Level Model}
+
+The firm-level analysis estimates the elasticity of automation investment with respect to unit labor costs using the merged EAM--EDIT dataset. The specification is:
+\begin{equation}
+\log(\text{automation\_proxy}_{f}) = \beta_0 + \beta_1 \cdot \log(\text{ULC}_{f}) + \beta_2 \cdot \log(\text{productivity}_{f}) + \beta_3 \cdot \text{firm\_size}_{f} + \beta_4 \cdot \text{sector}_{f} + \varepsilon_{f}
+\label{eq:firm}
+\end{equation}
+
+\noindent where $f$ indexes firms, the automation proxy is the ratio of machinery and equipment investment to total assets, ULC is total labor compensation divided by value added, productivity is value added per worker, and firm size and sector enter as categorical controls. The coefficient $\beta_1$ captures the cost--automation elasticity: the percentage change in automation investment associated with a one-percent increase in unit labor costs, controlling for productivity, scale, and sector. Our baseline estimate of $\hat{\beta}_1 = 0.84$ ($p < 0.01$) indicates a strong positive relationship: firms facing higher unit labor costs invest significantly more in machinery and equipment, consistent with cost-induced substitution.
+
+\subsubsection*{Simulation Framework}
+
+To quantify the labor market implications of alternative policy scenarios, we implement a Monte Carlo simulation framework with 1,000 draws per scenario. The simulation proceeds in three steps. First, we use the estimated logit coefficients from Equation~\ref{eq:logit} to compute baseline predicted probabilities of high automation risk for each worker in the GEIH sample. Second, we perturb the labor cost parameters---specifically, the non-wage cost multiplier and the minimum wage level---according to five scenarios: (i) baseline (current trajectory), (ii) moderate reform (non-wage costs reduced by 5 percentage points), (iii) accelerated costs (labor reform increasing non-wage costs by 18\%), (iv) aggressive reform (costs increase by 34\%), and (v) technology shock (automation threshold reduced by 20\% due to AI cost decline). Third, we translate changes in the automation probability threshold into projected job displacement, calibrating the substitution response using the elasticity of substitution parameter $\sigma$. Following the empirical literature, we evaluate the simulation at three values: $\sigma = 1.5$ (conservative), $\sigma = 2.5$ (moderate), and $\sigma = 3.8$ (the point estimate from \cite{cheng2021elasticity}). Confidence intervals are constructed from the empirical distribution of outcomes across Monte Carlo draws, incorporating parameter uncertainty from the first-stage logit estimation.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.85\textwidth]{fig6_correlation_matrix.pdf}
+\caption{Correlation matrix of key variables in the international panel dataset. Strong positive correlations between GDP per worker, labor productivity, and robot density confirm the substitution hypothesis. R\&D intensity is positively correlated with all automation-related variables.}
+\label{fig:correlation_matrix}
+\end{figure}
+
+Figure~\ref{fig:correlation_matrix} displays the correlation structure among the principal variables in the international panel, confirming the strong positive associations between income levels, productivity, R\&D investment, and robot adoption that motivate the empirical specifications. The high correlation between GDP per worker and robot density ($r > 0.7$) is consistent with the theoretical prediction that the automation incentive increases monotonically with the cost of labor, while the positive association between R\&D/GDP and robot density ($r > 0.5$) underscores the complementary role of absorptive capacity in translating cost incentives into actual technology adoption.
