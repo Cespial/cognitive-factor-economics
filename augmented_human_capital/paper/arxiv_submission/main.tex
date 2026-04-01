@@ -13,6 +13,7 @@
 \usepackage{setspace}
 \usepackage{enumitem}
 \usepackage{xcolor}
+\usepackage{float}
 
 \geometry{margin=1in}
 \onehalfspacing
@@ -218,9 +219,31 @@ The AHC index passes four validation tests:
 \begin{enumerate}[leftmargin=*]
 \item \textbf{Convergent validity}: $\mathrm{cor}(AHC_o, \text{Felten AIOE}) = +0.86$ and $\mathrm{cor}(AHC_o, \text{Eloundou GPT-}\beta) = +0.79$---high agreement with existing AI exposure measures that capture related (though not identical) constructs.
 \item \textbf{Discriminant validity}: $\mathrm{cor}(AHC_o, \text{Frey-Osborne}) = -0.79$ and $\mathrm{cor}(AHC_o, \text{Webb Robots}) = -0.89$. Augmentation and automation/robotization are opposing dimensions.
-\item \textbf{Face validity}: highest-AHC sectors are Education (55.2), Professional Services (53.8), Public Administration (50.0); lowest are Transport (37.9), Domestic Workers (38.9), Construction (39.5).
+\item \textbf{Face validity}: highest-AHC sectors are Education (55.2), Professional Services (53.8), Public Administration (50.0); lowest are Transport (37.9), Domestic Workers (38.9), Construction (39.5). See Figure~\ref{fig:sector}.
 \item \textbf{Inter-rater reliability}: re-scoring a 20\% subsample ($n = 3{,}666$ paired tasks) with Claude Sonnet 4 yields Pearson $r = 0.76$, Spearman $\rho = 0.75$ ($p < 10^{-300}$), and Krippendorff's $\alpha = 0.71$ (after adjusting for a systematic level bias of 8.6 points). This exceeds the standard reliability threshold of $\alpha > 0.7$, confirming that the AHC scores are consistent across LLM models.
 \end{enumerate}
+
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=\textwidth]{figs/fig2_ahc_by_sector.pdf}
+\caption{Augmentable Human Capital (AHC) score by sector. Sectors above the median (blue) are $H^A$-intensive; sectors below (gray) are $H^P$- or $H^C$-intensive. Education, professional services, and public administration rank highest.}
+\label{fig:sector}
+\end{figure}
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=0.8\textwidth]{figs/fig3_ahc_vs_fo.pdf}
+\caption{AHC score vs.\ Frey--Osborne automation probability at the occupation level ($n = 430$). The strong negative correlation ($r = -0.79$) confirms that augmentation and automation are opposing dimensions. Bubble size proportional to employment.}
+\label{fig:scatter}
+\end{figure}
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=\textwidth]{figs/fig7_validation.pdf}
+\caption{External validation: correlation of the AHC index with seven existing AI exposure indices. Green bars indicate convergent validity (AHC correlates positively with measures of AI-relevant cognitive content); red bars indicate discriminant validity (AHC correlates negatively with measures of automation/robotization risk).}
+\label{fig:validation}
+\end{figure}
 
 
 % ============================================================
@@ -379,7 +402,14 @@ Three patterns emerge (Table~\ref{tab:heterogeneity}). First, the augmentation p
 
 Second, the premium is gender-asymmetric: significant for men ($+$0.028) but insignificant for women ($-$0.006). This likely reflects occupational sorting: women in Colombia are overrepresented in sectors where the AI adoption proxy is low.
 
-Third, sectoral variation is large: Health ($+$0.608) and Education ($+$0.203) show massive augmentation effects, while Agriculture and Manufacturing show negative or null effects.
+Third, sectoral variation is large: Health ($+$0.608) and Education ($+$0.203) show massive augmentation effects, while Agriculture and Manufacturing show negative or null effects. Figure~\ref{fig:hetero} summarizes these results.
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=\textwidth]{figs/fig5_heterogeneity.pdf}
+\caption{Heterogeneity of the augmentation premium ($\beta_2$: AHC$\times$D interaction) across subgroups. Blue bars: significant positive premium. Red bars: significant negative. Gray: not significant. The formal/informal split and the age gradient are the strongest patterns.}
+\label{fig:hetero}
+\end{figure}
 
 \subsection{Wage Distribution Effects}
 
@@ -397,7 +427,14 @@ $H^A \times D$ & $+$0.014$^{*}$ & $+$0.021$^{***}$ & $+$0.118$^{***}$ & $+$0.223
 \end{tabular}
 \end{center}
 
-The augmentation premium at the 90th percentile ($+$0.269) is 19 times larger than at the 10th percentile ($+$0.014). This means AI augmentation is \textit{inequality-increasing}: high-wage workers in augmentable occupations capture disproportionately more of the augmentation rent. This result parallels the classical skill premium finding but through a different mechanism---not returns to education \textit{per se}, but returns to the cognitive composition of work.
+The augmentation premium at the 90th percentile ($+$0.269) is 19 times larger than at the 10th percentile ($+$0.014). This means AI augmentation is \textit{inequality-increasing}: high-wage workers in augmentable occupations capture disproportionately more of the augmentation rent (Figure~\ref{fig:quantile}). This result parallels the classical skill premium finding but through a different mechanism---not returns to education \textit{per se}, but returns to the cognitive composition of work.
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=\textwidth]{figs/fig6_quantile_regression.pdf}
+\caption{Augmentation premium across the wage distribution. Left: AHC level effect ($\beta_1$), which turns positive above the median. Right: AHC$\times$D interaction ($\beta_2$), which is 19 times larger at $\tau = 0.90$ than at $\tau = 0.10$, indicating that AI augmentation is inequality-increasing.}
+\label{fig:quantile}
+\end{figure}
 
 
 % ============================================================
