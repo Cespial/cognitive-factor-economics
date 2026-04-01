@@ -219,7 +219,7 @@ The AHC index passes four validation tests:
 \item \textbf{Convergent validity}: $\mathrm{cor}(AHC_o, \text{Felten AIOE}) = +0.86$ and $\mathrm{cor}(AHC_o, \text{Eloundou GPT-}\beta) = +0.79$---high agreement with existing AI exposure measures that capture related (though not identical) constructs.
 \item \textbf{Discriminant validity}: $\mathrm{cor}(AHC_o, \text{Frey-Osborne}) = -0.79$ and $\mathrm{cor}(AHC_o, \text{Webb Robots}) = -0.89$. Augmentation and automation/robotization are opposing dimensions.
 \item \textbf{Face validity}: highest-AHC sectors are Education (55.2), Professional Services (53.8), Public Administration (50.0); lowest are Transport (37.9), Domestic Workers (38.9), Construction (39.5).
-\item \textbf{Inter-rater reliability}: re-scoring a 20\% subsample with Claude Sonnet 4 yields Spearman $\rho = 0.47$ ($p < 0.001$), confirming ordinal consistency across models. A systematic level bias (Sonnet scores 16 points higher) does not affect the regression results, which use standardized scores.
+\item \textbf{Inter-rater reliability}: re-scoring a 20\% subsample ($n = 3{,}666$ paired tasks) with Claude Sonnet 4 yields Pearson $r = 0.76$, Spearman $\rho = 0.75$ ($p < 10^{-300}$), and Krippendorff's $\alpha = 0.71$ (after adjusting for a systematic level bias of 8.6 points). This exceeds the standard reliability threshold of $\alpha > 0.7$, confirming that the AHC scores are consistent across LLM models.
 \end{enumerate}
 
 
@@ -459,7 +459,7 @@ Four immediate implications follow. First, the Mincerian wage equation needs aug
 
 The AHC index---constructed from 18,796 LLM-scored task statements covering 430 Colombian occupations---is a new instrument available for future research. It shows convergent validity with Felten AIOE ($r = +0.86$) and Eloundou GPT exposure ($r = +0.79$), while being discriminant from Frey-Osborne automation risk ($r = -0.79$). Leave-one-sector-out jackknife shows zero sign changes across 20 sectors, and weighted regression with GEIH sampling weights yields a stronger effect ($+0.210$) than unweighted OLS ($+0.147$).
 
-Future work should address three limitations: (i)~the AI adoption proxy relies on observable sector$\times$occupation-group characteristics rather than direct firm-level AI deployment data; (ii)~the cross-sectional design limits causal claims that panel data could strengthen; and (iii)~inter-rater reliability across LLM models shows ordinal consistency ($\rho = 0.47$) but systematic level differences, suggesting the index is best interpreted as an ordinal ranking.
+Future work should address three limitations: (i)~the AI adoption proxy relies on observable sector$\times$occupation-group characteristics rather than direct firm-level AI deployment data; (ii)~the cross-sectional design limits causal claims that panel data could strengthen; and (iii)~while inter-rater reliability across LLM models exceeds standard thresholds (Krippendorff's $\alpha = 0.71$, Spearman $\rho = 0.75$), systematic level differences between models (Sonnet scores 8.6 points higher than Haiku) suggest that the absolute scale is model-dependent even though the ranking is robust.
 
 
 % ============================================================
