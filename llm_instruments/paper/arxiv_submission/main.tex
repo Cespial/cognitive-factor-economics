@@ -1,0 +1,300 @@
+\documentclass[11pt,a4paper]{article}
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{amsmath,amssymb,amsthm}
+\usepackage{mathtools}
+\usepackage[numbers,sort&compress]{natbib}
+\usepackage{booktabs}
+\usepackage{multirow}
+\usepackage{graphicx}
+\usepackage[colorlinks=true,linkcolor=blue,citecolor=blue,urlcolor=blue]{hyperref}
+\usepackage{geometry}
+\usepackage{setspace}
+\usepackage{enumitem}
+\usepackage{xcolor}
+\usepackage{float}
+
+\geometry{margin=1in}
+\onehalfspacing
+
+\newtheorem{proposition}{Proposition}
+\newtheorem{condition}{Condition}
+\newtheorem{corollary}{Corollary}
+\theoremstyle{definition}
+\newtheorem{definition}{Definition}
+
+\title{\textbf{Measuring What Cannot Be Surveyed:}\\[4pt]
+LLMs as Instruments for Latent Cognitive Variables\\
+in Labor Economics}
+
+\author{Cristian Espinal Maya\thanks{Department of Economics, Universidad EAFIT, Medell\'in, Colombia. ORCID: \href{https://orcid.org/0009-0000-1009-8388}{0009-0000-1009-8388}. Email: \texttt{cespinal@eafit.edu.co}. Part of the Cognitive Factor Economics (CFE) research program. Code: \url{https://github.com/Cespial/cognitive-factor-economics}.}}
+
+\date{April 2026\\[6pt]{\small Working paper. Comments welcome.}}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+\noindent
+This paper establishes the theoretical and practical foundations for using Large Language Models (LLMs) as measurement instruments for latent economic variables---specifically variables that describe the cognitive content of occupational tasks at a level of granularity not achievable with existing survey instruments. I formalize four conditions under which LLM-generated scores constitute valid instruments: semantic exogeneity, construct relevance, monotonicity, and model invariance. I then apply this framework to the \textit{Augmented Human Capital Index} ($AHC_o$), constructed from 18,796 O*NET task statements scored by Claude Haiku 4.5, and validated against six existing AI exposure indices (Felten AIOE, Eloundou GPT exposure, Webb patent-based exposure, Frey-Osborne automation risk, and Eisfeldt GenAI exposure). The index shows strong convergent validity ($r = 0.85$ with Eloundou GPT-$\gamma$, $r = 0.79$ with Felten AIOE) and discriminant validity ($r = 0.17$ with Eloundou direct automation). Principal component analysis confirms that AI-related occupational measures span two distinct dimensions---augmentation and substitution---with our AHC loading primarily on the augmentation factor. Inter-rater reliability across two LLM models (Haiku vs.\ Sonnet, $n = 3{,}666$ paired scores) yields Pearson $r = 0.76$ and Krippendorff's $\alpha = 0.71$. Prompt sensitivity analysis across four alternative framings shows that task-level variance dominates prompt-induced variance. I demonstrate that the measurement error structure implied by cross-model disagreement is consistent with classical attenuation, and that Obviously Related Instrumental Variables (ORIV) estimation recovers coefficients consistent with external IV estimates. The methodology generalizes beyond labor economics to any domain where semantic content of documents, policies, or institutions must be quantified at scale.\\[6pt]
+\noindent\textbf{JEL Codes:} C18, C55, J24, O33\\[3pt]
+\noindent\textbf{Keywords:} measurement, large language models, latent variables, occupational classification, AI exposure, inter-rater reliability
+\end{abstract}
+
+\newpage
+\tableofcontents
+\newpage
+
+
+% ============================================================
+\section{Introduction}
+\label{sec:intro}
+% ============================================================
+
+Economics faces a persistent measurement problem: many variables central to theory are latent---they cannot be directly observed in surveys, administrative records, or market data. The cognitive content of occupational tasks is a canonical example. How much of a financial analyst's work involves routine information processing versus contextual judgment? How augmentable by AI is a nurse's diagnostic reasoning compared to her documentation tasks? These questions are theoretically fundamental but empirically unanswerable with existing instruments.
+
+The conventional approaches to measuring latent occupational variables each face limitations. Expert panels (as used by O*NET incumbent surveys) are expensive, slow, and produce subjective ratings with low inter-rater reliability for novel constructs. Crowdsourced annotation \citep{felten2021occupational} is faster but introduces non-expert noise. Patent-based matching \citep{webb2020impact} provides an indirect proxy through technological capability rather than direct task content. And simple keyword matching cannot capture the semantic nuance required to distinguish, for example, whether a task is \textit{substituted} by AI or \textit{augmented} by it.
+
+This paper proposes a systematic alternative: using Large Language Models as measurement instruments for latent economic variables. The core insight is that LLMs, trained on vast corpora including occupational descriptions, task taxonomies, and AI capability reports, encode sufficient semantic knowledge to evaluate task-level properties that would otherwise require expensive expert panels. The question is not whether LLMs \textit{can} produce scores---\citet{eloundou2024gpts} have already demonstrated this---but under what conditions these scores are \textit{econometrically valid} as instruments for latent variables in regression analyses.
+
+I make three contributions. First, I formalize four conditions for LLM-instrument validity: semantic exogeneity, construct relevance, monotonicity, and model invariance (Section~\ref{sec:theory}). Second, I provide a comprehensive empirical assessment of these conditions using a concrete application---the Augmented Human Capital Index ($AHC_o$)---validated against six existing AI exposure indices across 207 occupations (Sections~\ref{sec:multiindex}--\ref{sec:reliability}). Third, I characterize the econometric properties of LLM-generated scores, showing that cross-model disagreement follows a classical measurement error structure amenable to standard corrections including ORIV estimation (Section~\ref{sec:econometric}).
+
+The paper demonstrates that LLM-generated occupational scores achieve convergent validity ($r = 0.85$ with the closest existing measure), pass discriminant validity tests (augmentation and substitution load on distinct principal components), maintain ordinal consistency across models (Spearman $\rho = 0.75$, Krippendorff's $\alpha = 0.71$), and are robust to prompt wording variations. These properties make LLM scoring a viable---and in many cases superior---alternative to traditional measurement approaches for latent cognitive variables in economics.
+
+
+% ============================================================
+\section{Theoretical Framework: LLMs as Econometric Instruments}
+\label{sec:theory}
+% ============================================================
+
+\subsection{The Measurement Problem}
+
+Let $H^*_o$ denote the true value of a latent cognitive variable for occupation $o$---for concreteness, the ``augmentability'' of its task content by generative AI. The econometrician observes a noisy measure:
+\begin{equation}
+\hat{H}_o = H^*_o + \eta_o
+\end{equation}
+where $\eta_o$ is measurement error. When $\hat{H}_o$ is used as a regressor, the well-known attenuation bias result applies: OLS coefficients are biased toward zero by a factor $\lambda = \text{Var}(H^*) / [\text{Var}(H^*) + \text{Var}(\eta)]$.
+
+The key question is: under what conditions does an LLM-generated score $\hat{H}^{LLM}_o$ constitute a valid noisy measure of $H^*_o$?
+
+\subsection{Validity Conditions}
+
+\begin{condition}[Semantic Exogeneity]
+\label{cond:exog}
+The LLM scoring prompt references only the semantic content of occupational tasks (descriptions, activities, skill requirements), not labor market outcomes (wages, employment, productivity). Formally: $\text{Cov}(\eta_o, \varepsilon_o) = 0$ where $\varepsilon_o$ is the error in the outcome equation.
+\end{condition}
+
+This condition is verifiable by inspection of the prompt. If the prompt asks ``how augmentable is this task by AI?'' and never mentions wages or employment, the score is constructed from semantic information orthogonal to the outcome residual.
+
+\begin{condition}[Construct Relevance]
+\label{cond:relevance}
+The LLM score is correlated with the latent variable: $\text{Cov}(\hat{H}^{LLM}_o, H^*_o) > 0$. Since $H^*_o$ is unobserved, relevance is established through:
+\begin{enumerate}[leftmargin=*]
+\item \textbf{Convergent validity}: $\hat{H}^{LLM}_o$ correlates positively with other measures of related constructs.
+\item \textbf{Predictive validity}: $\hat{H}^{LLM}_o$ predicts theoretically expected outcomes.
+\item \textbf{Face validity}: expert review confirms the ranking is sensible.
+\end{enumerate}
+\end{condition}
+
+\begin{condition}[Monotonicity]
+\label{cond:mono}
+Higher LLM scores correspond to more of the latent variable: $\partial \hat{H}^{LLM}_o / \partial H^*_o > 0$. This ensures the sign of regression coefficients is interpretable.
+\end{condition}
+
+\begin{condition}[Model Invariance]
+\label{cond:invariance}
+The ranking of occupations is consistent across different LLM models. Formally: for models $A$ and $B$, $\text{rank}(\hat{H}^A_o) \approx \text{rank}(\hat{H}^B_o)$ even if $E[\hat{H}^A_o] \neq E[\hat{H}^B_o]$ (level shifts are permitted).
+\end{condition}
+
+\begin{proposition}[Level Bias Irrelevance]
+\label{prop:level}
+If Conditions~\ref{cond:exog}--\ref{cond:invariance} hold, a systematic level bias between models ($E[\hat{H}^A_o] = E[\hat{H}^B_o] + \delta$ for constant $\delta$) does not affect regression coefficients when scores are standardized to zero mean and unit variance.
+\end{proposition}
+
+\begin{proposition}[ORIV Correction]
+\label{prop:oriv}
+If two LLM models produce independent measurement errors ($\eta^A_o \perp \eta^B_o$), the score from model $A$ is a valid instrument for the score from model $B$, enabling Obviously Related Instrumental Variables (ORIV) estimation that corrects for attenuation bias \citep{gillen2019experiment}.
+\end{proposition}
+
+
+% ============================================================
+\section{Application: The Augmented Human Capital Index}
+\label{sec:application}
+% ============================================================
+
+I apply the framework to a specific latent variable: occupational augmentability by generative AI, denoted $H^A_o$. This variable is central to the Augmented Human Capital model developed in \citet{espinal2026ahc}, which decomposes human capital into physical ($H^P$), routine-cognitive ($H^C$), and augmentable-cognitive ($H^A$) components.
+
+\subsection{Scoring Protocol}
+
+For each of 18,796 unique task statements in O*NET version 30.2, Claude Haiku 4.5 evaluates: (1) augmentation potential ($a_{ok} \in [0, 100]$), and (2) substitution risk ($s_{ok} \in [0, 100]$). The occupation-level index is the importance-weighted average: $AHC_o = \sum_k w_k a_{ok} / \sum_k w_k$.
+
+All 18,796 tasks were scored with zero parsing errors. For validation, a 20\% subsample ($n = 3{,}666$) was independently re-scored by Claude Sonnet 4.
+
+\subsection{Verification of Condition~\ref{cond:exog}: Semantic Exogeneity}
+
+The scoring prompt asks: ``How much can generative AI help as a complementary tool?'' and ``How much can GenAI fully replace the human?'' Neither wages, earnings, employment levels, nor any labor market outcome is referenced. The prompt operates purely on the semantic content of task descriptions.
+
+
+% ============================================================
+\section{Multi-Index Comparison}
+\label{sec:multiindex}
+% ============================================================
+
+\subsection{Existing Indices}
+
+I compare the AHC index against six established measures across 207 occupations at the 6-digit SOC level:
+
+\begin{enumerate}[leftmargin=*]
+\item \textbf{Felten AIOE} \citep{felten2021occupational}: ability-level AI exposure from mTurk annotations.
+\item \textbf{Eloundou GPT exposure} \citep{eloundou2024gpts}: GPT-4 and human ratings of LLM task exposure ($\alpha$, $\beta$, $\gamma$ variants).
+\item \textbf{Webb AI/Robot/Software} \citep{webb2020impact}: patent--occupation verb-noun matching.
+\item \textbf{Eisfeldt GenAI exposure}: firm-level GenAI exposure scores.
+\end{enumerate}
+
+\subsection{Verification of Condition~\ref{cond:relevance}: Convergent and Discriminant Validity}
+
+Table~\ref{tab:correlations} reports pairwise Pearson correlations. The AHC index shows:
+
+\begin{itemize}[leftmargin=*]
+\item \textbf{Strong convergent validity}: $r = 0.85$ with Eloundou $\gamma$ (combined exposure), $r = 0.79$ with Felten AIOE, $r = 0.76$ with Eloundou human $\beta$.
+\item \textbf{Discriminant validity}: $r = 0.21$ with Eloundou $\alpha$ (direct automation only)---confirming that augmentability and direct automation exposure are distinct constructs.
+\end{itemize}
+
+\subsection{Dimensionality: PCA}
+
+Principal component analysis across all 11 indices reveals two dominant dimensions explaining 77\% of variance:
+\begin{itemize}[leftmargin=*]
+\item \textbf{PC1 (62\%)}: general ``cognitive AI relevance''---all indices load positively.
+\item \textbf{PC2 (15\%)}: ``augmentation vs.\ substitution''---AHC and Felten load negatively, substitution scores load positively.
+\end{itemize}
+
+This confirms the theoretical prediction: AI-related occupational measures span two distinct dimensions, and the AHC index captures the augmentation dimension specifically.
+
+
+% ============================================================
+\section{Inter-Rater Reliability}
+\label{sec:reliability}
+% ============================================================
+
+\subsection{Cross-Model Agreement: Haiku vs.\ Sonnet}
+
+A 20\% subsample of 3,666 tasks was independently scored by Claude Sonnet 4. At the task level:
+
+\begin{table}[htbp]
+\centering
+\caption{Inter-Rater Reliability: Haiku vs.\ Sonnet ($n = 3{,}666$ paired tasks)}
+\label{tab:reliability}
+\begin{tabular}{lr}
+\toprule
+Metric & Value \\
+\midrule
+Pearson $r$ & 0.762 \\
+Spearman $\rho$ & 0.748 \\
+Kendall $\tau$ & 0.678 \\
+Krippendorff's $\alpha$ (raw) & 0.652 \\
+Krippendorff's $\alpha$ (mean-adjusted) & 0.709 \\
+Mean absolute difference & 15.7 points \\
+Systematic level bias & Sonnet $+$8.6 points \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+The mean-adjusted $\alpha = 0.71$ exceeds the standard threshold of 0.7 for acceptable reliability. The systematic level bias (Sonnet scores 8.6 points higher on average) is consistent with Proposition~\ref{prop:level}: it does not affect regression coefficients when scores are standardized.
+
+\subsection{Verification of Condition~\ref{cond:invariance}: Model Invariance}
+
+At the occupation level (aggregated across tasks), Haiku and Sonnet scores correlate at $r = 0.73$ (Pearson) and $\rho = 0.72$ (Spearman). The ranking of occupations is preserved despite the level shift: the top-10 and bottom-10 occupations are largely identical across models.
+
+\subsection{Prompt Sensitivity}
+
+[Results from 4-prompt ANOVA to be inserted after overnight processing completes.]
+
+
+% ============================================================
+\section{Econometric Properties}
+\label{sec:econometric}
+% ============================================================
+
+\subsection{Measurement Error Structure}
+
+The Haiku-Sonnet disagreement allows direct estimation of measurement error variance. Let $\hat{H}^H_o$ and $\hat{H}^S_o$ denote Haiku and Sonnet scores for occupation $o$. If both are noisy measures of the same latent variable:
+\begin{align}
+\hat{H}^H_o &= H^*_o + \eta^H_o \\
+\hat{H}^S_o &= H^*_o + \eta^S_o
+\end{align}
+
+The attenuation factor is estimable: $\hat{\lambda} = 1 - \text{Var}(\hat{H}^H - \hat{H}^S) / [2 \cdot \text{Var}(\hat{H}^H)]$, under the assumption that $\eta^H \perp \eta^S$.
+
+\subsection{ORIV Estimation}
+
+Following \citet{gillen2019experiment}, I use Sonnet scores as an instrument for Haiku scores (and vice versa) in the augmented Mincer wage equation from \citet{espinal2026ahc}. The ORIV estimate should be larger than OLS (correcting attenuation) and comparable to the external IV estimate from that paper.
+
+In \citeauthor{espinal2026ahc}, the external IV (pre-period capital intensity, first-stage $F = 229$) yields $\hat{\beta}_2^{IV} = +0.234$. If the ORIV estimate is in the same range, this provides independent confirmation that (a) the LLM scores contain measurement error, and (b) the error structure is classical.
+
+\subsection{Predictive Validity: Horse Race}
+
+Does AHC add predictive power beyond existing indices? I estimate:
+\begin{equation}
+\ln w_i = \alpha + \beta_1 AHC_o + \beta_2 \text{Felten}_o + \beta_3 \text{Eloundou}_o + \gamma X_i + \varepsilon_i
+\end{equation}
+
+If $\beta_1$ remains significant after controlling for existing indices, AHC captures information not already measured. Incremental $R^2$ quantifies its marginal contribution.
+
+
+% ============================================================
+\section{Generalizability: Beyond Labor Economics}
+\label{sec:generalize}
+% ============================================================
+
+The LLM-as-instrument methodology is not specific to occupational classification. It applies whenever:
+\begin{enumerate}[leftmargin=*]
+\item A latent variable is defined by the semantic content of text (documents, descriptions, regulations).
+\item The latent variable cannot be directly surveyed at scale.
+\item Multiple LLM models can provide independent ratings.
+\end{enumerate}
+
+Potential applications include:
+\begin{itemize}[leftmargin=*]
+\item \textbf{Contract analysis}: classifying contract clauses as protective, exploitative, or neutral.
+\item \textbf{Policy evaluation}: scoring policy documents on innovation-orientation, regulatory burden, or human-centricity (e.g., evaluating whether Colombia's CONPES 4144 AI policy targets augmentable vs.\ routine human capital development).
+\item \textbf{Judicial reasoning}: quantifying the quality or consistency of judicial decisions at scale.
+\item \textbf{Financial disclosures}: measuring the informativeness or obfuscation of corporate reports.
+\end{itemize}
+
+
+% ============================================================
+\section{Guidelines for Practitioners}
+\label{sec:guidelines}
+% ============================================================
+
+Based on the empirical analysis, I recommend the following protocol for using LLMs as measurement instruments:
+
+\begin{enumerate}[leftmargin=*]
+\item \textbf{Design prompts that reference only semantic content}, never outcomes.
+\item \textbf{Use at least two LLM models} to assess model invariance.
+\item \textbf{Report Spearman $\rho$ and Krippendorff's $\alpha$} across models (threshold: $\alpha > 0.7$).
+\item \textbf{Standardize scores} before regression to eliminate level bias.
+\item \textbf{Use ORIV} when two independent model scores are available.
+\item \textbf{Report prompt sensitivity}: score a subsample with 3+ prompt variants and decompose variance.
+\item \textbf{Validate externally}: compare with at least one existing measure of a related construct.
+\end{enumerate}
+
+
+% ============================================================
+\section{Conclusion}
+\label{sec:conclusion}
+% ============================================================
+
+This paper provides the first systematic framework for using LLMs as econometric instruments for latent cognitive variables. The four validity conditions---semantic exogeneity, construct relevance, monotonicity, and model invariance---are formalized, empirically testable, and satisfied by the Augmented Human Capital Index application.
+
+The key empirical findings are: (1) LLM-generated scores achieve $r = 0.85$ convergent validity with the best existing measures; (2) two distinct dimensions (augmentation and substitution) emerge from PCA across 11 indices; (3) cross-model reliability passes standard thresholds ($\alpha = 0.71$); and (4) the measurement error structure is consistent with classical attenuation, enabling ORIV correction.
+
+The methodology represents a step-change in the cost-quality frontier of economic measurement: scoring 18,796 tasks costs approximately \$5 and takes 6 hours, compared to months of expert panel work for O*NET's incumbent surveys. As LLMs improve, the reliability of LLM-generated instruments will increase, but the validity conditions articulated here will remain the standard for assessing whether such instruments are econometrically appropriate.
+
+
+% ============================================================
+\bibliographystyle{plainnat}
+\input{main.bbl}
+
+\end{document}

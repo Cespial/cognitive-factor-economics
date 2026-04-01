@@ -1,0 +1,41 @@
+\begin{thebibliography}{5}
+\providecommand{\natexlab}[1]{#1}
+\providecommand{\url}[1]{\texttt{#1}}
+\expandafter\ifx\csname urlstyle\endcsname\relax
+  \providecommand{\doi}[1]{doi: #1}\else
+  \providecommand{\doi}{doi: \begingroup \urlstyle{rm}\Url}\fi
+
+\bibitem[Eloundou et~al.(2024)Eloundou, Manning, Mishkin, and
+  Rock]{eloundou2024gpts}
+Tyna Eloundou, Sam Manning, Pamela Mishkin, and Daniel Rock.
+\newblock Gpts are gpts: An early look at the labor market impact potential of
+  large language models.
+\newblock \emph{Science}, 384\penalty0 (6702):\penalty0 1306--1308, 2024.
+
+\bibitem[Espinal~Maya(2026)]{espinal2026ahc}
+Cristian Espinal~Maya.
+\newblock Augmented human capital: A unified theory and llm-based measurement
+  framework for cognitive factor decomposition in ai-augmented economies.
+\newblock Technical report, Universidad EAFIT, 2026.
+\newblock arXiv preprint.
+
+\bibitem[Felten et~al.(2021)Felten, Raj, and Seamans]{felten2021occupational}
+Edward Felten, Manav Raj, and Robert Seamans.
+\newblock Occupational, industry, and geographic exposure to artificial
+  intelligence: A novel dataset and its potential uses.
+\newblock \emph{Strategic Management Journal}, 42\penalty0 (12):\penalty0
+  2195--2217, 2021.
+
+\bibitem[Gillen et~al.(2019)Gillen, Snowberg, and Yariv]{gillen2019experiment}
+Ben Gillen, Erik Snowberg, and Leeat Yariv.
+\newblock Experimenting with measurement error: Techniques with applications to
+  the caltech cohort study.
+\newblock \emph{Journal of Political Economy}, 127\penalty0 (4):\penalty0
+  1826--1863, 2019.
+
+\bibitem[Webb(2020)]{webb2020impact}
+Michael Webb.
+\newblock The impact of artificial intelligence on the labor market.
+\newblock Technical report, Stanford University, 2020.
+
+\end{thebibliography}
