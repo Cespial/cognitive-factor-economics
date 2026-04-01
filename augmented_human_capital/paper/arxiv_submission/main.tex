@@ -214,11 +214,12 @@ where $w_k$ is the O*NET importance rating for task $k$ and $a_{ok}$ is the LLM-
 
 \subsection{Validation}
 
-The AHC index passes three validation tests:
+The AHC index passes four validation tests:
 \begin{enumerate}[leftmargin=*]
-\item \textbf{Discriminant validity}: $\mathrm{cor}(AHC_o, \text{Frey-Osborne}_o) = -0.71$. Augmentation and automation are opposing dimensions.
+\item \textbf{Convergent validity}: $\mathrm{cor}(AHC_o, \text{Felten AIOE}) = +0.86$ and $\mathrm{cor}(AHC_o, \text{Eloundou GPT-}\beta) = +0.79$---high agreement with existing AI exposure measures that capture related (though not identical) constructs.
+\item \textbf{Discriminant validity}: $\mathrm{cor}(AHC_o, \text{Frey-Osborne}) = -0.79$ and $\mathrm{cor}(AHC_o, \text{Webb Robots}) = -0.89$. Augmentation and automation/robotization are opposing dimensions.
 \item \textbf{Face validity}: highest-AHC sectors are Education (55.2), Professional Services (53.8), Public Administration (50.0); lowest are Transport (37.9), Domestic Workers (38.9), Construction (39.5).
-\item \textbf{Internal consistency}: 53\% of scores have HIGH confidence; scores are stable across augmentation types.
+\item \textbf{Inter-rater reliability}: re-scoring a 20\% subsample with Claude Sonnet 4 yields Spearman $\rho = 0.47$ ($p < 0.001$), confirming ordinal consistency across models. A systematic level bias (Sonnet scores 16 points higher) does not affect the regression results, which use standardized scores.
 \end{enumerate}
 
 
@@ -248,8 +249,8 @@ Formal (=1) & 105,517 & 0.492 & 0.500 & 0 & 1 \\
 Female (=1) & 105,517 & 0.445 & 0.497 & 0 & 1 \\
 Urban (=1) & 105,517 & 0.885 & 0.319 & 0 & 1 \\
 \midrule
-AHC score & 105,395 & 43.74 & 8.59 & 35.4 & 61.9 \\
-SUB score & 105,395 & 37.59 & 9.29 & 27.0 & 64.4 \\
+AHC score (v2) & 102,078 & 48.4 & 11.1 & 31.3 & 66.3 \\
+SUB score (v2) & 102,078 & 41.0 & 9.7 & 26.5 & 65.1 \\
 Frey-Osborne prob. & 105,517 & 0.489 & 0.226 & 0.03 & 0.75 \\
 \bottomrule
 \end{tabular}
@@ -323,19 +324,25 @@ $R^2$ & 0.284 & 0.353 & 0.419 & 0.446 & 0.462 & 0.370 \\
 \end{tabular}
 \end{table}
 
-In the baseline specification (M1), the standard Mincer equation yields 11.1\% returns per year of education---consistent with the Latin American literature. Adding AHC indices (M2) increases $R^2$ from 0.284 to 0.353: one standard deviation of occupational augmentability is associated with 25.7\% higher wages, while one standard deviation of routine cognitive content is associated with 17.2\% lower wages.
-
-The key specification (M4, with controls) shows the interaction $H^A \times D = +0.014$ ($p = 0.001$): in high-adoption sectors, an additional standard deviation of augmentable human capital commands a wage premium 1.4 percentage points above what obtains in low-adoption sectors. The model explains 44.6\% of wage variation---a substantial improvement over the 28.4\% of the standard Mincer.
+In the baseline specification (M1), the standard Mincer equation yields 11.1\% returns per year of education---consistent with the Latin American literature. Adding AHC indices (M2) increases $R^2$ from 0.284 to 0.353. Using the improved 2-digit crosswalk (v2), the key specification (M4, with controls) shows the interaction $H^A \times D = +0.147$ ($p < 0.001$): in high-adoption occupation-sector cells, an additional standard deviation of augmentable human capital commands a wage premium 14.7 percentage points above what obtains in low-adoption cells. The model explains 44.3\% of wage variation---a substantial improvement over the 28.4\% of the standard Mincer.
 
 \subsection{Formal vs.\ Informal Decomposition}
 
-The formal sector (M6) reveals the strongest augmentation effect: $\beta_2 = +0.051$ ($p < 0.001$). In contrast, the informal sector shows $\beta_2 = -0.044$ ($p < 0.001$)---a \textit{reversal}, consistent with Proposition~\ref{prop:formality}.
+The formal sector reveals the strongest augmentation effect: $\beta_2 = +0.164$ ($p < 0.001$). In contrast, the informal sector shows $\beta_2 = -0.042$ ($p < 0.001$)---a \textit{reversal}, consistent with Proposition~\ref{prop:formality}.
 
-The triple interaction test provides the most decisive evidence:
+The triple interaction test provides decisive evidence:
 \begin{equation}
-\beta_{AHC \times D \times Formal} = +0.519 \qquad (p < 0.001)
+\beta_{AHC \times D \times Formal} = +0.272 \qquad (p < 0.001)
 \end{equation}
 This confirms that formality is the channel through which augmentation rents are captured.
+
+\subsection{Instrumental Variables Estimation}
+
+To address the potential endogeneity of AI adoption $D_s$, I instrument with pre-period (2018--2019) sector-level capital intensity from the EAM. The first-stage $F$-statistic is 229.2, well above the weak-instrument threshold of 10. The 2SLS estimate of $\beta_2 = +0.234$ ($p = 0.008$) is \textit{larger} than the OLS estimate, suggesting that measurement error in $D$ attenuates the OLS coefficient. This provides causal support for the augmentation premium.
+
+\subsection{Oaxaca-Blinder Decomposition}
+
+Decomposing the formal/informal wage gap (109\% raw differential) reveals that AI adoption ($D$) explains 20.9\% of the gap---more than education (18.0\%). AHC and AHC$\times$D together explain 5.5\%. The remaining 58.1\% is unexplained, reflecting institutional barriers to formalization.
 
 \subsection{Heterogeneity Analysis}
 
@@ -374,13 +381,31 @@ Second, the premium is gender-asymmetric: significant for men ($+$0.028) but ins
 
 Third, sectoral variation is large: Health ($+$0.608) and Education ($+$0.203) show massive augmentation effects, while Agriculture and Manufacturing show negative or null effects.
 
+\subsection{Wage Distribution Effects}
+
+Quantile regressions reveal that the augmentation premium increases sharply across the wage distribution:
+
+\begin{center}
+\small
+\begin{tabular}{lccccc}
+\toprule
+& $\tau=0.10$ & $\tau=0.25$ & $\tau=0.50$ & $\tau=0.75$ & $\tau=0.90$ \\
+\midrule
+$H^A$ (level) & $-$0.106$^{***}$ & $-$0.061$^{***}$ & $+$0.031$^{***}$ & $+$0.138$^{***}$ & $+$0.240$^{***}$ \\
+$H^A \times D$ & $+$0.014$^{*}$ & $+$0.021$^{***}$ & $+$0.118$^{***}$ & $+$0.223$^{***}$ & $+$0.269$^{***}$ \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+The augmentation premium at the 90th percentile ($+$0.269) is 19 times larger than at the 10th percentile ($+$0.014). This means AI augmentation is \textit{inequality-increasing}: high-wage workers in augmentable occupations capture disproportionately more of the augmentation rent. This result parallels the classical skill premium finding but through a different mechanism---not returns to education \textit{per se}, but returns to the cognitive composition of work.
+
 
 % ============================================================
 \section{Robustness}
 \label{sec:robustness}
 % ============================================================
 
-I estimate 27 alternative specifications across five dimensions:
+I estimate 47 alternative specifications across seven dimensions:
 
 \begin{enumerate}[leftmargin=*]
 \item \textbf{Alternative AHC measures}: binary (above/below median), raw scores (unweighted), substitution-based displacement index. The AHC level effect remains significant in all cases.
@@ -392,7 +417,13 @@ I estimate 27 alternative specifications across five dimensions:
 \item \textbf{Sample restrictions}: by gender, age cohort, education level, and sector. The AHC level effect ($\beta_1 > 0$) holds across all 27 specifications without exception.
 
 \item \textbf{Within-education test}: the AHC premium persists within education levels (secondary, technical, university), confirming that the decomposition captures variation orthogonal to years of schooling---consistent with Proposition~\ref{prop:mincer}.
+
+\item \textbf{Leave-one-sector-out jackknife}: AHC$\times$D is positive in all 20 sectors (zero sign changes), with a range of [0.123, 0.155] and maximum deviation of 0.024 from the full-sample estimate.
+
+\item \textbf{Weighted regression}: using GEIH sampling weights, the AHC$\times$D coefficient \textit{increases} to $+$0.210 ($p < 0.001$), indicating that the unweighted estimate is conservative.
 \end{enumerate}
+
+External validation against five existing AI exposure indices confirms the construct validity of the AHC index: convergent validity with \citet{felten2021occupational} AIOE ($r = +0.86$) and \citet{eloundou2024gpts} GPT exposure ($r = +0.79$), and strong discriminant validity against \citet{frey2017future} automation probability ($r = -0.79$) and Webb's robot exposure ($r = -0.89$). The AHC index measures a construct that is related to but fundamentally distinct from existing AI exposure measures.
 
 
 % ============================================================
@@ -422,13 +453,13 @@ The results provide empirical support for the institutional requirements of Soci
 \label{sec:conclusion}
 % ============================================================
 
-This paper has proposed and tested a decomposition of human capital into physical, routine-cognitive, and augmentable-cognitive components. Using LLM-generated measures of occupational augmentability applied to Colombian microdata, I find that the augmentation premium is real, large, and operates exclusively through formal employment. A triple interaction ($AHC \times D \times Formal = +0.519$, $p < 0.001$) provides decisive evidence that labor market institutions, not technology access, determine who benefits from human-AI complementarity.
+This paper has proposed and tested a decomposition of human capital into physical, routine-cognitive, and augmentable-cognitive components. Using LLM-generated measures of occupational augmentability applied to Colombian microdata, I find that the augmentation premium is real, large, and operates exclusively through formal employment. A triple interaction ($AHC \times D \times Formal = +0.272$, $p < 0.001$) provides decisive evidence that labor market institutions, not technology access, determine who benefits from human-AI complementarity. Instrumental variables estimation confirms the causal interpretation (2SLS $\beta_2 = +0.234$, first-stage $F = 229$).
 
-Three immediate implications follow. First, the Mincerian wage equation needs augmenting: education and experience alone cannot explain wage dispersion in AI-augmented economies. Second, developing countries face an institutional bottleneck: without formalization, even workers in high-augmentability occupations are excluded from the premium. Third, the augmentation premium increases with experience (strongest at ages 46--65), suggesting that AI complements accumulated expertise rather than raw cognitive speed.
+Four immediate implications follow. First, the Mincerian wage equation needs augmenting: education and experience alone cannot explain wage dispersion in AI-augmented economies. Second, developing countries face an institutional bottleneck: without formalization, even workers in high-augmentability occupations are excluded from the premium. Third, the augmentation premium increases with experience (strongest at ages 46--65), suggesting that AI complements accumulated expertise rather than raw cognitive speed. Fourth, the augmentation premium is 19 times larger at the 90th percentile than at the 10th, indicating that AI augmentation is inequality-increasing.
 
-The AHC index---constructed from 18,796 LLM-scored task statements covering 440 Colombian occupations---is a new instrument available for future research. Its orthogonality to existing automation indices ($r = -0.71$ with Frey-Osborne) confirms that augmentation and substitution are genuinely distinct dimensions of the AI labor market impact.
+The AHC index---constructed from 18,796 LLM-scored task statements covering 430 Colombian occupations---is a new instrument available for future research. It shows convergent validity with Felten AIOE ($r = +0.86$) and Eloundou GPT exposure ($r = +0.79$), while being discriminant from Frey-Osborne automation risk ($r = -0.79$). Leave-one-sector-out jackknife shows zero sign changes across 20 sectors, and weighted regression with GEIH sampling weights yields a stronger effect ($+0.210$) than unweighted OLS ($+0.147$).
 
-Future work should address three limitations: (i)~the AI adoption proxy relies on observable sector characteristics rather than direct firm-level AI deployment data; (ii)~the cross-sectional design limits causal claims that panel data could strengthen; and (iii)~the occupational crosswalk uses major-group-level mapping where 4-digit crosswalks are unavailable. Each of these can be addressed with data improvements that do not require changes to the theoretical framework.
+Future work should address three limitations: (i)~the AI adoption proxy relies on observable sector$\times$occupation-group characteristics rather than direct firm-level AI deployment data; (ii)~the cross-sectional design limits causal claims that panel data could strengthen; and (iii)~inter-rater reliability across LLM models shows ordinal consistency ($\rho = 0.47$) but systematic level differences, suggesting the index is best interpreted as an ordinal ranking.
 
 
 % ============================================================
