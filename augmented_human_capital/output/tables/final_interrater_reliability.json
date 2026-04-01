@@ -1,12 +1,12 @@
 {
   "n_paired": 3666,
-  "pearson_r": 0.762,
-  "spearman_rho": 0.748,
-  "kendall_tau": 0.678,
-  "mean_abs_diff": 15.7,
-  "level_bias": 8.6,
-  "krippendorff_alpha_raw": 0.652,
-  "krippendorff_alpha_adjusted": 0.709,
+  "pearson_r": 0.778,
+  "spearman_rho": 0.765,
+  "spearman_p": 0.0,
+  "mean_abs_diff": 15.3,
+  "level_bias": 7.8,
+  "krippendorff_alpha_raw": 0.673,
+  "krippendorff_alpha_adjusted": 0.72,
   "haiku_mean": 49.0,
-  "sonnet_mean": 57.5
+  "sonnet_mean": 56.8
 }
