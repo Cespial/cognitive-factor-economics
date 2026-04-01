@@ -22,7 +22,7 @@ P1_DATA = PROJECT / "data" / "paper1"
 OUTPUT = PROJECT / "output" / "tables"
 OUTPUT.mkdir(parents=True, exist_ok=True)
 
-load_dotenv(P1_DATA.parent.parent / "augmented_human_capital" / ".env")
+load_dotenv(PROJECT / ".env")
 
 # ============================================================
 # 4 PROMPT VARIANTS

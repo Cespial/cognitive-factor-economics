@@ -1,0 +1,23 @@
+{
+  "n_tasks": 329,
+  "n_prompts": 4,
+  "prompts": [
+    "A_baseline",
+    "B_behavioral",
+    "C_counterfactual",
+    "D_negative"
+  ],
+  "prompt_means": {
+    "A_baseline": 59.641337386018236,
+    "B_behavioral": 31.343465045592705,
+    "C_counterfactual": 50.08510638297872,
+    "D_negative": 44.56534954407295
+  },
+  "SS_total": 614846.0577507599,
+  "SS_task": 87270.05775075988,
+  "SS_task_pct": 14.193806181341174,
+  "SS_prompt": 137843.72948328266,
+  "SS_prompt_pct": 22.419226364977423,
+  "SS_residual": 389732.27051671734,
+  "SS_residual_pct": 63.38696745368141
+}
