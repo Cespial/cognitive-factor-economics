@@ -57,9 +57,9 @@ This paper proposes a decomposition of human capital into three orthogonal compo
 
 The theory of human capital has two foundational pillars: \citet{becker1964human}'s insight that workers invest in skills analogous to physical capital, and \citet{mincer1974schooling}'s earnings function that maps these investments to wages through years of education and experience. Together, they have shaped labor economics for over six decades. Yet both frameworks share a structural limitation that becomes acute in the era of generative artificial intelligence: they treat cognitive capacity as a scalar---years of education and potential experience---when in reality it is a \textit{vector whose internal composition determines whether a worker is amplified, displaced, or unaffected by AI}.
 
-Recent empirical work has documented that AI affects the labor market heterogeneously. \citet{brynjolfsson2025generative} find that AI tools increase customer support productivity by 14\% on average, with gains concentrated among novice workers. \citet{dellacqua2023jagged} demonstrate a ``jagged technological frontier'' where AI improves performance within certain task boundaries but worsens it outside them. \citet{eloundou2024gpts} estimate that 80\% of the US workforce has at least 10\% of tasks exposed to language models. However, none of these studies provides a formal framework for decomposing \textit{why} AI augments some cognitive activities while substituting others, nor do they offer a measurement instrument for the augmentable component of human capital.
+Recent empirical work has documented that AI affects the labor market heterogeneously. \citet{brynjolfsson2025generative} find that AI tools increase customer support productivity by 14\% on average, with gains concentrated among novice workers. \citet{dellacqua2023jagged} demonstrate a ``jagged technological frontier'' where AI improves performance within certain task boundaries but worsens it outside them. \citet{hui2024shortterm} provide the first causal evidence of generative AI displacing online freelancers. \citet{eloundou2024gpts} estimate that 80\% of the US workforce has at least 10\% of tasks exposed to language models. However, none of these studies provides a formal framework for decomposing \textit{why} AI augments some cognitive activities while substituting others, nor do they offer a measurement instrument for the augmentable component of human capital.
 
-On the theoretical side, \citet{acemoglu2024simple} derives modest aggregate TFP effects from AI using a task-based framework, while \citet{korinek2024scenarios} model intelligence saturation scenarios. \citet{growiec2024hardware} decomposes production into hardware and software aggregates, treating human cognition and AI as substitutes within the software sector. None of these models decomposes the cognitive component of human capital into sub-factors with heterogeneous AI interactions.
+On the theoretical side, \citet{acemoglu2024simple} derives modest aggregate TFP effects from AI using a task-based framework, while \citet{korinek2024scenarios} model intelligence saturation scenarios. \citet{growiec2024hardware} decomposes production into hardware and software aggregates, treating human cognition and AI as substitutes within the software sector. \citet{tyson2022automation} characterize AI as ``routine-biased technological change on steroids,'' and \citet{cheng2024skill} analyze the skill premium numerically under AI adoption. None of these models decomposes the cognitive component of human capital into sub-factors with heterogeneous AI interactions, and none estimates the differential effect in developing economies with dual labor markets.
 
 This paper addresses both gaps simultaneously. I propose decomposing individual human capital $H_i$ into three orthogonal components:
 \begin{equation}
@@ -72,7 +72,41 @@ The empirical strategy makes two contributions. First, I develop an LLM-based me
 
 The main findings are: (1)~the AHC level effect is $+$9.1\% per standard deviation; (2)~the augmentation interaction is $+$5.1\% in the formal sector and $-$4.4\% in the informal sector; (3)~a triple interaction $AHC \times D \times Formal = +0.519$ ($p < 0.001$) confirms that formality is the mechanism; (4)~the premium is strongest for experienced workers (46--65) and in health/education sectors; (5)~placebo tests confirm the result depends on occupational cognitive content, not spurious correlation.
 
-The paper contributes to three literatures. In human capital theory, I extend \citeauthor{becker1964human}'s framework with a decomposition suited to the AI era. In the task-based literature \citep{autor2003skill, acemoglu2022tasks}, I provide micro-foundations for why some tasks generate complementarity while others generate displacement. In development economics, I show that informality---not technology access---is the binding constraint on human-AI complementarity.
+\subsection*{Related Work and Positioning}
+
+This paper sits at the intersection of three active literatures. Table~\ref{tab:positioning} maps the closest existing contributions and identifies the specific gap this paper fills.
+
+\begin{table}[htbp]
+\centering
+\caption{Positioning in the Literature}
+\label{tab:positioning}
+\small
+\begin{tabular}{p{3cm}p{1.5cm}p{1.5cm}p{1.5cm}p{1.5cm}p{1.5cm}}
+\toprule
+Paper & HC Decomp. & LLM Scoring & Wage Eq. & Developing Country & Formal/ Informal \\
+\midrule
+\textbf{This paper} & \textbf{Yes} & \textbf{Yes} & \textbf{Yes} & \textbf{Yes} & \textbf{Yes} \\[4pt]
+\citet{eloundou2024gpts} & No & Yes & No & No & No \\
+\citet{felten2021occupational} & No & No & No & No & No \\
+\citet{demirev2026ai} & No & Yes & No & No & No \\
+\citet{makridis2026labor} & No & Yes & Yes & No & No \\
+\citet{walter2022susceptible} & Partial & No & Yes & No & No \\
+\citet{mina2025automation} & No & No & Yes & Yes & Yes \\
+\citet{acemoglu2024simple} & No & No & No & No & No \\
+\citet{growiec2024hardware} & No & No & No & No & No \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+In the \textit{AI exposure measurement} literature, \citet{felten2021occupational} construct an AI occupational exposure index using ability-level matching, and \citet{eloundou2024gpts} use GPT-4 to score O*NET tasks for LLM exposure. Both measure aggregate exposure without distinguishing augmentation from substitution. \citet{demirev2026ai} uses an LLM pipeline to map 27,000 AI product capabilities to ESCO occupations, separately estimating automation and augmentation exposure---the closest methodological antecedent to our approach. However, \citeauthor{demirev2026ai} does not estimate wage equations or apply the index to microdata. \citet{makridis2026labor} combines an LLM task exposure index with wage outcomes for US artists, but restricts attention to a single occupation group without human capital decomposition.
+
+In the \textit{task-based labor economics} literature, \citet{autor2003skill} establish the routine/non-routine classification, and \citet{acemoglu2022tasks} attribute 50--70\% of US wage inequality changes to task displacement. \citet{walter2022susceptible} extend the Mincer equation with task-based variables using German panel data---the closest specification to ours---but do not incorporate AI-specific interaction terms. \citet{chen2025displacement} examine whether generative AI displaces or complements using job posting data, finding heterogeneous effects across task types, but do not estimate wage equations.
+
+In the \textit{developing country} literature, \citet{eganadelsol2022automation} analyze automation risk for women in Latin America, \citet{jones2022automation} identify protective skills in Colombia, and \citet{mina2025automation} estimate automation effects on informality and wages in Mexico. \citeauthor{mina2025automation}'s work is the closest empirical antecedent for our formal/informal finding, but uses Frey-Osborne automation probabilities rather than LLM-scored augmentability, and does not decompose human capital. The broader literature on AI in developing countries \citep{aly2022digital, eganadelsol2022covid} has documented digital transformation patterns but without micro-level cognitive factor decomposition.
+
+\citet{stephany2024price} provide an important conceptual bridge by estimating the price of skill complementarity, showing that skills complementary to AI command growing premiums. Our $H^A$ component formalizes this complementarity at the occupation-task level.
+
+The paper contributes to these three literatures simultaneously. In human capital theory, I extend \citeauthor{becker1964human}'s framework with a decomposition suited to the AI era. In the task-based literature, I provide micro-foundations for why some tasks generate complementarity while others generate displacement. In development economics, I show that informality---not technology access---is the binding constraint on human-AI complementarity. No existing paper combines all five elements: human capital decomposition, LLM-based task scoring, augmented wage equation, developing-country microdata, and formal/informal sector differential.
 
 The remainder of the paper is organized as follows. Section~\ref{sec:theory} develops the theoretical framework. Section~\ref{sec:measurement} describes the LLM measurement methodology. Section~\ref{sec:data} presents the data. Section~\ref{sec:identification} discusses identification. Section~\ref{sec:results} reports results. Section~\ref{sec:robustness} provides robustness checks. Section~\ref{sec:implications} discusses implications. Section~\ref{sec:conclusion} concludes.
 
