@@ -87,59 +87,131 @@ The program consists of **6 papers** organized in a dependency graph. Paper 1 is
 
 | Phase | Description | Status | Output |
 |-------|-------------|--------|--------|
-| 0 | Data acquisition (O\*NET, GEIH, EAM, crosswalks) | **Done** | 41 O\*NET files, 111K workers, 60K firm-years |
-| 1 | Occupational crosswalk SOC-ISCO-CIUO | **Done** | 66,157 chained mappings |
-| 1 | Task-occupation matrix | **Done** | 2,229,863 task-occupation pairs |
-| 1 | H^P/H^C/H^A rules-based classification | **Done** | HA 71%, HP 21%, HC 8% |
-| 2 | **LLM scoring (Claude Haiku)** | **In progress** | ~5K/18,796 tasks scored, 0 errors |
-| 2 | AHC index aggregation | Pending | Blocked by scoring completion |
-| 2 | Index validation (Felten, Webb, F&O) | Pending | |
-| 3 | Theoretical model formalization | Pending | 5 propositions to prove |
-| 4 | Augmented Mincer estimation (OLS + IV) | Pending | |
-| 5 | Robustness & heterogeneity | Pending | |
-| 6 | Paper writing & submission | Pending | Target: May 2026 |
+| 0 | Data acquisition (O\*NET, GEIH, EAM) | **Done** | 41 O\*NET files, 111K workers, 60K firm-years |
+| 1 | Crosswalks + task matrix | **Done** | 66K mappings, 2.2M task-occupation pairs |
+| 2 | LLM scoring (Claude Haiku) | **Done** | 18,796/18,796 tasks, **0 errors** |
+| 2 | AHC index (440 occupations) | **Done** | Aug mean=48.8, Sub mean=39.7, cor=0.24 |
+| 4 | OLS Mincer estimation (7 specs) | **Done** | AHC×D = +0.051*** (formal), -0.044*** (informal) |
+| 4 | Triple interaction | **Done** | AHC×D×Formal = **+0.519*** (p<0.001)** |
+| 5 | Robustness (27 specs) | **Done** | Placebo passes, within-education confirmed |
+| 6 | Working paper draft | **Done** | 12pp arXiv format, compiles clean |
+| | **Scopus literature review (2,070 papers)** | **Done** | **Novelty confirmed: 0 direct competitors** |
+
+### Novelty Assessment (Scopus, March 2026)
+
+2,070 papers analyzed across 8 search blocks. **Zero papers combine 3+ of our 5 core elements.** Closest competitors share only 2:
+
+| Competitor | Shared elements | Missing |
+|-----------|----------------|---------|
+| Demirev (2026) | LLM pipeline + occupation exposure | No Mincer, no wages, no developing country |
+| Makridis (2026) | LLM task index + wages | US artists only, no HC decomposition |
+| Walter & Lee (2022) | Mincer + task decomposition | No LLM, no AI, no developing country |
+| Mina & Gomez (2025) | Automation + informality + LatAm | No LLM, no HC decomposition |
+
+**Our unique combination:** (1) H^P/H^C/H^A decomposition + (2) LLM-scored tasks + (3) augmented Mincer + (4) developing country + (5) formal/informal differential
 
 ### Paper 0.5 — Automatizacion Colombia
 
 | Component | Status |
 |-----------|--------|
-| 15 Python scripts (DiD, logit, simulations, figures) | Complete |
-| LaTeX manuscript (ES + EN, 10K words) | Complete |
+| 15 Python scripts, LaTeX manuscript | Complete |
 | Technovation submission (double-blind) | **Under review** |
 
 ---
 
-## Roadmap
+## Roadmap: Working Paper → Definitive arXiv
 
-### 2026 Q2 (April-June) — Paper 1: Augmented Human Capital
+### Sprint 1 — Literature & Positioning (Week 1-2)
 
 ```
-Week 1-2 (Apr 1-12)
-├── Complete LLM scoring (18,796 tasks)
-├── Aggregate AHC index by occupation
-├── Validate: AHC vs Felten AIOE, Webb, Frey-Osborne
-├── Prove orthogonality: cor(AHC, SUB) < 0.3
-└── Formalize theoretical model (5 propositions)
+□ Add ~15 missing Scopus citations:
+  ├── Demirev (2026) — LLM + ESCO augmentation/automation exposure
+  ├── Makridis (2026) — LLM task index + artist wages
+  ├── Walter & Lee (2022) — Extended Mincer + task decomposition
+  ├── Mina & Gomez (2025) — Automation + informality + Mexico
+  ├── Hui et al. (2024) — Short-term GenAI employment effects (76 cites)
+  ├── Stephany & Teutloff (2024) — Skill price complementarity (33 cites)
+  ├── Tyson & Zysman (2022) — "RBTC on steroids" (68 cites)
+  ├── Chen et al. (2025) — Displacement vs complementarity GenAI
+  ├── Jones et al. (2022) — Automation in Colombia
+  ├── Egana-delSol et al. (2022) — Automation risk LatAm women (54 cites)
+  ├── Digital transformation developing countries (2022, 147 cites)
+  └── Samek & Squicciarini (2023) — AI human capital review
+□ Add "Related Work" section with positioning table
+□ Differentiate clearly vs Eloundou et al. (2023) "GPTs are GPTs"
+□ Rewrite Introduction with explicit positioning
+```
 
-Week 3-4 (Apr 13-22)
-├── Merge AHC onto GEIH estimation sample (105K workers)
-├── Construct AI adoption proxy from EAM (sector-level)
-├── Build patent-based IV for AI adoption
-├── OLS estimation of augmented Mincer equation
-└── IV estimation (2SLS) + first-stage diagnostics
+### Sprint 2 — Methodological Strengthening (Week 3-4)
 
-Week 5-6 (Apr 23-May 4)
-├── Robustness: alternative AHC measures, samples, specifications
-├── Heterogeneity: gender, education, formality, sector, age
-├── Quantile regressions across wage distribution
-└── Distributional analysis (crossing point estimation)
+```
+□ Improve crosswalk: download 4-digit SOC-ISCO from iscoCrosswalks
+  R package or BLS alternative URL
+□ External validation: download Felten AIOE + Webb AI exposure data,
+  compute formal correlations with AHC index
+□ Inter-rater reliability: re-score 20% of tasks with Claude Sonnet,
+  compute Krippendorff's alpha (target > 0.7)
+□ Document full LLM prompt in Online Appendix
+□ Add prompt sensitivity analysis (3 alternative phrasings)
+```
 
-Week 7-10 (May 5-31)
-├── Write full paper (10 sections, 10,000 words)
-├── Publication-quality tables (7+) and figures (7+)
-├── Internal review (Santiago Jimenez, EAFIT colleagues)
-├── LaTeX formatting for JPE
-└── Submit to Journal of Political Economy
+### Sprint 3 — Stronger Identification (Week 5-6)
+
+```
+□ Build IV: USPTO PatentsView AI patents by sector (lagged 3-5 years)
+  → Colombian sector adoption (Bartik shift-share)
+□ 2SLS estimation with first-stage F-statistic (target F > 10)
+□ Alternative IV: IFR robot density × sector employment shares
+□ If IV weak: present OLS as main + Anderson-Rubin robust inference
+□ Event study: pre/post ChatGPT (Nov 2022) if GEIH 2022 available
+□ Oaxaca-Blinder: formal/informal wage gap decomposition
+```
+
+### Sprint 4 — Publication Figures (Week 3-4, parallel)
+
+```
+□ Fig 1: Conceptual diagram H^P ⊕ H^C ⊕ H^A (TikZ)
+□ Fig 2: AHC distribution by sector (violin/box plot)
+□ Fig 3: AHC vs Frey-Osborne scatter (cor = -0.71)
+□ Fig 4: Marginal effect of AHC on wages at different D levels
+□ Fig 5: Heterogeneity bar chart (β₂ by formality, age, sector)
+□ Fig 6: Quantile regression coefficients across distribution
+```
+
+### Sprint 5 — Additional Robustness (Week 7)
+
+```
+□ Leave-one-sector-out jackknife
+□ Bootstrap CIs for occupation-level AHC scores
+□ Sensitivity to LLM prompt wording (3 alternatives)
+□ Alternative D proxy: EAM software investment (manufacturing only)
+```
+
+### Sprint 6 — Final Writing (Week 8-9)
+
+```
+□ Rewrite abstract with calibrated claims
+□ Expand Related Work into dedicated section
+□ Create Online Appendix:
+  ├── Full LLM prompt text
+  ├── Crosswalk documentation
+  ├── Complete AHC scores by occupation
+  ├── All 27 robustness specifications
+  └── Prompt sensitivity results
+□ Expand limitations discussion
+□ Final proofread
+□ Submit to arXiv (econ.GN, cross-list cs.AI + econ.EM)
+```
+
+### Timeline
+
+```
+April 7-18:    Sprint 1 (literature) + Sprint 4 (figures)
+April 21-May 2: Sprint 2 (methodology)
+May 5-16:      Sprint 3 (IV estimation)
+May 19-23:     Sprint 5 (extra robustness)
+May 26-Jun 6:  Sprint 6 (final writing)
+June 9:        → arXiv submission
 ```
 
 ### 2026 Q3 (July-September) — Paper 0: Methodology
