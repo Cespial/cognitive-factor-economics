@@ -1,22 +1,29 @@
 \contentsline {section}{\numberline {1}Introduction}{3}{section.1}%
-\contentsline {section}{\numberline {2}Dynamic Model with Endogenous Depreciation}{3}{section.2}%
-\contentsline {subsection}{\numberline {2.1}Setup}{3}{subsection.2.1}%
-\contentsline {subsection}{\numberline {2.2}Accumulation Equations}{4}{subsection.2.2}%
-\contentsline {subsection}{\numberline {2.3}The Worker's Problem}{4}{subsection.2.3}%
-\contentsline {subsection}{\numberline {2.4}Key Propositions}{5}{subsection.2.4}%
-\contentsline {section}{\numberline {3}Measuring AI Advancement by Occupation}{5}{section.3}%
-\contentsline {subsection}{\numberline {3.1}AI Benchmark Time Series}{5}{subsection.3.1}%
-\contentsline {subsection}{\numberline {3.2}Mapping Benchmarks to Occupations}{6}{subsection.3.2}%
-\contentsline {subsection}{\numberline {3.3}Results}{7}{subsection.3.3}%
-\contentsline {section}{\numberline {4}Empirical Estimation}{7}{section.4}%
-\contentsline {subsection}{\numberline {4.1}Specification}{7}{subsection.4.1}%
-\contentsline {subsection}{\numberline {4.2}Results}{7}{subsection.4.2}%
-\contentsline {section}{\numberline {5}Calibration and Simulation}{8}{section.5}%
-\contentsline {subsection}{\numberline {5.1}Calibration}{8}{subsection.5.1}%
-\contentsline {subsection}{\numberline {5.2}Four-Scenario Simulation}{8}{subsection.5.2}%
-\contentsline {subsection}{\numberline {5.3}Occupation-Specific Half-Lives}{9}{subsection.5.3}%
-\contentsline {section}{\numberline {6}Policy Implications}{9}{section.6}%
-\contentsline {subsection}{\numberline {6.1}Educational Investment Horizons}{9}{subsection.6.1}%
-\contentsline {subsection}{\numberline {6.2}Reskilling Program Design}{12}{subsection.6.2}%
-\contentsline {subsection}{\numberline {6.3}Curriculum Composition}{12}{subsection.6.3}%
-\contentsline {section}{\numberline {7}Conclusion}{12}{section.7}%
+\contentsline {section}{\numberline {2}Related Work}{3}{section.2}%
+\contentsline {subsection}{\numberline {2.1}Human Capital Depreciation}{4}{subsection.2.1}%
+\contentsline {subsection}{\numberline {2.2}Lifecycle Models}{4}{subsection.2.2}%
+\contentsline {subsection}{\numberline {2.3}AI Capability Measurement}{4}{subsection.2.3}%
+\contentsline {subsection}{\numberline {2.4}AI and Labor Markets}{4}{subsection.2.4}%
+\contentsline {subsection}{\numberline {2.5}Positioning}{5}{subsection.2.5}%
+\contentsline {section}{\numberline {3}Dynamic Model with Endogenous Depreciation}{5}{section.3}%
+\contentsline {subsection}{\numberline {3.1}Setup}{5}{subsection.3.1}%
+\contentsline {subsection}{\numberline {3.2}Accumulation Equations}{6}{subsection.3.2}%
+\contentsline {subsection}{\numberline {3.3}The Worker's Problem}{6}{subsection.3.3}%
+\contentsline {subsection}{\numberline {3.4}Key Propositions}{6}{subsection.3.4}%
+\contentsline {section}{\numberline {4}Measuring AI Advancement by Occupation}{7}{section.4}%
+\contentsline {subsection}{\numberline {4.1}AI Benchmark Time Series}{7}{subsection.4.1}%
+\contentsline {subsection}{\numberline {4.2}Mapping Benchmarks to Occupations}{7}{subsection.4.2}%
+\contentsline {subsection}{\numberline {4.3}Results}{8}{subsection.4.3}%
+\contentsline {section}{\numberline {5}Empirical Estimation}{8}{section.5}%
+\contentsline {subsection}{\numberline {5.1}Specification}{8}{subsection.5.1}%
+\contentsline {subsection}{\numberline {5.2}Results}{8}{subsection.5.2}%
+\contentsline {section}{\numberline {6}Calibration and Simulation}{10}{section.6}%
+\contentsline {subsection}{\numberline {6.1}Calibration}{10}{subsection.6.1}%
+\contentsline {subsection}{\numberline {6.2}Four-Scenario Simulation}{10}{subsection.6.2}%
+\contentsline {subsection}{\numberline {6.3}Occupation-Specific Half-Lives}{10}{subsection.6.3}%
+\contentsline {section}{\numberline {7}Robustness}{13}{section.7}%
+\contentsline {section}{\numberline {8}Policy Implications}{13}{section.8}%
+\contentsline {subsection}{\numberline {8.1}Educational Investment Horizons}{13}{subsection.8.1}%
+\contentsline {subsection}{\numberline {8.2}Reskilling Program Design}{13}{subsection.8.2}%
+\contentsline {subsection}{\numberline {8.3}Curriculum Composition}{14}{subsection.8.3}%
+\contentsline {section}{\numberline {9}Conclusion}{14}{section.9}%

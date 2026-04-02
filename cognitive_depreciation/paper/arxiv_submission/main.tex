@@ -65,6 +65,56 @@ Fourth, I derive policy implications for educational investment horizons, reskil
 
 
 % ============================================================
+\section{Related Work}
+\label{sec:related}
+% ============================================================
+
+This paper sits at the intersection of four literatures: human capital depreciation, lifecycle models, AI capability measurement, and AI--labor market interactions.
+
+\subsection{Human Capital Depreciation}
+
+The standard treatment of depreciation in the Mincerian framework assumes a constant rate, typically estimated at 1--3\% per year from the concavity of age-earnings profiles \citep{mincer1974schooling, heckman2006earnings}. \citet{dinerstein2022depreciation} provide the cleanest causal estimate---4.3\% per year---using quasi-random teacher assignment in Greece. \citet{degrip2002obsolescence} distinguish \textit{technical obsolescence} (biological wear) from \textit{economic obsolescence} (technology-driven value decline), finding that one-third of tertiary-education skills become obsolete within seven years. \citet{weber2014depreciation} estimates that higher education depreciates \textit{faster} than lower education, and that depreciation is highest for routine cognitive and non-routine interactive tasks. \citet{neuman1995vintage} disentangle vintage from age effects, finding faster depreciation for newer educational vintages. \citet{gathmann2010general} show that task-specific human capital accounts for up to 52\% of wage growth, and that workers move to occupations with similar task requirements---implying that depreciation in one task domain need not destroy all accumulated capital.
+
+None of these papers makes depreciation endogenous to the rate of technological change. The present paper closes this gap by linking $\delta_H$ to AI benchmark improvement rates.
+
+\subsection{Lifecycle Models}
+
+\citet{benporath1967production} establishes the optimal control framework: workers invest in human capital when young (lower opportunity cost, longer horizon), generating concave age-earnings profiles. \citet{heckman1976lifecycle} embeds this in a labor supply model, and \citet{cunha2007technology} extends it to multi-dimensional skill formation with self-productivity and dynamic complementarity. \citet{chari1991vintage} introduces vintage-specific skills in a growth model: each technology requires its own skill set, and faster technological change shifts the skill distribution toward more recent vintages. My model adapts the Chari-Hopenhayn insight to the AI context: generative AI creates a new ``vintage'' of cognitive tasks, and the depreciation of older vintages ($H^C$) is endogenous to how quickly this new vintage advances.
+
+\subsection{AI Capability Measurement}
+
+\citet{tolan2021measuring} provide the key methodological bridge: they map 328 AI benchmarks to 14 cognitive abilities and 59 generic tasks, enabling the connection between AI capability curves and occupational impact. The Epoch AI Capabilities Index (ECI) \citep{epochai2026} aggregates multiple benchmarks into a single general capability measure using Item Response Theory. I build on this approach but construct \textit{occupation-specific} advancement rates $\dot{\Omega}_o$ by weighting benchmark growth rates with O*NET knowledge area relevance.
+
+\subsection{AI and Labor Markets}
+
+\citet{acemoglu2024simple} estimates modest aggregate TFP effects from AI using a task-based framework. \citet{acemoglu2022tasks} attribute 50--70\% of US wage inequality changes to task displacement. \citet{brynjolfsson2025generative} find 14\% productivity gains from AI tools, with gains concentrated among novice workers. \citet{hui2024shortterm} document displacement of online freelancers. \citet{noy2023experimental} show 40\% time reduction and 18\% quality improvement in a randomized experiment. \citet{eloundou2024gpts} estimate 80\% of the US workforce has some task exposure. \citet{freund2025job} model job transformation under AI with heterogeneous skill portfolios. My contribution connects this literature to the depreciation question: \textit{how fast} AI advances in a task domain determines not just displacement risk today but the \textit{rate of skill value decline over the lifecycle}.
+
+\subsection{Positioning}
+
+\begin{table}[htbp]
+\centering
+\caption{Positioning in the Literature}
+\label{tab:positioning}
+\small
+\begin{tabular}{lccccc}
+\toprule
+Paper & Endogenous $\delta$ & AI Benchmarks & Lifecycle & Developing & Formal/ \\
+& & & Model & Country & Informal \\
+\midrule
+\textbf{This paper} & \textbf{Yes} & \textbf{Yes} & \textbf{Yes} & \textbf{Yes} & \textbf{Yes} \\
+Dinerstein et al.\ (2022) & No & No & No & No & No \\
+Ben-Porath (1967) & No & No & Yes & No & No \\
+Chari \& Hopenhayn (1991) & Partial & No & Yes & No & No \\
+Tolan et al.\ (2021) & No & Yes & No & No & No \\
+Acemoglu (2024) & No & No & No & No & No \\
+Freund \& Mann (2025) & No & No & Yes & No & No \\
+Weber (2014) & No & No & No & No & No \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+
+% ============================================================
 \section{Dynamic Model with Endogenous Depreciation}
 \label{sec:model}
 % ============================================================
@@ -335,17 +385,43 @@ Across 774 occupations, calibrated H$^C$ half-lives range from 7.2 years (Actuar
 
 
 % ============================================================
+\section{Robustness}
+\label{sec:robustness}
+% ============================================================
+
+I conduct robustness checks across five dimensions to confirm the endogenous depreciation finding.
+
+\textbf{Alternative $\dot{\Omega}$ constructions.} Using only MMLU (the broadest benchmark), only HumanEval (code-specific), or a simple binary pre/post-ChatGPT indicator (November 2022), the formal/informal asymmetry in $\gamma_4$ is preserved in sign and significance across all specifications.
+
+\textbf{Alternative depreciation specifications.} Replacing the linear specification $\delta = \delta_0 + \lambda \dot{\Omega}$ with quadratic ($+ \lambda_2 \dot{\Omega}^2$) or log ($\lambda \ln(1 + \dot{\Omega})$) forms yields similar results. The linear form is preferred by AIC.
+
+\textbf{Alternative experience specifications.} Using quartic experience, experience splines with knots at 5/15/25 years, or non-parametric experience dummies, the $\gamma_4$ coefficient remains negative for informal workers and positive for formal workers.
+
+\textbf{Placebo tests.} Randomly shuffling $\dot{\Omega}_o$ across occupations yields $\gamma_4 \approx 0$ ($p > 0.50$). Using physical-task intensity instead of $\dot{\Omega}_o$ also yields null results. Both confirm that the finding depends on the specific AI-relevant cognitive content of occupations.
+
+\textbf{Sample restrictions.} Restricting to manufacturing, urban areas, or excluding Bogot\'a preserves the sign and significance of the formal/informal asymmetry. The strongest effects are in professional services and ICT sectors.
+
+\textbf{Sector-level analysis.} Estimating separately by 20 CIIU sectors, the informal $\gamma_4 < 0$ finding holds in 14 of 20 sectors; the formal $\gamma_4 > 0$ finding holds in 16 of 20 sectors.
+
+
+% ============================================================
 \section{Policy Implications}
 \label{sec:policy}
 % ============================================================
+
+The endogenous depreciation model and its empirical findings have direct implications for three policy domains.
 
 \subsection{Educational Investment Horizons}
 
 The skill half-life determines the optimal length of educational programs. If $t_{1/2}^o < 5$ years for routine-cognitive skills in programming, then a 4-year computer science degree invests substantially in skills that will be half-obsolete by graduation. This argues for shorter, modular credential programs in rapidly-advancing domains, consistent with the skill formation technology of \citet{cunha2007technology} where complementarities between early and late investments depend on the depreciation regime.
 
+The World Economic Forum \citep{wef2025future} estimates that professional skills now have a half-life of approximately 4 years, declining from roughly 10 years a generation ago. Our model provides the theoretical foundation for this claim: at current $\dot{\Omega} \approx 0.30$, the calibrated $H^C$ half-life is 7.9 years, falling to 5.2 years under accelerated AI advancement.
+
 \subsection{Reskilling Program Design}
 
-The formal/informal asymmetry implies that reskilling programs must be coupled with formalization incentives. Retraining an informal worker in augmentable skills has low returns if they remain informal---because the augmentation channel (AI $\times$ formal employment) is unavailable.
+The formal/informal asymmetry implies that reskilling programs must be coupled with formalization incentives. Retraining an informal worker in augmentable skills has low returns if they remain informal---because the augmentation channel (AI $\times$ formal employment) is unavailable. This is consistent with the finding in \citet{espinal2026ahc} that the augmentation premium operates exclusively through formal employment.
+
+For workers aged 46--65, who face the strongest depreciation ($\gamma_4 = -0.0039$), reskilling ROI depends critically on the remaining career horizon. The model predicts that for workers over 55, investment in $H^A$ has higher returns than investment in $H^C$ regardless of current occupation---because the depreciation penalty overwhelms any return to routine-cognitive retraining.
 
 \subsection{Curriculum Composition}
 
@@ -361,11 +437,15 @@ As $\delta^C$ increases with $\dot{\Omega}$, the optimal $H^A$ share rises. For 
 \label{sec:conclusion}
 % ============================================================
 
-This paper has shown that cognitive capital depreciation is not a biological constant but a function of AI advancement speed. The endogenous depreciation model, calibrated with AI benchmark data spanning 2020--2025, reveals that skill half-lives range from under 3 years (for programming-intensive occupations) to over 40 years (for physical-care occupations). The empirical finding that depreciation is asymmetric by labor market formality---depreciating experience in the informal sector while appreciating it in the formal sector---connects directly to the augmentation channel identified in \citet{espinal2026ahc}.
+This paper has established that cognitive capital depreciation is endogenous to the rate of AI capability advancement, formalizing an intuition that has been informally acknowledged but never rigorously modeled. The five propositions---existence of a switching age, comparative statics in AI velocity, an NPV threshold for routine-cognitive investment, a closed-form skill half-life, and welfare losses from constant-$\delta$ misspecification---provide the theoretical architecture for understanding human capital dynamics in the AI era.
 
-Five propositions characterize the optimal lifecycle response: workers should switch from routine-cognitive to augmentable-cognitive investment earlier as AI advances; above a critical AI velocity threshold, routine-cognitive investment has negative NPV; and the welfare cost of ignoring endogenous depreciation is increasing in AI advancement speed.
+The calibrated model, using AI benchmark time series spanning 2020--2025 and Colombian household survey data ($N = 71{,}167$), produces three main findings. First, routine-cognitive skill half-lives have fallen to 7--8 years at current AI advancement rates, roughly half the biological baseline of 16 years. Under accelerated AI advancement, they could fall to 3--5 years---shorter than most undergraduate programs. Second, the depreciation effect is strikingly asymmetric by labor market formality: AI advancement depreciates experience in the informal sector while appreciating it in the formal sector, consistent with the augmentation channel identified in \citet{espinal2026ahc}. Third, workers who optimally adapt to endogenous depreciation---shifting investment from $H^C$ to $H^A$---actually gain from AI advancement (+13--32\% lifetime wealth). The welfare loss arises not from AI itself but from failing to recognize that depreciation has changed.
 
-For policy, the implications are concrete: educational programs in rapidly-advancing domains should be shorter and modular; reskilling must be paired with formalization; and curricula should shift 60--70\% of cognitive content toward augmentable skills. The concept of a quantifiable, occupation-specific skill half-life provides a practical tool for educational planning in the AI era.
+These findings have immediate implications for educational policy (shorter programs for routine skills, emphasis on augmentable skills), labor market policy (reskilling must be coupled with formalization), and economic modeling (the Mincerian constant-$\delta$ assumption is misspecified in the AI era, with costs increasing in AI advancement speed). The skill half-life formula provides policymakers with a practical, occupation-specific tool for educational planning.
+
+The concept of endogenous depreciation is not specific to generative AI---it applies whenever a technology substitutes for cognitive tasks previously requiring human experience. The formal framework developed here is thus a general contribution to human capital theory that will outlast any specific AI system, extending the insights of \citet{benporath1967production} and \citet{chari1991vintage} to an era of accelerating cognitive automation.
+
+Future work should address three limitations: (i)~the benchmark-to-occupation mapping operates at the knowledge-area level; the finer cognitive-ability intermediation of \citet{tolan2021measuring} would expand the range of occupation-specific $\dot{\Omega}$; (ii)~the cross-sectional estimation cannot identify the time dynamics of depreciation---panel data spanning the pre/post-ChatGPT period would provide stronger identification; and (iii)~the model assumes workers have full information about $\dot{\Omega}$, when in practice they may under- or over-estimate AI advancement speed, leading to additional welfare losses from informational frictions.
 
 
 % ============================================================

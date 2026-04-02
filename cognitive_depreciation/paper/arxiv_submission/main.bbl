@@ -1,14 +1,31 @@
-\begin{thebibliography}{15}
+\begin{thebibliography}{25}
 \providecommand{\natexlab}[1]{#1}
 \providecommand{\url}[1]{\texttt{#1}}
 \expandafter\ifx\csname urlstyle\endcsname\relax
   \providecommand{\doi}[1]{doi: #1}\else
   \providecommand{\doi}{doi: \begingroup \urlstyle{rm}\Url}\fi
 
+\bibitem[Acemoglu(2025)]{acemoglu2024simple}
+Daron Acemoglu.
+\newblock The simple macroeconomics of {AI}.
+\newblock \emph{Economic Policy}, 40\penalty0 (121):\penalty0 13--58, 2025.
+
+\bibitem[Acemoglu and Restrepo(2022)]{acemoglu2022tasks}
+Daron Acemoglu and Pascual Restrepo.
+\newblock Tasks, automation, and the rise in {U.S.} wage inequality.
+\newblock \emph{Econometrica}, 90\penalty0 (5):\penalty0 1973--2016, 2022.
+
 \bibitem[Ben-Porath(1967)]{benporath1967production}
 Yoram Ben-Porath.
 \newblock The production of human capital and the life cycle of earnings.
 \newblock \emph{Journal of Political Economy}, 75:\penalty0 352--365, 1967.
+
+\bibitem[Brynjolfsson et~al.(2025)Brynjolfsson, Li, and
+  Raymond]{brynjolfsson2025generative}
+Erik Brynjolfsson, Danielle Li, and Lindsey~R. Raymond.
+\newblock Generative {AI} at work.
+\newblock \emph{The Quarterly Journal of Economics}, 140\penalty0 (2):\penalty0
+  889--942, 2025.
 
 \bibitem[Chari and Hopenhayn(1991)]{chari1991vintage}
 V.~V. Chari and Hugo Hopenhayn.
@@ -39,6 +56,13 @@ Michael Dinerstein, Rigissa Megalokonomou, and Constantine Yannelis.
 \newblock \emph{American Economic Review}, 112\penalty0 (11):\penalty0
   3725--3762, 2022.
 
+\bibitem[Eloundou et~al.(2024)Eloundou, Manning, Mishkin, and
+  Rock]{eloundou2024gpts}
+Tyna Eloundou, Sam Manning, Pamela Mishkin, and Daniel Rock.
+\newblock {GPTs} are {GPTs}: An early look at the labor market impact potential
+  of large language models.
+\newblock \emph{Science}, 384\penalty0 (6702):\penalty0 1306--1308, 2024.
+
 \bibitem[{Epoch AI}(2026)]{epochai2026}
 {Epoch AI}.
 \newblock Epoch {AI} capabilities index ({ECI}).
@@ -58,11 +82,23 @@ Cristian Espinal~Maya.
 \newblock Technical report, Universidad EAFIT, 2026{\natexlab{b}}.
 \newblock arXiv preprint.
 
+\bibitem[Freund and Mann(2025)]{freund2025job}
+Lukas~B. Freund and Katja Mann.
+\newblock Job transformation, specialization, and the labor market effects of
+  {AI}.
+\newblock Working paper, CESifo, 2025.
+
 \bibitem[Gathmann and Sch{\"o}nberg(2010)]{gathmann2010general}
 Christina Gathmann and Uta Sch{\"o}nberg.
 \newblock How general is human capital? a task-based approach.
 \newblock \emph{Journal of Labor Economics}, 28\penalty0 (1):\penalty0 1--49,
   2010.
+
+\bibitem[Heckman(1976)]{heckman1976lifecycle}
+James~J. Heckman.
+\newblock Estimates of a human capital production function embedded in a
+  life-cycle model of labor supply.
+\newblock \emph{NBER Chapters}, 1976.
 
 \bibitem[Heckman et~al.(2006)Heckman, Lochner, and Todd]{heckman2006earnings}
 James~J. Heckman, Lance~J. Lochner, and Petra~E. Todd.
@@ -70,6 +106,12 @@ James~J. Heckman, Lance~J. Lochner, and Petra~E. Todd.
   {Mincer} equation and beyond.
 \newblock In \emph{Handbook of the Economics of Education}, volume~1, pages
   307--458. Elsevier, 2006.
+
+\bibitem[Hui et~al.(2024)Hui, Reshef, and Zhou]{hui2024shortterm}
+Xiang Hui, Oren Reshef, and Luofeng Zhou.
+\newblock The short-term effects of generative artificial intelligence on
+  employment.
+\newblock \emph{Organization Science}, 2024.
 
 \bibitem[Machlup(1962)]{machlup1962production}
 Fritz Machlup.
@@ -81,6 +123,19 @@ Fritz Machlup.
 Jacob Mincer.
 \newblock \emph{Schooling, Experience, and Earnings}.
 \newblock NBER / Columbia University Press, 1974.
+
+\bibitem[Neuman and Weiss(1995)]{neuman1995vintage}
+Shoshana Neuman and Amos Weiss.
+\newblock On the effects of schooling vintage on experience-earnings profiles:
+  Theory and evidence.
+\newblock \emph{European Economic Review}, 39\penalty0 (5):\penalty0 943--955,
+  1995.
+
+\bibitem[Noy and Zhang(2023)]{noy2023experimental}
+Shakked Noy and Whitney Zhang.
+\newblock Experimental evidence on the productivity effects of generative
+  artificial intelligence.
+\newblock \emph{Science}, 2023.
 
 \bibitem[Tolan et~al.(2021)Tolan, Pesole, Martinez-Plumed,
   Fern{\'a}ndez-Mac{\'i}as, Hern{\'a}ndez-Orallo, and
@@ -97,5 +152,10 @@ Sylvain Weber.
 \newblock Human capital depreciation and education level.
 \newblock \emph{International Journal of Manpower}, 35\penalty0 (5):\penalty0
   613--642, 2014.
+
+\bibitem[{World Economic Forum}(2025)]{wef2025future}
+{World Economic Forum}.
+\newblock The future of jobs report 2025.
+\newblock Technical report, WEF, 2025.
 
 \end{thebibliography}
