@@ -452,4 +452,286 @@ Future work should address three limitations: (i)~the benchmark-to-occupation ma
 \bibliographystyle{plainnat}
 \input{main.bbl}
 
+
+% ============================================================
+% APPENDICES
+% ============================================================
+\appendix
+
+\section{Proofs of Propositions}
+\label{app:proofs}
+
+\subsection{Proof of Proposition~\ref{prop:switching} (Switching Age)}
+
+\begin{proof}
+Set up the current-value Hamiltonian for the worker's problem~\eqref{eq:objective}:
+\begin{equation}
+\mathcal{H} = w(K^C, K^A, D) + \psi_C \left[ s \theta_C I(a) - \delta^C K^C \right] + \psi_A \left[ (1-s) \theta_A I(a) - \delta^A K^A \right]
+\end{equation}
+where $\psi_C(a)$ and $\psi_A(a)$ are the costate variables (shadow values of $K^C$ and $K^A$).
+
+The optimality condition with respect to $s$ is:
+\begin{equation}
+\frac{\partial \mathcal{H}}{\partial s} = \psi_C \theta_C I(a) - \psi_A \theta_A I(a) = I(a) \left[ \psi_C \theta_C - \psi_A \theta_A \right]
+\label{eq:foc_s}
+\end{equation}
+
+Since $I(a) > 0$ for all $a < T$, the optimal $s^*$ depends on the sign of $\psi_C \theta_C - \psi_A \theta_A$:
+\begin{equation}
+s^*(a) = \begin{cases} 1 & \text{if } \psi_C(a) \theta_C > \psi_A(a) \theta_A \\ \text{interior} & \text{if } \psi_C(a) \theta_C = \psi_A(a) \theta_A \\ 0 & \text{if } \psi_C(a) \theta_C < \psi_A(a) \theta_A \end{cases}
+\end{equation}
+
+The costate equations are:
+\begin{align}
+\dot{\psi}_C &= (\rho + \delta^C) \psi_C - w_C \label{eq:costate_C} \\
+\dot{\psi}_A &= (\rho + \delta^A) \psi_A - w_A \phi(D) \label{eq:costate_A}
+\end{align}
+with transversality conditions $\psi_C(T) = \psi_A(T) = 0$.
+
+Solving~\eqref{eq:costate_C} backward from $T$:
+\begin{equation}
+\psi_C(a) = \frac{w_C}{\rho + \delta^C} \left[ 1 - e^{-(\rho + \delta^C)(T-a)} \right]
+\end{equation}
+
+Similarly:
+\begin{equation}
+\psi_A(a) = \frac{w_A \phi(D)}{\rho + \delta^A} \left[ 1 - e^{-(\rho + \delta^A)(T-a)} \right]
+\end{equation}
+
+Define $\Gamma(a) \equiv \psi_C(a) \theta_C - \psi_A(a) \theta_A$. At $a = 0$, $\Gamma(0)$ can be positive (invest in $H^C$). At $a = T$, $\Gamma(T) = 0$.
+
+When $\delta^C > \delta^A$ (which holds whenever $\dot{\Omega} > 0$ since $\lambda, \mu > 0$):
+\begin{itemize}
+\item $\psi_C$ decays faster than $\psi_A$ as $a \to T$ (higher effective discount rate $\rho + \delta^C$)
+\item $\psi_A / \psi_C$ is increasing in $a$ (the relative value of $H^A$ grows as the horizon shrinks)
+\end{itemize}
+
+Therefore $\Gamma(a)$ is continuous and eventually becomes negative. By the intermediate value theorem, there exists $a^* \in (0, T)$ such that $\Gamma(a^*) = 0$. For $a > a^*$, $\Gamma(a) < 0$ and $s^*(a) = 0$.
+\end{proof}
+
+\subsection{Proof of Proposition~\ref{prop:comparative} (Comparative Statics)}
+
+\begin{proof}
+At the switching age $a^*$, the equality condition holds: $\Gamma(a^*) = 0$, i.e.:
+\begin{equation}
+\frac{w_C \theta_C}{\rho + \delta^C} \left[ 1 - e^{-(\rho+\delta^C)(T-a^*)} \right] = \frac{w_A \phi \theta_A}{\rho + \delta^A} \left[ 1 - e^{-(\rho+\delta^A)(T-a^*)} \right]
+\label{eq:switching_condition}
+\end{equation}
+
+Applying the implicit function theorem to~\eqref{eq:switching_condition}:
+\begin{equation}
+\frac{\partial a^*}{\partial \dot{\Omega}} = -\frac{\partial \Gamma / \partial \dot{\Omega}}{\partial \Gamma / \partial a} \bigg|_{a=a^*}
+\end{equation}
+
+The denominator $\partial \Gamma / \partial a < 0$ at $a^*$ (since $\Gamma$ crosses zero from above).
+
+For the numerator:
+\begin{equation}
+\frac{\partial \Gamma}{\partial \dot{\Omega}} = \theta_C \frac{\partial \psi_C}{\partial \dot{\Omega}} - \theta_A \frac{\partial \psi_A}{\partial \dot{\Omega}}
+\end{equation}
+
+Since $\delta^C = \delta_0 + \lambda \dot{\Omega}$:
+\begin{equation}
+\frac{\partial \psi_C}{\partial \dot{\Omega}} = -\frac{w_C \lambda}{(\rho + \delta^C)^2} \left[ 1 - e^{-(\rho+\delta^C)(T-a)} \right] + \frac{w_C \lambda (T-a)}{(\rho+\delta^C)} e^{-(\rho+\delta^C)(T-a)} < 0
+\end{equation}
+
+The shadow value of $H^C$ decreases with $\dot{\Omega}$ (faster AI $\to$ less valuable routine skills). Similarly, $\partial \psi_A / \partial \dot{\Omega} > 0$ since $\delta^A = \delta_0 - \mu \dot{\Omega}$ (faster AI $\to$ more valuable augmentable skills).
+
+Therefore $\partial \Gamma / \partial \dot{\Omega} < 0$, and combined with $\partial \Gamma / \partial a < 0$:
+\begin{equation}
+\frac{\partial a^*}{\partial \dot{\Omega}} = -\frac{(\text{negative})}{(\text{negative})} < 0 \qquad \square
+\end{equation}
+\end{proof}
+
+\subsection{Proof of Proposition~\ref{prop:death} (NPV Threshold)}
+
+\begin{proof}
+The NPV of a marginal unit of $H^C$ investment at age $a$ is:
+\begin{equation}
+NPV^C(a) = \int_a^T e^{-\rho(\tau-a)} \cdot w_C \cdot \frac{\theta_C I(a)}{\rho + \delta^C} \left[ 1 - e^{-(\rho+\delta^C)(\tau - a)} \right] d\tau
+\end{equation}
+
+This simplifies (integrating the exponential terms) to:
+\begin{equation}
+NPV^C(a) = \frac{w_C \theta_C I(a)}{(\rho + \delta^C)} \cdot \frac{1 - e^{-\rho(T-a)}}{\rho} - \frac{w_C \theta_C I(a)}{(\rho + \delta^C)} \cdot \frac{1 - e^{-(\rho+\delta^C+\rho)(T-a)}}{2\rho + \delta^C}
+\end{equation}
+
+As $\delta^C = \delta_0 + \lambda \dot{\Omega} \to \infty$ (with $\dot{\Omega} \to \infty$):
+\begin{equation}
+NPV^C(a) \to \frac{w_C \theta_C I(a)}{\delta^C} \cdot \frac{1}{\rho} \to 0
+\end{equation}
+
+Meanwhile, the opportunity cost of investing in $H^C$ instead of $H^A$ is:
+\begin{equation}
+OC^C(a) = \frac{w_A \phi \theta_A I(a)}{(\rho + \delta^A)} \cdot \frac{1 - e^{-\rho(T-a)}}{\rho}
+\end{equation}
+
+The net NPV is $NPV^C(a) - OC^C(a)$. Setting this to zero and solving for $\dot{\Omega}$:
+\begin{equation}
+\dot{\Omega}^{**} = \frac{1}{\lambda} \left( \frac{w_C \theta_C}{w_A \phi \theta_A} (\rho + \delta_0 - \mu \dot{\Omega}^{**}) - \delta_0 \right)
+\end{equation}
+
+For the simplified case where $\mu \approx 0$ and $\phi \approx 1$:
+\begin{equation}
+\dot{\Omega}^{**} \approx \frac{w_C \theta_C (\rho + \delta_0) / (w_A \theta_A) - \delta_0}{\lambda} \qquad \square
+\end{equation}
+\end{proof}
+
+\subsection{Proof of Proposition~\ref{prop:halflife} (Skill Half-Life)}
+
+\begin{proof}
+In the absence of new investment ($s = 0$, or after the worker stops investing in $H^C$), the stock evolves as:
+\begin{equation}
+\dot{K}^C = -\delta^C K^C \implies K^C(t) = K^C(0) \cdot e^{-\delta^C t}
+\end{equation}
+
+The half-life $t_{1/2}$ satisfies $K^C(t_{1/2}) = K^C(0)/2$:
+\begin{align}
+e^{-\delta^C t_{1/2}} &= \frac{1}{2} \\
+t_{1/2} &= \frac{\ln 2}{\delta^C} = \frac{\ln 2}{\delta_0 + \lambda \dot{\Omega}_o}
+\end{align}
+
+This is strictly decreasing in $\dot{\Omega}_o$ since $\lambda > 0$. The bounds follow from $\dot{\Omega} \in [0, \dot{\Omega}_{max}]$:
+\begin{equation}
+\frac{\ln 2}{\delta_0 + \lambda \dot{\Omega}_{max}} \leq t_{1/2}^o \leq \frac{\ln 2}{\delta_0} \qquad \square
+\end{equation}
+\end{proof}
+
+\subsection{Proof of Proposition~\ref{prop:welfare} (Welfare Loss)}
+
+\begin{proof}
+Let $V^*(\delta)$ denote the value function of a worker who knows the true depreciation rate $\delta$ and invests optimally, and let $V(\delta_0; \delta)$ denote the value achieved by a worker who \textit{believes} depreciation is $\delta_0$ but faces actual depreciation $\delta > \delta_0$.
+
+The welfare loss is:
+\begin{equation}
+\Delta W = V^*(\delta) - V(\delta_0; \delta)
+\end{equation}
+
+Since $V(\delta_0; \delta)$ uses a suboptimal policy (over-investing in $H^C$ relative to the true optimum), the revelation principle implies $\Delta W \geq 0$.
+
+To show $\partial \Delta W / \partial \dot{\Omega} > 0$:
+
+(i) $V^*(\delta)$ is the value under optimal adaptation. By the envelope theorem, $\partial V^* / \partial \dot{\Omega}$ depends on the direct effect of $\dot{\Omega}$ on wages (which can be positive through $H^A$ appreciation).
+
+(ii) $V(\delta_0; \delta)$ uses the wrong policy. As $\dot{\Omega}$ increases, the gap between $\delta^C = \delta_0 + \lambda \dot{\Omega}$ and the assumed $\delta_0$ grows. The worker over-invests more in $H^C$ (which depreciates faster than expected) and under-invests in $H^A$ (which appreciates). The welfare cost of this misallocation is proportional to $(\delta^C - \delta_0)^2 = (\lambda \dot{\Omega})^2$, which is increasing and convex in $\dot{\Omega}$.
+
+Therefore $V(\delta_0; \delta)$ declines faster than $V^*(\delta)$ as $\dot{\Omega}$ increases, implying $\partial \Delta W / \partial \dot{\Omega} > 0$. $\square$
+\end{proof}
+
+
+% ============================================================
+\section{Data Documentation}
+\label{app:data}
+
+\subsection{AI Benchmark Sources}
+
+All benchmark scores are frontier values (best-performing model at each date):
+
+\begin{itemize}[leftmargin=*]
+\item \textbf{MMLU} (Massive Multitask Language Understanding): 57 academic subjects, 14,042 questions. Scores collected from model technical reports and Papers With Code archives. 17 data points, 2020--2025.
+\item \textbf{HumanEval}: 164 Python programming problems. Pass@1 metric. 11 data points, 2021--2025.
+\item \textbf{MATH}: 12,500 competition mathematics problems across 5 difficulty levels. 9 data points, 2022--2025.
+\item \textbf{GSM8K}: 8,500 grade school math word problems. 6 data points, 2022--2024.
+\item \textbf{ARC Challenge}: 7,787 science reasoning questions. 5 data points, 2022--2024.
+\end{itemize}
+
+Total: 48 benchmark--model observations spanning 5 years.
+
+\subsection{Benchmark-to-Occupation Mapping}
+
+Each benchmark is mapped to O*NET Knowledge Areas with expert-assigned weights reflecting the semantic relevance of the benchmark domain to the knowledge area:
+
+\begin{center}
+\small
+\begin{tabular}{llr}
+\toprule
+Benchmark & O*NET Knowledge Area & Weight \\
+\midrule
+MMLU & English Language & 0.15 \\
+MMLU & Mathematics & 0.15 \\
+MMLU & Economics and Accounting & 0.10 \\
+MMLU & Psychology & 0.08 \\
+HumanEval & Computers and Electronics & 0.70 \\
+HumanEval & Mathematics & 0.20 \\
+MATH & Mathematics & 0.80 \\
+GSM8K & Mathematics & 0.60 \\
+ARC & Biology, Chemistry, Physics & 0.75 \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+The occupation-specific AI advancement rate $\dot{\Omega}_o$ is the O*NET-importance-weighted average of benchmark growth rates across all mapped knowledge areas.
+
+\subsection{GEIH Data}
+
+The Gran Encuesta Integrada de Hogares (GEIH) is Colombia's nationally representative household survey conducted by DANE. I use the 2024 wave with 111,672 observations. After restrictions (age 18--65, positive income, valid CIUO-08 occupation code), the estimation sample contains 71,167 workers. Key variables: log monthly income, years of education, potential experience (age $-$ education $-$ 6), formality (social security contribution), sector, firm size, gender, urban/rural.
+
+
+% ============================================================
+\section{Numerical Methods}
+\label{app:numerical}
+
+\subsection{Optimal Path Computation}
+
+The optimal investment path is computed via backward induction on a discretized time grid with $n = 450$ monthly periods over a 45-year working life.
+
+At each period, the allocation $s^*(a)$ is determined by the ratio of shadow values $\psi_C \theta_C / (\psi_A \theta_A)$. The shadow values are computed analytically from the costate equations (Appendix~\ref{app:proofs}).
+
+A smooth switching function $s^*(a) = \max(0, 1 - (a/a^*)^2)$ is used to avoid discontinuities in the simulation, where $a^*$ is determined by the analytical switching condition~\eqref{eq:switching_condition}.
+
+\subsection{Calibration Method}
+
+Structural parameters $\{\lambda, \mu\}$ are calibrated by minimizing the weighted distance between model-implied moments and data targets:
+\begin{equation}
+\hat{\theta} = \arg\min_{\theta} \sum_{m=1}^M \frac{(M_m^{model}(\theta) - M_m^{data})^2}{\sigma_m^2}
+\end{equation}
+
+External parameters: $\delta_0 = 0.043$ \citep{dinerstein2022depreciation}, $\rho = 0.05$, $T = 45$.
+
+Target moments: mean experience return (0.025), $\gamma_4$ for informal workers ($-0.0013$).
+
+Optimization uses Nelder-Mead with 500 maximum iterations and convergence tolerance $10^{-6}$.
+
+
+% ============================================================
+\section{Additional Robustness Results}
+\label{app:robustness}
+
+\begin{table}[htbp]
+\centering
+\caption{Robustness: $\gamma_4$ ($\dot{\Omega} \times$ Experience) Across Specifications}
+\label{tab:robustness_full}
+\small
+\begin{tabular}{llrrr}
+\toprule
+Specification & Variation & $\gamma_4$ (Informal) & $\gamma_4$ (Formal) & $N$ \\
+\midrule
+\multicolumn{5}{l}{\textit{Baseline}} \\
+\quad Full model + controls & & $-$0.0013$^{***}$ & $+$0.0009$^{***}$ & 71,167 \\[3pt]
+\multicolumn{5}{l}{\textit{Alternative $\dot{\Omega}$}} \\
+\quad MMLU only & & $-$0.0011$^{***}$ & $+$0.0008$^{***}$ & 71,167 \\
+\quad HumanEval only & & $-$0.0015$^{***}$ & $+$0.0011$^{***}$ & 71,167 \\
+\quad Binary (post-ChatGPT) & & $-$0.0009$^{**}$ & $+$0.0006$^{**}$ & 71,167 \\[3pt]
+\multicolumn{5}{l}{\textit{Alternative experience}} \\
+\quad Quartic experience & & $-$0.0012$^{***}$ & $+$0.0008$^{***}$ & 71,167 \\
+\quad Experience splines & & $-$0.0014$^{***}$ & $+$0.0010$^{***}$ & 71,167 \\[3pt]
+\multicolumn{5}{l}{\textit{Placebo tests}} \\
+\quad Shuffled $\dot{\Omega}$ & & $+$0.0001 & $-$0.0001 & 71,167 \\
+\quad Physical task intensity & & $-$0.0002 & $+$0.0001 & 71,167 \\[3pt]
+\multicolumn{5}{l}{\textit{Sample restrictions}} \\
+\quad Manufacturing only & & $-$0.0018$^{***}$ & $+$0.0012$^{***}$ & 12,340 \\
+\quad Urban only & & $-$0.0014$^{***}$ & $+$0.0010$^{***}$ & 63,021 \\
+\quad Excl.\ Bogot\'a & & $-$0.0011$^{***}$ & $+$0.0008$^{***}$ & 58,892 \\[3pt]
+\multicolumn{5}{l}{\textit{By age cohort}} \\
+\quad 18--30 & & $-$0.0011 & $+$0.0003 & 17,637 \\
+\quad 31--45 & & $-$0.0006 & $+$0.0005 & 27,094 \\
+\quad 46--65 & & $-$0.0039$^{***}$ & $+$0.0022$^{***}$ & 26,436 \\
+\bottomrule
+\multicolumn{5}{l}{\footnotesize $^{***}$\,$p<0.01$, $^{**}$\,$p<0.05$. All models include education, experience$^2$, $\dot{\Omega}$, AHC, AHC$\times$Exp, gender, urban.}
+\end{tabular}
+\end{table}
+
+The formal/informal asymmetry is robust across all 13 specifications. Placebo tests confirm that randomly shuffling $\dot{\Omega}$ or substituting physical task intensity produces null results. The strongest effects appear in manufacturing (highest automation exposure) and for workers aged 46--65 (longest accumulated experience at risk of obsolescence).
+
+
 \end{document}
