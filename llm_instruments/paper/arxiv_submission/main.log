@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.24 (TeX Live 2022) (preloaded format=pdflatex 2023.2.12)  1 APR 2026 15:49
+This is pdfTeX, Version 3.141592653-2.6-1.40.24 (TeX Live 2022) (preloaded format=pdflatex 2023.2.12)  1 APR 2026 19:06
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -527,27 +527,144 @@ File: t1cmtt.fd 2019/12/16 v2.5j Standard LaTeX font definitions
 LaTeX Warning: Reference `tab:correlations' on page 5 undefined on input line 1
 57.
 
-[5] [6
+[5]
+<fig3_pca_biplot.pdf, id=208, 570.5798pt x 425.60881pt>
+File: fig3_pca_biplot.pdf Graphic file (type pdf)
+<use fig3_pca_biplot.pdf>
+Package pdftex.def Info: fig3_pca_biplot.pdf  used on input line 176.
+(pdftex.def)             Requested size: 385.02547pt x 287.2021pt.
+<fig2_correlation_heatmap.pdf, id=209, 689.6048pt x 570.97943pt>
+File: fig2_correlation_heatmap.pdf Graphic file (type pdf)
+<use fig2_correlation_heatmap.pdf>
+Package pdftex.def Info: fig2_correlation_heatmap.pdf  used on input line 183.
+(pdftex.def)             Requested size: 452.9679pt x 375.05283pt.
+
+
+Package natbib Warning: Citation `krippendorff2011computing' on page 6 undefine
+d on input line 217.
+
+<fig4_bland_altman.pdf, id=212, 570.72346pt x 353.77045pt>
+File: fig4_bland_altman.pdf Graphic file (type pdf)
+<use fig4_bland_altman.pdf>
+Package pdftex.def Info: fig4_bland_altman.pdf  used on input line 221.
+(pdftex.def)             Requested size: 362.37569pt x 224.62013pt.
+[6
+pdfTeX warning (ext4): destination with the same identifier (name{figure.1}) ha
+s been already used, duplicate ignored
+<argument> ...shipout:D \box_use:N \l_shipout_box 
+                                                  \__shipout_drop_firstpage_...
+l.229 
+       <./fig3_pca_biplot.pdf>] [7
+pdfTeX warning (ext4): destination with the same identifier (name{figure.2}) ha
+s been already used, duplicate ignored
+<argument> ...shipout:D \box_use:N \l_shipout_box 
+                                                  \__shipout_drop_firstpage_...
+l.229 
+      
 pdfTeX warning (ext4): destination with the same identifier (name{table.1}) has
  been already used, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   \__shipout_drop_firstpage_...
-l.222 \begin{align}
-                   ] [7] (./main.bbl [8]) [9] (./main.aux)
+l.229 
+       <./fig2_correlation_heatmap.pdf>]
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `math shift' on input line 230.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `\times' on input line 230.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `math shift' on input line 230.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `math shift' on input line 230.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `\times' on input line 230.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `math shift' on input line 230.
+
+<fig8_three_way_reliability.pdf, id=344, 859.8314pt x 297.84149pt>
+File: fig8_three_way_reliability.pdf Graphic file (type pdf)
+<use fig8_three_way_reliability.pdf>
+Package pdftex.def Info: fig8_three_way_reliability.pdf  used on input line 251
+.
+(pdftex.def)             Requested size: 452.9679pt x 156.90538pt.
+[8
+pdfTeX warning (ext4): destination with the same identifier (name{figure.3}) ha
+s been already used, duplicate ignored
+<argument> ...shipout:D \box_use:N \l_shipout_box 
+                                                  \__shipout_drop_firstpage_...
+l.272 \end{center}
+                   <./fig4_bland_altman.pdf>]
+<fig5_prompt_sensitivity.pdf, id=413, 744.1888pt x 335.3626pt>
+File: fig5_prompt_sensitivity.pdf Graphic file (type pdf)
+<use fig5_prompt_sensitivity.pdf>
+Package pdftex.def Info: fig5_prompt_sensitivity.pdf  used on input line 280.
+(pdftex.def)             Requested size: 452.9679pt x 204.1308pt.
+ [9
+pdfTeX warning (ext4): destination with the same identifier (name{figure.4}) ha
+s been already used, duplicate ignored
+<argument> ...shipout:D \box_use:N \l_shipout_box 
+                                                  \__shipout_drop_firstpage_...
+l.304 
+       <./fig8_three_way_reliability.pdf>]
+<fig7_oriv_comparison.pdf, id=493, 498.66866pt x 317.92226pt>
+File: fig7_oriv_comparison.pdf Graphic file (type pdf)
+<use fig7_oriv_comparison.pdf>
+Package pdftex.def Info: fig7_oriv_comparison.pdf  used on input line 325.
+(pdftex.def)             Requested size: 339.72592pt x 216.59177pt.
+ [10
+pdfTeX warning (ext4): destination with the same identifier (name{figure.5}) ha
+s been already used, duplicate ignored
+<argument> ...shipout:D \box_use:N \l_shipout_box 
+                                                  \__shipout_drop_firstpage_...
+l.347 \end{center}
+                   <./fig5_prompt_sensitivity.pdf>]
+<fig6_horse_race.pdf, id=583, 570.53716pt x 318.03944pt>
+File: fig6_horse_race.pdf Graphic file (type pdf)
+<use fig6_horse_race.pdf>
+Package pdftex.def Info: fig6_horse_race.pdf  used on input line 353.
+(pdftex.def)             Requested size: 362.37569pt x 202.00133pt.
+ [11
+pdfTeX warning (ext4): destination with the same identifier (name{figure.6}) ha
+s been already used, duplicate ignored
+<argument> ...shipout:D \box_use:N \l_shipout_box 
+                                                  \__shipout_drop_firstpage_...
+l.375 \item \textbf
+                   {Judicial reasoning}: quantifying the quality or consiste...
+ <./fig7_oriv_comparison.pdf>] [12
+pdfTeX warning (ext4): destination with the same identifier (name{figure.7}) ha
+s been already used, duplicate ignored
+<argument> ...shipout:D \box_use:N \l_shipout_box 
+                                                  \__shipout_drop_firstpage_...
+l.404 
+       <./fig6_horse_race.pdf>] (./main.bbl)
+
+Package natbib Warning: There were undefined citations.
+
+[13] (./main.aux)
 
 LaTeX Warning: There were undefined references.
 
 Package rerunfilecheck Info: File `main.out' has not changed.
-(rerunfilecheck)             Checksum: 675BFEEEEA7EB31341881339ACFFA35F;4487.
+(rerunfilecheck)             Checksum: 233F368ABD12E868A99DBD871992C076;4808.
  ) 
 Here is how much of TeX's memory you used:
- 12313 strings out of 478268
- 190127 string characters out of 5846347
- 495049 words of memory out of 5000000
- 30260 multiletter control sequences out of 15000+600000
+ 12382 strings out of 478268
+ 191886 string characters out of 5846347
+ 496808 words of memory out of 5000000
+ 30311 multiletter control sequences out of 15000+600000
  493490 words of font info for 88 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 60i,11n,63p,1943b,455s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 60i,11n,63p,1943b,457s stack positions out of 10000i,1000n,20000p,200000b,200000s
 {/usr/local/texlive/2022/texmf-dist/fonts/enc/dvips/cm-super/cm-super-ts1.enc
 }{/usr/local/texlive/2022/texmf-dist/fonts/enc/dvips/cm-super/cm-super-t1.enc}<
 /usr/local/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></
@@ -555,29 +672,31 @@ usr/local/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></u
 sr/local/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi7.pfb></usr
 /local/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb></usr/l
 ocal/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/loc
-al/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/local/
-texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/local/t
-exlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb></usr/local/tex
-live/2022/texmf-dist/fonts/type1/public/cm-super/sfbi1095.pfb></usr/local/texli
-ve/2022/texmf-dist/fonts/type1/public/cm-super/sfbx1000.pfb></usr/local/texlive
-/2022/texmf-dist/fonts/type1/public/cm-super/sfbx1095.pfb></usr/local/texlive/2
-022/texmf-dist/fonts/type1/public/cm-super/sfbx1200.pfb></usr/local/texlive/202
-2/texmf-dist/fonts/type1/public/cm-super/sfbx1440.pfb></usr/local/texlive/2022/
-texmf-dist/fonts/type1/public/cm-super/sfbx1728.pfb></usr/local/texlive/2022/te
-xmf-dist/fonts/type1/public/cm-super/sfrm0600.pfb></usr/local/texlive/2022/texm
-f-dist/fonts/type1/public/cm-super/sfrm0800.pfb></usr/local/texlive/2022/texmf-
-dist/fonts/type1/public/cm-super/sfrm0900.pfb></usr/local/texlive/2022/texmf-di
-st/fonts/type1/public/cm-super/sfrm1000.pfb></usr/local/texlive/2022/texmf-dist
-/fonts/type1/public/cm-super/sfrm1095.pfb></usr/local/texlive/2022/texmf-dist/f
-onts/type1/public/cm-super/sfrm1200.pfb></usr/local/texlive/2022/texmf-dist/fon
-ts/type1/public/cm-super/sfrm1728.pfb></usr/local/texlive/2022/texmf-dist/fonts
-/type1/public/cm-super/sfti1000.pfb></usr/local/texlive/2022/texmf-dist/fonts/t
-ype1/public/cm-super/sfti1095.pfb></usr/local/texlive/2022/texmf-dist/fonts/typ
-e1/public/cm-super/sftt0900.pfb>
-Output written on main.pdf (9 pages, 435591 bytes).
+al/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb></usr/local/
+texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/local/tex
+live/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/local/texl
+ive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy7.pfb></usr/local/texliv
+e/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb></usr/local/texlive/
+2022/texmf-dist/fonts/type1/public/cm-super/sfbi1095.pfb></usr/local/texlive/20
+22/texmf-dist/fonts/type1/public/cm-super/sfbx1000.pfb></usr/local/texlive/2022
+/texmf-dist/fonts/type1/public/cm-super/sfbx1095.pfb></usr/local/texlive/2022/t
+exmf-dist/fonts/type1/public/cm-super/sfbx1200.pfb></usr/local/texlive/2022/tex
+mf-dist/fonts/type1/public/cm-super/sfbx1440.pfb></usr/local/texlive/2022/texmf
+-dist/fonts/type1/public/cm-super/sfbx1728.pfb></usr/local/texlive/2022/texmf-d
+ist/fonts/type1/public/cm-super/sfrm0600.pfb></usr/local/texlive/2022/texmf-dis
+t/fonts/type1/public/cm-super/sfrm0800.pfb></usr/local/texlive/2022/texmf-dist/
+fonts/type1/public/cm-super/sfrm0900.pfb></usr/local/texlive/2022/texmf-dist/fo
+nts/type1/public/cm-super/sfrm1000.pfb></usr/local/texlive/2022/texmf-dist/font
+s/type1/public/cm-super/sfrm1095.pfb></usr/local/texlive/2022/texmf-dist/fonts/
+type1/public/cm-super/sfrm1200.pfb></usr/local/texlive/2022/texmf-dist/fonts/ty
+pe1/public/cm-super/sfrm1728.pfb></usr/local/texlive/2022/texmf-dist/fonts/type
+1/public/cm-super/sfti1000.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/
+public/cm-super/sfti1095.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/pu
+blic/cm-super/sftt0900.pfb>
+Output written on main.pdf (13 pages, 643882 bytes).
 PDF statistics:
- 361 PDF objects out of 1000 (max. 8388607)
- 298 compressed objects within 3 object streams
- 67 named destinations out of 1000 (max. 500000)
- 177 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 874 PDF objects out of 1000 (max. 8388607)
+ 429 compressed objects within 5 object streams
+ 78 named destinations out of 1000 (max. 500000)
+ 220 words of extra memory for PDF output out of 10000 (max. 10000000)
 
