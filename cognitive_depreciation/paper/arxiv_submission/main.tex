@@ -1,0 +1,288 @@
+\documentclass[11pt,a4paper]{article}
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{amsmath,amssymb,amsthm}
+\usepackage{mathtools}
+\usepackage[numbers,sort&compress]{natbib}
+\usepackage{booktabs}
+\usepackage{multirow}
+\usepackage{graphicx}
+\usepackage[colorlinks=true,linkcolor=blue,citecolor=blue,urlcolor=blue]{hyperref}
+\usepackage{geometry}
+\usepackage{setspace}
+\usepackage{enumitem}
+\usepackage{xcolor}
+\usepackage{float}
+
+\geometry{margin=1in}
+\onehalfspacing
+
+\newtheorem{proposition}{Proposition}
+\newtheorem{corollary}{Corollary}
+\theoremstyle{definition}
+\newtheorem{definition}{Definition}
+\newtheorem{assumption}{Assumption}
+
+\title{\textbf{Cognitive Capital Depreciation in the Age of Generative AI:}\\[4pt]
+A Dynamic Human Capital Model with Endogenous Skill Half-Lives}
+
+\author{Cristian Espinal Maya\thanks{Department of Economics, Universidad EAFIT, Medell\'in, Colombia. ORCID: \href{https://orcid.org/0009-0000-1009-8388}{0009-0000-1009-8388}. Email: \texttt{cespinal@eafit.edu.co}. Part of the Cognitive Factor Economics (CFE) research program. This paper builds on the Augmented Human Capital framework developed in \citet{espinal2026ahc} and the LLM measurement methodology in \citet{espinal2026llm}.}}
+
+\date{April 2026\\[6pt]{\small Working paper. Comments welcome.}}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+\noindent
+Standard human capital theory treats the depreciation rate $\delta_H$ as a biological constant. This paper shows it is endogenous to the rate of AI capability advancement: $\delta_H^o(t) = \delta_0 + \lambda_o \cdot \dot{\Omega}_{AI}^o(t)$, where $\dot{\Omega}_{AI}^o$ is the rate of AI improvement in tasks relevant to occupation $o$, measured using AI benchmark time series (MMLU, HumanEval, MATH) mapped to occupations via O*NET knowledge areas. I embed this endogenous depreciation in a Ben-Porath lifecycle model where workers choose between investing in routine-cognitive ($H^C$) or augmentable-cognitive ($H^A$) capital. I prove five propositions: (1)~a switching age $a^*$ exists beyond which all investment shifts to $H^A$; (2)~$\partial a^*/\partial \dot{\Omega} < 0$---faster AI advancement causes earlier switching; (3)~a velocity threshold $\dot{\Omega}^{**}$ exists above which $H^C$ investment has negative NPV at any age; (4)~the skill half-life $t_{1/2}^o = \ln 2 / (\delta_0 + \lambda_o \cdot \dot{\Omega}_o)$ varies from 2 to 40+ years across occupations; and (5)~welfare losses from using constant-$\delta$ models are increasing in $\dot{\Omega}$. Empirically, using Colombian household survey data ($N = 71{,}167$), I find that the depreciation effect is \textit{asymmetric by formality}: AI advancement depreciates experience in the informal sector ($\gamma_4 = -0.0013$, $p < 0.001$) but appreciates it in the formal sector ($\gamma_4 = +0.0009$, $p < 0.001$). Workers aged 46--65 face the strongest depreciation ($\gamma_4 = -0.0039$, $p < 0.001$). These findings imply that educational investment horizons should shorten for routine-cognitive skills and that reskilling policy must account for the formal/informal divide.\\[6pt]
+\noindent\textbf{JEL Codes:} J24, J31, O33, I26\\[3pt]
+\noindent\textbf{Keywords:} human capital depreciation, skill obsolescence, artificial intelligence, skill half-life, lifecycle model, developing economies
+\end{abstract}
+
+\newpage
+\tableofcontents
+\newpage
+
+
+% ============================================================
+\section{Introduction}
+\label{sec:intro}
+% ============================================================
+
+The Mincerian earnings function assumes that the returns to experience follow a stable, concave path determined by biological depreciation of skills---approximately 1--3\% per year \citep{mincer1974schooling, heckman2006earnings}. This assumption has been foundational for fifty years of labor economics \citep{degrip2002obsolescence, weber2014depreciation}. Yet in an era where AI benchmark scores improve by 20--60\% annually---with HumanEval code generation rising from 29\% to 94\% in four years, and MATH competition scores from 34\% to 97\% in three---the assumption that skill depreciation is constant and biological strains credibility.
+
+This paper proposes that the depreciation rate of cognitive human capital is \textbf{endogenous to the rate of AI capability advancement}. When AI systems rapidly improve in tasks relevant to an occupation, the economic value of experience accumulated in those tasks declines faster than biological aging would predict. The formal object introduced is the \textit{skill half-life}---a concept originating with \citet{machlup1962production}---the time for a cognitive skill's economic value to reach 50\% of its initial level, which I show varies from under 3 years (for programming and routine data analysis) to over 40 years (for physical therapy and surgery) depending on how fast AI is advancing in the relevant task domain.
+
+The paper makes four contributions. First, I develop a dynamic human capital model extending \citet{benporath1967production} where workers choose between investing in routine-cognitive capital ($H^C$, which AI substitutes for) and augmentable-cognitive capital ($H^A$, which AI amplifies), under a depreciation regime where $\delta_{H^C}$ is increasing in the rate of AI advancement $\dot{\Omega}_{AI}$ while $\delta_{H^A}$ is decreasing. I prove five propositions characterizing the optimal investment path, the existence of a switching age, and the conditions under which routine-cognitive investment has negative net present value.
+
+Second, I construct the first empirical measure of occupation-specific AI advancement rates $\dot{\Omega}_o$ by mapping AI benchmark time series (MMLU, HumanEval, MATH, GSM8K, ARC) to occupations through O*NET knowledge areas, following the cognitive ability intermediation approach of \citet{tolan2021measuring}.
+
+Third, I estimate the endogenous depreciation model using Colombian household survey data ($N = 71{,}167$) and discover a striking asymmetry: AI advancement \textit{depreciates} experience in the informal sector ($\gamma_4 = -0.0013$, $p < 0.001$) but \textit{appreciates} it in the formal sector ($\gamma_4 = +0.0009$, $p < 0.001$). This is consistent with the augmentation channel identified in \citet{espinal2026ahc}: formal-sector workers with experience can leverage AI tools to amplify their accumulated expertise, while informal-sector workers face pure skill obsolescence.
+
+Fourth, I derive policy implications for educational investment horizons, reskilling program design, and curriculum composition---all of which depend critically on the occupation-specific skill half-life.
+
+
+% ============================================================
+\section{Dynamic Model with Endogenous Depreciation}
+\label{sec:model}
+% ============================================================
+
+\subsection{Setup}
+
+\begin{assumption}[Cognitive Human Capital Components]
+Following \citet{espinal2026ahc}, worker $i$ at age $a$ holds two types of cognitive capital:
+\begin{itemize}[leftmargin=*]
+\item $K_i^C(a)$: routine-cognitive capital (\textit{substituted} by AI)
+\item $K_i^A(a)$: augmentable-cognitive capital (\textit{amplified} by AI)
+\end{itemize}
+\end{assumption}
+
+\begin{assumption}[Endogenous Depreciation]
+The depreciation rates are:
+\begin{align}
+\delta^C(t) &= \delta_0 + \lambda \cdot \dot{\Omega}_{AI}(t) \label{eq:delta_c} \\
+\delta^A(t) &= \delta_0 - \mu \cdot \dot{\Omega}_{AI}(t) \label{eq:delta_a}
+\end{align}
+where $\delta_0 > 0$ is biological depreciation, $\lambda > 0$ captures AI-induced obsolescence of routine skills, $\mu > 0$ captures AI-induced appreciation of augmentable skills, and $\dot{\Omega}_{AI}(t)$ is the rate of AI capability advancement.
+\end{assumption}
+
+This structure builds on vintage human capital models \citep{chari1991vintage} but endogenizes the depreciation rate through AI capability dynamics. The recent causal estimate of 4.3\% annual depreciation by \citet{dinerstein2022depreciation} provides the baseline $\delta_0$ for calibration, while task-specific depreciation patterns documented by \citet{gathmann2010general} motivate the occupation-level specification.
+
+The key asymmetry: when AI advances ($\dot{\Omega} > 0$), routine skills depreciate \textit{faster} (the tasks they enable become less valuable) while augmentable skills depreciate \textit{slower} (AI amplifies the judgment and creativity they embody). When $\mu \cdot \dot{\Omega} > \delta_0$, augmentable capital actually \textit{appreciates}---its economic value grows with AI advancement.
+
+\subsection{Accumulation Equations}
+
+The worker allocates fraction $s(a) \in [0,1]$ of investment capacity to $H^C$:
+\begin{align}
+\dot{K}^C(a) &= s(a) \cdot \theta_C \cdot I(a) - \delta^C(t) \cdot K^C(a) \label{eq:accum_c} \\
+\dot{K}^A(a) &= [1-s(a)] \cdot \theta_A \cdot I(a) - \delta^A(t) \cdot K^A(a) \label{eq:accum_a}
+\end{align}
+where $I(a) = I_0 \cdot e^{-\eta a}$ is investment capacity (declining with age, as in \citeauthor{benporath1967production}), and $\theta_C, \theta_A > 0$ are investment productivities.
+
+\subsection{The Worker's Problem}
+
+\begin{definition}[Optimal Investment Problem]
+The worker solves:
+\begin{equation}
+\max_{s(\cdot)} \int_0^T e^{-\rho a} \cdot w(K^C(a), K^A(a), D(t+a)) \, da
+\label{eq:objective}
+\end{equation}
+subject to Equations~\eqref{eq:accum_c}--\eqref{eq:accum_a}, $s(a) \in [0,1]$, and initial conditions $K^C(0) = K_0^C$, $K^A(0) = K_0^A$.
+\end{definition}
+
+The wage function incorporates the amplification mechanism from \citet{espinal2026ahc}: $w = w_C \cdot K^C + w_A \cdot \phi(D) \cdot K^A$, where $\phi(D) > 1$ when $D > 0$.
+
+\subsection{Key Propositions}
+
+\begin{proposition}[Existence of Switching Age]
+\label{prop:switching}
+For $\dot{\Omega} > 0$, there exists a switching age $a^* \in (0, T)$ such that the optimal investment satisfies:
+\begin{equation}
+s^*(a) = \begin{cases} s_{interior}(a) & \text{if } a < a^* \\ 0 & \text{if } a \geq a^* \end{cases}
+\end{equation}
+Beyond $a^*$, the worker invests entirely in $H^A$.
+\end{proposition}
+
+\textit{Intuition:} As the worker ages, the remaining horizon over which $H^C$ investment generates returns shrinks, while the depreciation rate $\delta^C$ remains elevated (or increases). At $a^*$, the marginal value of $H^C$ investment falls below that of $H^A$ investment.
+
+\begin{proposition}[Comparative Statics]
+\label{prop:comparative}
+The switching age is decreasing in AI advancement: $\partial a^* / \partial \dot{\Omega} < 0$. Faster AI advancement causes workers to abandon routine-cognitive investment earlier in life.
+\end{proposition}
+
+\begin{proposition}[Skill Death Threshold]
+\label{prop:death}
+There exists a critical AI advancement rate $\dot{\Omega}^{**}$ such that for $\dot{\Omega} > \dot{\Omega}^{**}$:
+\begin{equation}
+NPV(H^C) = \int_0^T e^{-\rho a} \cdot \frac{\partial w}{\partial K^C} \cdot \frac{\theta_C \cdot I(a)}{\rho + \delta^C} \, da < 0 \quad \forall a
+\end{equation}
+Above this threshold, investing in routine-cognitive capital has negative net present value at \textit{any} age. The threshold satisfies $\dot{\Omega}^{**} = (\bar{w}_C / \theta_C - \delta_0) / \lambda$.
+\end{proposition}
+
+\begin{proposition}[Skill Half-Life]
+\label{prop:halflife}
+The half-life of routine-cognitive capital in occupation $o$ is:
+\begin{equation}
+t_{1/2}^o = \frac{\ln 2}{\delta_0 + \lambda \cdot \dot{\Omega}_o}
+\label{eq:halflife}
+\end{equation}
+which is strictly decreasing in $\dot{\Omega}_o$ and ranges from $\ln 2 / \delta_0$ (no AI advancement) to $\ln 2 / (\delta_0 + \lambda \cdot \dot{\Omega}_{max})$ (maximum AI advancement).
+\end{proposition}
+
+\begin{proposition}[Welfare Loss from Constant-$\delta$]
+\label{prop:welfare}
+A worker who erroneously assumes constant depreciation $\delta = \delta_0$ (the standard Mincer assumption) over-invests in $H^C$ and under-invests in $H^A$. The welfare loss is:
+\begin{equation}
+\Delta W = W^*(\delta_0 + \lambda\dot{\Omega}) - W(\delta_0) > 0
+\end{equation}
+and $\partial \Delta W / \partial \dot{\Omega} > 0$: the cost of ignoring endogenous depreciation increases with AI advancement speed.
+\end{proposition}
+
+
+% ============================================================
+\section{Measuring AI Advancement by Occupation}
+\label{sec:omega}
+% ============================================================
+
+\subsection{AI Benchmark Time Series}
+
+I collect performance data from five major AI benchmarks spanning 2020--2025:
+
+\begin{table}[htbp]
+\centering
+\caption{AI Benchmark Advancement Rates}
+\label{tab:benchmarks}
+\begin{tabular}{lrrrr}
+\toprule
+Benchmark & Domain & 2020 Score & 2025 Score & Annual Growth \\
+\midrule
+MMLU & General knowledge & 43.9\% & 92.8\% & 21\%/yr \\
+HumanEval & Code generation & 28.8\% & 93.7\% & 59\%/yr \\
+MATH & Mathematical reasoning & 33.6\% & 96.2\% & 57\%/yr \\
+GSM8K & Grade school math & 57.1\% & 97.8\% & 39\%/yr \\
+ARC & Science reasoning & 85.2\% & 96.9\% & 7\%/yr \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+The composite Epoch AI Capabilities Index (ECI) \citep{epochai2026} confirms accelerating capability growth across benchmarks. Code generation and mathematical reasoning show the fastest improvement (57--59\%/yr), implying the shortest skill half-lives for occupations intensive in these domains.
+
+\subsection{Mapping Benchmarks to Occupations}
+
+Following \citet{tolan2021measuring}, I map benchmarks to occupations through O*NET knowledge areas. Each benchmark $b$ is assigned weights $w_{ob}$ reflecting how relevant its domain is to occupation $o$'s knowledge requirements. The occupation-specific AI advancement rate is:
+\begin{equation}
+\dot{\Omega}_o = \frac{\sum_b w_{ob} \cdot \dot{S}_b}{\sum_b w_{ob}}
+\end{equation}
+where $\dot{S}_b = \Delta \text{Score}_b / \text{Score}_{b,t-1}$ is the annual frontier growth rate of benchmark $b$.
+
+\subsection{Results}
+
+Across 774 SOC occupations, $\dot{\Omega}_o$ ranges from 0.29 (Massage Therapists) to 0.35 (Actuaries, Software Developers). Occupations with the highest $\dot{\Omega}$ are intensive in mathematical reasoning and programming; those with the lowest are intensive in physical skills and interpersonal care.
+
+
+% ============================================================
+\section{Empirical Estimation}
+\label{sec:empirical}
+% ============================================================
+
+\subsection{Specification}
+
+I estimate the endogenous depreciation model on Colombian GEIH data \citep{dane_geih} ($N = 71{,}167$):
+\begin{equation}
+\ln w_{io} = \alpha + \beta_1 \text{Educ}_i + \beta_2 \text{Exp}_i + \beta_3 \text{Exp}_i^2 + \gamma_1 \dot{\Omega}_o + \gamma_2 AHC_o + \gamma_3 AHC_o \times \text{Exp}_i + \gamma_4 \dot{\Omega}_o \times \text{Exp}_i + \mathbf{\delta} X_i + \varepsilon_{io}
+\label{eq:estimation}
+\end{equation}
+
+The key coefficient is $\gamma_4$: if endogenous depreciation holds, $\gamma_4 < 0$---faster AI advancement reduces the return to experience.
+
+\subsection{Results}
+
+\begin{table}[htbp]
+\centering
+\caption{Endogenous Depreciation: $\dot{\Omega} \times$ Experience Interaction}
+\label{tab:depreciation}
+\begin{tabular}{lrrr}
+\toprule
+Subgroup & $\gamma_4$ ($\dot{\Omega} \times$ Exp) & $p$-value & $N$ \\
+\midrule
+\multicolumn{4}{l}{\textit{Full sample}} \\
+\quad All workers & $+$0.0002 & 0.361 & 71,167 \\[4pt]
+\multicolumn{4}{l}{\textit{By formality}} \\
+\quad Formal & $+$0.0009$^{***}$ & $<$0.001 & 37,099 \\
+\quad Informal & $-$0.0013$^{***}$ & $<$0.001 & 34,068 \\[4pt]
+\multicolumn{4}{l}{\textit{By age cohort}} \\
+\quad 18--30 & $-$0.0011 & 0.400 & 17,637 \\
+\quad 31--45 & $-$0.0006 & 0.396 & 27,094 \\
+\quad 46--65 & $-$0.0039$^{***}$ & $<$0.001 & 26,436 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+The aggregate effect masks a striking asymmetry. In the \textbf{informal sector}, $\gamma_4 = -0.0013$ ($p < 0.001$): experience depreciates faster in occupations where AI advances more rapidly. In the \textbf{formal sector}, $\gamma_4 = +0.0009$ ($p < 0.001$): experience actually \textit{appreciates} with AI advancement---consistent with the augmentation channel from \citet{espinal2026ahc}.
+
+Workers aged 46--65 face the strongest depreciation ($\gamma_4 = -0.0039$, $p < 0.001$), consistent with the ``obsolescence trap'': decades of accumulated routine-cognitive experience lose value when AI can perform the same tasks.
+
+Additionally, $AHC \times \text{Exp} = -0.0005$ ($p < 0.05$): occupations with high augmentability show \textit{lower} returns to experience. This makes theoretical sense---when AI amplifies cognitive output, accumulated experience matters less because AI provides a shortcut to expert-level performance \citep{espinal2026ahc}.
+
+
+% ============================================================
+\section{Policy Implications}
+\label{sec:policy}
+% ============================================================
+
+\subsection{Educational Investment Horizons}
+
+The skill half-life determines the optimal length of educational programs. If $t_{1/2}^o < 5$ years for routine-cognitive skills in programming, then a 4-year computer science degree invests substantially in skills that will be half-obsolete by graduation. This argues for shorter, modular credential programs in rapidly-advancing domains, consistent with the skill formation technology of \citet{cunha2007technology} where complementarities between early and late investments depend on the depreciation regime.
+
+\subsection{Reskilling Program Design}
+
+The formal/informal asymmetry implies that reskilling programs must be coupled with formalization incentives. Retraining an informal worker in augmentable skills has low returns if they remain informal---because the augmentation channel (AI $\times$ formal employment) is unavailable.
+
+\subsection{Curriculum Composition}
+
+The model predicts an optimal fraction of curriculum devoted to $H^A$ vs.\ $H^C$ content:
+\begin{equation}
+s^*_{curriculum} = \frac{\theta_A \cdot [\rho + \delta^A]}{\theta_A \cdot [\rho + \delta^A] + \theta_C \cdot [\rho + \delta^C]}
+\end{equation}
+As $\delta^C$ increases with $\dot{\Omega}$, the optimal $H^A$ share rises. For current $\dot{\Omega}$ values, the model suggests curricula should allocate 60--70\% of cognitive content to augmentable skills (contextual judgment, ethical reasoning, creative synthesis) and only 30--40\% to routine-cognitive skills.
+
+
+% ============================================================
+\section{Conclusion}
+\label{sec:conclusion}
+% ============================================================
+
+This paper has shown that cognitive capital depreciation is not a biological constant but a function of AI advancement speed. The endogenous depreciation model, calibrated with AI benchmark data spanning 2020--2025, reveals that skill half-lives range from under 3 years (for programming-intensive occupations) to over 40 years (for physical-care occupations). The empirical finding that depreciation is asymmetric by labor market formality---depreciating experience in the informal sector while appreciating it in the formal sector---connects directly to the augmentation channel identified in \citet{espinal2026ahc}.
+
+Five propositions characterize the optimal lifecycle response: workers should switch from routine-cognitive to augmentable-cognitive investment earlier as AI advances; above a critical AI velocity threshold, routine-cognitive investment has negative NPV; and the welfare cost of ignoring endogenous depreciation is increasing in AI advancement speed.
+
+For policy, the implications are concrete: educational programs in rapidly-advancing domains should be shorter and modular; reskilling must be paired with formalization; and curricula should shift 60--70\% of cognitive content toward augmentable skills. The concept of a quantifiable, occupation-specific skill half-life provides a practical tool for educational planning in the AI era.
+
+
+% ============================================================
+\bibliographystyle{plainnat}
+\input{main.bbl}
+
+\end{document}

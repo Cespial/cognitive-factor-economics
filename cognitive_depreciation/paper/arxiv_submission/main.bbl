@@ -1,0 +1,101 @@
+\begin{thebibliography}{15}
+\providecommand{\natexlab}[1]{#1}
+\providecommand{\url}[1]{\texttt{#1}}
+\expandafter\ifx\csname urlstyle\endcsname\relax
+  \providecommand{\doi}[1]{doi: #1}\else
+  \providecommand{\doi}{doi: \begingroup \urlstyle{rm}\Url}\fi
+
+\bibitem[Ben-Porath(1967)]{benporath1967production}
+Yoram Ben-Porath.
+\newblock The production of human capital and the life cycle of earnings.
+\newblock \emph{Journal of Political Economy}, 75:\penalty0 352--365, 1967.
+
+\bibitem[Chari and Hopenhayn(1991)]{chari1991vintage}
+V.~V. Chari and Hugo Hopenhayn.
+\newblock Vintage human capital, growth, and the diffusion of new technology.
+\newblock \emph{Journal of Political Economy}, 99\penalty0 (6):\penalty0
+  1142--1165, 1991.
+
+\bibitem[Cunha and Heckman(2007)]{cunha2007technology}
+Flavio Cunha and James~J. Heckman.
+\newblock The technology of skill formation.
+\newblock \emph{American Economic Review}, 97\penalty0 (2):\penalty0 31--47,
+  2007.
+
+\bibitem[{DANE}(2024)]{dane_geih}
+{DANE}.
+\newblock Gran encuesta integrada de hogares ({GEIH}).
+\newblock \url{https://microdatos.dane.gov.co}, 2024.
+
+\bibitem[De~Grip and Van~Loo(2002)]{degrip2002obsolescence}
+Andries De~Grip and Jasper Van~Loo.
+\newblock The economics of skills obsolescence: A review.
+\newblock In \emph{Research in Labor Economics}, volume~21. Emerald, 2002.
+
+\bibitem[Dinerstein et~al.(2022)Dinerstein, Megalokonomou, and
+  Yannelis]{dinerstein2022depreciation}
+Michael Dinerstein, Rigissa Megalokonomou, and Constantine Yannelis.
+\newblock Human capital depreciation and returns to experience.
+\newblock \emph{American Economic Review}, 112\penalty0 (11):\penalty0
+  3725--3762, 2022.
+
+\bibitem[{Epoch AI}(2026)]{epochai2026}
+{Epoch AI}.
+\newblock Epoch {AI} capabilities index ({ECI}).
+\newblock \url{https://epoch.ai/benchmarks/eci}, 2026.
+
+\bibitem[Espinal~Maya(2026{\natexlab{a}})]{espinal2026ahc}
+Cristian Espinal~Maya.
+\newblock Augmented human capital: A unified theory and {LLM}-based measurement
+  framework for cognitive factor decomposition in {AI}-augmented economies.
+\newblock Technical report, Universidad EAFIT, 2026{\natexlab{a}}.
+\newblock arXiv preprint.
+
+\bibitem[Espinal~Maya(2026{\natexlab{b}})]{espinal2026llm}
+Cristian Espinal~Maya.
+\newblock Measuring what cannot be surveyed: {LLMs} as instruments for latent
+  cognitive variables in labor economics.
+\newblock Technical report, Universidad EAFIT, 2026{\natexlab{b}}.
+\newblock arXiv preprint.
+
+\bibitem[Gathmann and Sch{\"o}nberg(2010)]{gathmann2010general}
+Christina Gathmann and Uta Sch{\"o}nberg.
+\newblock How general is human capital? a task-based approach.
+\newblock \emph{Journal of Labor Economics}, 28\penalty0 (1):\penalty0 1--49,
+  2010.
+
+\bibitem[Heckman et~al.(2006)Heckman, Lochner, and Todd]{heckman2006earnings}
+James~J. Heckman, Lance~J. Lochner, and Petra~E. Todd.
+\newblock Earnings functions, rates of return and treatment effects: The
+  {Mincer} equation and beyond.
+\newblock In \emph{Handbook of the Economics of Education}, volume~1, pages
+  307--458. Elsevier, 2006.
+
+\bibitem[Machlup(1962)]{machlup1962production}
+Fritz Machlup.
+\newblock \emph{The Production and Distribution of Knowledge in the United
+  States}.
+\newblock Princeton University Press, 1962.
+
+\bibitem[Mincer(1974)]{mincer1974schooling}
+Jacob Mincer.
+\newblock \emph{Schooling, Experience, and Earnings}.
+\newblock NBER / Columbia University Press, 1974.
+
+\bibitem[Tolan et~al.(2021)Tolan, Pesole, Martinez-Plumed,
+  Fern{\'a}ndez-Mac{\'i}as, Hern{\'a}ndez-Orallo, and
+  G{\'o}mez]{tolan2021measuring}
+Songul Tolan, Annarosa Pesole, Fernando Martinez-Plumed, Enrique
+  Fern{\'a}ndez-Mac{\'i}as, Jos{\'e} Hern{\'a}ndez-Orallo, and Emilia
+  G{\'o}mez.
+\newblock Measuring the occupational impact of {AI}: Tasks, cognitive abilities
+  and {AI} benchmarks.
+\newblock \emph{Journal of Artificial Intelligence Research}, 71, 2021.
+
+\bibitem[Weber(2014)]{weber2014depreciation}
+Sylvain Weber.
+\newblock Human capital depreciation and education level.
+\newblock \emph{International Journal of Manpower}, 35\penalty0 (5):\penalty0
+  613--642, 2014.
+
+\end{thebibliography}
