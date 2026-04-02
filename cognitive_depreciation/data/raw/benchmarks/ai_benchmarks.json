@@ -1,0 +1,252 @@
+{
+  "MMLU": [
+    {
+      "model": "GPT-3",
+      "date": "2020-06-01",
+      "score": 43.9
+    },
+    {
+      "model": "Chinchilla",
+      "date": "2022-03-01",
+      "score": 67.5
+    },
+    {
+      "model": "PaLM",
+      "date": "2022-04-01",
+      "score": 69.3
+    },
+    {
+      "model": "GPT-4",
+      "date": "2023-03-01",
+      "score": 86.4
+    },
+    {
+      "model": "Claude 3 Opus",
+      "date": "2024-03-01",
+      "score": 86.8
+    },
+    {
+      "model": "Gemini Ultra",
+      "date": "2024-02-01",
+      "score": 90.0
+    },
+    {
+      "model": "GPT-4o",
+      "date": "2024-05-01",
+      "score": 88.7
+    },
+    {
+      "model": "Claude 3.5 Sonnet",
+      "date": "2024-06-01",
+      "score": 88.7
+    },
+    {
+      "model": "Llama 3.1 405B",
+      "date": "2024-07-01",
+      "score": 88.6
+    },
+    {
+      "model": "GPT-o1",
+      "date": "2024-09-01",
+      "score": 92.3
+    },
+    {
+      "model": "Claude 3.5 Sonnet v2",
+      "date": "2024-10-01",
+      "score": 88.7
+    },
+    {
+      "model": "Gemini 2.0 Flash",
+      "date": "2024-12-01",
+      "score": 90.2
+    },
+    {
+      "model": "DeepSeek-V3",
+      "date": "2024-12-01",
+      "score": 88.5
+    },
+    {
+      "model": "GPT-4.5",
+      "date": "2025-02-01",
+      "score": 90.2
+    },
+    {
+      "model": "Claude Sonnet 4",
+      "date": "2025-05-01",
+      "score": 91.5
+    },
+    {
+      "model": "GPT-5",
+      "date": "2025-08-01",
+      "score": 93.1
+    },
+    {
+      "model": "Claude Opus 4.5",
+      "date": "2025-09-01",
+      "score": 92.8
+    }
+  ],
+  "HumanEval": [
+    {
+      "model": "Codex (GPT-3)",
+      "date": "2021-07-01",
+      "score": 28.8
+    },
+    {
+      "model": "AlphaCode",
+      "date": "2022-02-01",
+      "score": 17.1
+    },
+    {
+      "model": "GPT-3.5",
+      "date": "2022-11-01",
+      "score": 48.1
+    },
+    {
+      "model": "GPT-4",
+      "date": "2023-03-01",
+      "score": 67.0
+    },
+    {
+      "model": "Claude 2",
+      "date": "2023-07-01",
+      "score": 71.2
+    },
+    {
+      "model": "GPT-4 Turbo",
+      "date": "2023-11-01",
+      "score": 85.4
+    },
+    {
+      "model": "Claude 3 Opus",
+      "date": "2024-03-01",
+      "score": 84.9
+    },
+    {
+      "model": "DeepSeek Coder V2",
+      "date": "2024-06-01",
+      "score": 90.2
+    },
+    {
+      "model": "Claude 3.5 Sonnet",
+      "date": "2024-06-01",
+      "score": 92.0
+    },
+    {
+      "model": "GPT-o1",
+      "date": "2024-09-01",
+      "score": 92.4
+    },
+    {
+      "model": "Claude Sonnet 4",
+      "date": "2025-05-01",
+      "score": 93.7
+    }
+  ],
+  "MATH": [
+    {
+      "model": "Minerva 540B",
+      "date": "2022-06-01",
+      "score": 33.6
+    },
+    {
+      "model": "GPT-4",
+      "date": "2023-03-01",
+      "score": 42.5
+    },
+    {
+      "model": "Claude 2",
+      "date": "2023-07-01",
+      "score": 32.9
+    },
+    {
+      "model": "Gemini Ultra",
+      "date": "2024-02-01",
+      "score": 53.2
+    },
+    {
+      "model": "Claude 3 Opus",
+      "date": "2024-03-01",
+      "score": 60.1
+    },
+    {
+      "model": "GPT-4o",
+      "date": "2024-05-01",
+      "score": 76.6
+    },
+    {
+      "model": "GPT-o1",
+      "date": "2024-09-01",
+      "score": 94.8
+    },
+    {
+      "model": "DeepSeek-R1",
+      "date": "2025-01-01",
+      "score": 97.3
+    },
+    {
+      "model": "Claude Opus 4.5",
+      "date": "2025-09-01",
+      "score": 96.2
+    }
+  ],
+  "GSM8K": [
+    {
+      "model": "GPT-3.5",
+      "date": "2022-11-01",
+      "score": 57.1
+    },
+    {
+      "model": "GPT-4",
+      "date": "2023-03-01",
+      "score": 92.0
+    },
+    {
+      "model": "Claude 3 Opus",
+      "date": "2024-03-01",
+      "score": 95.0
+    },
+    {
+      "model": "GPT-4o",
+      "date": "2024-05-01",
+      "score": 95.8
+    },
+    {
+      "model": "Llama 3.1 405B",
+      "date": "2024-07-01",
+      "score": 96.8
+    },
+    {
+      "model": "GPT-o1",
+      "date": "2024-09-01",
+      "score": 97.8
+    }
+  ],
+  "ARC": [
+    {
+      "model": "GPT-3.5",
+      "date": "2022-11-01",
+      "score": 85.2
+    },
+    {
+      "model": "GPT-4",
+      "date": "2023-03-01",
+      "score": 96.3
+    },
+    {
+      "model": "Claude 3 Opus",
+      "date": "2024-03-01",
+      "score": 96.4
+    },
+    {
+      "model": "GPT-4o",
+      "date": "2024-05-01",
+      "score": 96.7
+    },
+    {
+      "model": "Llama 3.1 405B",
+      "date": "2024-07-01",
+      "score": 96.9
+    }
+  ]
+}
