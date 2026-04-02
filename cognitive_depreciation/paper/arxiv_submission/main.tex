@@ -187,7 +187,14 @@ ARC & Science reasoning & 85.2\% & 96.9\% & 7\%/yr \\
 \end{tabular}
 \end{table}
 
-The composite Epoch AI Capabilities Index (ECI) \citep{epochai2026} confirms accelerating capability growth across benchmarks. Code generation and mathematical reasoning show the fastest improvement (57--59\%/yr), implying the shortest skill half-lives for occupations intensive in these domains.
+The composite Epoch AI Capabilities Index (ECI) \citep{epochai2026} confirms accelerating capability growth across benchmarks (Figure~\ref{fig:benchmarks}). Code generation and mathematical reasoning show the fastest improvement (57--59\%/yr), implying the shortest skill half-lives for occupations intensive in these domains.
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=\textwidth]{fig1_benchmark_curves.pdf}
+\caption{AI capability frontier by benchmark (2020--2025). All five benchmarks show rapid improvement, with code generation (HumanEval) and mathematical reasoning (MATH) advancing fastest. Most benchmarks approach saturation ($>$90\%) by 2025.}
+\label{fig:benchmarks}
+\end{figure}
 
 \subsection{Mapping Benchmarks to Occupations}
 
@@ -245,6 +252,86 @@ The aggregate effect masks a striking asymmetry. In the \textbf{informal sector}
 Workers aged 46--65 face the strongest depreciation ($\gamma_4 = -0.0039$, $p < 0.001$), consistent with the ``obsolescence trap'': decades of accumulated routine-cognitive experience lose value when AI can perform the same tasks.
 
 Additionally, $AHC \times \text{Exp} = -0.0005$ ($p < 0.05$): occupations with high augmentability show \textit{lower} returns to experience. This makes theoretical sense---when AI amplifies cognitive output, accumulated experience matters less because AI provides a shortcut to expert-level performance \citep{espinal2026ahc}.
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=0.75\textwidth]{fig9_formal_informal.pdf}
+\caption{The formal/informal depreciation asymmetry. In the formal sector, experience returns increase with AI advancement (blue, $\gamma_4 > 0$: augmentation channel). In the informal sector, experience returns decrease (red, $\gamma_4 < 0$: obsolescence channel).}
+\label{fig:asymmetry}
+\end{figure}
+
+
+% ============================================================
+\section{Calibration and Simulation}
+\label{sec:simulation}
+% ============================================================
+
+\subsection{Calibration}
+
+I calibrate the structural parameters $\{\lambda, \mu\}$ using the Method of Simulated Moments, setting $\delta_0 = 0.043$ from \citet{dinerstein2022depreciation} and targeting the experience returns and $\gamma_4$ coefficients estimated in Section~\ref{sec:empirical}. The calibrated values are $\hat{\lambda} = 0.116$ (routine-cognitive depreciation sensitivity) and $\hat{\mu} = 0.010$ (augmentable-cognitive appreciation sensitivity).
+
+These imply that at the current average AI advancement rate ($\dot{\Omega} \approx 0.30$), the effective depreciation of routine-cognitive capital is $\delta^C = 0.043 + 0.116 \times 0.30 = 0.078$ (7.8\%/year), approximately twice the biological baseline. The corresponding H$^C$ half-life is $\ln 2 / 0.078 = 8.9$ years.
+
+\subsection{Four-Scenario Simulation}
+
+Using the calibrated parameters, I solve the optimal investment path numerically under four AI advancement scenarios:
+
+\begin{table}[htbp]
+\centering
+\caption{Simulation Results Under Four Scenarios}
+\label{tab:simulation}
+\begin{tabular}{lcccc}
+\toprule
+& A: No AI & B: Historical & C: 2$\times$ & D: Exponential \\
+& ($\dot{\Omega}=0$) & ($\dot{\Omega}=0.30$) & ($\dot{\Omega}=0.60$) & ($\dot{\Omega}=1.00$) \\
+\midrule
+$H^C$ half-life (years) & 16.1 & 7.9 & 5.2 & 3.6 \\
+$H^A$ half-life (years) & 16.1 & 36.5 & $>$100 & $>$100 \\
+Final $K^C$ stock & 0.144 & 0.019 & 0.002 & 0.000 \\
+Final $K^A$ stock & 1.134 & 2.027 & 3.366 & 3.366 \\
+Lifetime wealth & 42.9 & 48.6 & 56.9 & 55.5 \\
+$\Delta W$ vs. no-AI & --- & $+$13.2\% & $+$32.4\% & $+$29.3\% \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+Under historical AI advancement (Scenario B), the H$^C$ half-life drops from 16.1 to 7.9 years---a degree earned today in routine-cognitive skills will be half-obsolete within 8 years. Under accelerated advancement (Scenario C), this drops to 5.2 years, shorter than a typical undergraduate program.
+
+Critically, lifetime wealth \textit{increases} with AI advancement when workers invest optimally (shifting to H$^A$). The welfare loss arises not from AI advancement itself but from \textit{failing to adapt}---workers who continue investing in H$^C$ under constant-$\delta$ assumptions suffer significant losses (Proposition~\ref{prop:welfare}).
+
+Figure~\ref{fig:paths} shows the optimal capital trajectories. Under all AI scenarios, H$^C$ declines toward zero while H$^A$ accumulates; the speed of transition depends on $\dot{\Omega}$.
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=\textwidth]{fig4_optimal_paths.pdf}
+\caption{Optimal lifecycle paths under four AI advancement scenarios. Left: investment allocation $s^*(a)$. Center: routine-cognitive capital $K^C(a)$ declines faster with higher $\dot{\Omega}$. Right: augmentable capital $K^A(a)$ accumulates more as investment shifts away from H$^C$.}
+\label{fig:paths}
+\end{figure}
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=\textwidth]{fig5_age_earnings.pdf}
+\caption{Age--earnings profiles under endogenous depreciation. Higher AI advancement initially yields higher wage growth (due to H$^A$ amplification) but with steeper late-career decline as H$^C$ becomes obsolete.}
+\label{fig:earnings}
+\end{figure}
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=\textwidth]{fig7_welfare_halflife.pdf}
+\caption{Left: lifetime wealth increases with $\dot{\Omega}$ for optimally-adapting workers. Right: H$^C$ skill half-life declines sharply, falling below the 5-year degree horizon at $\dot{\Omega} \approx 0.55$.}
+\label{fig:welfare}
+\end{figure}
+
+\subsection{Occupation-Specific Half-Lives}
+
+Across 774 occupations, calibrated H$^C$ half-lives range from 7.2 years (Actuaries, Software Developers) to 8.0 years (Massage Therapists, Physical Therapists). The distribution is compressed because $\dot{\Omega}$ variation across occupations is moderate (0.29--0.35) with the current benchmark-to-occupation mapping. With finer mapping (e.g., using the Tolan et al. 14-ability intermediation), the range would expand.
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=\textwidth]{fig3_halflife_bar.pdf}
+\caption{Routine-cognitive skill half-lives by occupation. Red bars: shortest half-lives (fastest depreciation). Blue bars: longest half-lives. The range (7.2--8.0 years) reflects the calibrated model at current AI advancement rates.}
+\label{fig:halflives}
+\end{figure}
 
 
 % ============================================================

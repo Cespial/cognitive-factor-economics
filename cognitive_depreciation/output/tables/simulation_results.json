@@ -1,0 +1,38 @@
+{
+  "A: No AI (\u03a9\u0307=0)": {
+    "a_switch": 0,
+    "half_life_C": 16.119701873487102,
+    "half_life_A": 16.119701873487102,
+    "final_KC": 0.1438229550515019,
+    "final_KA": 1.1336304819619667,
+    "lifetime_wealth": 42.92379021275062,
+    "welfare_loss_pct": 0.0
+  },
+  "B: Historical (\u03a9\u0307=0.30)": {
+    "a_switch": 0,
+    "half_life_C": 7.876672506363015,
+    "half_life_A": 36.4814305557866,
+    "final_KC": 0.01873190797775649,
+    "final_KA": 2.027492186096412,
+    "lifetime_wealth": 48.569174072138125,
+    "welfare_loss_pct": -13.152109427910055
+  },
+  "C: Accelerated (\u03a9\u0307=0.60)": {
+    "a_switch": 0,
+    "half_life_C": 5.2116329365409415,
+    "half_life_A": 693.1471805599452,
+    "final_KC": 0.002417172758115257,
+    "final_KA": 3.3655983754712238,
+    "lifetime_wealth": 56.84979124687044,
+    "welfare_loss_pct": -32.44354928839221
+  },
+  "D: Exponential (\u03a9\u0307=1.00)": {
+    "a_switch": 0,
+    "half_life_C": 3.5914361687043797,
+    "half_life_A": 693.1471805599452,
+    "final_KC": 0.0001553384205473649,
+    "final_KA": 3.3655983754712238,
+    "lifetime_wealth": 55.49671716096457,
+    "welfare_loss_pct": -29.291278533178406
+  }
+}

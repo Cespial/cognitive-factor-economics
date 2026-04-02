@@ -7,12 +7,16 @@
 \contentsline {section}{\numberline {3}Measuring AI Advancement by Occupation}{5}{section.3}%
 \contentsline {subsection}{\numberline {3.1}AI Benchmark Time Series}{5}{subsection.3.1}%
 \contentsline {subsection}{\numberline {3.2}Mapping Benchmarks to Occupations}{6}{subsection.3.2}%
-\contentsline {subsection}{\numberline {3.3}Results}{6}{subsection.3.3}%
-\contentsline {section}{\numberline {4}Empirical Estimation}{6}{section.4}%
-\contentsline {subsection}{\numberline {4.1}Specification}{6}{subsection.4.1}%
-\contentsline {subsection}{\numberline {4.2}Results}{6}{subsection.4.2}%
-\contentsline {section}{\numberline {5}Policy Implications}{7}{section.5}%
-\contentsline {subsection}{\numberline {5.1}Educational Investment Horizons}{7}{subsection.5.1}%
-\contentsline {subsection}{\numberline {5.2}Reskilling Program Design}{7}{subsection.5.2}%
-\contentsline {subsection}{\numberline {5.3}Curriculum Composition}{7}{subsection.5.3}%
-\contentsline {section}{\numberline {6}Conclusion}{8}{section.6}%
+\contentsline {subsection}{\numberline {3.3}Results}{7}{subsection.3.3}%
+\contentsline {section}{\numberline {4}Empirical Estimation}{7}{section.4}%
+\contentsline {subsection}{\numberline {4.1}Specification}{7}{subsection.4.1}%
+\contentsline {subsection}{\numberline {4.2}Results}{7}{subsection.4.2}%
+\contentsline {section}{\numberline {5}Calibration and Simulation}{8}{section.5}%
+\contentsline {subsection}{\numberline {5.1}Calibration}{8}{subsection.5.1}%
+\contentsline {subsection}{\numberline {5.2}Four-Scenario Simulation}{8}{subsection.5.2}%
+\contentsline {subsection}{\numberline {5.3}Occupation-Specific Half-Lives}{9}{subsection.5.3}%
+\contentsline {section}{\numberline {6}Policy Implications}{9}{section.6}%
+\contentsline {subsection}{\numberline {6.1}Educational Investment Horizons}{9}{subsection.6.1}%
+\contentsline {subsection}{\numberline {6.2}Reskilling Program Design}{12}{subsection.6.2}%
+\contentsline {subsection}{\numberline {6.3}Curriculum Composition}{12}{subsection.6.3}%
+\contentsline {section}{\numberline {7}Conclusion}{12}{section.7}%
